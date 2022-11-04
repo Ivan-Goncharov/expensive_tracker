@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 /// Тема приложения
 class MyThemeApp {
+  
   static final lightColorScheme = ThemeData(
     colorScheme: const ColorScheme(
       brightness: Brightness.light,
@@ -21,7 +22,7 @@ class MyThemeApp {
       errorContainer: Color(0xFFFFDAD6),
       onError: Color(0xFFFFFFFF),
       onErrorContainer: Color(0xFF410002),
-      background: Color(0xFFF7FFEE),
+      background: Color(0xFFE0E0E0),
       onBackground: Color(0xFF012200),
       surface: Color(0xFFF7FFEE),
       onSurface: Color(0xFF012200),
@@ -31,7 +32,7 @@ class MyThemeApp {
       onInverseSurface: Color(0xFFCBFFB7),
       inverseSurface: Color(0xFF043900),
       inversePrimary: Color(0xFFFFB59D),
-      shadow: Color(0xFF000000),
+      shadow: Color(0xFF9E9E9E),
       surfaceTint: Color(0xFF9B4427),
     ),
   );
