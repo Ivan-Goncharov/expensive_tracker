@@ -1,6 +1,8 @@
+import 'package:expensive_tracker_app/constants/routes.dart';
 import 'package:expensive_tracker_app/get_it.dart';
 import 'package:expensive_tracker_app/units/home/view/home_screen.dart';
 import 'package:expensive_tracker_app/units/navigation/components/bottom_hide_bar.dart';
+import 'package:expensive_tracker_app/units/navigation/components/float_button_visible.dart';
 import 'package:expensive_tracker_app/units/navigation/cubit/navigation_cubit.dart';
 import 'package:expensive_tracker_app/units/settings/view/settings_screen.dart';
 import 'package:flutter/material.dart';
@@ -37,6 +39,20 @@ class _NavScreenBody extends StatelessWidget {
           return Scaffold(
             backgroundColor: colors.background,
             body: _pages[state.currentPage],
+            floatingActionButton: FloatButtonVisible(
+              widget: FloatingActionButton(
+                onPressed: () => Navigator.pushNamed(context, createExpenseRoute),
+                backgroundColor: colors.tertiary,
+                foregroundColor: colors.background,
+                child: Icon(
+                  FontAwesomeIcons.plus,
+                  color: colors.background,
+                  size: 28,
+                ),
+              ),
+            ),
+            floatingActionButtonLocation:
+                FloatingActionButtonLocation.centerDocked,
             bottomNavigationBar: BottomHideBar(
               widget: BottomNavigationBar(
                 elevation: 0,

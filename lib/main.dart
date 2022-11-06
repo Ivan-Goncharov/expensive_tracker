@@ -1,6 +1,6 @@
 import 'package:expensive_tracker_app/get_it.dart';
+import 'package:expensive_tracker_app/router.dart';
 import 'package:expensive_tracker_app/theme.dart';
-import 'package:expensive_tracker_app/units/navigation/nav_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -14,7 +14,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: MyThemeApp.lightColorScheme,
-      home: const NavScreen(),
+      initialRoute: '/',
+      onGenerateRoute: getRoutes,
     );
   }
 }

@@ -1,5 +1,5 @@
 import 'package:expensive_tracker_app/get_it.dart';
-import 'package:expensive_tracker_app/units/navigation/components/cubit/bottom_hide_cubit.dart';
+import 'package:expensive_tracker_app/units/navigation/components/cubits/bottom_hide_cubit/bottom_hide_cubit.dart';
 import 'package:expensive_tracker_app/units/navigation/cubit/navigation_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
