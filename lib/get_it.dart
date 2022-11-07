@@ -1,4 +1,5 @@
 import 'package:expensive_tracker_app/units/create_expense/components/date_title/cubit/date_picker_cubit.dart';
+import 'package:expensive_tracker_app/units/create_expense/components/operation_category/cubit/operation_category_cubit.dart';
 import 'package:expensive_tracker_app/units/create_expense/cubit/create_operation_cubit.dart';
 import 'package:expensive_tracker_app/units/navigation/components/cubits/float_button_hide_cubit/cubit/float_button_vis_cubit.dart';
 import 'package:expensive_tracker_app/units/navigation/cubit/navigation_cubit.dart';
@@ -15,4 +16,5 @@ void setupGetIt() {
   getIt.registerFactory(() => FloatButtonVisCubit());
   getIt.registerFactory(() => DatePickerCubit());
   getIt.registerFactory(() => CreateOperationCubit());
+  getIt.registerFactory(() => OperationCategoryCubit());
 }

@@ -4,6 +4,12 @@ abstract class CreateOperationState {}
 
 class CreateOperationInitial extends CreateOperationState {}
 
-class CreateExpenseState extends CreateOperationState {}
+class CreateExpenseState extends CreateOperationState {
+  final List<CategoryOperationModel> expenseCategory;
+  CreateExpenseState(this.expenseCategory);
+}
 
-class CreateIncomeState extends CreateOperationState {}
+class CreateIncomeState extends CreateOperationState {
+  final List<CategoryOperationModel> incomeCategory;
+  CreateIncomeState(this.incomeCategory);
+}

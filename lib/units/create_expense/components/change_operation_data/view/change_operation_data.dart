@@ -1,5 +1,4 @@
-import 'package:expensive_tracker_app/constants/string_constants.dart';
-import 'package:expensive_tracker_app/units/create_expense/components/change_operation_data/view/data/models/category_model.dart';
+import 'package:expensive_tracker_app/units/create_expense/components/operation_category/view/operation_category.dart';
 import 'package:expensive_tracker_app/units/create_expense/cubit/create_operation_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,13 +30,6 @@ class _CreateExpenseBody extends StatefulWidget {
   State<_CreateExpenseBody> createState() => _CreateExpenseBodyState();
 }
 
-final listExpense = [
-  const CategoryOperationModel(
-    title: SResources.foodCategory,
-    icon: FontAwesomeIcons.bowlRice,
-  ),
-];
-
 class _CreateExpenseBodyState extends State<_CreateExpenseBody> {
   var currentIndex = -1;
   void changeIndex(int index) {
@@ -48,28 +40,7 @@ class _CreateExpenseBodyState extends State<_CreateExpenseBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 200,
-      width: 200,
-      child: ListView.builder(
-        itemBuilder: (context, index) {
-          return IconButton(
-            onPressed: () {
-              if (index == currentIndex) {
-                changeIndex(-1);
-              } else {
-                changeIndex(index);
-              }
-            },
-            icon: Icon(
-              FontAwesomeIcons.airbnb,
-              color: index == currentIndex ? Colors.red : Colors.black,
-            ),
-          );
-        },
-        itemCount: 3,
-      ),
-    );
+    return const OperationCategoryWidget();
   }
 }
 

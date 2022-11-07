@@ -6,4 +6,17 @@ class SResources {
   static const cancel = 'Cancel';
   static const foodCategory = 'Food';
   static const clothesCategory = 'Clothes';
+  static const billsCategory = 'Bills';
+  static const carCategory = 'Cars';
+  static const communicationCategory = 'Communication';
+  static const eatingOutCategory = 'Eating out';
+  static const entertainmentCategory = 'Entertainment';
+  static const giftsCategory = 'Gifts';
+  static const healthCategory = 'Health';
+  static const houseCategory = 'House';
+  static const petsCategory = 'Pets';
+  static const sportsCategory = 'Sports';
+  static const taxiCategory = 'Taxi';
+  static const toiletryCategory = 'Toiletry';
+  static const transportCategory = 'Transport';
 }
