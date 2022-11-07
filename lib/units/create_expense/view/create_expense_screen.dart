@@ -47,18 +47,22 @@ class _CreateExpenseScreenBody extends StatelessWidget {
         ),
       ),
       backgroundColor: colors.background,
-      body: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: const [
-              DateTitle(),
-              SwitchOperation(),
-              InputMoneyQuantity(),
-              ChangeOperationData()
-            ],
+      body: SingleChildScrollView(
+        keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
+        child: GestureDetector(
+          behavior: HitTestBehavior.opaque,
+          onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: const [
+                DateTitle(),
+                SwitchOperation(),
+                InputMoneyQuantity(),
+                ChangeOperationData()
+              ],
+            ),
           ),
         ),
       ),

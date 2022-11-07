@@ -19,4 +19,5 @@ class SResources {
   static const taxiCategory = 'Taxi';
   static const toiletryCategory = 'Toiletry';
   static const transportCategory = 'Transport';
+  static const investingCategory = 'Investing';
 }

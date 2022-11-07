@@ -63,6 +63,10 @@ final listExpense = [
     title: SResources.transportCategory,
     icon: FontAwesomeIcons.bus,
   ),
+  const CategoryOperationModel(
+    title: SResources.investingCategory,
+    icon: FontAwesomeIcons.piggyBank,
+  ),
 ];
 
 final listIncome = <CategoryOperationModel>[];

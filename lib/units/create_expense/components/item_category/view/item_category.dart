@@ -13,27 +13,47 @@ class ItemCategory extends StatelessWidget {
 
     return Container(
       height: 80,
+      // alignment: Alignment.center,
+      margin: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(4.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
         color: colors.background,
         boxShadow: [
           const BoxShadow(
               color: Color(0xFF9E9E9E),
-              offset: Offset(4.0, 4.0),
-              blurRadius: 15.0,
+              offset: Offset(2.0, 2.0),
+              blurRadius: 6.0,
               spreadRadius: 1.0),
           BoxShadow(
               color: colors.onPrimary,
-              offset: const Offset(-4.0, -4.0),
-              blurRadius: 15.0,
+              offset: const Offset(-2.0, -2.0),
+              blurRadius: 6.0,
               spreadRadius: 1.0),
         ],
       ),
       child: Column(
-        mainAxisSize: MainAxisSize.min,
+        // mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisAlignment: MainAxisAlignment.center,
+
         children: [
-          Icon(itemCategory.icon),
-          Text(itemCategory.title),
+          Icon(
+            itemCategory.icon,
+            size: 26,
+          ),
+          const SizedBox(
+            height: 6,
+          ),
+          Text(
+            itemCategory.title,
+            textAlign: TextAlign.center,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(
+              fontSize: 12,
+            ),
+          ),
         ],
       ),
     );

@@ -40,11 +40,14 @@ class _OperationCategoryBody extends StatelessWidget {
     return BlocBuilder<OperationCategoryCubit, OperationCategoryState>(
       builder: (context, state) {
         if (state is OperationCategoryInitState) {
-          return Expanded(
+          return Flexible(
+            fit: FlexFit.loose,
             child: GridView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                crossAxisSpacing: 16.0,
+                crossAxisCount: 4,
+                crossAxisSpacing: 8.0,
               ),
               itemBuilder: (_, index) {
                 return ItemCategory(itemCategory: state.categories[index]);
