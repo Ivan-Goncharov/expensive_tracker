@@ -2,7 +2,6 @@ import 'package:expensive_tracker_app/units/create_expense/components/operation_
 import 'package:expensive_tracker_app/units/create_expense/cubit/create_operation_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ChangeOperationData extends StatelessWidget {
   const ChangeOperationData({super.key});
