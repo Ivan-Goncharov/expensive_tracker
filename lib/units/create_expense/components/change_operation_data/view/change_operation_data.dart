@@ -1,5 +1,5 @@
 import 'package:expensive_tracker_app/units/create_expense/components/operation_category/view/operation_category.dart';
-import 'package:expensive_tracker_app/units/create_expense/cubit/create_operation_cubit.dart';
+import 'package:expensive_tracker_app/units/create_expense/cubit/change_categories_cubit/change_categories_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -8,7 +8,7 @@ class ChangeOperationData extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CreateOperationCubit, CreateOperationState>(
+    return BlocBuilder<ChangeCategoriesCubit, ChangeCategoriesState>(
       builder: (context, state) {
         if (state is CreateExpenseState) {
           return const _CreateExpenseBody();

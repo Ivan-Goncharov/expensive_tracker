@@ -1,5 +1,5 @@
 import 'package:expensive_tracker_app/constants/string_constants.dart';
-import 'package:expensive_tracker_app/units/create_expense/cubit/create_operation_cubit.dart';
+import 'package:expensive_tracker_app/units/create_expense/cubit/change_categories_cubit/change_categories_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:toggle_switch/toggle_switch.dart';
@@ -25,7 +25,7 @@ class SwitchOperation extends StatelessWidget {
           SResources.income,
         ],
         onToggle: (index) {
-          BlocProvider.of<CreateOperationCubit>(context).changeState(index!);
+          BlocProvider.of<ChangeCategoriesCubit>(context).changeState(index!);
         },
       ),
     );

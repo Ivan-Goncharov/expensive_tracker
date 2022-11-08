@@ -2,7 +2,7 @@ import 'package:expensive_tracker_app/get_it.dart';
 import 'package:expensive_tracker_app/units/create_expense/components/change_operation_data/view/data/models/category_model.dart';
 import 'package:expensive_tracker_app/units/create_expense/components/item_category/view/item_category.dart';
 import 'package:expensive_tracker_app/units/create_expense/components/operation_category/cubit/operation_category_cubit.dart';
-import 'package:expensive_tracker_app/units/create_expense/cubit/create_operation_cubit.dart';
+import 'package:expensive_tracker_app/units/create_expense/cubit/change_categories_cubit/change_categories_cubit.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,7 +12,7 @@ class OperationCategoryWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final operationState = BlocProvider.of<CreateOperationCubit>(context).state;
+    final operationState = BlocProvider.of<ChangeCategoriesCubit>(context).state;
 
     return BlocProvider(
       create: (_) =>
@@ -21,7 +21,7 @@ class OperationCategoryWidget extends StatelessWidget {
     );
   }
 
-  List<CategoryOperationModel> getList(CreateOperationState state) {
+  List<CategoryOperationModel> getList(ChangeCategoriesState state) {
     if (state is CreateExpenseState) {
       return state.expenseCategory;
     } else if (state is CreateIncomeState) {
