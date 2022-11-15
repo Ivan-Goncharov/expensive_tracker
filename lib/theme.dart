@@ -6,7 +6,7 @@ class MyThemeApp {
   static final lightColorScheme = ThemeData(
     colorScheme: const ColorScheme(
       brightness: Brightness.light,
-      primary: Color(0xFF9B4427),
+      primary: Color(0xFF2d3142),
       onPrimary: Color(0xFFFFFFFF),
       primaryContainer: Color(0xFFFFDBD0),
       onPrimaryContainer: Color(0xFF390B00),

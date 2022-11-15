@@ -1,5 +1,7 @@
 import 'package:expensive_tracker_app/units/create_expense/components/change_operation_data/view/data/models/category_model.dart';
+import 'package:expensive_tracker_app/units/create_expense/cubit/create_operation_cubit/cubit/create_operation_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ItemCategory extends StatefulWidget {
   final CategoryOperationModel itemCategory;
@@ -12,8 +14,12 @@ class ItemCategory extends StatefulWidget {
 class _ItemCategoryState extends State<ItemCategory> {
   bool isPress = false;
 
-  void pressToButton() {
-    setState(() => isPress = !isPress);
+  void pressToButton(BuildContext context) {
+    if (!isPress) {
+      setState(() => isPress = !isPress);
+      BlocProvider.of<CreateOperationCubit>(context)
+          .changeCategory(widget.itemCategory.title);
+    }
   }
 
   // @override
@@ -21,7 +27,7 @@ class _ItemCategoryState extends State<ItemCategory> {
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
     return GestureDetector(
-      onTap: () => pressToButton(),
+      onTap: () => pressToButton(context),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
         height: 80,

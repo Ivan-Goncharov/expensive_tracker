@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 class ItemOperationModel extends Equatable {
   final String category;
   final double amount;
-  final OperatinType type;
+  final OperationType type;
   final DateTime date;
   const ItemOperationModel({
     required this.category,
@@ -11,14 +11,12 @@ class ItemOperationModel extends Equatable {
     required this.type,
     required this.date,
   });
-  
+
   @override
-  List<Object?> get props =>[category, amount, type, date];
-
-
+  List<Object?> get props => [category, amount, type, date];
 }
 
-enum OperatinType {
+enum OperationType {
   income,
   expense,
 }

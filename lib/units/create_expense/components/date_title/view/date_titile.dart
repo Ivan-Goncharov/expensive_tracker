@@ -1,5 +1,6 @@
 import 'package:expensive_tracker_app/get_it.dart';
 import 'package:expensive_tracker_app/units/create_expense/components/date_title/cubit/date_picker_cubit.dart';
+import 'package:expensive_tracker_app/units/create_expense/cubit/create_operation_cubit/cubit/create_operation_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -39,6 +40,8 @@ class _DateTitleBody extends StatelessWidget {
               BlocBuilder<DatePickerCubit, DatePickerState>(
                 builder: (context, state) {
                   if (state is DatePickerChangeState) {
+                    BlocProvider.of<CreateOperationCubit>(context)
+                        .changeDateTime(state.dateTime);
                     return Text(
                       DateFormat('EEEE, d MMMM').format(
                         state.dateTime,

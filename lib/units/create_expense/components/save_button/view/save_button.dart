@@ -1,9 +1,6 @@
 import 'package:expensive_tracker_app/constants/string_constants.dart';
-import 'package:expensive_tracker_app/units/create_expense/cubit/change_categories_cubit/change_categories_cubit.dart';
 import 'package:expensive_tracker_app/units/create_expense/cubit/create_operation_cubit/cubit/create_operation_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SaveButton extends StatelessWidget {
@@ -33,9 +30,13 @@ class _SaveButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () => saveOperation,
-      child: const Text(SResources.saveButton),
+    return SizedBox(
+      width: 250,
+      height: 45,
+      child: ElevatedButton(
+        onPressed: saveOperation == null ? null : () => saveOperation,
+        child: const Text(SResources.saveButton),
+      ),
     );
   }
 }

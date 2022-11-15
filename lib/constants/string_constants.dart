@@ -21,4 +21,6 @@ class SResources {
   static const transportCategory = 'Transport';
   static const investingCategory = 'Investing';
   static const saveButton = 'Save';
+  static const salaryCategory = 'Salary';
+  
 }

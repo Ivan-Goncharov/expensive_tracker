@@ -41,8 +41,9 @@ class _NavScreenBody extends StatelessWidget {
             body: _pages[state.currentPage],
             floatingActionButton: FloatButtonVisible(
               widget: FloatingActionButton(
-                onPressed: () => Navigator.pushNamed(context, createExpenseRoute),
-                backgroundColor: colors.tertiary,
+                onPressed: () =>
+                    Navigator.pushNamed(context, createExpenseRoute),
+                backgroundColor: colors.primary,
                 foregroundColor: colors.background,
                 child: Icon(
                   FontAwesomeIcons.plus,

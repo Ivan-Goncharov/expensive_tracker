@@ -9,7 +9,7 @@ class CreateOperationCubit extends Cubit<CreateOperationState> {
   double _amount = 0;
   String _category = '';
   DateTime _dateTime = DateTime.now();
-  OperatinType _type = OperatinType.expense;
+  OperationType _type = OperationType.expense;
 
   void initial() {
     emit(CreateOperationNotAllowed());
@@ -20,9 +20,28 @@ class CreateOperationCubit extends Cubit<CreateOperationState> {
     _changeState();
   }
 
-  void saveOperation() {
-    print('DEBUG SAVE');
+  void changeCategory(String newCategory) {
+    _category = newCategory;
+
+    _changeState();
   }
+
+  void changeDateTime(DateTime newDate) {
+    _dateTime = newDate;
+  }
+
+  void changeType(int typeIndex) {
+    emit(CreateOperationNotAllowed());
+    _category = '';
+    if (typeIndex == 0) {
+      _type = OperationType.expense;
+    } else {
+      _type = OperationType.income;
+    }
+    _changeState();
+  }
+
+  void saveOperation() {}
 
   void _changeState() {
     if (_amount != 0 && _category.isNotEmpty) {
