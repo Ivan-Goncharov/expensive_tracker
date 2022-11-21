@@ -1,3 +1,4 @@
+import 'package:expensive_tracker_app/units/create_expense/components/change_operation_data/view/data/models/category_model.dart';
 import 'package:expensive_tracker_app/units/create_expense/components/operation_category/view/operation_category.dart';
 import 'package:expensive_tracker_app/units/create_expense/cubit/change_categories_cubit/change_categories_cubit.dart';
 import 'package:flutter/material.dart';
@@ -11,43 +12,23 @@ class ChangeOperationData extends StatelessWidget {
     return BlocBuilder<ChangeCategoriesCubit, ChangeCategoriesState>(
       builder: (context, state) {
         if (state is CreateExpenseState) {
-          return const _CreateExpenseBody();
+          return OperationCategoryWidget(getList(state), key: const  ValueKey('Expense'),);
         } else if (state is CreateIncomeState) {
-          return const _CreateIncomeBody();
+          return OperationCategoryWidget(getList(state), key: const  ValueKey('Income'),);
         } else {
           return const SizedBox();
         }
       },
     );
   }
-}
 
-class _CreateExpenseBody extends StatefulWidget {
-  const _CreateExpenseBody();
-
-  @override
-  State<_CreateExpenseBody> createState() => _CreateExpenseBodyState();
-}
-
-class _CreateExpenseBodyState extends State<_CreateExpenseBody> {
-  var currentIndex = -1;
-  void changeIndex(int index) {
-    setState(() {
-      currentIndex = index;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return const OperationCategoryWidget();
-  }
-}
-
-class _CreateIncomeBody extends StatelessWidget {
-  const _CreateIncomeBody();
-
-  @override
-  Widget build(BuildContext context) {
-    return const Text('INCOME');
+  List<CategoryOperationModel> getList(ChangeCategoriesState state) {
+    if (state is CreateExpenseState) {
+      return state.expenseCategory;
+    } else if (state is CreateIncomeState) {
+      return state.incomeCategory;
+    } else {
+      return [];
+    }
   }
 }

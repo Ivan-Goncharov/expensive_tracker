@@ -22,5 +22,13 @@ class SResources {
   static const investingCategory = 'Investing';
   static const saveButton = 'Save';
   static const salaryCategory = 'Salary';
+  static const percentagesCategory = 'Percentages';
+  static const debtsCategory = 'Debts';
+  static const dividendsCategory = 'Dividends';
+  static const otherCategory = 'Other';
+  
+
+
+
   
 }

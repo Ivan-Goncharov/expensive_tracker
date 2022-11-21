@@ -9,7 +9,11 @@ abstract class OperationCategoryState extends Equatable {
 
 class OperationCategoryInitial extends OperationCategoryState {}
 
-class OperationCategoryInitState extends OperationCategoryState {
+class OperationChangeCategoryState extends OperationCategoryState {
   final List<CategoryOperationModel> categories;
-  const OperationCategoryInitState(this.categories);
+  final int indexOfSelect;
+  const OperationChangeCategoryState(this.categories, this.indexOfSelect);
+
+  @override
+  List<Object> get props => [categories, indexOfSelect];
 }

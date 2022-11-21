@@ -69,4 +69,25 @@ final listExpense = [
   ),
 ];
 
-final listIncome = <CategoryOperationModel>[];
+final listIncome = <CategoryOperationModel>[
+   const CategoryOperationModel(
+    title: SResources.salaryCategory,
+    icon: FontAwesomeIcons.moneyBill,
+  ),
+   const CategoryOperationModel(
+    title: SResources.debtsCategory,
+    icon: FontAwesomeIcons.moneyCheckDollar,
+  ),
+   const CategoryOperationModel(
+    title: SResources.percentagesCategory,
+    icon: FontAwesomeIcons.percent,
+  ),
+   const CategoryOperationModel(
+    title: SResources.dividendsCategory,
+    icon: FontAwesomeIcons.divide,
+  ),
+   const CategoryOperationModel(
+    title: SResources.giftsCategory,
+    icon: FontAwesomeIcons.gift,
+  ),
+];

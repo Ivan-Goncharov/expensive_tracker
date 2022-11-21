@@ -2,33 +2,21 @@ import 'package:expensive_tracker_app/get_it.dart';
 import 'package:expensive_tracker_app/units/create_expense/components/change_operation_data/view/data/models/category_model.dart';
 import 'package:expensive_tracker_app/units/create_expense/components/item_category/view/item_category.dart';
 import 'package:expensive_tracker_app/units/create_expense/components/operation_category/cubit/operation_category_cubit.dart';
-import 'package:expensive_tracker_app/units/create_expense/cubit/change_categories_cubit/change_categories_cubit.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OperationCategoryWidget extends StatelessWidget {
-  const OperationCategoryWidget({super.key});
+  final List<CategoryOperationModel> listCategories;
+  const OperationCategoryWidget(this.listCategories, {super.key,});
 
   @override
   Widget build(BuildContext context) {
-    final operationState = BlocProvider.of<ChangeCategoriesCubit>(context).state;
-
     return BlocProvider(
       create: (_) =>
-          getIt<OperationCategoryCubit>()..initial(getList(operationState)),
+          getIt<OperationCategoryCubit>()..initial(listCategories),
       child: const _OperationCategoryBody(),
     );
-  }
-
-  List<CategoryOperationModel> getList(ChangeCategoriesState state) {
-    if (state is CreateExpenseState) {
-      return state.expenseCategory;
-    } else if (state is CreateIncomeState) {
-      return state.incomeCategory;
-    } else {
-      return [];
-    }
   }
 }
 
@@ -38,8 +26,9 @@ class _OperationCategoryBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<OperationCategoryCubit, OperationCategoryState>(
+      buildWhen: (previous, current) => true,
       builder: (context, state) {
-        if (state is OperationCategoryInitState) {
+        if (state is OperationChangeCategoryState) {
           return Flexible(
             fit: FlexFit.loose,
             child: GridView.builder(
@@ -50,7 +39,8 @@ class _OperationCategoryBody extends StatelessWidget {
                 crossAxisSpacing: 8.0,
               ),
               itemBuilder: (_, index) {
-                return ItemCategory(itemCategory: state.categories[index]);
+                return ItemCategory(
+                    itemCategory: state.categories[index], index: index);
               },
               itemCount: state.categories.length,
             ),

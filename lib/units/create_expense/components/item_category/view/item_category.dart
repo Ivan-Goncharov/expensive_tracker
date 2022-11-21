@@ -1,33 +1,25 @@
 import 'package:expensive_tracker_app/units/create_expense/components/change_operation_data/view/data/models/category_model.dart';
-import 'package:expensive_tracker_app/units/create_expense/cubit/create_operation_cubit/cubit/create_operation_cubit.dart';
+import 'package:expensive_tracker_app/units/create_expense/components/operation_category/cubit/operation_category_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ItemCategory extends StatefulWidget {
+class ItemCategory extends StatelessWidget {
   final CategoryOperationModel itemCategory;
-  const ItemCategory({super.key, required this.itemCategory});
+  final int index;
+  const ItemCategory({super.key, required this.itemCategory, required this.index});
 
-  @override
-  State<ItemCategory> createState() => _ItemCategoryState();
-}
-
-class _ItemCategoryState extends State<ItemCategory> {
-  bool isPress = false;
-
-  void pressToButton(BuildContext context) {
-    if (!isPress) {
-      setState(() => isPress = !isPress);
-      BlocProvider.of<CreateOperationCubit>(context)
-          .changeCategory(widget.itemCategory.title);
-    }
-  }
 
   // @override
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
+    // final changeCategoryCubit =
+    //     BlocProvider.of<OperationCategoryCubit>(context);
+    final selectIndex =
+        (BlocProvider.of<OperationCategoryCubit>(context).state as OperationChangeCategoryState)
+            .indexOfSelect;
     return GestureDetector(
-      onTap: () => pressToButton(context),
+      onTap: () => BlocProvider.of<OperationCategoryCubit>(context).changeCategory(index, context),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
         height: 80,
@@ -35,8 +27,8 @@ class _ItemCategoryState extends State<ItemCategory> {
         padding: const EdgeInsets.all(4.0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          color: isPress ? colors.primary : colors.background,
-          boxShadow: isPress
+          color: selectIndex == index ? colors.primary : colors.background,
+          boxShadow: selectIndex == index
               ? []
               : [
                   const BoxShadow(
@@ -57,21 +49,21 @@ class _ItemCategoryState extends State<ItemCategory> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
-              widget.itemCategory.icon,
+              itemCategory.icon,
               size: 26,
-              color: isPress ? colors.onPrimary : colors.onBackground,
+              color: selectIndex == index ? colors.onPrimary : colors.onBackground,
             ),
             const SizedBox(
               height: 6,
             ),
             Text(
-              widget.itemCategory.title,
+              itemCategory.title,
               textAlign: TextAlign.center,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
                   fontSize: 12,
-                  color: isPress ? colors.onPrimary : colors.onBackground),
+                  color: selectIndex == index ? colors.onPrimary : colors.onBackground),
             ),
           ],
         ),
