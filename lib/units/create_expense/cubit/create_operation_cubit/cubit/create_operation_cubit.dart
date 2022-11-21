@@ -41,7 +41,16 @@ class CreateOperationCubit extends Cubit<CreateOperationState> {
     _changeState();
   }
 
-  void saveOperation() {}
+  void saveOperation() {
+    print('DEBUG SAVE BUTTOM PRESS');
+    final model = ItemOperationModel(
+      category: _category,
+      amount: _amount,
+      type: _type,
+      date: _dateTime,
+    );
+    print('DEBUG $model');
+  }
 
   void _changeState() {
     if (_amount != 0 && _category.isNotEmpty) {

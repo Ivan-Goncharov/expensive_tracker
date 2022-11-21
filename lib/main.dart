@@ -3,7 +3,7 @@ import 'package:expensive_tracker_app/router.dart';
 import 'package:expensive_tracker_app/theme.dart';
 import 'package:flutter/material.dart';
 
-void main() {
+void main() async {
   setupGetIt();
   runApp(const MyApp());
 }

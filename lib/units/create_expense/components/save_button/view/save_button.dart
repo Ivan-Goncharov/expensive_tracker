@@ -34,7 +34,7 @@ class _SaveButtonWidget extends StatelessWidget {
       width: 250,
       height: 45,
       child: ElevatedButton(
-        onPressed: saveOperation == null ? null : () => saveOperation,
+        onPressed: saveOperation == null ? null : () => saveOperation!(),
         child: const Text(SResources.saveButton),
       ),
     );
