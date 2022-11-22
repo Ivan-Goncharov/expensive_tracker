@@ -43,19 +43,18 @@ dependencies:
   intl: ^0.17.0
   toggle_switch: ^2.0.1
   equatable: ^2.0.5
-  hive: ^2.2.3
-  hive_flutter: ^1.1.0
+  drift: ^2.2.0
+  path_provider: ^2.0.11
+  path: ^1.8.2
+  json_serializable: ^6.2.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
+    
+  drift_dev: ^2.0.2  
   flutter_lints: ^2.0.0
+  build_runner: ^2.3.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
