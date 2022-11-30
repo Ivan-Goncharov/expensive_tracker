@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:expensive_tracker_app/data/app_db/app_db.dart';
 
 class ItemOperationModel extends Equatable {
   final String category;
@@ -14,6 +15,7 @@ class ItemOperationModel extends Equatable {
 
   @override
   List<Object?> get props => [category, amount, type, date];
+ 
 }
 
 enum OperationType {

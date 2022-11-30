@@ -8,6 +8,12 @@ import 'package:path/path.dart' as path;
 
 part 'app_db.g.dart';
 
+late AppDb database;
+
+void initDb() {
+  database = AppDb();
+}
+
 LazyDatabase _openConnection() {
   return LazyDatabase(() async {
     final dbFolder = await getApplicationDocumentsDirectory();
@@ -28,12 +34,24 @@ class AppDb extends _$AppDb {
     return select(noteOperation).get();
   }
 
-  // Получение одной записи.
+  /// Получение одной записи.
   Future<NoteOperationData> getItemNoteOperation(int id) {
     return (select(noteOperation)..where((tbl) => tbl.id.equals(id)))
         .getSingle();
   }
 
-  // Удаление одной записи из бд
-  // Future<vo>
+  /// Удаление одной записи из бд.
+  Future<int> deleteNoteData(int id) {
+    return (delete(noteOperation)..where((tbl) => tbl.id.equals(id))).go();
+  }
+
+  /// Обновление одной записи в бд.
+  Future<bool> updateNoteData(NoteOperationData noteData) {
+    return update(noteOperation).replace(noteData);
+  }
+
+  /// Сохранение одной записи в БД.
+  Future<int> addNewOperationData(NoteOperationData noteData) {
+    return into(noteOperation).insert(noteData);
+  }
 }
