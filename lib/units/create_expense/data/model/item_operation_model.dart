@@ -1,22 +1,65 @@
 import 'package:equatable/equatable.dart';
-import 'package:expensive_tracker_app/data/app_db/app_db.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:uuid/uuid.dart';
 
-class ItemOperationModel extends Equatable {
-  final String category;
-  final double amount;
-  final OperationType type;
-  final DateTime date;
-  const ItemOperationModel({
-    required this.category,
-    required this.amount,
-    required this.type,
-    required this.date,
-  });
+part 'item_operation_model.freezed.dart';
 
-  @override
-  List<Object?> get props => [category, amount, type, date];
- 
+@freezed
+class ItemOperationModel with _$ItemOperationModel {
+  const ItemOperationModel._();
+  factory ItemOperationModel({
+    required String id,
+    required String category,
+    required double amount,
+    required OperationType type,
+    required DateTime dateOperation,
+  }) = _ItemOperationModel;
+
+  /// Создание операции
+  factory ItemOperationModel.create({
+    required String category,
+    required double amount,
+    required OperationType type,
+    required DateTime dateOperation,
+  }) =>
+      ItemOperationModel(
+        id: const Uuid().v4(),
+        category: category,
+        amount: amount,
+        type: type,
+        dateOperation: dateOperation,
+      );
+
+  /// Изменение операции
+  ItemOperationModel edit({
+    String? category,
+    double? amount,
+    OperationType? type,
+    DateTime? dateOperation,
+  }) =>
+      copyWith(
+        category: category ?? this.category,
+        amount: amount ?? this.amount,
+        type: type ?? this.type,
+        dateOperation: dateOperation ?? this.dateOperation,
+      );
 }
+
+// class ItemOperationModel2 extends Equatable {
+//   final String category;
+//   final double amount;
+//   final OperationType type;
+//   final DateTime date;
+//   const ItemOperationModel2({
+//     required this.category,
+//     required this.amount,
+//     required this.type,
+//     required this.date,
+//   });
+
+//   @override
+//   List<Object?> get props => [category, amount, type, date];
+// }
 
 enum OperationType {
   income,

@@ -2,6 +2,9 @@ import 'package:expensive_tracker_app/units/create_expense/components/date_title
 import 'package:expensive_tracker_app/units/create_expense/components/operation_category/cubit/operation_category_cubit.dart';
 import 'package:expensive_tracker_app/units/create_expense/cubit/change_categories_cubit/change_categories_cubit.dart';
 import 'package:expensive_tracker_app/units/create_expense/cubit/create_operation_cubit/cubit/create_operation_cubit.dart';
+import 'package:expensive_tracker_app/units/create_expense/data/repositories/create_operation_repo_impl.dart';
+import 'package:expensive_tracker_app/units/create_expense/data/services/create_operation_service.dart';
+import 'package:expensive_tracker_app/units/create_expense/domain/repositories/create_operation_repo.dart';
 import 'package:expensive_tracker_app/units/navigation/components/cubits/float_button_hide_cubit/cubit/float_button_vis_cubit.dart';
 import 'package:expensive_tracker_app/units/navigation/cubit/navigation_cubit.dart';
 import 'package:get_it/get_it.dart';
@@ -19,4 +22,14 @@ void setupGetIt() {
   getIt.registerFactory(() => ChangeCategoriesCubit());
   getIt.registerFactory(() => OperationCategoryCubit());
   getIt.registerFactory(() => CreateOperationCubit());
+
+  /// Repo
+  getIt.registerSingleton<CreateOperationRepository>(
+    CreateOperationRepoImpl(),
+  );
+
+  /// Servises.
+  getIt.registerSingleton<CreateOpeartionService>(
+    CreateOpeartionServiceImpl(),
+  );
 }

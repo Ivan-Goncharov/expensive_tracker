@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
 import 'package:expensive_tracker_app/data/entity/note_operation.dart';
+import 'package:expensive_tracker_app/units/create_expense/data/model/item_operation_model.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as path;
 
@@ -27,31 +28,31 @@ class AppDb extends _$AppDb {
   AppDb() : super(_openConnection());
 
   @override
-  int get schemaVersion => 1;
+  int get schemaVersion =>2;
 
-  /// Получение списка всех записей.
-  Future<List<NoteOperationData>> getNotesOperation() {
+  // / Получение списка всех записей.
+  Future<List<ItemOperationModel>> getNotesOperation() {
     return select(noteOperation).get();
   }
 
   /// Получение одной записи.
-  Future<NoteOperationData> getItemNoteOperation(int id) {
+  Future<ItemOperationModel> getItemNoteOperation(String id) {
     return (select(noteOperation)..where((tbl) => tbl.id.equals(id)))
         .getSingle();
   }
 
   /// Удаление одной записи из бд.
-  Future<int> deleteNoteData(int id) {
+  Future<int> deleteNoteData(String id) {
     return (delete(noteOperation)..where((tbl) => tbl.id.equals(id))).go();
   }
 
   /// Обновление одной записи в бд.
-  Future<bool> updateNoteData(NoteOperationData noteData) {
-    return update(noteOperation).replace(noteData);
+  Future<bool> updateNoteData(Insertable<ItemOperationModel> operation) {
+    return update(noteOperation).replace(operation);
   }
 
   /// Сохранение одной записи в БД.
-  Future<int> addNewOperationData(NoteOperationData noteData) {
-    return into(noteOperation).insert(noteData);
+  Future<int> addNewOperationData(Insertable<ItemOperationModel> operation) {
+    return into(noteOperation).insert(operation);
   }
 }

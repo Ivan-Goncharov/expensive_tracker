@@ -1,6 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:expensive_tracker_app/get_it.dart';
 import 'package:expensive_tracker_app/units/create_expense/data/model/item_operation_model.dart';
+import 'package:expensive_tracker_app/units/create_expense/domain/repositories/create_operation_repo.dart';
 
 part 'create_operation_state.dart';
 
@@ -41,15 +43,14 @@ class CreateOperationCubit extends Cubit<CreateOperationState> {
     _changeState();
   }
 
-  void saveOperation() {
+  Future<void> saveOperation() {
     print('DEBUG SAVE BUTTOM PRESS');
-    final model = ItemOperationModel(
-      category: _category,
+    return getIt<CreateOperationRepository>().saveOperation(
+      categoty: _category,
+      dateTime: _dateTime,
       amount: _amount,
       type: _type,
-      date: _dateTime,
-    );
-    print('DEBUG $model');
+    ); 
   }
 
   void _changeState() {

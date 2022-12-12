@@ -7,105 +7,10 @@ part of 'app_db.dart';
 // **************************************************************************
 
 // ignore_for_file: type=lint
-class NoteOperationData extends DataClass
-    implements Insertable<NoteOperationData> {
-  final int id;
-  final String category;
-  final String type;
-  final DateTime dateOperation;
-  final double amount;
-  const NoteOperationData(
-      {required this.id,
-      required this.category,
-      required this.type,
-      required this.dateOperation,
-      required this.amount});
-  @override
-  Map<String, Expression> toColumns(bool nullToAbsent) {
-    final map = <String, Expression>{};
-    map['id'] = Variable<int>(id);
-    map['operation_category'] = Variable<String>(category);
-    map['operation_type'] = Variable<String>(type);
-    map['operation_date'] = Variable<DateTime>(dateOperation);
-    map['operation_amount'] = Variable<double>(amount);
-    return map;
-  }
-
-  NoteOperationCompanion toCompanion(bool nullToAbsent) {
-    return NoteOperationCompanion(
-      id: Value(id),
-      category: Value(category),
-      type: Value(type),
-      dateOperation: Value(dateOperation),
-      amount: Value(amount),
-    );
-  }
-
-  factory NoteOperationData.fromJson(Map<String, dynamic> json,
-      {ValueSerializer? serializer}) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
-    return NoteOperationData(
-      id: serializer.fromJson<int>(json['id']),
-      category: serializer.fromJson<String>(json['category']),
-      type: serializer.fromJson<String>(json['type']),
-      dateOperation: serializer.fromJson<DateTime>(json['dateOperation']),
-      amount: serializer.fromJson<double>(json['amount']),
-    );
-  }
-  @override
-  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
-    serializer ??= driftRuntimeOptions.defaultSerializer;
-    return <String, dynamic>{
-      'id': serializer.toJson<int>(id),
-      'category': serializer.toJson<String>(category),
-      'type': serializer.toJson<String>(type),
-      'dateOperation': serializer.toJson<DateTime>(dateOperation),
-      'amount': serializer.toJson<double>(amount),
-    };
-  }
-
-  NoteOperationData copyWith(
-          {int? id,
-          String? category,
-          String? type,
-          DateTime? dateOperation,
-          double? amount}) =>
-      NoteOperationData(
-        id: id ?? this.id,
-        category: category ?? this.category,
-        type: type ?? this.type,
-        dateOperation: dateOperation ?? this.dateOperation,
-        amount: amount ?? this.amount,
-      );
-  @override
-  String toString() {
-    return (StringBuffer('NoteOperationData(')
-          ..write('id: $id, ')
-          ..write('category: $category, ')
-          ..write('type: $type, ')
-          ..write('dateOperation: $dateOperation, ')
-          ..write('amount: $amount')
-          ..write(')'))
-        .toString();
-  }
-
-  @override
-  int get hashCode => Object.hash(id, category, type, dateOperation, amount);
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      (other is NoteOperationData &&
-          other.id == this.id &&
-          other.category == this.category &&
-          other.type == this.type &&
-          other.dateOperation == this.dateOperation &&
-          other.amount == this.amount);
-}
-
-class NoteOperationCompanion extends UpdateCompanion<NoteOperationData> {
-  final Value<int> id;
+class NoteOperationCompanion extends UpdateCompanion<ItemOperationModel> {
+  final Value<String> id;
   final Value<String> category;
-  final Value<String> type;
+  final Value<OperationType> type;
   final Value<DateTime> dateOperation;
   final Value<double> amount;
   const NoteOperationCompanion({
@@ -116,35 +21,36 @@ class NoteOperationCompanion extends UpdateCompanion<NoteOperationData> {
     this.amount = const Value.absent(),
   });
   NoteOperationCompanion.insert({
-    this.id = const Value.absent(),
+    required String id,
     required String category,
-    required String type,
+    required OperationType type,
     required DateTime dateOperation,
     required double amount,
-  })  : category = Value(category),
+  })  : id = Value(id),
+        category = Value(category),
         type = Value(type),
         dateOperation = Value(dateOperation),
         amount = Value(amount);
-  static Insertable<NoteOperationData> custom({
-    Expression<int>? id,
+  static Insertable<ItemOperationModel> custom({
+    Expression<String>? id,
     Expression<String>? category,
-    Expression<String>? type,
+    Expression<int>? type,
     Expression<DateTime>? dateOperation,
     Expression<double>? amount,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
       if (category != null) 'operation_category': category,
-      if (type != null) 'operation_type': type,
+      if (type != null) 'type': type,
       if (dateOperation != null) 'operation_date': dateOperation,
       if (amount != null) 'operation_amount': amount,
     });
   }
 
   NoteOperationCompanion copyWith(
-      {Value<int>? id,
+      {Value<String>? id,
       Value<String>? category,
-      Value<String>? type,
+      Value<OperationType>? type,
       Value<DateTime>? dateOperation,
       Value<double>? amount}) {
     return NoteOperationCompanion(
@@ -160,13 +66,14 @@ class NoteOperationCompanion extends UpdateCompanion<NoteOperationData> {
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
     if (id.present) {
-      map['id'] = Variable<int>(id.value);
+      map['id'] = Variable<String>(id.value);
     }
     if (category.present) {
       map['operation_category'] = Variable<String>(category.value);
     }
     if (type.present) {
-      map['operation_type'] = Variable<String>(type.value);
+      final converter = $NoteOperationTable.$converter0;
+      map['type'] = Variable<int>(converter.toSql(type.value));
     }
     if (dateOperation.present) {
       map['operation_date'] = Variable<DateTime>(dateOperation.value);
@@ -190,19 +97,40 @@ class NoteOperationCompanion extends UpdateCompanion<NoteOperationData> {
   }
 }
 
+class _$ItemOperationModelInsertable implements Insertable<ItemOperationModel> {
+  ItemOperationModel _object;
+
+  _$ItemOperationModelInsertable(this._object);
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    return NoteOperationCompanion(
+      id: Value(_object.id),
+      category: Value(_object.category),
+      amount: Value(_object.amount),
+      type: Value(_object.type),
+      dateOperation: Value(_object.dateOperation),
+    ).toColumns(false);
+  }
+}
+
+extension ItemOperationModelToInsertable on ItemOperationModel {
+  _$ItemOperationModelInsertable toInsertable() {
+    return _$ItemOperationModelInsertable(this);
+  }
+}
+
 class $NoteOperationTable extends NoteOperation
-    with TableInfo<$NoteOperationTable, NoteOperationData> {
+    with TableInfo<$NoteOperationTable, ItemOperationModel> {
   @override
   final GeneratedDatabase attachedDatabase;
   final String? _alias;
   $NoteOperationTable(this.attachedDatabase, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
   @override
-  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
       'id', aliasedName, false,
-      type: DriftSqlType.int,
-      requiredDuringInsert: false,
-      defaultConstraints: 'PRIMARY KEY AUTOINCREMENT');
+      type: DriftSqlType.string, requiredDuringInsert: true);
   final VerificationMeta _categoryMeta = const VerificationMeta('category');
   @override
   late final GeneratedColumn<String> category = GeneratedColumn<String>(
@@ -210,9 +138,10 @@ class $NoteOperationTable extends NoteOperation
       type: DriftSqlType.string, requiredDuringInsert: true);
   final VerificationMeta _typeMeta = const VerificationMeta('type');
   @override
-  late final GeneratedColumn<String> type = GeneratedColumn<String>(
-      'operation_type', aliasedName, false,
-      type: DriftSqlType.string, requiredDuringInsert: true);
+  late final GeneratedColumnWithTypeConverter<OperationType, int> type =
+      GeneratedColumn<int>('type', aliasedName, false,
+              type: DriftSqlType.int, requiredDuringInsert: true)
+          .withConverter<OperationType>($NoteOperationTable.$converter0);
   final VerificationMeta _dateOperationMeta =
       const VerificationMeta('dateOperation');
   @override
@@ -232,12 +161,14 @@ class $NoteOperationTable extends NoteOperation
   @override
   String get actualTableName => 'note_operation';
   @override
-  VerificationContext validateIntegrity(Insertable<NoteOperationData> instance,
+  VerificationContext validateIntegrity(Insertable<ItemOperationModel> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
       context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
     }
     if (data.containsKey('operation_category')) {
       context.handle(
@@ -247,12 +178,7 @@ class $NoteOperationTable extends NoteOperation
     } else if (isInserting) {
       context.missing(_categoryMeta);
     }
-    if (data.containsKey('operation_type')) {
-      context.handle(_typeMeta,
-          type.isAcceptableOrUnknown(data['operation_type']!, _typeMeta));
-    } else if (isInserting) {
-      context.missing(_typeMeta);
-    }
+    context.handle(_typeMeta, const VerificationResult.success());
     if (data.containsKey('operation_date')) {
       context.handle(
           _dateOperationMeta,
@@ -271,21 +197,22 @@ class $NoteOperationTable extends NoteOperation
   }
 
   @override
-  Set<GeneratedColumn> get $primaryKey => {id};
+  Set<GeneratedColumn> get $primaryKey => <GeneratedColumn>{};
   @override
-  NoteOperationData map(Map<String, dynamic> data, {String? tablePrefix}) {
+  ItemOperationModel map(Map<String, dynamic> data, {String? tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
-    return NoteOperationData(
+    return ItemOperationModel(
       id: attachedDatabase.options.types
-          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
       category: attachedDatabase.options.types.read(
           DriftSqlType.string, data['${effectivePrefix}operation_category'])!,
-      type: attachedDatabase.options.types
-          .read(DriftSqlType.string, data['${effectivePrefix}operation_type'])!,
-      dateOperation: attachedDatabase.options.types.read(
-          DriftSqlType.dateTime, data['${effectivePrefix}operation_date'])!,
       amount: attachedDatabase.options.types.read(
           DriftSqlType.double, data['${effectivePrefix}operation_amount'])!,
+      type: $NoteOperationTable.$converter0.fromSql(attachedDatabase
+          .options.types
+          .read(DriftSqlType.int, data['${effectivePrefix}type'])!),
+      dateOperation: attachedDatabase.options.types.read(
+          DriftSqlType.dateTime, data['${effectivePrefix}operation_date'])!,
     );
   }
 
@@ -293,6 +220,9 @@ class $NoteOperationTable extends NoteOperation
   $NoteOperationTable createAlias(String alias) {
     return $NoteOperationTable(attachedDatabase, alias);
   }
+
+  static TypeConverter<OperationType, int> $converter0 =
+      const EnumIndexConverter<OperationType>(OperationType.values);
 }
 
 abstract class _$AppDb extends GeneratedDatabase {
