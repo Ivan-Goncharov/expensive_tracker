@@ -5,6 +5,7 @@ import 'package:expensive_tracker_app/units/create_expense/cubit/create_operatio
 import 'package:expensive_tracker_app/units/create_expense/data/repositories/create_operation_repo_impl.dart';
 import 'package:expensive_tracker_app/units/create_expense/data/services/create_operation_service.dart';
 import 'package:expensive_tracker_app/units/create_expense/domain/repositories/create_operation_repo.dart';
+import 'package:expensive_tracker_app/units/last_operationes/cubit/last_operationes_cubit.dart';
 import 'package:expensive_tracker_app/units/navigation/components/cubits/float_button_hide_cubit/cubit/float_button_vis_cubit.dart';
 import 'package:expensive_tracker_app/units/navigation/cubit/navigation_cubit.dart';
 import 'package:get_it/get_it.dart';
@@ -22,6 +23,7 @@ void setupGetIt() {
   getIt.registerFactory(() => ChangeCategoriesCubit());
   getIt.registerFactory(() => OperationCategoryCubit());
   getIt.registerFactory(() => CreateOperationCubit());
+  getIt.registerFactory(() => LastOperationesCubit());
 
   /// Repo
   getIt.registerSingleton<CreateOperationRepository>(
