@@ -45,22 +45,6 @@ class ItemOperationModel with _$ItemOperationModel {
       );
 }
 
-// class ItemOperationModel2 extends Equatable {
-//   final String category;
-//   final double amount;
-//   final OperationType type;
-//   final DateTime date;
-//   const ItemOperationModel2({
-//     required this.category,
-//     required this.amount,
-//     required this.type,
-//     required this.date,
-//   });
-
-//   @override
-//   List<Object?> get props => [category, amount, type, date];
-// }
-
 enum OperationType {
   income,
   expense,
