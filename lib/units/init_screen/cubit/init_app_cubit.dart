@@ -9,6 +9,6 @@ class InitAppCubit extends Cubit<InitAppState> {
   // Future<void> initial() async {
   //   emit(InitAppStartState());
   //   await Hive.initFlutter();
-    
+
   // }
 }

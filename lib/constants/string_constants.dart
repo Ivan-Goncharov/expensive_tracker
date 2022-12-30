@@ -26,9 +26,4 @@ class SResources {
   static const debtsCategory = 'Debts';
   static const dividendsCategory = 'Dividends';
   static const otherCategory = 'Other';
-  
-
-
-
-  
 }

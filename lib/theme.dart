@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 /// Тема приложения
 class MyThemeApp {
-  
   static final lightColorScheme = ThemeData(
     colorScheme: const ColorScheme(
       brightness: Brightness.light,

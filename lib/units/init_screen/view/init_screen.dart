@@ -1,9 +1,3 @@
-import 'package:expensive_tracker_app/get_it.dart';
-import 'package:expensive_tracker_app/units/init_screen/cubit/init_app_cubit.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 // class InitScreenWidget extends StatelessWidget {
 //   const InitScreenWidget({super.key});

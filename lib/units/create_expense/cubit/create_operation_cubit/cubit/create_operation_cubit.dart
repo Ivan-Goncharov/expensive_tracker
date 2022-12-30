@@ -44,13 +44,12 @@ class CreateOperationCubit extends Cubit<CreateOperationState> {
   }
 
   Future<void> saveOperation() {
-    print('DEBUG SAVE BUTTOM PRESS');
     return getIt<CreateOperationRepository>().saveOperation(
       categoty: _category,
       dateTime: _dateTime,
       amount: _amount,
       type: _type,
-    ); 
+    );
   }
 
   void _changeState() {

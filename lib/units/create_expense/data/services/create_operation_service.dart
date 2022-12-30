@@ -9,7 +9,5 @@ class CreateOpeartionServiceImpl implements CreateOpeartionService {
   @override
   Future<void> createOperation(ItemOperationModel operation) async {
     await database.addNewOperationData(operation.toInsertable());
-    final test = await database.getNotesOperation();
-    print('DEBUG TEST $test');
   }
 }

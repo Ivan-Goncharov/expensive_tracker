@@ -22,7 +22,6 @@ class StartScreenServiceImpl implements StartScreenService {
     final prefs = await SharedPreferences.getInstance();
     try {
       final isFirstStart = prefs.getBool(isFirstStartConst);
-      print('DEBUG IS FIRST START $isFirstStart');
       if (isFirstStart == null) {
         return false;
       } else {
@@ -63,7 +62,7 @@ class StartScreenServiceImpl implements StartScreenService {
   }
 
   @override
-  Future<List<OperationCategories>> getCategories()   {
-    return database.getAllCategories(); 
+  Future<List<OperationCategories>> getCategories() {
+    return database.getAllCategories();
   }
 }

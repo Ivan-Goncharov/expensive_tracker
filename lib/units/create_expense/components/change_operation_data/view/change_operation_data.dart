@@ -1,6 +1,6 @@
-import 'package:expensive_tracker_app/units/create_expense/components/change_operation_data/view/data/models/category_model.dart';
 import 'package:expensive_tracker_app/units/create_expense/components/operation_category/view/operation_category.dart';
 import 'package:expensive_tracker_app/units/create_expense/cubit/change_categories_cubit/change_categories_cubit.dart';
+import 'package:expensive_tracker_app/units/start_screen/data/model/categories.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -12,9 +12,15 @@ class ChangeOperationData extends StatelessWidget {
     return BlocBuilder<ChangeCategoriesCubit, ChangeCategoriesState>(
       builder: (context, state) {
         if (state is CreateExpenseState) {
-          return OperationCategoryWidget(getList(state), key: const  ValueKey('Expense'),);
+          return OperationCategoryWidget(
+            getList(state),
+            key: const ValueKey('Expense'),
+          );
         } else if (state is CreateIncomeState) {
-          return OperationCategoryWidget(getList(state), key: const  ValueKey('Income'),);
+          return OperationCategoryWidget(
+            getList(state),
+            key: const ValueKey('Income'),
+          );
         } else {
           return const SizedBox();
         }
@@ -22,7 +28,7 @@ class ChangeOperationData extends StatelessWidget {
     );
   }
 
-  List<CategoryOperationModel> getList(ChangeCategoriesState state) {
+  List<OperationCategories> getList(ChangeCategoriesState state) {
     if (state is CreateExpenseState) {
       return state.expenseCategory;
     } else if (state is CreateIncomeState) {

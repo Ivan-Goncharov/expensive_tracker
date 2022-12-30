@@ -24,6 +24,7 @@ class LastOperationesRepoImpl implements LastOperationesRepo {
   @override
   set categories(List<OperationCategories> val) => _categories = val;
 
+  @override
   List<OperationCategories> getTypeCategories(OperationType type) {
     return _categories.where((element) => element.type == type).toList();
   }

@@ -1,13 +1,14 @@
-import 'package:expensive_tracker_app/units/create_expense/components/change_operation_data/view/data/models/category_model.dart';
 import 'package:expensive_tracker_app/units/create_expense/components/operation_category/cubit/operation_category_cubit.dart';
+import 'package:expensive_tracker_app/units/start_screen/data/model/categories.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ItemCategory extends StatelessWidget {
-  final CategoryOperationModel itemCategory;
+  final OperationCategories itemCategory;
   final int index;
-  const ItemCategory({super.key, required this.itemCategory, required this.index});
-
+  const ItemCategory(
+      {super.key, required this.itemCategory, required this.index});
 
   // @override
   @override
@@ -15,11 +16,12 @@ class ItemCategory extends StatelessWidget {
     final colors = Theme.of(context).colorScheme;
     // final changeCategoryCubit =
     //     BlocProvider.of<OperationCategoryCubit>(context);
-    final selectIndex =
-        (BlocProvider.of<OperationCategoryCubit>(context).state as OperationChangeCategoryState)
-            .indexOfSelect;
+    final selectIndex = (BlocProvider.of<OperationCategoryCubit>(context).state
+            as OperationChangeCategoryState)
+        .indexOfSelect;
     return GestureDetector(
-      onTap: () => BlocProvider.of<OperationCategoryCubit>(context).changeCategory(index, context),
+      onTap: () => BlocProvider.of<OperationCategoryCubit>(context)
+          .changeCategory(index, context),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
         height: 80,
@@ -49,9 +51,10 @@ class ItemCategory extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
-              itemCategory.icon,
+              IconDataSolid(itemCategory.getIconCode),
               size: 26,
-              color: selectIndex == index ? colors.onPrimary : colors.onBackground,
+              color:
+                  selectIndex == index ? colors.onPrimary : colors.onBackground,
             ),
             const SizedBox(
               height: 6,
@@ -63,7 +66,9 @@ class ItemCategory extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               style: TextStyle(
                   fontSize: 12,
-                  color: selectIndex == index ? colors.onPrimary : colors.onBackground),
+                  color: selectIndex == index
+                      ? colors.onPrimary
+                      : colors.onBackground),
             ),
           ],
         ),

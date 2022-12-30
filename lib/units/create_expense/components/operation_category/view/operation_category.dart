@@ -1,20 +1,22 @@
 import 'package:expensive_tracker_app/get_it.dart';
-import 'package:expensive_tracker_app/units/create_expense/components/change_operation_data/view/data/models/category_model.dart';
 import 'package:expensive_tracker_app/units/create_expense/components/item_category/view/item_category.dart';
 import 'package:expensive_tracker_app/units/create_expense/components/operation_category/cubit/operation_category_cubit.dart';
+import 'package:expensive_tracker_app/units/start_screen/data/model/categories.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OperationCategoryWidget extends StatelessWidget {
-  final List<CategoryOperationModel> listCategories;
-  const OperationCategoryWidget(this.listCategories, {super.key,});
+  final List<OperationCategories> listCategories;
+  const OperationCategoryWidget(
+    this.listCategories, {
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) =>
-          getIt<OperationCategoryCubit>()..initial(listCategories),
+      create: (_) => getIt<OperationCategoryCubit>()..initial(listCategories),
       child: const _OperationCategoryBody(),
     );
   }

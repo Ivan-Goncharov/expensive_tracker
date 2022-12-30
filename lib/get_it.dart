@@ -22,7 +22,6 @@ import 'units/navigation/components/cubits/bottom_hide_cubit/bottom_hide_cubit.d
 final getIt = GetIt.instance;
 
 void setupGetIt() {
-
   /// Servises.
   getIt.registerSingleton<CreateOpeartionService>(
     CreateOpeartionServiceImpl(),
@@ -35,7 +34,7 @@ void setupGetIt() {
   );
 
   /// Repo
-  getIt.registerSingleton<CreateOperationRepository>(CreateOperationRepoImpl());
+  getIt.registerSingleton<CreateOperationRepository>(CreateOperationRepoImpl(getIt()));
   getIt.registerSingleton<LastOperationesRepo>(LastOperationesRepoImpl());
   getIt.registerSingleton<StartScreenRepo>(StartScreenRepoImpl(getIt()));
 
@@ -49,5 +48,4 @@ void setupGetIt() {
   getIt.registerFactory(() => CreateOperationCubit());
   getIt.registerFactory(() => LastOperationesCubit());
   getIt.registerFactory(() => StartScreenCubit());
-  
 }

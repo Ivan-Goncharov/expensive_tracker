@@ -15,6 +15,8 @@ class OperationCategories with _$OperationCategories {
     required OperationType type,
   }) = _OperationCategories;
 
+  int get getIconCode => int.parse(code);
+
   factory OperationCategories.create({
     required String title,
     required String code,

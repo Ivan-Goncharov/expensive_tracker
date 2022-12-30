@@ -1,31 +1,27 @@
- 
 import 'package:equatable/equatable.dart';
 
-abstract class StartScreenState implements Equatable { 
-}
+abstract class StartScreenState implements Equatable {}
 
-class StartScreenInitialState implements StartScreenState{
+class StartScreenInitialState implements StartScreenState {
   @override
   List<Object?> get props => [];
 
-  @override 
+  @override
   bool? get stringify => true;
-
 }
 
 class StartScreenLoadingState implements StartScreenState {
-  @override 
+  @override
   List<Object?> get props => [];
 
-  @override 
+  @override
   bool? get stringify => true;
 }
 
 class StartScreenLoadedState implements StartScreenState {
-  
-  @override 
+  @override
   List<Object?> get props => [1];
 
-  @override 
+  @override
   bool? get stringify => true;
 }
