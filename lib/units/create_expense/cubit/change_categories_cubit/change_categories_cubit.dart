@@ -1,13 +1,19 @@
 import 'package:bloc/bloc.dart';
-import 'package:expensive_tracker_app/constants/operation_categories.dart';
-import 'package:expensive_tracker_app/units/create_expense/components/change_operation_data/view/data/models/category_model.dart';
+import 'package:expensive_tracker_app/units/create_expense/data/model/item_operation_model.dart';
+import 'package:expensive_tracker_app/units/last_operationes/domain/repositories/last_operationes_repo.dart';
+import 'package:expensive_tracker_app/units/start_screen/data/model/categories.dart';
 
 part 'change_categories_state.dart';
 
 class ChangeCategoriesCubit extends Cubit<ChangeCategoriesState> {
-  ChangeCategoriesCubit() : super(CreateOperationInitial());
+  final LastOperationesRepo lastOperRepo;
+  ChangeCategoriesCubit(this.lastOperRepo) : super(CreateOperationInitial());
+  List<OperationCategories> listExpense = [];
+  List<OperationCategories> listIncome = [];
 
   void initial() {
+    listExpense = lastOperRepo.getTypeCategories(OperationType.expense);
+    listExpense = lastOperRepo.getTypeCategories(OperationType.income);
     emit(CreateExpenseState(listExpense));
   }
 

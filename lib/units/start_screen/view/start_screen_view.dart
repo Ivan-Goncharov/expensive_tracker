@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class StartScreenView extends StatelessWidget {
   const StartScreenView({super.key});
@@ -25,13 +26,17 @@ class _StartScreenBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocListener<StartScreenCubit, StartScreenState>(
+       
       listener: (context, state) {
         if (state is StartScreenLoadedState) {
+          print('DEBUG state $state');
           Navigator.of(context).pushReplacementNamed(navScreenRoute);
         }
       },
       // TODO: реализовать начальный экран.
-      child: Container(),
+      child: const Scaffold(
+        body: Center(child: Icon(IconDataSolid(0xe2eb))),
+      ),
     );
   }
 }

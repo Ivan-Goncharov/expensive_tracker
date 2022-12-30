@@ -1,0 +1,24 @@
+{
+    "categories": [
+        {
+            "title": "Salary",
+            "code": "0xf0d6"
+        },
+        {
+            "title": "Debts",
+            "code": "0xf53d"
+        },
+        {
+            "title": "Percentages",
+            "code": "0x25"
+        },
+        {
+            "title": "Dividends",
+            "code": "0xf529"
+        },
+        {
+            "title": "Gifts",
+            "code": "0xf06b"
+        }
+    ]
+}

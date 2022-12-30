@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:expensive_tracker_app/get_it.dart';
+import 'package:expensive_tracker_app/units/last_operationes/domain/repositories/last_operationes_repo.dart';
 import 'package:expensive_tracker_app/units/start_screen/domain/repositories/start_screen_repo.dart';
 import 'package:expensive_tracker_app/units/start_screen/view/cubit/start_screen_state.dart';
 
@@ -9,10 +10,14 @@ class StartScreenCubit extends Cubit<StartScreenState> {
   Future<void> startApp() async {
     final repo = getIt<StartScreenRepo>();
     emit(StartScreenLoadingState());
-    final isFirstStart = await repo.isFirstStart();
-    if (isFirstStart) {
+
+    final isNotFirstStart = await repo.isFirstStart();
+    if (!isNotFirstStart) {
       await repo.saveStartInfo();
     }
+    await repo.getAllCategories();
+    print('DEBUG start repo ${getIt<LastOperationesRepo>().categories}');
+
     emit(StartScreenLoadedState());
   }
 }

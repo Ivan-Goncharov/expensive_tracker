@@ -22,8 +22,9 @@ class StartScreenLoadingState implements StartScreenState {
 }
 
 class StartScreenLoadedState implements StartScreenState {
+  
   @override 
-  List<Object?> get props => [];
+  List<Object?> get props => [1];
 
   @override 
   bool? get stringify => true;

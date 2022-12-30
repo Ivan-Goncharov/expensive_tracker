@@ -14,6 +14,7 @@ import 'package:expensive_tracker_app/units/navigation/cubit/navigation_cubit.da
 import 'package:expensive_tracker_app/units/start_screen/data/repositories/start_screen_repo_impl.dart';
 import 'package:expensive_tracker_app/units/start_screen/data/services/start_screen_service.dart';
 import 'package:expensive_tracker_app/units/start_screen/domain/repositories/start_screen_repo.dart';
+import 'package:expensive_tracker_app/units/start_screen/view/cubit/start_screen_cubit.dart';
 import 'package:get_it/get_it.dart';
 
 import 'units/navigation/components/cubits/bottom_hide_cubit/bottom_hide_cubit.dart';
@@ -43,8 +44,10 @@ void setupGetIt() {
   getIt.registerFactory(() => BottomHideCubit());
   getIt.registerFactory(() => FloatButtonVisCubit());
   getIt.registerFactory(() => DatePickerCubit());
-  getIt.registerFactory(() => ChangeCategoriesCubit());
+  getIt.registerFactory(() => ChangeCategoriesCubit(getIt()));
   getIt.registerFactory(() => OperationCategoryCubit());
   getIt.registerFactory(() => CreateOperationCubit());
   getIt.registerFactory(() => LastOperationesCubit());
+  getIt.registerFactory(() => StartScreenCubit());
+  
 }

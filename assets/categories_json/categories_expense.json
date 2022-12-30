@@ -1,0 +1,64 @@
+{
+    "categories": [
+        {
+            "title": "Food",
+            "code": "0xe2eb"
+        },
+        {
+            "title": "Clothes",
+            "code": "0xf553"
+        },
+        {
+            "title": "Bills",
+            "code": "0xf0d6"
+        },
+        {
+            "title": "Cars",
+            "code": "0xf5e4"
+        },
+        {
+            "title": "Communication",
+            "code": "0xf095"
+        },
+        {
+            "title": "Eating out",
+            "code": "0xf805"
+        },
+        {
+            "title": "Entertainment",
+            "code": "0xf57b"
+        },
+        {
+            "title": "Gifts",
+            "code": "0xf06b"
+        },
+        {
+            "title": "Gifts",
+            "code": "0xf82f"
+        },
+        {
+            "title": "House",
+            "code": "0xf015"
+        },
+        {
+            "title": "Pets",
+            "code": "0xf6be"
+        },
+        {
+            "title": "Taxi",
+            "code": "0xf1ba"
+        },
+        {
+            "title": "Toiletry",
+            "code": "0xe06d"
+        },
+        {
+            "title": "Transport",
+            "code": "0xf207"
+        },
+        {
+            "title": "Investing",
+            "code": "0xf4d3"
+        }
+    ]
+}

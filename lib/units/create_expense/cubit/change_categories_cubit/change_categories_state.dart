@@ -5,11 +5,11 @@ abstract class ChangeCategoriesState {}
 class CreateOperationInitial extends ChangeCategoriesState {}
 
 class CreateExpenseState extends ChangeCategoriesState {
-  final List<CategoryOperationModel> expenseCategory;
+  final List<OperationCategories> expenseCategory;
   CreateExpenseState(this.expenseCategory);
 }
 
 class CreateIncomeState extends ChangeCategoriesState {
-  final List<CategoryOperationModel> incomeCategory;
+  final List<OperationCategories> incomeCategory;
   CreateIncomeState(this.incomeCategory);
 }
