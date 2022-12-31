@@ -8,13 +8,31 @@ class SaveButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CreateOperationCubit, CreateOperationState>(
+    return BlocConsumer<CreateOperationCubit, CreateOperationState>(
+      listener: (_, state) {
+        if (state is CreateOperationError) {
+          //TODO: Реализовать оповещение об ошибки создания
+        } else if (state is CreateOperationSucces) {
+          print('DEBUG pop');
+          Navigator.pop(context);
+        }
+      },
+      buildWhen: (previous, current) {
+        if (previous != current ||
+            current != CreateOperationError() ||
+            current != CreateOperationSucces()) {
+          return true;
+        } else {
+          return false;
+        }
+      },
       builder: (context, state) {
         if (state is CreateOperationAllowed) {
           return _SaveButtonWidget(
             BlocProvider.of<CreateOperationCubit>(context).saveOperation,
           );
-        } else if (state is CreateOperationNotAllowed) {
+        } else if (state is CreateOperationNotAllowed ||
+            state is CreateOperationError) {
           return const _SaveButtonWidget();
         } else {
           return const SizedBox();

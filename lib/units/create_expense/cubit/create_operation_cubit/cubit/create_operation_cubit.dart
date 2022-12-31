@@ -43,13 +43,18 @@ class CreateOperationCubit extends Cubit<CreateOperationState> {
     _changeState();
   }
 
-  Future<void> saveOperation() {
-    return getIt<CreateOperationRepository>().saveOperation(
-      categoty: _category,
-      dateTime: _dateTime,
-      amount: _amount,
-      type: _type,
-    );
+  Future<void> saveOperation() async {
+    try {
+      await getIt<CreateOperationRepository>().saveOperation(
+        categoty: _category,
+        dateTime: _dateTime,
+        amount: _amount,
+        type: _type,
+      );
+      emit(CreateOperationSucces());
+    } catch (_) {
+      emit(CreateOperationError());
+    }
   }
 
   void _changeState() {

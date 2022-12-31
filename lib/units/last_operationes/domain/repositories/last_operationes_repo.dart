@@ -7,5 +7,6 @@ abstract class LastOperationesRepo {
   set categories(List<OperationCategories> val);
 
   Future<List<ItemOperationModel>> getLastOperationes();
+  void addNewOperationes(ItemOperationModel operationModel);
   List<OperationCategories> getTypeCategories(OperationType type);
 }

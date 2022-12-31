@@ -28,4 +28,9 @@ class LastOperationesRepoImpl implements LastOperationesRepo {
   List<OperationCategories> getTypeCategories(OperationType type) {
     return _categories.where((element) => element.type == type).toList();
   }
+
+  @override
+  void addNewOperationes(ItemOperationModel operationModel) {
+    _operationes.insert(0, operationModel);
+  }
 }

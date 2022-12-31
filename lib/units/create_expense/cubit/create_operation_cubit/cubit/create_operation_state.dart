@@ -7,8 +7,42 @@ abstract class CreateOperationState extends Equatable {
   List<Object> get props => [];
 }
 
-class CreateOperationInitial extends CreateOperationState {}
+class CreateOperationInitial implements CreateOperationState {
+  @override
+  List<Object> get props => [1];
 
-class CreateOperationNotAllowed extends CreateOperationState {}
+  @override
+  bool? get stringify => true;
+}
 
-class CreateOperationAllowed extends CreateOperationState {}
+class CreateOperationNotAllowed implements CreateOperationState {
+  @override
+  List<Object> get props => [2];
+
+  @override
+  bool? get stringify => true;
+}
+
+class CreateOperationAllowed implements CreateOperationState {
+  @override
+  List<Object> get props => [3];
+
+  @override
+  bool? get stringify => true;
+}
+
+class CreateOperationError implements CreateOperationState {
+  @override
+  List<Object> get props => [4];
+
+  @override
+  bool? get stringify => true;
+}
+
+class CreateOperationSucces implements CreateOperationState {
+  @override
+  List<Object> get props => [5];
+
+  @override
+  bool? get stringify => true;
+}
