@@ -34,7 +34,8 @@ void setupGetIt() {
   );
 
   /// Repo
-  getIt.registerSingleton<CreateOperationRepository>(CreateOperationRepoImpl(getIt()));
+  getIt.registerSingleton<CreateOperationRepository>(
+      CreateOperationRepoImpl(getIt()));
   getIt.registerSingleton<LastOperationesRepo>(LastOperationesRepoImpl());
   getIt.registerSingleton<StartScreenRepo>(StartScreenRepoImpl(getIt()));
 
@@ -46,6 +47,6 @@ void setupGetIt() {
   getIt.registerFactory(() => ChangeCategoriesCubit(getIt()));
   getIt.registerFactory(() => OperationCategoryCubit());
   getIt.registerFactory(() => CreateOperationCubit());
-  getIt.registerFactory(() => LastOperationesCubit());
+  getIt.registerFactory(() => LastOperationesCubit(getIt()));
   getIt.registerFactory(() => StartScreenCubit());
 }

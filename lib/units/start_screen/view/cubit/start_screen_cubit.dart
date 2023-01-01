@@ -1,4 +1,3 @@
-
 import 'package:bloc/bloc.dart';
 import 'package:expensive_tracker_app/get_it.dart';
 import 'package:expensive_tracker_app/units/start_screen/domain/repositories/start_screen_repo.dart';

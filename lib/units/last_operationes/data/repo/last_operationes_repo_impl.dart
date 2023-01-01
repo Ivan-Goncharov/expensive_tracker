@@ -33,4 +33,9 @@ class LastOperationesRepoImpl implements LastOperationesRepo {
   void addNewOperationes(ItemOperationModel operationModel) {
     _operationes.insert(0, operationModel);
   }
+
+  @override
+  OperationCategories getCategoryById(String id) {
+    return _categories.firstWhere((element) => element.id == id);
+  }
 }

@@ -13,7 +13,6 @@ class SaveButton extends StatelessWidget {
         if (state is CreateOperationError) {
           //TODO: Реализовать оповещение об ошибки создания
         } else if (state is CreateOperationSucces) {
-          print('DEBUG pop');
           Navigator.pop(context);
         }
       },

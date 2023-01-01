@@ -3,10 +3,12 @@ import 'package:expensive_tracker_app/units/start_screen/data/model/categories.d
 
 abstract class LastOperationesRepo {
   List<OperationCategories> get categories;
-  List<ItemOperationModel> get operationes;
   set categories(List<OperationCategories> val);
 
+  List<ItemOperationModel> get operationes;
   Future<List<ItemOperationModel>> getLastOperationes();
   void addNewOperationes(ItemOperationModel operationModel);
+
   List<OperationCategories> getTypeCategories(OperationType type);
+  OperationCategories getCategoryById(String id);
 }

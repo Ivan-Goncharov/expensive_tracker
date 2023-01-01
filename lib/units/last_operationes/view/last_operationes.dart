@@ -2,6 +2,7 @@ import 'package:expensive_tracker_app/get_it.dart';
 import 'package:expensive_tracker_app/units/last_operationes/cubit/last_operationes_cubit.dart';
 import 'package:expensive_tracker_app/units/last_operationes/cubit/last_operationes_state.dart';
 import 'package:expensive_tracker_app/units/last_operationes/view/components/item_operationes_view.dart';
+import 'package:expensive_tracker_app/units/last_operationes/view/components/operationes_scroll.dart';
 import 'package:expensive_tracker_app/units/navigation/cubit/navigation_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,8 +24,6 @@ class _LastOperationesViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final navState = BlocProvider.of<NavigatorCubit>(context).state
-        as NavigationChangePageState;
     return BlocBuilder<LastOperationesCubit, LastOperationState>(
       builder: (context, state) {
         if (state is LastOperationLoadingState) {
@@ -33,17 +32,12 @@ class _LastOperationesViewBody extends StatelessWidget {
             child: CircularProgressIndicator(),
           );
         } else if (state is LastOperationErrorState) {
-          ///TODO: Реализовать красивую ошибку.
+          /// TODO: Реализовать красивую ошибку.
           return const Center(
             child: Text('Text Произошла ошибка'),
           );
         } else if (state is LastOperationLoadedState) {
-          return ListView.builder(
-            controller: navState.scrollController,
-            itemBuilder: (_, index) =>
-                ItemOperationView(operation: state.operations[index]),
-            itemCount: state.operations.length,
-          );
+          return OperationesScroll(state.operations);
         } else {
           return const SizedBox();
         }
