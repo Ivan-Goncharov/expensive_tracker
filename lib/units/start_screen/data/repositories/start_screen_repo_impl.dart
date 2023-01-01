@@ -22,4 +22,10 @@ class StartScreenRepoImpl implements StartScreenRepo {
   Future<void> getAllCategories() async {
     getIt<LastOperationesRepo>().categories = await _service.getCategories();
   }
+
+  @override
+  Future<void> getListOfMonth() async {
+    getIt<LastOperationesRepo>().listOfMonth =
+        (await _service.getMonthList()).reversed.toList();
+  }
 }

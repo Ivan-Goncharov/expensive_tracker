@@ -6,9 +6,12 @@ abstract class LastOperationesRepo {
   set categories(List<OperationCategories> val);
 
   List<ItemOperationModel> get operationes;
-  Future<List<ItemOperationModel>> getLastOperationes();
+  Future<List<ItemOperationModel>> getLastOperationes(DateTime date);
   void addNewOperationes(ItemOperationModel operationModel);
 
   List<OperationCategories> getTypeCategories(OperationType type);
   OperationCategories getCategoryById(String id);
+
+  List<DateTime> get listOfMonth;
+  set listOfMonth(List<DateTime> value);
 }

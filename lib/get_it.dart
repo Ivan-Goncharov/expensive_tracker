@@ -5,6 +5,7 @@ import 'package:expensive_tracker_app/units/create_expense/cubit/create_operatio
 import 'package:expensive_tracker_app/units/create_expense/data/repositories/create_operation_repo_impl.dart';
 import 'package:expensive_tracker_app/units/create_expense/data/services/create_operation_service.dart';
 import 'package:expensive_tracker_app/units/create_expense/domain/repositories/create_operation_repo.dart';
+import 'package:expensive_tracker_app/units/home/cubit/month_change_cubit.dart';
 import 'package:expensive_tracker_app/units/last_operationes/cubit/last_operationes_cubit.dart';
 import 'package:expensive_tracker_app/units/last_operationes/data/repo/last_operationes_repo_impl.dart';
 import 'package:expensive_tracker_app/units/last_operationes/data/services/last_operationes_services.dart';
@@ -36,7 +37,8 @@ void setupGetIt() {
   /// Repo
   getIt.registerSingleton<CreateOperationRepository>(
       CreateOperationRepoImpl(getIt()));
-  getIt.registerSingleton<LastOperationesRepo>(LastOperationesRepoImpl());
+  getIt
+      .registerSingleton<LastOperationesRepo>(LastOperationesRepoImpl(getIt()));
   getIt.registerSingleton<StartScreenRepo>(StartScreenRepoImpl(getIt()));
 
   /// Bloc and Cubit
@@ -49,4 +51,5 @@ void setupGetIt() {
   getIt.registerFactory(() => CreateOperationCubit());
   getIt.registerFactory(() => LastOperationesCubit(getIt()));
   getIt.registerFactory(() => StartScreenCubit());
+  getIt.registerFactory(() => MonthChangeCubit(getIt()));
 }

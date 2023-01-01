@@ -12,7 +12,7 @@ class LastOperationesCubit extends Cubit<LastOperationState> {
   Future<void> initial() async {
     emit(LastOperationLoadingState());
     try {
-      final list = await lastOperationRepo.getLastOperationes();
+      final list = await lastOperationRepo.getLastOperationes(DateTime.now());
       if (list.isEmpty) {
         emit(LastOperationErrorState());
       } else {

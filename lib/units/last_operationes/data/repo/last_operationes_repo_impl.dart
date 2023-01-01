@@ -1,10 +1,14 @@
-import 'package:expensive_tracker_app/get_it.dart';
 import 'package:expensive_tracker_app/units/create_expense/data/model/item_operation_model.dart';
 import 'package:expensive_tracker_app/units/last_operationes/data/services/last_operationes_services.dart';
 import 'package:expensive_tracker_app/units/last_operationes/domain/repositories/last_operationes_repo.dart';
 import 'package:expensive_tracker_app/units/start_screen/data/model/categories.dart';
 
 class LastOperationesRepoImpl implements LastOperationesRepo {
+  final LastOperationesSevices lastOperService;
+  LastOperationesRepoImpl(this.lastOperService);
+
+  List<DateTime> _listOfMonth = [];
+
   List<OperationCategories> _categories = [];
 
   List<ItemOperationModel> _operationes = [];
@@ -16,8 +20,11 @@ class LastOperationesRepoImpl implements LastOperationesRepo {
   List<ItemOperationModel> get operationes => _operationes;
 
   @override
-  Future<List<ItemOperationModel>> getLastOperationes() async {
-    _operationes = await getIt<LastOperationesSevices>().getLastOperationes();
+  List<DateTime> get listOfMonth => _listOfMonth;
+
+  @override
+  Future<List<ItemOperationModel>> getLastOperationes(DateTime date) async {
+    _operationes = await lastOperService.getLastOperationes(date);
     return _operationes;
   }
 
@@ -38,4 +45,7 @@ class LastOperationesRepoImpl implements LastOperationesRepo {
   OperationCategories getCategoryById(String id) {
     return _categories.firstWhere((element) => element.id == id);
   }
+
+  @override
+  set listOfMonth(List<DateTime> value) => _listOfMonth = value;
 }

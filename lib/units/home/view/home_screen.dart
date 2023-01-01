@@ -1,4 +1,5 @@
 import 'package:expensive_tracker_app/units/home/view/components/balance_card.dart';
+import 'package:expensive_tracker_app/units/home/view/components/month_view.dart';
 import 'package:expensive_tracker_app/units/last_operationes/view/last_operationes.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +14,9 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           children: const [
             BalanceCard(),
+            SizedBox(height: 10),
+            MonthView(),
+            SizedBox(height: 10),
             Expanded(child: LastOperationesView()),
           ],
         ),

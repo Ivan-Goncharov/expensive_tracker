@@ -1,9 +1,7 @@
 import 'package:expensive_tracker_app/get_it.dart';
 import 'package:expensive_tracker_app/units/last_operationes/cubit/last_operationes_cubit.dart';
 import 'package:expensive_tracker_app/units/last_operationes/cubit/last_operationes_state.dart';
-import 'package:expensive_tracker_app/units/last_operationes/view/components/item_operationes_view.dart';
 import 'package:expensive_tracker_app/units/last_operationes/view/components/operationes_scroll.dart';
-import 'package:expensive_tracker_app/units/navigation/cubit/navigation_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

@@ -33,8 +33,26 @@ class AppDb extends _$AppDb {
   int get schemaVersion => 1;
 
   /// Получение списка всех записей.
-  Future<List<ItemOperationModel>> getNotesOperation() {
-    return select(noteOperation).get();
+  Future<List<ItemOperationModel>> getNotesOperation(DateTime date) {
+    return (select(noteOperation)
+          ..where((tbl) =>
+              tbl.dateOperation.year.equals(date.year) &
+              tbl.dateOperation.month.equals(date.month))
+          ..orderBy([
+            (u) => OrderingTerm(
+                expression: u.dateOperation, mode: OrderingMode.desc)
+          ]))
+        .get();
+  }
+
+  /// Получение даты самого первой и самого последнего месяца
+  Future<DateTime> getTimeSingleOperation(OrderingMode mode) async {
+    final data = await (select(noteOperation)
+          ..orderBy(
+              [(u) => OrderingTerm(expression: u.dateOperation, mode: mode)])
+          ..limit(1))
+        .get();
+    return data.first.dateOperation;
   }
 
   /// Получение одной записи.
