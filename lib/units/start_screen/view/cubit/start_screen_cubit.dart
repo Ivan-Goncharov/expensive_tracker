@@ -6,6 +6,7 @@ import 'package:expensive_tracker_app/units/start_screen/view/cubit/start_screen
 class StartScreenCubit extends Cubit<StartScreenState> {
   final StartScreenRepo startScreenRepo;
   final MonthRepositoty monthRepositoty;
+
   StartScreenCubit(this.startScreenRepo, this.monthRepositoty)
       : super(StartScreenInitialState());
 

@@ -36,6 +36,10 @@ class LastOperationesRepoImpl implements LastOperationesRepo {
   @override
   bool addNewOperationes(ItemOperationModel operationModel) {
     final currentDate = getIt<MonthRepositoty>().currentDate;
+    if (currentDate == null) {
+      _operationes.add(operationModel);
+      return true;
+    }
 
     if (currentDate.year == operationModel.dateOperation.year &&
         currentDate.month == operationModel.dateOperation.month) {

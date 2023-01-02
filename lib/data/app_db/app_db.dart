@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
+import 'package:expensive_tracker_app/data/entity/balance_cards.dart';
 import 'package:expensive_tracker_app/data/entity/categories.dart';
 import 'package:expensive_tracker_app/data/entity/note_operation.dart';
 import 'package:expensive_tracker_app/units/create_expense/data/model/item_operation_model.dart';
@@ -25,7 +26,7 @@ LazyDatabase _openConnection() {
   });
 }
 
-@DriftDatabase(tables: [NoteOperation, CategoriesOperationTable])
+@DriftDatabase(tables: [NoteOperation, CategoriesOperationTable, BalanceCards])
 class AppDb extends _$AppDb {
   AppDb() : super(_openConnection());
 
@@ -52,6 +53,7 @@ class AppDb extends _$AppDb {
               [(u) => OrderingTerm(expression: u.dateOperation, mode: mode)])
           ..limit(1))
         .get();
+
     return data.first.dateOperation;
   }
 
@@ -95,5 +97,15 @@ class AppDb extends _$AppDb {
   Future<int> deleteCategories(String id) {
     return (delete(categoriesOperationTable)..where((tbl) => tbl.id.equals(id)))
         .go();
+  }
+
+  /// Запись одного id карты баланса
+  Future<int> addNewBalanceCard(Insertable<BalanceCard> card) {
+    return into(balanceCards).insert(card);
+  }
+
+  /// Получение всех id карт балансов
+  Future<List<BalanceCard>> getAllBalanceCardIds() {
+    return (select(balanceCards)).get();
   }
 }

@@ -415,15 +415,152 @@ class $NoteOperationTable extends NoteOperation
       const EnumIndexConverter<OperationType>(OperationType.values);
 }
 
+class BalanceCard extends DataClass implements Insertable<BalanceCard> {
+  final String id;
+  const BalanceCard({required this.id});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<String>(id);
+    return map;
+  }
+
+  BalanceCardsCompanion toCompanion(bool nullToAbsent) {
+    return BalanceCardsCompanion(
+      id: Value(id),
+    );
+  }
+
+  factory BalanceCard.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return BalanceCard(
+      id: serializer.fromJson<String>(json['id']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<String>(id),
+    };
+  }
+
+  BalanceCard copyWith({String? id}) => BalanceCard(
+        id: id ?? this.id,
+      );
+  @override
+  String toString() {
+    return (StringBuffer('BalanceCard(')
+          ..write('id: $id')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => id.hashCode;
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) || (other is BalanceCard && other.id == this.id);
+}
+
+class BalanceCardsCompanion extends UpdateCompanion<BalanceCard> {
+  final Value<String> id;
+  const BalanceCardsCompanion({
+    this.id = const Value.absent(),
+  });
+  BalanceCardsCompanion.insert({
+    required String id,
+  }) : id = Value(id);
+  static Insertable<BalanceCard> custom({
+    Expression<String>? id,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+    });
+  }
+
+  BalanceCardsCompanion copyWith({Value<String>? id}) {
+    return BalanceCardsCompanion(
+      id: id ?? this.id,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<String>(id.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('BalanceCardsCompanion(')
+          ..write('id: $id')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $BalanceCardsTable extends BalanceCards
+    with TableInfo<$BalanceCardsTable, BalanceCard> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $BalanceCardsTable(this.attachedDatabase, [this._alias]);
+  final VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<String> id = GeneratedColumn<String>(
+      'id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  @override
+  List<GeneratedColumn> get $columns => [id];
+  @override
+  String get aliasedName => _alias ?? 'balance_cards';
+  @override
+  String get actualTableName => 'balance_cards';
+  @override
+  VerificationContext validateIntegrity(Insertable<BalanceCard> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    } else if (isInserting) {
+      context.missing(_idMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => <GeneratedColumn>{};
+  @override
+  BalanceCard map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return BalanceCard(
+      id: attachedDatabase.options.types
+          .read(DriftSqlType.string, data['${effectivePrefix}id'])!,
+    );
+  }
+
+  @override
+  $BalanceCardsTable createAlias(String alias) {
+    return $BalanceCardsTable(attachedDatabase, alias);
+  }
+}
+
 abstract class _$AppDb extends GeneratedDatabase {
   _$AppDb(QueryExecutor e) : super(e);
   late final $CategoriesOperationTableTable categoriesOperationTable =
       $CategoriesOperationTableTable(this);
   late final $NoteOperationTable noteOperation = $NoteOperationTable(this);
+  late final $BalanceCardsTable balanceCards = $BalanceCardsTable(this);
   @override
   Iterable<TableInfo<Table, dynamic>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
   @override
   List<DatabaseSchemaEntity> get allSchemaEntities =>
-      [categoriesOperationTable, noteOperation];
+      [categoriesOperationTable, noteOperation, balanceCards];
 }

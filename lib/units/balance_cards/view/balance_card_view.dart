@@ -4,8 +4,8 @@ import 'package:expensive_tracker_app/constants/string_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class BalanceCard extends StatelessWidget {
-  const BalanceCard({super.key});
+class BalanceCardView extends StatelessWidget {
+  const BalanceCardView({super.key});
 
   @override
   Widget build(BuildContext context) {

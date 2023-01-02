@@ -7,5 +7,5 @@ abstract class MonthRepositoty {
 
   void addMonthInStream(int index);
 
-  DateTime get currentDate;
+  DateTime? get currentDate;
 }
