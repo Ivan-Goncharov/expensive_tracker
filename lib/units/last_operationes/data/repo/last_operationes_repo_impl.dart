@@ -1,6 +1,8 @@
+import 'package:expensive_tracker_app/get_it.dart';
 import 'package:expensive_tracker_app/units/create_expense/data/model/item_operation_model.dart';
 import 'package:expensive_tracker_app/units/last_operationes/data/services/last_operationes_services.dart';
 import 'package:expensive_tracker_app/units/last_operationes/domain/repositories/last_operationes_repo.dart';
+import 'package:expensive_tracker_app/units/last_operationes/domain/repositories/month_repository.dart';
 import 'package:expensive_tracker_app/units/start_screen/data/model/categories.dart';
 
 class LastOperationesRepoImpl implements LastOperationesRepo {
@@ -32,8 +34,17 @@ class LastOperationesRepoImpl implements LastOperationesRepo {
   }
 
   @override
-  void addNewOperationes(ItemOperationModel operationModel) {
-    _operationes.insert(0, operationModel);
+  bool addNewOperationes(ItemOperationModel operationModel) {
+    final currentDate = getIt<MonthRepositoty>().currentDate;
+
+    if (currentDate.year == operationModel.dateOperation.year &&
+        currentDate.month == operationModel.dateOperation.month) {
+      _operationes.add(operationModel);
+
+      _operationes.sort((a, b) => b.dateOperation.compareTo(a.dateOperation));
+      return true;
+    }
+    return false;
   }
 
   @override

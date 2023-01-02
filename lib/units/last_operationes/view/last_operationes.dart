@@ -23,6 +23,9 @@ class _LastOperationesViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LastOperationesCubit, LastOperationState>(
+      buildWhen: (_, current) {
+        return true;
+      },
       builder: (context, state) {
         if (state is LastOperationLoadingState) {
           /// TODO: Реализовать нормальный загрузочный экран.

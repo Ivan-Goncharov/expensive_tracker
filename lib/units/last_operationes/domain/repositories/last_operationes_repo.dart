@@ -7,7 +7,7 @@ abstract class LastOperationesRepo {
 
   List<ItemOperationModel> get operationes;
   Future<List<ItemOperationModel>> getLastOperationes(DateTime date);
-  void addNewOperationes(ItemOperationModel operationModel);
+  bool addNewOperationes(ItemOperationModel operationModel);
 
   List<OperationCategories> getTypeCategories(OperationType type);
   OperationCategories getCategoryById(String id);
