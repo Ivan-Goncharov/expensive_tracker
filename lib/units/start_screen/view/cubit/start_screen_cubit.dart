@@ -16,9 +16,9 @@ class StartScreenCubit extends Cubit<StartScreenState> {
     final isNotFirstStart = await startScreenRepo.isFirstStart();
     if (!isNotFirstStart) {
       await startScreenRepo.saveStartInfo();
-    }
-    await monthRepositoty.getListOfMonth();
-    await startScreenRepo.getAllCategories();
+    } 
+    // await monthRepositoty.getListOfMonth();
+    // await startScreenRepo.getAllCategories();
     emit(StartScreenLoadedState());
   }
 }
