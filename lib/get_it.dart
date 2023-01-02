@@ -10,6 +10,7 @@ import 'package:expensive_tracker_app/units/last_operationes/cubit/last_operatio
 import 'package:expensive_tracker_app/units/last_operationes/data/repo/last_operationes_repo_impl.dart';
 import 'package:expensive_tracker_app/units/last_operationes/data/services/last_operationes_services.dart';
 import 'package:expensive_tracker_app/units/last_operationes/domain/repositories/last_operationes_repo.dart';
+import 'package:expensive_tracker_app/units/last_operationes/domain/repositories/month_repository.dart';
 import 'package:expensive_tracker_app/units/navigation/components/cubits/float_button_hide_cubit/cubit/float_button_vis_cubit.dart';
 import 'package:expensive_tracker_app/units/navigation/cubit/navigation_cubit.dart';
 import 'package:expensive_tracker_app/units/start_screen/data/repositories/start_screen_repo_impl.dart';
@@ -18,6 +19,7 @@ import 'package:expensive_tracker_app/units/start_screen/domain/repositories/sta
 import 'package:expensive_tracker_app/units/start_screen/view/cubit/start_screen_cubit.dart';
 import 'package:get_it/get_it.dart';
 
+import 'units/last_operationes/data/repo/month_repository_impl.dart';
 import 'units/navigation/components/cubits/bottom_hide_cubit/bottom_hide_cubit.dart';
 
 final getIt = GetIt.instance;
@@ -40,6 +42,7 @@ void setupGetIt() {
   getIt
       .registerSingleton<LastOperationesRepo>(LastOperationesRepoImpl(getIt()));
   getIt.registerSingleton<StartScreenRepo>(StartScreenRepoImpl(getIt()));
+  getIt.registerSingleton<MonthRepositoty>(MothRepositoryImpl(getIt()));
 
   /// Bloc and Cubit
   getIt.registerFactory(() => NavigatorCubit());
@@ -49,7 +52,7 @@ void setupGetIt() {
   getIt.registerFactory(() => ChangeCategoriesCubit(getIt()));
   getIt.registerFactory(() => OperationCategoryCubit());
   getIt.registerFactory(() => CreateOperationCubit());
-  getIt.registerFactory(() => LastOperationesCubit(getIt()));
-  getIt.registerFactory(() => StartScreenCubit());
+  getIt.registerFactory(() => LastOperationesCubit(getIt(), getIt()));
+  getIt.registerFactory(() => StartScreenCubit(getIt(), getIt()));
   getIt.registerFactory(() => MonthChangeCubit(getIt()));
 }

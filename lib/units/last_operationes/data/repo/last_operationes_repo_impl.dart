@@ -7,8 +7,6 @@ class LastOperationesRepoImpl implements LastOperationesRepo {
   final LastOperationesSevices lastOperService;
   LastOperationesRepoImpl(this.lastOperService);
 
-  List<DateTime> _listOfMonth = [];
-
   List<OperationCategories> _categories = [];
 
   List<ItemOperationModel> _operationes = [];
@@ -18,9 +16,6 @@ class LastOperationesRepoImpl implements LastOperationesRepo {
 
   @override
   List<ItemOperationModel> get operationes => _operationes;
-
-  @override
-  List<DateTime> get listOfMonth => _listOfMonth;
 
   @override
   Future<List<ItemOperationModel>> getLastOperationes(DateTime date) async {
@@ -45,7 +40,4 @@ class LastOperationesRepoImpl implements LastOperationesRepo {
   OperationCategories getCategoryById(String id) {
     return _categories.firstWhere((element) => element.id == id);
   }
-
-  @override
-  set listOfMonth(List<DateTime> value) => _listOfMonth = value;
 }

@@ -29,7 +29,7 @@ class _MonthViewBody extends StatelessWidget {
           final cubit = context.read<MonthChangeCubit>();
           return Container(
             margin: const EdgeInsets.symmetric(horizontal: 15.0),
-            height: 34,
+            height: 40,
             width: double.infinity,
             child: Row(
               // mainAxisSize: MainAxisSize.min,
@@ -38,8 +38,8 @@ class _MonthViewBody extends StatelessWidget {
                 InkWell(
                   onTap: () => cubit.onScrollLeft(),
                   child: Container(
-                    width: 34,
-                    height: 34,
+                    width: 40,
+                    height: 40,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
                         border: Border.all(
@@ -54,12 +54,12 @@ class _MonthViewBody extends StatelessWidget {
                       border: Border.all(
                         color: const Color(0xFF9E9E9E),
                       )),
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(4.0),
                   width: MediaQuery.of(context).size.width * 0.6,
-                  height: 34,
+                  height: 40,
                   child: CarouselSlider(
                     options: CarouselOptions(
-                      height: 34,
+                      height: 40,
                       reverse: true,
                       enableInfiniteScroll: false,
                       onPageChanged: (index, _) =>
@@ -82,8 +82,8 @@ class _MonthViewBody extends StatelessWidget {
                 InkWell(
                   onTap: () => cubit.onScrollRight(),
                   child: Container(
-                    width: 34,
-                    height: 34,
+                    width: 40,
+                    height: 40,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
                         border: Border.all(

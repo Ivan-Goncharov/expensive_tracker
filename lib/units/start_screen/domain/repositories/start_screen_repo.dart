@@ -4,6 +4,4 @@ abstract class StartScreenRepo {
   Future<void> saveStartInfo();
 
   Future<void> getAllCategories();
-
-  Future<void> getListOfMonth();
 }

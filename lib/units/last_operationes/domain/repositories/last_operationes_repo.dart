@@ -11,7 +11,4 @@ abstract class LastOperationesRepo {
 
   List<OperationCategories> getTypeCategories(OperationType type);
   OperationCategories getCategoryById(String id);
-
-  List<DateTime> get listOfMonth;
-  set listOfMonth(List<DateTime> value);
 }
