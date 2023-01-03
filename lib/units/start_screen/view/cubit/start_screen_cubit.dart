@@ -12,11 +12,10 @@ class StartScreenCubit extends Cubit<StartScreenState> {
 
   Future<void> startApp() async {
     emit(StartScreenLoadingState());
-
     final isNotFirstStart = await startScreenRepo.isFirstStart();
     if (!isNotFirstStart) {
       await startScreenRepo.saveStartInfo();
-    } 
+    }
     // await monthRepositoty.getListOfMonth();
     // await startScreenRepo.getAllCategories();
     emit(StartScreenLoadedState());

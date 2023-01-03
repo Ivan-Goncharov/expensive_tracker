@@ -551,16 +551,294 @@ class $BalanceCardsTable extends BalanceCards
   }
 }
 
+class CurrencyData extends DataClass implements Insertable<CurrencyData> {
+  final int id;
+  final String name;
+  final String code;
+  final String symbol;
+  final int type;
+  const CurrencyData(
+      {required this.id,
+      required this.name,
+      required this.code,
+      required this.symbol,
+      required this.type});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['name'] = Variable<String>(name);
+    map['code'] = Variable<String>(code);
+    map['symbol'] = Variable<String>(symbol);
+    map['type'] = Variable<int>(type);
+    return map;
+  }
+
+  CurrencyCompanion toCompanion(bool nullToAbsent) {
+    return CurrencyCompanion(
+      id: Value(id),
+      name: Value(name),
+      code: Value(code),
+      symbol: Value(symbol),
+      type: Value(type),
+    );
+  }
+
+  factory CurrencyData.fromJson(Map<String, dynamic> json,
+      {ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return CurrencyData(
+      id: serializer.fromJson<int>(json['id']),
+      name: serializer.fromJson<String>(json['name']),
+      code: serializer.fromJson<String>(json['code']),
+      symbol: serializer.fromJson<String>(json['symbol']),
+      type: serializer.fromJson<int>(json['type']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'name': serializer.toJson<String>(name),
+      'code': serializer.toJson<String>(code),
+      'symbol': serializer.toJson<String>(symbol),
+      'type': serializer.toJson<int>(type),
+    };
+  }
+
+  CurrencyData copyWith(
+          {int? id, String? name, String? code, String? symbol, int? type}) =>
+      CurrencyData(
+        id: id ?? this.id,
+        name: name ?? this.name,
+        code: code ?? this.code,
+        symbol: symbol ?? this.symbol,
+        type: type ?? this.type,
+      );
+  @override
+  String toString() {
+    return (StringBuffer('CurrencyData(')
+          ..write('id: $id, ')
+          ..write('name: $name, ')
+          ..write('code: $code, ')
+          ..write('symbol: $symbol, ')
+          ..write('type: $type')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, name, code, symbol, type);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is CurrencyData &&
+          other.id == this.id &&
+          other.name == this.name &&
+          other.code == this.code &&
+          other.symbol == this.symbol &&
+          other.type == this.type);
+}
+
+class CurrencyCompanion extends UpdateCompanion<CurrencyData> {
+  final Value<int> id;
+  final Value<String> name;
+  final Value<String> code;
+  final Value<String> symbol;
+  final Value<int> type;
+  const CurrencyCompanion({
+    this.id = const Value.absent(),
+    this.name = const Value.absent(),
+    this.code = const Value.absent(),
+    this.symbol = const Value.absent(),
+    this.type = const Value.absent(),
+  });
+  CurrencyCompanion.insert({
+    this.id = const Value.absent(),
+    required String name,
+    required String code,
+    required String symbol,
+    required int type,
+  })  : name = Value(name),
+        code = Value(code),
+        symbol = Value(symbol),
+        type = Value(type);
+  static Insertable<CurrencyData> custom({
+    Expression<int>? id,
+    Expression<String>? name,
+    Expression<String>? code,
+    Expression<String>? symbol,
+    Expression<int>? type,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (name != null) 'name': name,
+      if (code != null) 'code': code,
+      if (symbol != null) 'symbol': symbol,
+      if (type != null) 'type': type,
+    });
+  }
+
+  CurrencyCompanion copyWith(
+      {Value<int>? id,
+      Value<String>? name,
+      Value<String>? code,
+      Value<String>? symbol,
+      Value<int>? type}) {
+    return CurrencyCompanion(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      code: code ?? this.code,
+      symbol: symbol ?? this.symbol,
+      type: type ?? this.type,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (name.present) {
+      map['name'] = Variable<String>(name.value);
+    }
+    if (code.present) {
+      map['code'] = Variable<String>(code.value);
+    }
+    if (symbol.present) {
+      map['symbol'] = Variable<String>(symbol.value);
+    }
+    if (type.present) {
+      map['type'] = Variable<int>(type.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('CurrencyCompanion(')
+          ..write('id: $id, ')
+          ..write('name: $name, ')
+          ..write('code: $code, ')
+          ..write('symbol: $symbol, ')
+          ..write('type: $type')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $CurrencyTable extends Currency
+    with TableInfo<$CurrencyTable, CurrencyData> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $CurrencyTable(this.attachedDatabase, [this._alias]);
+  final VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+      'id', aliasedName, false,
+      type: DriftSqlType.int,
+      requiredDuringInsert: false,
+      defaultConstraints: 'PRIMARY KEY AUTOINCREMENT');
+  final VerificationMeta _nameMeta = const VerificationMeta('name');
+  @override
+  late final GeneratedColumn<String> name = GeneratedColumn<String>(
+      'name', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  final VerificationMeta _codeMeta = const VerificationMeta('code');
+  @override
+  late final GeneratedColumn<String> code = GeneratedColumn<String>(
+      'code', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  final VerificationMeta _symbolMeta = const VerificationMeta('symbol');
+  @override
+  late final GeneratedColumn<String> symbol = GeneratedColumn<String>(
+      'symbol', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
+  final VerificationMeta _typeMeta = const VerificationMeta('type');
+  @override
+  late final GeneratedColumn<int> type = GeneratedColumn<int>(
+      'type', aliasedName, false,
+      type: DriftSqlType.int, requiredDuringInsert: true);
+  @override
+  List<GeneratedColumn> get $columns => [id, name, code, symbol, type];
+  @override
+  String get aliasedName => _alias ?? 'currency';
+  @override
+  String get actualTableName => 'currency';
+  @override
+  VerificationContext validateIntegrity(Insertable<CurrencyData> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('name')) {
+      context.handle(
+          _nameMeta, name.isAcceptableOrUnknown(data['name']!, _nameMeta));
+    } else if (isInserting) {
+      context.missing(_nameMeta);
+    }
+    if (data.containsKey('code')) {
+      context.handle(
+          _codeMeta, code.isAcceptableOrUnknown(data['code']!, _codeMeta));
+    } else if (isInserting) {
+      context.missing(_codeMeta);
+    }
+    if (data.containsKey('symbol')) {
+      context.handle(_symbolMeta,
+          symbol.isAcceptableOrUnknown(data['symbol']!, _symbolMeta));
+    } else if (isInserting) {
+      context.missing(_symbolMeta);
+    }
+    if (data.containsKey('type')) {
+      context.handle(
+          _typeMeta, type.isAcceptableOrUnknown(data['type']!, _typeMeta));
+    } else if (isInserting) {
+      context.missing(_typeMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  CurrencyData map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return CurrencyData(
+      id: attachedDatabase.options.types
+          .read(DriftSqlType.int, data['${effectivePrefix}id'])!,
+      name: attachedDatabase.options.types
+          .read(DriftSqlType.string, data['${effectivePrefix}name'])!,
+      code: attachedDatabase.options.types
+          .read(DriftSqlType.string, data['${effectivePrefix}code'])!,
+      symbol: attachedDatabase.options.types
+          .read(DriftSqlType.string, data['${effectivePrefix}symbol'])!,
+      type: attachedDatabase.options.types
+          .read(DriftSqlType.int, data['${effectivePrefix}type'])!,
+    );
+  }
+
+  @override
+  $CurrencyTable createAlias(String alias) {
+    return $CurrencyTable(attachedDatabase, alias);
+  }
+}
+
 abstract class _$AppDb extends GeneratedDatabase {
   _$AppDb(QueryExecutor e) : super(e);
   late final $CategoriesOperationTableTable categoriesOperationTable =
       $CategoriesOperationTableTable(this);
   late final $NoteOperationTable noteOperation = $NoteOperationTable(this);
   late final $BalanceCardsTable balanceCards = $BalanceCardsTable(this);
+  late final $CurrencyTable currency = $CurrencyTable(this);
   @override
   Iterable<TableInfo<Table, dynamic>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
   @override
   List<DatabaseSchemaEntity> get allSchemaEntities =>
-      [categoriesOperationTable, noteOperation, balanceCards];
+      [categoriesOperationTable, noteOperation, balanceCards, currency];
 }

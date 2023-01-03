@@ -4,6 +4,7 @@ import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
 import 'package:expensive_tracker_app/data/entity/balance_cards.dart';
 import 'package:expensive_tracker_app/data/entity/categories.dart';
+import 'package:expensive_tracker_app/data/entity/currency.dart';
 import 'package:expensive_tracker_app/data/entity/note_operation.dart';
 import 'package:expensive_tracker_app/units/create_expense/data/model/item_operation_model.dart';
 import 'package:expensive_tracker_app/units/start_screen/data/model/categories.dart';
@@ -26,7 +27,8 @@ LazyDatabase _openConnection() {
   });
 }
 
-@DriftDatabase(tables: [NoteOperation, CategoriesOperationTable, BalanceCards])
+@DriftDatabase(
+    tables: [NoteOperation, CategoriesOperationTable, BalanceCards, Currency])
 class AppDb extends _$AppDb {
   AppDb() : super(_openConnection());
 

@@ -10,7 +10,9 @@ class CreateCardNameCubit extends Cubit<CreateCardNameState> {
   late TextEditingController _textEditingController;
   var _isShowButton = true;
 
-  void initial() {
+  Future<void> initial() async {
+    emit(CreateCardNameLoadingState());
+    await _repo.getCurrencyList();
     _textEditingController = TextEditingController(text: 'New card');
     _textEditingController.addListener(_controllerListener);
     emit(CreateCardNameSuccesState(_textEditingController, _isShowButton));

@@ -17,6 +17,7 @@ import 'package:expensive_tracker_app/units/last_operationes/domain/repositories
 import 'package:expensive_tracker_app/units/last_operationes/domain/repositories/month_repository.dart';
 import 'package:expensive_tracker_app/units/navigation/components/cubits/float_button_hide_cubit/cubit/float_button_vis_cubit.dart';
 import 'package:expensive_tracker_app/units/navigation/cubit/navigation_cubit.dart';
+import 'package:expensive_tracker_app/units/new_balance_card/data/create_balance_card_dervice.dart';
 import 'package:expensive_tracker_app/units/new_balance_card/data/create_balance_card_repo_impl.dart';
 import 'package:expensive_tracker_app/units/new_balance_card/domian/create_balance_card_repo.dart';
 import 'package:expensive_tracker_app/units/new_balance_card/view/cubits/create_name_cubit/cubit/create_card_name_cubit.dart';
@@ -46,6 +47,9 @@ void setupGetIt() {
     StartScreenServiceImpl(),
   );
   getIt.registerSingleton<BalanceCardsService>(BalanceCardServiceImpl(getIt()));
+  getIt.registerSingleton<CreateBalanceCardService>(
+    CreateBalanceCardServiceImpl(),
+  );
 
   /// Repo
   getIt.registerSingleton<CreateOperationRepository>(
@@ -55,7 +59,8 @@ void setupGetIt() {
   getIt.registerSingleton<StartScreenRepo>(StartScreenRepoImpl(getIt()));
   getIt.registerSingleton<MonthRepositoty>(MothRepositoryImpl(getIt()));
   getIt.registerSingleton<BalanceCardRepo>(BalanceCardsRepoImpl(getIt()));
-  getIt.registerSingleton<CreateBalanceCardRepo>(CreateBalanceCardRepoImpl());
+  getIt.registerSingleton<CreateBalanceCardRepo>(
+      CreateBalanceCardRepoImpl(getIt()));
 
   /// Bloc and Cubit
   getIt.registerFactory(() => NavigatorCubit());

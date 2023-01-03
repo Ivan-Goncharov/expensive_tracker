@@ -7,5 +7,4 @@ class SResources {
   static const saveButton = 'Save';
   static const createCardNameTitle = 'Enter the name of your main card';
   static const nextButtonCreate = 'Next';
-
 }

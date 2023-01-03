@@ -11,6 +11,14 @@ class CreateCardNameInitialState implements CreateCardNameState {
   bool? get stringify => true;
 }
 
+class CreateCardNameLoadingState implements CreateCardNameState {
+  @override
+  List<Object?> get props => [2];
+
+  @override
+  bool? get stringify => true;
+}
+
 class CreateCardNameSuccesState implements CreateCardNameState {
   final TextEditingController textController;
   final bool isShowButton;

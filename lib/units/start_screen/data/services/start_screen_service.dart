@@ -44,8 +44,32 @@ class StartScreenServiceImpl implements StartScreenService {
     await _createIncomeCategories(
         asset: 'assets/categories_json/categories_expense.json',
         type: OperationType.expense);
+    await _saveStartCurrency();
     final prefs = await SharedPreferences.getInstance();
     prefs.setBool(isFirstStartConst, true);
+  }
+
+  Future<void> _saveStartCurrency() async {
+    var data = await rootBundle.loadString('assets/currencies/currensies.json');
+    final map = Map<String, dynamic>.from(jsonDecode(data));
+
+    map.forEach((key, value) async {
+      await database.into(database.currency).insert(CurrencyCompanion.insert(
+            name: value['name'],
+            code: value['code'],
+            symbol: value['symbol'],
+            type: 0,
+          ));
+    });
+
+    data =
+        await rootBundle.loadString('assets/currencies/crypto_currensies.json');
+    for (final i in jsonDecode(data)) {
+      await database.into(database.currency).insert(
+            CurrencyCompanion.insert(
+                name: i['name'], code: i['code'], symbol: i['symbol'], type: 1),
+          );
+    }
   }
 
   Future<void> _createIncomeCategories({

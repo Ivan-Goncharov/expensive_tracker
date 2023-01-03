@@ -56,6 +56,9 @@ class _CreateBalanceNameBody extends StatelessWidget {
                 ),
               ),
             );
+          } else if (state is CreateCardNameLoadingState) {
+            /// TODO: Реализовать экран загрузочный.
+            return const SizedBox();
           } else {
             return const SizedBox();
           }
