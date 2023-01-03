@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:expensive_tracker_app/units/new_balance_card/domian/create_balance_card_repo.dart';
-import 'package:expensive_tracker_app/units/new_balance_card/view/cubits/create_name_cubit/cubit/create_card_name_state.dart';
+import 'package:expensive_tracker_app/units/new_balance_card/view/cubits/create_name_cubit/create_card_name_state.dart';
+
 import 'package:flutter/material.dart';
 
 class CreateCardNameCubit extends Cubit<CreateCardNameState> {
@@ -28,10 +29,11 @@ class CreateCardNameCubit extends Cubit<CreateCardNameState> {
     }
   }
 
-  void saveInput() {
-    /// TODO: Реализовать сохранение имени и переход на следующий экран.
+  void saveInput() async {
     if (_textEditingController.text.trim().isNotEmpty) {
       _repo.changeName(_textEditingController.text);
+      FocusManager.instance.primaryFocus?.unfocus();
+      emit(CreateCardNameFinishState());
     } else {
       /// TODO: Реализовать тоаст о том, что не может быть поле пустым
     }

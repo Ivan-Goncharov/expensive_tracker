@@ -8,6 +8,8 @@ class CreateBalanceCardRepoImpl implements CreateBalanceCardRepo {
 
   // ignore: unused_field
   String _name = '';
+  CurrencyData? _currentCurrencyData;
+
   final _listOfUsualCurrency = <CurrencyData>[];
   final _listOfCryptoCurrency = <CurrencyData>[];
 
@@ -15,6 +17,9 @@ class CreateBalanceCardRepoImpl implements CreateBalanceCardRepo {
   List<CurrencyData> get listOfUsualCurrency => _listOfUsualCurrency;
   @override
   List<CurrencyData> get listOfCryptoCurrency => _listOfCryptoCurrency;
+  @override
+  CurrencyData get currentCurrencyData =>
+      _currentCurrencyData ?? _listOfUsualCurrency.first;
 
   @override
   void changeName(String name) => _name = name;
@@ -24,10 +29,12 @@ class CreateBalanceCardRepoImpl implements CreateBalanceCardRepo {
     final list = await _service.getCurrencyList();
     for (final item in list) {
       if (item.type == 0) {
+        if (item.code == 'USD') _currentCurrencyData = item;
         _listOfUsualCurrency.add(item);
       } else {
         _listOfCryptoCurrency.add(item);
       }
     }
+    _currentCurrencyData ??= _listOfUsualCurrency.first;
   }
 }

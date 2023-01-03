@@ -1,11 +1,13 @@
+import 'package:expensive_tracker_app/constants/routes.dart';
 import 'package:expensive_tracker_app/constants/string_constants.dart';
 import 'package:expensive_tracker_app/get_it.dart';
 import 'package:expensive_tracker_app/units/new_balance_card/view/components/balance_icon.dart';
 import 'package:expensive_tracker_app/units/new_balance_card/view/components/create_card_title.dart';
 import 'package:expensive_tracker_app/units/new_balance_card/view/components/next_button.dart';
 import 'package:expensive_tracker_app/units/new_balance_card/view/components/text_field_card.dart';
-import 'package:expensive_tracker_app/units/new_balance_card/view/cubits/create_name_cubit/cubit/create_card_name_cubit.dart';
-import 'package:expensive_tracker_app/units/new_balance_card/view/cubits/create_name_cubit/cubit/create_card_name_state.dart';
+import 'package:expensive_tracker_app/units/new_balance_card/view/cubits/create_name_cubit/create_card_name_cubit.dart';
+import 'package:expensive_tracker_app/units/new_balance_card/view/cubits/create_name_cubit/create_card_name_state.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
@@ -32,7 +34,26 @@ class _CreateBalanceNameBody extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: colors.background,
-      body: BlocBuilder<CreateCardNameCubit, CreateCardNameState>(
+      body: BlocConsumer<CreateCardNameCubit, CreateCardNameState>(
+        listener: (context, state) async {
+          if (state is CreateCardNameFinishState) {
+            Navigator.of(context).pushReplacementNamed(selectCurrencyRoute);
+          }
+        },
+        listenWhen: ((previous, current) {
+          if (current is CreateCardNameFinishState) {
+            return true;
+          } else {
+            return false;
+          }
+        }),
+        buildWhen: (previous, current) {
+          if (current is CreateCardNameFinishState) {
+            return false;
+          } else {
+            return true;
+          }
+        },
         builder: (context, state) {
           if (state is CreateCardNameSuccesState) {
             return GestureDetector(
@@ -43,9 +64,9 @@ class _CreateBalanceNameBody extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const BalanceIcon(FontAwesomeIcons.filePen),
+                    const BalanceIcon(FontAwesomeIcons.moneyBill1Wave),
                     const SizedBox(height: 20),
-                    const CreateCardTitle(SResources.createCardNameTitle),
+                    const CreateCardTitle(SResources.selectCurrencyOfCard),
                     const SizedBox(height: 20),
                     TextFieldCard(state.textController),
                     const SizedBox(height: 20),

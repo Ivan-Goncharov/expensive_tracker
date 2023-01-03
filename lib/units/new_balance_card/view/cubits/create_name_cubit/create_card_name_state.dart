@@ -33,3 +33,11 @@ class CreateCardNameSuccesState implements CreateCardNameState {
   @override
   bool? get stringify => true;
 }
+
+class CreateCardNameFinishState implements CreateCardNameState {
+  @override
+  List<Object?> get props => [3];
+
+  @override
+  bool? get stringify => true;
+}

@@ -6,5 +6,7 @@ abstract class CreateBalanceCardRepo {
   List<CurrencyData> get listOfUsualCurrency;
   List<CurrencyData> get listOfCryptoCurrency;
 
+  CurrencyData get currentCurrencyData;
+
   Future<void> getCurrencyList();
 }
