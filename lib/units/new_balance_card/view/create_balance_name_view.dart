@@ -1,4 +1,4 @@
-import 'package:expensive_tracker_app/constants/routes.dart';
+import 'package:expensive_tracker_app/units/routes/routes.dart';
 import 'package:expensive_tracker_app/constants/string_constants.dart';
 import 'package:expensive_tracker_app/get_it.dart';
 import 'package:expensive_tracker_app/units/new_balance_card/view/components/balance_icon.dart';

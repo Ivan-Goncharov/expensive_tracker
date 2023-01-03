@@ -8,4 +8,6 @@ class SResources {
   static const createCardNameTitle = 'Enter the name of your main card';
   static const selectCurrencyOfCard = 'Select the main currency of the card';
   static const nextButtonCreate = 'Next';
+  static const selectCurrencyTitle = 'Select the currency';
+  static const searchHint = 'Search';
 }

@@ -3,6 +3,7 @@ import 'package:expensive_tracker_app/get_it.dart';
 import 'package:expensive_tracker_app/units/new_balance_card/view/components/balance_icon.dart';
 import 'package:expensive_tracker_app/units/new_balance_card/view/components/create_card_title.dart';
 import 'package:expensive_tracker_app/units/new_balance_card/view/components/next_button.dart';
+import 'package:expensive_tracker_app/units/new_balance_card/view/components/select_currency_button.dart';
 import 'package:expensive_tracker_app/units/new_balance_card/view/cubits/select_currency_cubit/select_currency_cubit.dart';
 import 'package:expensive_tracker_app/units/new_balance_card/view/cubits/select_currency_cubit/select_currency_state.dart';
 import 'package:flutter/material.dart';
@@ -45,10 +46,12 @@ class _SelectBalanceCardBody extends StatelessWidget {
                     const SizedBox(height: 20),
                     const CreateCardTitle(SResources.selectCurrencyOfCard),
                     const SizedBox(height: 20),
-                    // TextFieldCard(state.textController),
+                    const SelectCurrencyButton(),
                     const SizedBox(height: 20),
                     NextButtonView(
-                        context.read<SelectCurrencyCubit>().saveChoise, true),
+                      context.read<SelectCurrencyCubit>().saveChoise,
+                      true,
+                    ),
                   ],
                 ),
               ),

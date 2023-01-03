@@ -1,5 +1,6 @@
 import 'package:expensive_tracker_app/constants/string_constants.dart';
 import 'package:expensive_tracker_app/get_it.dart';
+import 'package:expensive_tracker_app/helpers/default_app_bar.dart';
 import 'package:expensive_tracker_app/units/create_expense/components/change_operation_data/view/change_operation_data.dart';
 import 'package:expensive_tracker_app/units/create_expense/components/date_title/view/date_titile.dart';
 import 'package:expensive_tracker_app/units/create_expense/components/input_money_quantity/view/input_money_quantity.dart';
@@ -9,7 +10,6 @@ import 'package:expensive_tracker_app/units/create_expense/cubit/change_categori
 import 'package:expensive_tracker_app/units/create_expense/cubit/create_operation_cubit/cubit/create_operation_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CreateExpenseScreen extends StatelessWidget {
   const CreateExpenseScreen({super.key});
@@ -33,24 +33,7 @@ class _CreateExpenseScreenBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: colors.background,
-        title: const Text(SResources.newOperation),
-        titleTextStyle: const TextStyle(
-          color: Colors.grey,
-          fontWeight: FontWeight.bold,
-          fontSize: 20,
-        ),
-        elevation: 0,
-        leadingWidth: 100,
-        leading: IconButton(
-          icon: Icon(
-            FontAwesomeIcons.arrowLeft,
-            color: colors.tertiary,
-          ),
-          onPressed: () => Navigator.pop(context),
-        ),
-      ),
+      appBar: const DefaultAppBar(title: SResources.newOperation),
       backgroundColor: colors.background,
       body: SingleChildScrollView(
         keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,

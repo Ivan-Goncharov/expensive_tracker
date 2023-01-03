@@ -35,6 +35,8 @@ class CreateBalanceCardRepoImpl implements CreateBalanceCardRepo {
         _listOfCryptoCurrency.add(item);
       }
     }
+    _listOfCryptoCurrency.sort(((a, b) => a.name.compareTo(b.name)));
+    _listOfUsualCurrency.sort(((a, b) => a.name.compareTo(b.name)));
     _currentCurrencyData ??= _listOfUsualCurrency.first;
   }
 }

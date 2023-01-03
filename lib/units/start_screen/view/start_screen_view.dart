@@ -1,4 +1,4 @@
-import 'package:expensive_tracker_app/constants/routes.dart';
+import 'package:expensive_tracker_app/units/routes/routes.dart';
 import 'package:expensive_tracker_app/get_it.dart';
 import 'package:expensive_tracker_app/units/start_screen/view/cubit/start_screen_cubit.dart';
 import 'package:expensive_tracker_app/units/start_screen/view/cubit/start_screen_state.dart';

@@ -1,4 +1,4 @@
-import 'package:expensive_tracker_app/constants/routes.dart';
+import 'package:expensive_tracker_app/units/routes/routes.dart';
 import 'package:expensive_tracker_app/get_it.dart';
 import 'package:expensive_tracker_app/units/home/view/home_screen.dart';
 import 'package:expensive_tracker_app/units/navigation/components/bottom_hide_bar.dart';
