@@ -1,21 +1,20 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:expensive_tracker_app/data/app_db/app_db.dart';
 
 import 'package:expensive_tracker_app/helpers/container_neomorphic_emboss.dart';
-import 'package:expensive_tracker_app/units/new_balance_card/view/cubits/select_currency_cubit/select_currency_cubit.dart';
-import 'package:expensive_tracker_app/units/new_balance_card/view/cubits/select_currency_cubit/select_currency_state.dart';
 import 'package:expensive_tracker_app/units/routes/routes.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SelectCurrencyButton extends StatelessWidget {
-  const SelectCurrencyButton({super.key});
+  final CurrencyData currency;
+  const SelectCurrencyButton(this.currency, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => Navigator.of(context).pushNamed(searchCurrensiesRoute),
       child: ContainerNemorophicEmboss(
-        widget: const _SelectCurrencyTitle(),
+        widget:   _SelectCurrencyTitle(currency),
         height: 40,
         width: MediaQuery.of(context).size.width * 0.5,
       ),
@@ -24,14 +23,12 @@ class SelectCurrencyButton extends StatelessWidget {
 }
 
 class _SelectCurrencyTitle extends StatelessWidget {
-  const _SelectCurrencyTitle();
+  final CurrencyData currency;
+
+  const _SelectCurrencyTitle(this.currency);
 
   @override
   Widget build(BuildContext context) {
-    final state =
-        context.read<SelectCurrencyCubit>().state as SelectCurrencyLoadedState;
-    final currency = state.currencyData;
-
     if (currency.type == 0) {
       return Text(
         '${currency.symbol} - ${currency.name}',

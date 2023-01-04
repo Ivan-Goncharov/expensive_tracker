@@ -46,7 +46,7 @@ class _SelectBalanceCardBody extends StatelessWidget {
                     const SizedBox(height: 20),
                     const CreateCardTitle(SResources.selectCurrencyOfCard),
                     const SizedBox(height: 20),
-                    const SelectCurrencyButton(),
+                    SelectCurrencyButton(state.currencyData),
                     const SizedBox(height: 20),
                     NextButtonView(
                       context.read<SelectCurrencyCubit>().saveChoise,

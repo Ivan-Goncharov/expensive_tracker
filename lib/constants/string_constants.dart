@@ -10,4 +10,6 @@ class SResources {
   static const nextButtonCreate = 'Next';
   static const selectCurrencyTitle = 'Select the currency';
   static const searchHint = 'Search';
+  static const currencyTitle = 'Currency';
+  static const crytoCurrencyTitle = 'Cryptocurrency';
 }

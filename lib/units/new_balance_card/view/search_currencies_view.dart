@@ -1,6 +1,7 @@
 import 'package:expensive_tracker_app/constants/string_constants.dart';
 import 'package:expensive_tracker_app/get_it.dart';
 import 'package:expensive_tracker_app/helpers/default_app_bar.dart';
+import 'package:expensive_tracker_app/units/new_balance_card/view/components/scroll_currencies.dart';
 import 'package:expensive_tracker_app/units/new_balance_card/view/components/search_currency_toggle.dart';
 import 'package:expensive_tracker_app/units/new_balance_card/view/components/search_text_field.dart';
 import 'package:expensive_tracker_app/units/new_balance_card/view/cubits/search_currency_cubit/search_currency_cubit.dart';
@@ -29,8 +30,27 @@ class _SearchCurrensiesBody extends StatelessWidget {
       appBar: const DefaultAppBar(title: SResources.selectCurrencyTitle),
       backgroundColor: colors.background,
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: BlocBuilder<SearchCurrencyCubit, SearchCurrencyState>(
+        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+        child: BlocConsumer<SearchCurrencyCubit, SearchCurrencyState>(
+          listener: (context, state) {
+            if (state is SearchCurrencySelectState) {
+              Navigator.of(context).pop();
+            }
+          },
+          listenWhen: (_, current) {
+            if (current is SearchCurrencySelectState) {
+              return true;
+            } else {
+              return false;
+            }
+          },
+          buildWhen: (_, current) {
+            if (current is SearchCurrencySelectState) {
+              return false;
+            } else {
+              return true;
+            }
+          },
           builder: (context, state) {
             if (state is SearchCurrencyChangeState) {
               return _SuccesefulSearchView(state);
@@ -58,6 +78,7 @@ class _SuccesefulSearchView extends StatelessWidget {
         const SizedBox(height: 10),
         SearchCurrencyTextField(state.textController),
         const SizedBox(height: 10),
+        ScrollCurrencies(state.listOfCurrency),
       ],
     );
   }

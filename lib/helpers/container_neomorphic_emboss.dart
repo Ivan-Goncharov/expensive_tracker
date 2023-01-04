@@ -16,7 +16,7 @@ class ContainerNemorophicEmboss extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Neumorphic(
-      margin: const EdgeInsets.only(left: 8, right: 8, top: 2, bottom: 4),
+      margin: const EdgeInsets.only(top: 4, bottom: 4),
       style: NeumorphicStyle(
         depth: NeumorphicTheme.embossDepth(context),
         color: Theme.of(context).colorScheme.background,

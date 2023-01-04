@@ -9,4 +9,8 @@ abstract class CreateBalanceCardRepo {
   CurrencyData get currentCurrencyData;
 
   Future<void> getCurrencyList();
+
+  Stream<CurrencyData> get handleCurrencyData;
+
+  void changeCurrencyData(CurrencyData data);
 }

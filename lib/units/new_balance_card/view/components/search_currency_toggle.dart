@@ -1,3 +1,4 @@
+import 'package:expensive_tracker_app/constants/string_constants.dart';
 import 'package:expensive_tracker_app/units/new_balance_card/view/cubits/search_currency_cubit/search_currency_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
@@ -21,24 +22,24 @@ class SearchCurrencyToggle extends StatelessWidget {
         ToggleElement(
           background: const Center(
               child: Text(
-            "This week",
+            SResources.currencyTitle,
             style: TextStyle(fontWeight: FontWeight.w500),
           )),
           foreground: const Center(
               child: Text(
-            "This week",
+            SResources.currencyTitle,
             style: TextStyle(fontWeight: FontWeight.w700),
           )),
         ),
         ToggleElement(
           background: const Center(
               child: Text(
-            "This month",
+            SResources.crytoCurrencyTitle,
             style: TextStyle(fontWeight: FontWeight.w500),
           )),
           foreground: const Center(
               child: Text(
-            "This month",
+            SResources.crytoCurrencyTitle,
             style: TextStyle(fontWeight: FontWeight.w700),
           )),
         ),

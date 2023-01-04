@@ -79,4 +79,9 @@ class SearchCurrencyCubit extends Cubit<SearchCurrencyState> {
             c.code.toLowerCase().contains(query))
         .toList();
   }
+
+  void selectCurrencyData(CurrencyData data) {
+    _repo.changeCurrencyData(data);
+    emit(SearchCurrencySelectState());
+  }
 }

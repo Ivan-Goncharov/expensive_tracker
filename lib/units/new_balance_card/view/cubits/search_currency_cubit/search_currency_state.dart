@@ -49,3 +49,11 @@ class SearchCurrencyEmptyState implements SearchCurrencyState {
   @override
   bool? get stringify => true;
 }
+
+class SearchCurrencySelectState implements SearchCurrencyState {
+  @override
+  List<Object?> get props => [2];
+
+  @override
+  bool? get stringify => true;
+}

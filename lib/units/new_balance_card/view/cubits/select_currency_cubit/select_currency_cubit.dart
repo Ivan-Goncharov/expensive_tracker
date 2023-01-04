@@ -7,14 +7,16 @@ class SelectCurrencyCubit extends Cubit<SelectCurrencyState> {
   final CreateBalanceCardRepo _repo;
   SelectCurrencyCubit(this._repo) : super(SelectCurrencyInitialState());
 
-  late CurrencyData _currencyData;
-
   void initial() {
-    _currencyData = _repo.currentCurrencyData;
-    emit(SelectCurrencyLoadedState(_currencyData));
+    _repo.handleCurrencyData.listen(_listenCurrencyData);
+    emit(SelectCurrencyLoadedState(_repo.currentCurrencyData));
   }
 
   void saveChoise() {
     /// TODO: Реализовать переход на следующий экран.
+  }
+
+  void _listenCurrencyData(CurrencyData data) {
+    emit(SelectCurrencyLoadedState(data));
   }
 }
