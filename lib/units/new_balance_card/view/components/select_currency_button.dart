@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:expensive_tracker_app/data/app_db/app_db.dart';
 
 import 'package:expensive_tracker_app/helpers/container_neomorphic_emboss.dart';
@@ -15,7 +14,7 @@ class SelectCurrencyButton extends StatelessWidget {
     return GestureDetector(
       onTap: () => Navigator.of(context).pushNamed(searchCurrensiesRoute),
       child: ContainerNemorophicEmboss(
-        widget:   _SelectCurrencyTitle(currency),
+        widget: _SelectCurrencyTitle(currency),
         height: 40,
         width: MediaQuery.of(context).size.width * 0.5,
       ),

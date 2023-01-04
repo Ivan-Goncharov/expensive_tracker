@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:expensive_tracker_app/data/app_db/app_db.dart';
 import 'package:expensive_tracker_app/helpers/container_neomorphic_emboss.dart';
 import 'package:expensive_tracker_app/helpers/crypto_logo_image.dart';
@@ -59,6 +58,6 @@ class _SuffixTextField extends StatelessWidget {
 //   keyboardType: TextInputType.number,
 //   inputFormatters: <TextInputFormatter>[
 //    // for below version 2 use this
-//  FilteringTextInputFormatter.allow(RegExp(r'[0-9]')), 
+//  FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
 // // for version 2 and greater youcan also use this
 //  FilteringTextInputFormatter.digitsOnly

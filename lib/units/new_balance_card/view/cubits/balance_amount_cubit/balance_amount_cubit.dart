@@ -11,18 +11,20 @@ class BalanceAmountCubit extends Cubit<BalanceAmountState> {
 
   void initial() {
     _controller = TextEditingController();
-    emit(BalanceAmountLoadedState(_controller, _repo.currentCurrencyData));   
+    emit(BalanceAmountLoadedState(_controller, _repo.currentCurrencyData));
   }
 
-  void saveInput() {
+  Future<void> saveInput() async {
     try {
-      final num = double.parse(_controller.text);
-      print('DEBUG NUM $num');
-    } catch (er, _) {
-      
+      var num = 0.0;
+      if (_controller.text.trim().isNotEmpty) {
+        num = double.parse(_controller.text);
+      }
+      emit(BalanceAmountLoadingState());
+      await _repo.saveInputAmount(num);
+      emit(BalanceAmountCreateFinishState());
+    } catch (er, st) {
+      debugPrint('$er\n$st');
     }
   }
 }
-
-
- 

@@ -6,7 +6,8 @@ import 'package:expensive_tracker_app/units/new_balance_card/view/components/inp
 import 'package:expensive_tracker_app/units/new_balance_card/view/components/next_button.dart';
 import 'package:expensive_tracker_app/units/new_balance_card/view/cubits/balance_amount_cubit/balance_amount_cubit.dart';
 import 'package:expensive_tracker_app/units/new_balance_card/view/cubits/balance_amount_cubit/balance_amount_state.dart';
-import 'package:flutter/material.dart'; 
+import 'package:expensive_tracker_app/units/routes/routes.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -33,7 +34,7 @@ class _CreateBalanceAmountBody extends StatelessWidget {
       body: BlocConsumer<BalanceAmountCubit, BalanceAmountState>(
         listener: (context, state) async {
           if (state is BalanceAmountCreateFinishState) {
-            // Navigator.of(context).pushReplacementNamed(selectCurrencyRoute);
+            Navigator.pushReplacementNamed(context, navScreenRoute);
           }
         },
         listenWhen: ((previous, current) {

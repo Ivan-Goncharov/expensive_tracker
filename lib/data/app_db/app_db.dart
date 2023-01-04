@@ -110,4 +110,8 @@ class AppDb extends _$AppDb {
   Future<List<BalanceCard>> getAllBalanceCardIds() {
     return (select(balanceCards)).get();
   }
+
+  Future<CurrencyData> getItemCurrencyData(int id) {
+    return (select(currency)..where((tbl) => tbl.id.equals(id))).getSingle();
+  }
 }

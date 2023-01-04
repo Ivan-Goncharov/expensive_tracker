@@ -2,6 +2,7 @@ import 'package:expensive_tracker_app/data/app_db/key_value_storage.dart';
 import 'package:expensive_tracker_app/units/balance_cards/data/repositories/balance_cards_repo_impl.dart';
 import 'package:expensive_tracker_app/units/balance_cards/data/services/balance_cards_service.dart';
 import 'package:expensive_tracker_app/units/balance_cards/domain/repositories/balance_cards_repo.dart';
+import 'package:expensive_tracker_app/units/balance_cards/view/cubit/balance_card_cubit.dart';
 import 'package:expensive_tracker_app/units/create_expense/components/date_title/cubit/date_picker_cubit.dart';
 import 'package:expensive_tracker_app/units/create_expense/components/operation_category/cubit/operation_category_cubit.dart';
 import 'package:expensive_tracker_app/units/create_expense/cubit/change_categories_cubit/change_categories_cubit.dart';
@@ -80,4 +81,5 @@ void setupGetIt() {
   getIt.registerFactory(() => SelectCurrencyCubit(getIt()));
   getIt.registerFactory(() => SearchCurrencyCubit(getIt()));
   getIt.registerFactory(() => BalanceAmountCubit(getIt()));
+  getIt.registerFactory(() => BalanceCardCubit(getIt()));
 }

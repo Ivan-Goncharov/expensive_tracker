@@ -1,4 +1,6 @@
 import 'package:expensive_tracker_app/data/app_db/app_db.dart';
+import 'package:expensive_tracker_app/get_it.dart';
+import 'package:expensive_tracker_app/units/balance_cards/domain/repositories/balance_cards_repo.dart';
 import 'package:expensive_tracker_app/units/new_balance_card/data/create_balance_card_dervice.dart';
 import 'package:expensive_tracker_app/units/new_balance_card/domian/create_balance_card_repo.dart';
 import 'package:rxdart/rxdart.dart';
@@ -50,5 +52,14 @@ class CreateBalanceCardRepoImpl implements CreateBalanceCardRepo {
   void changeCurrencyData(CurrencyData data) {
     _currentCurrencyData = data;
     _streamController.add(data);
+  }
+
+  @override
+  Future<void> saveInputAmount(double value) {
+    return getIt<BalanceCardRepo>().saveNewCard(
+      name: _name,
+      amount: value,
+      currencyId: _currentCurrencyData!.id,
+    );
   }
 }

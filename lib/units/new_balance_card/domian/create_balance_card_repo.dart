@@ -13,4 +13,6 @@ abstract class CreateBalanceCardRepo {
   Stream<CurrencyData> get handleCurrencyData;
 
   void changeCurrencyData(CurrencyData data);
+
+  Future<void> saveInputAmount(double value);
 }

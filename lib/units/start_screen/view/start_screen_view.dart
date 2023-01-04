@@ -25,9 +25,10 @@ class _StartScreenBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<StartScreenCubit, StartScreenState>(
       listener: (context, state) {
-        // TODO: реализовать разные действия
-        if (state is StartScreenLoadedState) {
+        if (state is StartScreenFirstStartState) {
           Navigator.of(context).pushReplacementNamed(createBalanceCardName);
+        } else if (state is StartScreenIsNotFirstStartState) {
+          Navigator.of(context).pushReplacementNamed(navScreenRoute);
         }
       },
       // TODO: реализовать начальный экран.

@@ -14,13 +14,18 @@ class KeyValueStorageImpl implements KeyValueStorage {
   @override
   Future<void> saveNewCard(ItemBalanceCardModel balanceCard) async {
     final box = await Hive.openBox('cards');
+
     await box.put(balanceCard.id, balanceCard.toJson());
   }
 
   @override
   Future<List<ItemBalanceCardModel>> getAllCards(List<BalanceCard> ids) async {
+    print('DEBUG IN KEY VALUE');
     final list = <ItemBalanceCardModel>[];
+    print('DEBUG IN ');
+    print('DEBUG BOX EXIST ${await Hive.boxExists('cards')}');
     final box = await Hive.openBox('cards');
+    print('DEBUG BOX $box');
     for (final item in ids) {
       list.add(ItemBalanceCardModel.fromJson(
           Map<String, dynamic>.from(box.get(item.id))));

@@ -34,16 +34,11 @@ class _SelectBalanceCardBody extends StatelessWidget {
       backgroundColor: colors.background,
       body: BlocConsumer<SelectCurrencyCubit, SelectCurrencyState>(
         listener: (context, state) {
-          print('DEBUG STATE $state');
           if (state is SelectCurrencySaveSelectState) {
             Navigator.of(context)
                 .pushReplacementNamed(createBalanceAmountRoute);
           }
         },
-        // listenWhen: (_, current) {
-        //   if (current is SelectCurrencySaveSelectState) return true;
-        //   return false;
-        // },
         buildWhen: (_, current) {
           if (current is SelectCurrencySaveSelectState) return false;
           return true;

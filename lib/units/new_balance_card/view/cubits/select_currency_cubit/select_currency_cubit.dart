@@ -13,7 +13,6 @@ class SelectCurrencyCubit extends Cubit<SelectCurrencyState> {
   }
 
   void saveChoise() {
-    print('DEBUG SAVE CHOISE');
     emit(SelectCurrencySaveSelectState());
   }
 

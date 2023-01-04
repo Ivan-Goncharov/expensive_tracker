@@ -23,6 +23,7 @@ mixin _$ItemBalanceCardModel {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   double get amount => throw _privateConstructorUsedError;
+  int get currencyId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +37,7 @@ abstract class $ItemBalanceCardModelCopyWith<$Res> {
           $Res Function(ItemBalanceCardModel) then) =
       _$ItemBalanceCardModelCopyWithImpl<$Res, ItemBalanceCardModel>;
   @useResult
-  $Res call({String id, String name, double amount});
+  $Res call({String id, String name, double amount, int currencyId});
 }
 
 /// @nodoc
@@ -56,6 +57,7 @@ class _$ItemBalanceCardModelCopyWithImpl<$Res,
     Object? id = null,
     Object? name = null,
     Object? amount = null,
+    Object? currencyId = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -70,6 +72,10 @@ class _$ItemBalanceCardModelCopyWithImpl<$Res,
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
               as double,
+      currencyId: null == currencyId
+          ? _value.currencyId
+          : currencyId // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -82,7 +88,7 @@ abstract class _$$_ItemBalanceCardCopyWith<$Res>
       __$$_ItemBalanceCardCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String name, double amount});
+  $Res call({String id, String name, double amount, int currencyId});
 }
 
 /// @nodoc
@@ -99,6 +105,7 @@ class __$$_ItemBalanceCardCopyWithImpl<$Res>
     Object? id = null,
     Object? name = null,
     Object? amount = null,
+    Object? currencyId = null,
   }) {
     return _then(_$_ItemBalanceCard(
       id: null == id
@@ -113,6 +120,10 @@ class __$$_ItemBalanceCardCopyWithImpl<$Res>
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
               as double,
+      currencyId: null == currencyId
+          ? _value.currencyId
+          : currencyId // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -121,7 +132,10 @@ class __$$_ItemBalanceCardCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_ItemBalanceCard extends _ItemBalanceCard {
   _$_ItemBalanceCard(
-      {required this.id, required this.name, required this.amount})
+      {required this.id,
+      required this.name,
+      required this.amount,
+      required this.currencyId})
       : super._();
 
   factory _$_ItemBalanceCard.fromJson(Map<String, dynamic> json) =>
@@ -133,10 +147,12 @@ class _$_ItemBalanceCard extends _ItemBalanceCard {
   final String name;
   @override
   final double amount;
+  @override
+  final int currencyId;
 
   @override
   String toString() {
-    return 'ItemBalanceCardModel(id: $id, name: $name, amount: $amount)';
+    return 'ItemBalanceCardModel(id: $id, name: $name, amount: $amount, currencyId: $currencyId)';
   }
 
   @override
@@ -146,12 +162,14 @@ class _$_ItemBalanceCard extends _ItemBalanceCard {
             other is _$_ItemBalanceCard &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.amount, amount) || other.amount == amount));
+            (identical(other.amount, amount) || other.amount == amount) &&
+            (identical(other.currencyId, currencyId) ||
+                other.currencyId == currencyId));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, amount);
+  int get hashCode => Object.hash(runtimeType, id, name, amount, currencyId);
 
   @JsonKey(ignore: true)
   @override
@@ -171,7 +189,8 @@ abstract class _ItemBalanceCard extends ItemBalanceCardModel {
   factory _ItemBalanceCard(
       {required final String id,
       required final String name,
-      required final double amount}) = _$_ItemBalanceCard;
+      required final double amount,
+      required final int currencyId}) = _$_ItemBalanceCard;
   _ItemBalanceCard._() : super._();
 
   factory _ItemBalanceCard.fromJson(Map<String, dynamic> json) =
@@ -183,6 +202,8 @@ abstract class _ItemBalanceCard extends ItemBalanceCardModel {
   String get name;
   @override
   double get amount;
+  @override
+  int get currencyId;
   @override
   @JsonKey(ignore: true)
   _$$_ItemBalanceCardCopyWith<_$_ItemBalanceCard> get copyWith =>
