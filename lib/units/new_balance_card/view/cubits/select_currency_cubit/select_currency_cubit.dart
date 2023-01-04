@@ -13,7 +13,8 @@ class SelectCurrencyCubit extends Cubit<SelectCurrencyState> {
   }
 
   void saveChoise() {
-    /// TODO: Реализовать переход на следующий экран.
+    print('DEBUG SAVE CHOISE');
+    emit(SelectCurrencySaveSelectState());
   }
 
   void _listenCurrencyData(CurrencyData data) {

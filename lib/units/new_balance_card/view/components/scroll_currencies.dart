@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:expensive_tracker_app/data/app_db/app_db.dart';
+import 'package:expensive_tracker_app/helpers/crypto_logo_image.dart';
 import 'package:expensive_tracker_app/units/new_balance_card/view/cubits/search_currency_cubit/search_currency_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
@@ -17,7 +18,9 @@ class ScrollCurrencies extends StatelessWidget {
           itemBuilder: (context, index) {
             final itemCurr = listOfCurrencies[index];
             return InkWell(
-              onTap: () => context.read<SearchCurrencyCubit>().selectCurrencyData(itemCurr),
+              onTap: () => context
+                  .read<SearchCurrencyCubit>()
+                  .selectCurrencyData(itemCurr),
               child: Container(
                 padding: const EdgeInsets.all(16.0),
                 width: double.infinity,
@@ -62,19 +65,7 @@ class _LeadingCurrency extends StatelessWidget {
         ),
       );
     } else {
-      return ClipRRect(
-        borderRadius: BorderRadius.circular(15.0),
-        child: CachedNetworkImage(
-          imageUrl: currency.symbol,
-          height: 26,
-          width: 26,
-          fadeOutDuration: const Duration(milliseconds: 50),
-          fadeInDuration: const Duration(milliseconds: 50),
-          placeholder: (_, __) {
-            return const CircularProgressIndicator();
-          },
-        ),
-      );
+      return CryptoLogoIage(currency.symbol);
     }
   }
 }

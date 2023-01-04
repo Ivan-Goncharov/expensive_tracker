@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:expensive_tracker_app/data/app_db/app_db.dart';
 
 import 'package:expensive_tracker_app/helpers/container_neomorphic_emboss.dart';
+import 'package:expensive_tracker_app/helpers/crypto_logo_image.dart';
 import 'package:expensive_tracker_app/units/routes/routes.dart';
 import 'package:flutter/material.dart';
 
@@ -39,16 +40,7 @@ class _SelectCurrencyTitle extends StatelessWidget {
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          CachedNetworkImage(
-            imageUrl: currency.symbol,
-            height: 26,
-            width: 26,
-            fadeOutDuration: const Duration(milliseconds: 50),
-            fadeInDuration: const Duration(milliseconds: 50),
-            placeholder: (_, __) {
-              return const CircularProgressIndicator();
-            },
-          ),
+          CryptoLogoIage(currency.symbol),
           const SizedBox(width: 5),
           Text(
             currency.name,

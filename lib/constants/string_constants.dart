@@ -12,4 +12,5 @@ class SResources {
   static const searchHint = 'Search';
   static const currencyTitle = 'Currency';
   static const crytoCurrencyTitle = 'Cryptocurrency';
+  static const adjustBalanceTitle = 'Adjust your balance';
 }

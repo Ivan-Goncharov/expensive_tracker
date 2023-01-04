@@ -15,3 +15,10 @@ class SelectCurrencyLoadedState extends SelectCurrencyState {
   @override
   List<Object?> get props => [currencyData];
 }
+
+class SelectCurrencySaveSelectState extends SelectCurrencyState {
+  SelectCurrencySaveSelectState();
+
+  @override
+  List<Object?> get props => [2];
+}

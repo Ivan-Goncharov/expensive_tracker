@@ -6,6 +6,7 @@ import 'package:expensive_tracker_app/units/new_balance_card/view/components/nex
 import 'package:expensive_tracker_app/units/new_balance_card/view/components/select_currency_button.dart';
 import 'package:expensive_tracker_app/units/new_balance_card/view/cubits/select_currency_cubit/select_currency_cubit.dart';
 import 'package:expensive_tracker_app/units/new_balance_card/view/cubits/select_currency_cubit/select_currency_state.dart';
+import 'package:expensive_tracker_app/units/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -31,7 +32,22 @@ class _SelectBalanceCardBody extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: colors.background,
-      body: BlocBuilder<SelectCurrencyCubit, SelectCurrencyState>(
+      body: BlocConsumer<SelectCurrencyCubit, SelectCurrencyState>(
+        listener: (context, state) {
+          print('DEBUG STATE $state');
+          if (state is SelectCurrencySaveSelectState) {
+            Navigator.of(context)
+                .pushReplacementNamed(createBalanceAmountRoute);
+          }
+        },
+        // listenWhen: (_, current) {
+        //   if (current is SelectCurrencySaveSelectState) return true;
+        //   return false;
+        // },
+        buildWhen: (_, current) {
+          if (current is SelectCurrencySaveSelectState) return false;
+          return true;
+        },
         builder: (context, state) {
           if (state is SelectCurrencyLoadedState) {
             return GestureDetector(
@@ -42,7 +58,7 @@ class _SelectBalanceCardBody extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const BalanceIcon(FontAwesomeIcons.filePen),
+                    const BalanceIcon(FontAwesomeIcons.moneyBill1Wave),
                     const SizedBox(height: 20),
                     const CreateCardTitle(SResources.selectCurrencyOfCard),
                     const SizedBox(height: 20),
