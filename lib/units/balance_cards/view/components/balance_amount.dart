@@ -1,3 +1,4 @@
+import 'package:animated_flip_counter/animated_flip_counter.dart';
 import 'package:expensive_tracker_app/data/app_db/app_db.dart';
 import 'package:expensive_tracker_app/helpers/crypto_logo_image.dart';
 import 'package:flutter/material.dart';
@@ -14,9 +15,13 @@ class BalanceAmount extends StatelessWidget {
       children: [
         _BalanceSymbol(currencyData),
         const SizedBox(width: 5),
-        Text(
-          amount.toString(),
-          style: const TextStyle(color: Colors.black, fontSize: 30),
+        AnimatedFlipCounter(
+          duration: const Duration(milliseconds: 500),
+          value: amount,
+          textStyle: const TextStyle(
+            color: Colors.black,
+            fontSize: 30,
+          ),
         ),
       ],
     );

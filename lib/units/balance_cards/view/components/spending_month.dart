@@ -1,3 +1,4 @@
+import 'package:animated_flip_counter/animated_flip_counter.dart';
 import 'package:expensive_tracker_app/constants/string_constants.dart';
 import 'package:expensive_tracker_app/units/balance_cards/data/models/month_operation_amount_model.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
@@ -68,12 +69,13 @@ class _SpendingWidget extends StatelessWidget {
               title,
               style: const TextStyle(color: Colors.grey),
             ),
-            Text(
-              quantity.toString(),
-              style: const TextStyle(
+            AnimatedFlipCounter(
+              value: quantity,
+              duration: const Duration(milliseconds: 500),
+              textStyle: const TextStyle(
                 color: Colors.black,
               ),
-            ),
+            )
           ],
         )
       ],
