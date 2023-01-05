@@ -24,7 +24,8 @@ class BalanceCardLoadedState implements BalanceCardState {
   });
 
   @override
-  List<Object?> get props => [currencyData, balanceCardModel, monthOperationAmount];
+  List<Object?> get props =>
+      [currencyData, balanceCardModel, monthOperationAmount];
 
   @override
   bool? get stringify => true;

@@ -12,7 +12,7 @@ class MonthOperationAmountModel implements Equatable {
   MonthOperationAmountModel copyWith({
     double? newIncome,
     double? newExpense,
-   }) =>
+  }) =>
       MonthOperationAmountModel(
         expense: newExpense ?? expense,
         income: newIncome ?? income,
