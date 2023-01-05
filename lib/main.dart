@@ -3,12 +3,10 @@ import 'package:expensive_tracker_app/get_it.dart';
 import 'package:expensive_tracker_app/units/routes/router.dart';
 import 'package:expensive_tracker_app/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
 void main() async {
   setupGetIt();
   initDb();
-  await Hive.initFlutter();
   runApp(const MyApp());
 }
 

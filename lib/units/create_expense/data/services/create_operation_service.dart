@@ -9,5 +9,6 @@ class CreateOpeartionServiceImpl implements CreateOpeartionService {
   @override
   Future<void> createOperation(ItemOperationModel operation) async {
     await database.addNewOperationData(operation.toInsertable());
+    await database.updateBalanceCardAmount(operation);
   }
 }

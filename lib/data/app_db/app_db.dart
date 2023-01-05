@@ -6,6 +6,7 @@ import 'package:expensive_tracker_app/data/entity/balance_cards.dart';
 import 'package:expensive_tracker_app/data/entity/categories.dart';
 import 'package:expensive_tracker_app/data/entity/currency.dart';
 import 'package:expensive_tracker_app/data/entity/note_operation.dart';
+import 'package:expensive_tracker_app/units/balance_cards/data/models/item_balance_card_model.dart';
 import 'package:expensive_tracker_app/units/create_expense/data/model/item_operation_model.dart';
 import 'package:expensive_tracker_app/units/start_screen/data/model/categories.dart';
 import 'package:path_provider/path_provider.dart';
@@ -102,13 +103,41 @@ class AppDb extends _$AppDb {
   }
 
   /// Запись одного id карты баланса
-  Future<int> addNewBalanceCard(Insertable<BalanceCard> card) {
+  Future<int> addNewBalanceCard(Insertable<ItemBalanceCardModel> card) {
     return into(balanceCards).insert(card);
   }
 
   /// Получение всех id карт балансов
-  Future<List<BalanceCard>> getAllBalanceCardIds() {
+  Future<List<ItemBalanceCardModel>> getAllBalanceCards() {
     return (select(balanceCards)).get();
+  }
+
+  /// Обновление баланса одной карты
+  /// [model] - денежная операция после которой потребовалось обновление баланаса.
+  Future<void> updateBalanceCardAmount(ItemOperationModel model) async {
+    var balanceCard = await (select(balanceCards)
+          ..where((tbl) => tbl.id.equals(model.cardId)))
+        .getSingle();
+
+    if (model.type == OperationType.income) {
+      balanceCard =
+          balanceCard.copyWith(amount: balanceCard.amount + model.amount);
+    } else {
+      balanceCard =
+          balanceCard.copyWith(amount: balanceCard.amount - model.amount);
+    }
+    await (update(balanceCards)..where((t) => t.id.equals(model.cardId)))
+        .write(balanceCard.toInsertable());
+  }
+
+  /// Получение одной карты баланса.
+  /// [id] - id данной карты.
+  Future<ItemBalanceCardModel> getItemBalanceCard(String id) {
+    return (select(balanceCards)
+          ..where(
+            (tbl) => tbl.id.equals(id),
+          ))
+        .getSingle();
   }
 
   Future<CurrencyData> getItemCurrencyData(int id) {

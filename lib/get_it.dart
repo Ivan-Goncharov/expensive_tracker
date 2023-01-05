@@ -1,4 +1,3 @@
-import 'package:expensive_tracker_app/data/app_db/key_value_storage.dart';
 import 'package:expensive_tracker_app/units/balance_cards/data/repositories/balance_cards_repo_impl.dart';
 import 'package:expensive_tracker_app/units/balance_cards/data/services/balance_cards_service.dart';
 import 'package:expensive_tracker_app/units/balance_cards/domain/repositories/balance_cards_repo.dart';
@@ -37,9 +36,6 @@ import 'units/navigation/components/cubits/bottom_hide_cubit/bottom_hide_cubit.d
 final getIt = GetIt.instance;
 
 void setupGetIt() {
-  /// DB
-  getIt.registerSingleton<KeyValueStorage>(KeyValueStorageImpl());
-
   /// Servises.
   getIt.registerSingleton<CreateOpeartionService>(
     CreateOpeartionServiceImpl(),
@@ -50,7 +46,7 @@ void setupGetIt() {
   getIt.registerSingleton<StartScreenService>(
     StartScreenServiceImpl(),
   );
-  getIt.registerSingleton<BalanceCardsService>(BalanceCardServiceImpl(getIt()));
+  getIt.registerSingleton<BalanceCardsService>(const BalanceCardServiceImpl());
   getIt.registerSingleton<CreateBalanceCardService>(
     CreateBalanceCardServiceImpl(),
   );
