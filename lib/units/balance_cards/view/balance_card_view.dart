@@ -1,11 +1,10 @@
-import 'package:expensive_tracker_app/constants/string_constants.dart';
 import 'package:expensive_tracker_app/get_it.dart';
 import 'package:expensive_tracker_app/units/balance_cards/view/components/balance_amount.dart';
+import 'package:expensive_tracker_app/units/balance_cards/view/components/spending_month.dart';
 import 'package:expensive_tracker_app/units/balance_cards/view/cubit/balance_card_cubit.dart';
 import 'package:expensive_tracker_app/units/balance_cards/view/cubit/balance_card_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class BalanceCardView extends StatelessWidget {
   const BalanceCardView({super.key});
@@ -63,24 +62,7 @@ class _BalanceCardBody extends StatelessWidget {
                   state.currencyData,
                   state.balanceCardModel.amount,
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      _SpendingWidget(
-                          color: Colors.green,
-                          title: SResources.income,
-                          quantity: '\$0.0',
-                          icon: FontAwesomeIcons.arrowUp),
-                      _SpendingWidget(
-                          color: Colors.red,
-                          title: SResources.expense,
-                          quantity: '0.0',
-                          icon: FontAwesomeIcons.arrowDown),
-                    ],
-                  ),
-                )
+                SpendingMonth(state.monthOperationAmount),
               ],
             );
           } else {
@@ -88,57 +70,6 @@ class _BalanceCardBody extends StatelessWidget {
           }
         },
       ),
-    );
-  }
-}
-
-class _SpendingWidget extends StatelessWidget {
-  final Color color;
-  final String title;
-  final String quantity;
-  final IconData icon;
-  const _SpendingWidget({
-    required this.color,
-    required this.title,
-    required this.quantity,
-    required this.icon,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Container(
-          padding: const EdgeInsets.all(8.0),
-          decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.onPrimary,
-            shape: BoxShape.circle,
-          ),
-          child: Icon(
-            icon,
-            size: 16,
-            color: color,
-          ),
-        ),
-        const SizedBox(
-          width: 5,
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              title,
-              style: const TextStyle(color: Colors.grey),
-            ),
-            Text(
-              quantity,
-              style: const TextStyle(
-                color: Colors.black,
-              ),
-            ),
-          ],
-        )
-      ],
     );
   }
 }

@@ -1,10 +1,13 @@
 import 'dart:collection';
 
 import 'package:expensive_tracker_app/data/app_db/app_db.dart';
+import 'package:expensive_tracker_app/get_it.dart';
 import 'package:expensive_tracker_app/units/balance_cards/data/models/item_balance_card_model.dart';
 import 'package:expensive_tracker_app/units/balance_cards/data/models/month_operation_amount_model.dart';
 import 'package:expensive_tracker_app/units/balance_cards/data/services/balance_cards_service.dart';
 import 'package:expensive_tracker_app/units/balance_cards/domain/repositories/balance_cards_repo.dart';
+import 'package:expensive_tracker_app/units/create_expense/data/model/item_operation_model.dart';
+import 'package:expensive_tracker_app/units/last_operationes/domain/repositories/month_repository.dart';
 
 class BalanceCardsRepoImpl implements BalanceCardRepo {
   final BalanceCardsService _balanceCardService;
@@ -17,6 +20,8 @@ class BalanceCardsRepoImpl implements BalanceCardRepo {
 
   @override
   ItemBalanceCardModel get currentBalanceCard => _currentSelectCard;
+  @override
+  MonthOperationAmountModel get operationAmountModel => _operationAmountModel;
 
   @override
   Future<List<ItemBalanceCardModel>> getAllCards() async {
@@ -84,13 +89,32 @@ class BalanceCardsRepoImpl implements BalanceCardRepo {
   }
 
   @override
-  Future<MonthOperationAmountModel> getOperationesMonthSumm() async {
-    _operationAmountModel = await _balanceCardService.getAmountMonthOperationes(
-      DateTime(
-        DateTime.now().year,
-        DateTime.now().month,
-      ),
-    );
-    return _operationAmountModel;
+  Future<void> getOperationesMonthSumm(DateTime dateTime) async {
+    _operationAmountModel =
+        await _balanceCardService.getAmountMonthOperationes(dateTime);
+  }
+
+  @override
+  bool addNewOperation(ItemOperationModel operationModel) {
+    final currentData = getIt<MonthRepositoty>().currentDate;
+
+    // Если месяц и год добавленной операции не тот, что на экране - ничего не делаем
+    if (currentData != null &&
+        currentData.month != operationModel.dateOperation.month &&
+        currentData.year != operationModel.dateOperation.year) {
+      return false;
+    }
+    if (currentBalanceCard.id == operationModel.cardId) {
+      if (operationModel.type == OperationType.expense) {
+        _operationAmountModel = _operationAmountModel.copyWith(
+            newExpense: _operationAmountModel.expense + operationModel.amount);
+      } else {
+        _operationAmountModel = _operationAmountModel.copyWith(
+            newIncome: _operationAmountModel.income + operationModel.amount);
+      }
+      return true;
+    } else {
+      return false;
+    }
   }
 }

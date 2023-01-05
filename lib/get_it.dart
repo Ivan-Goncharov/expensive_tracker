@@ -81,5 +81,5 @@ void setupGetIt() {
   getIt.registerFactory(() => SelectCurrencyCubit(getIt()));
   getIt.registerFactory(() => SearchCurrencyCubit(getIt()));
   getIt.registerFactory(() => BalanceAmountCubit(getIt()));
-  getIt.registerFactory(() => BalanceCardCubit(getIt()));
+  getIt.registerFactory(() => BalanceCardCubit(getIt(), getIt()));
 }
