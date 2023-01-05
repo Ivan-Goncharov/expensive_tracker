@@ -1,6 +1,7 @@
 import 'package:expensive_tracker_app/data/app_db/app_db.dart';
 import 'package:expensive_tracker_app/units/balance_cards/data/models/item_balance_card_model.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive/hive.dart';
+// import 'package:hive_flutter/hive_flutter.dart';
 
 abstract class KeyValueStorage {
   Future<void> saveNewCard(ItemBalanceCardModel balanceCard);
@@ -14,18 +15,13 @@ class KeyValueStorageImpl implements KeyValueStorage {
   @override
   Future<void> saveNewCard(ItemBalanceCardModel balanceCard) async {
     final box = await Hive.openBox('cards');
-
     await box.put(balanceCard.id, balanceCard.toJson());
   }
 
   @override
   Future<List<ItemBalanceCardModel>> getAllCards(List<BalanceCard> ids) async {
-    print('DEBUG IN KEY VALUE');
     final list = <ItemBalanceCardModel>[];
-    print('DEBUG IN ');
-    print('DEBUG BOX EXIST ${await Hive.boxExists('cards')}');
     final box = await Hive.openBox('cards');
-    print('DEBUG BOX $box');
     for (final item in ids) {
       list.add(ItemBalanceCardModel.fromJson(
           Map<String, dynamic>.from(box.get(item.id))));

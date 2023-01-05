@@ -23,10 +23,11 @@ class MothRepositoryImpl implements MonthRepositoty {
   Future<void> getListOfMonth() async {
     try {
       _listOfMonth = (await _service.getMonthList()).reversed.toList();
-      _currentDate = _listOfMonth.first;
     } catch (er, st) {
+      _listOfMonth.add(DateTime(DateTime.now().year, DateTime.now().month));
       debugPrint('$er\n$st');
     }
+    _currentDate = _listOfMonth.first;
   }
 
   @override
@@ -36,5 +37,10 @@ class MothRepositoryImpl implements MonthRepositoty {
   void addMonthInStream(int index) {
     _monthStreamController.add(index);
     _currentDate = _listOfMonth[index];
+  }
+
+  @override
+  void firstStartAddMonth() {
+    _listOfMonth.add(DateTime(DateTime.now().year, DateTime.now().month));
   }
 }

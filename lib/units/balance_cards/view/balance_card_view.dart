@@ -1,7 +1,6 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:expensive_tracker_app/constants/string_constants.dart';
 import 'package:expensive_tracker_app/get_it.dart';
+import 'package:expensive_tracker_app/units/balance_cards/view/components/balance_amount.dart';
 import 'package:expensive_tracker_app/units/balance_cards/view/cubit/balance_card_cubit.dart';
 import 'package:expensive_tracker_app/units/balance_cards/view/cubit/balance_card_state.dart';
 import 'package:flutter/material.dart';
@@ -49,22 +48,20 @@ class _BalanceCardBody extends StatelessWidget {
       child: BlocBuilder<BalanceCardCubit, BalanceCardState>(
         builder: (context, state) {
           if (state is BalanceCardLoadedState) {
-            print(
-                'DEBUG  STATE ${state.balanceCardModel}  \n ${state.currencyData}');
             return Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Padding(
-                  padding: EdgeInsets.only(top: 16.0),
+                Padding(
+                  padding: const EdgeInsets.only(top: 16.0, bottom: 8.0),
                   child: Text(
-                    SResources.balance,
-                    style: TextStyle(color: Colors.grey, fontSize: 16),
+                    state.balanceCardModel.name,
+                    style: const TextStyle(color: Colors.grey, fontSize: 20),
                   ),
                 ),
-                const Text(
-                  '\$0.0',
-                  style: TextStyle(color: Colors.black, fontSize: 40),
+                BalanceAmount(
+                  state.currencyData,
+                  state.balanceCardModel.amount,
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),

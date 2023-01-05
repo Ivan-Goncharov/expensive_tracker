@@ -203,12 +203,14 @@ class NoteOperationCompanion extends UpdateCompanion<ItemOperationModel> {
   final Value<double> amount;
   final Value<OperationType> type;
   final Value<DateTime> dateOperation;
+  final Value<String> cardId;
   const NoteOperationCompanion({
     this.id = const Value.absent(),
     this.category = const Value.absent(),
     this.amount = const Value.absent(),
     this.type = const Value.absent(),
     this.dateOperation = const Value.absent(),
+    this.cardId = const Value.absent(),
   });
   NoteOperationCompanion.insert({
     required String id,
@@ -216,17 +218,20 @@ class NoteOperationCompanion extends UpdateCompanion<ItemOperationModel> {
     required double amount,
     required OperationType type,
     required DateTime dateOperation,
+    required String cardId,
   })  : id = Value(id),
         category = Value(category),
         amount = Value(amount),
         type = Value(type),
-        dateOperation = Value(dateOperation);
+        dateOperation = Value(dateOperation),
+        cardId = Value(cardId);
   static Insertable<ItemOperationModel> custom({
     Expression<String>? id,
     Expression<String>? category,
     Expression<double>? amount,
     Expression<int>? type,
     Expression<DateTime>? dateOperation,
+    Expression<String>? cardId,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -234,6 +239,7 @@ class NoteOperationCompanion extends UpdateCompanion<ItemOperationModel> {
       if (amount != null) 'operation_amount': amount,
       if (type != null) 'type': type,
       if (dateOperation != null) 'operation_date': dateOperation,
+      if (cardId != null) 'card_id': cardId,
     });
   }
 
@@ -242,13 +248,15 @@ class NoteOperationCompanion extends UpdateCompanion<ItemOperationModel> {
       Value<String>? category,
       Value<double>? amount,
       Value<OperationType>? type,
-      Value<DateTime>? dateOperation}) {
+      Value<DateTime>? dateOperation,
+      Value<String>? cardId}) {
     return NoteOperationCompanion(
       id: id ?? this.id,
       category: category ?? this.category,
       amount: amount ?? this.amount,
       type: type ?? this.type,
       dateOperation: dateOperation ?? this.dateOperation,
+      cardId: cardId ?? this.cardId,
     );
   }
 
@@ -271,6 +279,9 @@ class NoteOperationCompanion extends UpdateCompanion<ItemOperationModel> {
     if (dateOperation.present) {
       map['operation_date'] = Variable<DateTime>(dateOperation.value);
     }
+    if (cardId.present) {
+      map['card_id'] = Variable<String>(cardId.value);
+    }
     return map;
   }
 
@@ -281,7 +292,8 @@ class NoteOperationCompanion extends UpdateCompanion<ItemOperationModel> {
           ..write('category: $category, ')
           ..write('amount: $amount, ')
           ..write('type: $type, ')
-          ..write('dateOperation: $dateOperation')
+          ..write('dateOperation: $dateOperation, ')
+          ..write('cardId: $cardId')
           ..write(')'))
         .toString();
   }
@@ -300,6 +312,7 @@ class _$ItemOperationModelInsertable implements Insertable<ItemOperationModel> {
       amount: Value(_object.amount),
       type: Value(_object.type),
       dateOperation: Value(_object.dateOperation),
+      cardId: Value(_object.cardId),
     ).toColumns(false);
   }
 }
@@ -345,9 +358,14 @@ class $NoteOperationTable extends NoteOperation
   late final GeneratedColumn<DateTime> dateOperation =
       GeneratedColumn<DateTime>('operation_date', aliasedName, false,
           type: DriftSqlType.dateTime, requiredDuringInsert: true);
+  final VerificationMeta _cardIdMeta = const VerificationMeta('cardId');
+  @override
+  late final GeneratedColumn<String> cardId = GeneratedColumn<String>(
+      'card_id', aliasedName, false,
+      type: DriftSqlType.string, requiredDuringInsert: true);
   @override
   List<GeneratedColumn> get $columns =>
-      [id, category, amount, type, dateOperation];
+      [id, category, amount, type, dateOperation, cardId];
   @override
   String get aliasedName => _alias ?? 'note_operation';
   @override
@@ -383,6 +401,12 @@ class $NoteOperationTable extends NoteOperation
     } else if (isInserting) {
       context.missing(_dateOperationMeta);
     }
+    if (data.containsKey('card_id')) {
+      context.handle(_cardIdMeta,
+          cardId.isAcceptableOrUnknown(data['card_id']!, _cardIdMeta));
+    } else if (isInserting) {
+      context.missing(_cardIdMeta);
+    }
     return context;
   }
 
@@ -403,6 +427,8 @@ class $NoteOperationTable extends NoteOperation
           .read(DriftSqlType.int, data['${effectivePrefix}type'])!),
       dateOperation: attachedDatabase.options.types.read(
           DriftSqlType.dateTime, data['${effectivePrefix}operation_date'])!,
+      cardId: attachedDatabase.options.types
+          .read(DriftSqlType.string, data['${effectivePrefix}card_id'])!,
     );
   }
 

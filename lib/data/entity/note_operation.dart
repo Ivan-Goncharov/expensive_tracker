@@ -9,4 +9,5 @@ class NoteOperation extends Table {
   RealColumn get amount => real().named('operation_amount')();
   IntColumn get type => intEnum<OperationType>()();
   DateTimeColumn get dateOperation => dateTime().named('operation_date')();
+  TextColumn get cardId => text()();
 }

@@ -1,5 +1,6 @@
 import 'package:expensive_tracker_app/data/app_db/app_db.dart';
 import 'package:expensive_tracker_app/units/balance_cards/data/models/item_balance_card_model.dart';
+import 'package:expensive_tracker_app/units/balance_cards/data/models/month_operation_amount_model.dart';
 
 abstract class BalanceCardRepo {
   Future<void> saveNewCard({
@@ -20,4 +21,6 @@ abstract class BalanceCardRepo {
     double? amount,
     int? currencyId,
   });
+
+  Future<MonthOperationAmountModel> getOperationesMonthSumm();
 }

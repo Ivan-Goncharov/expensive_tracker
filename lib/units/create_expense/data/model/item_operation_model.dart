@@ -12,6 +12,7 @@ class ItemOperationModel with _$ItemOperationModel {
     required double amount,
     required OperationType type,
     required DateTime dateOperation,
+    required String cardId,
   }) = _ItemOperationModel;
 
   /// Создание операции
@@ -20,6 +21,7 @@ class ItemOperationModel with _$ItemOperationModel {
     required double amount,
     required OperationType type,
     required DateTime dateOperation,
+    required String cardId,
   }) =>
       ItemOperationModel(
         id: const Uuid().v4(),
@@ -27,6 +29,7 @@ class ItemOperationModel with _$ItemOperationModel {
         amount: amount,
         type: type,
         dateOperation: dateOperation,
+        cardId: cardId,
       );
 
   /// Изменение операции

@@ -17,11 +17,12 @@ class StartScreenCubit extends Cubit<StartScreenState> {
     final isNotFirstStart = await startScreenRepo.isFirstStart();
     if (!isNotFirstStart) {
       await startScreenRepo.saveStartInfo();
-      emit(StartScreenFirstStartState());
       await startScreenRepo.getAllCategories();
+      monthRepositoty.firstStartAddMonth();
+      emit(StartScreenFirstStartState());
     } else {
       await startScreenRepo.getAllCategories();
-      getIt<BalanceCardRepo>().getAllCards();
+      await getIt<BalanceCardRepo>().getAllCards();
       await monthRepositoty.getListOfMonth();
       emit(StartScreenIsNotFirstStartState());
     }

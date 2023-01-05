@@ -10,6 +10,11 @@ class BalanceCardCubit extends Cubit<BalanceCardState> {
     final balanceCard = _repo.currentBalanceCard;
     final currencyData =
         await _repo.getCurrencyDataById(balanceCard.currencyId);
-    emit(BalanceCardLoadedState(currencyData, balanceCard));
+    final monthOperationAmount = await _repo.getOperationesMonthSumm();
+    emit(BalanceCardLoadedState(
+      currencyData: currencyData,
+      balanceCardModel: balanceCard,
+      monthOperationAmount: monthOperationAmount,
+    ));
   }
 }

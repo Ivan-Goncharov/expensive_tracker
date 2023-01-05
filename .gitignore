@@ -44,9 +44,5 @@ app.*.map.json
 /android/app/release
 
 # Generated files
-/lib/data/app_db/app_db.g.dart
-/lib/units/balance_cards/data/models/item_balance_card_model.freezed.dart
-/lib/units/balance_cards/data/models/item_balance_card_model.g.dart
-/lib/units/create_expense/data/model/item_operation_model.freezed.dart
-/lib/units/start_screen/data/model/categories.freezed.dart
+lib/**/*.g.dart
 

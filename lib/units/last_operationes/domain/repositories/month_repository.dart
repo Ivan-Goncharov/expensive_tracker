@@ -5,6 +5,8 @@ abstract class MonthRepositoty {
 
   Future<void> getListOfMonth();
 
+  void firstStartAddMonth();
+
   void addMonthInStream(int index);
 
   DateTime? get currentDate;

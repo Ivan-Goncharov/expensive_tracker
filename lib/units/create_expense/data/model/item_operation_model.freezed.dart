@@ -21,6 +21,7 @@ mixin _$ItemOperationModel {
   double get amount => throw _privateConstructorUsedError;
   OperationType get type => throw _privateConstructorUsedError;
   DateTime get dateOperation => throw _privateConstructorUsedError;
+  String get cardId => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ItemOperationModelCopyWith<ItemOperationModel> get copyWith =>
@@ -38,7 +39,8 @@ abstract class $ItemOperationModelCopyWith<$Res> {
       String category,
       double amount,
       OperationType type,
-      DateTime dateOperation});
+      DateTime dateOperation,
+      String cardId});
 }
 
 /// @nodoc
@@ -59,6 +61,7 @@ class _$ItemOperationModelCopyWithImpl<$Res, $Val extends ItemOperationModel>
     Object? amount = null,
     Object? type = null,
     Object? dateOperation = null,
+    Object? cardId = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -81,6 +84,10 @@ class _$ItemOperationModelCopyWithImpl<$Res, $Val extends ItemOperationModel>
           ? _value.dateOperation
           : dateOperation // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      cardId: null == cardId
+          ? _value.cardId
+          : cardId // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -98,7 +105,8 @@ abstract class _$$_ItemOperationModelCopyWith<$Res>
       String category,
       double amount,
       OperationType type,
-      DateTime dateOperation});
+      DateTime dateOperation,
+      String cardId});
 }
 
 /// @nodoc
@@ -117,6 +125,7 @@ class __$$_ItemOperationModelCopyWithImpl<$Res>
     Object? amount = null,
     Object? type = null,
     Object? dateOperation = null,
+    Object? cardId = null,
   }) {
     return _then(_$_ItemOperationModel(
       id: null == id
@@ -139,6 +148,10 @@ class __$$_ItemOperationModelCopyWithImpl<$Res>
           ? _value.dateOperation
           : dateOperation // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      cardId: null == cardId
+          ? _value.cardId
+          : cardId // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -151,7 +164,8 @@ class _$_ItemOperationModel extends _ItemOperationModel {
       required this.category,
       required this.amount,
       required this.type,
-      required this.dateOperation})
+      required this.dateOperation,
+      required this.cardId})
       : super._();
 
   @override
@@ -164,10 +178,12 @@ class _$_ItemOperationModel extends _ItemOperationModel {
   final OperationType type;
   @override
   final DateTime dateOperation;
+  @override
+  final String cardId;
 
   @override
   String toString() {
-    return 'ItemOperationModel(id: $id, category: $category, amount: $amount, type: $type, dateOperation: $dateOperation)';
+    return 'ItemOperationModel(id: $id, category: $category, amount: $amount, type: $type, dateOperation: $dateOperation, cardId: $cardId)';
   }
 
   @override
@@ -181,12 +197,13 @@ class _$_ItemOperationModel extends _ItemOperationModel {
             (identical(other.amount, amount) || other.amount == amount) &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.dateOperation, dateOperation) ||
-                other.dateOperation == dateOperation));
+                other.dateOperation == dateOperation) &&
+            (identical(other.cardId, cardId) || other.cardId == cardId));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, category, amount, type, dateOperation);
+  int get hashCode => Object.hash(
+      runtimeType, id, category, amount, type, dateOperation, cardId);
 
   @JsonKey(ignore: true)
   @override
@@ -202,7 +219,8 @@ abstract class _ItemOperationModel extends ItemOperationModel {
       required final String category,
       required final double amount,
       required final OperationType type,
-      required final DateTime dateOperation}) = _$_ItemOperationModel;
+      required final DateTime dateOperation,
+      required final String cardId}) = _$_ItemOperationModel;
   _ItemOperationModel._() : super._();
 
   @override
@@ -215,6 +233,8 @@ abstract class _ItemOperationModel extends ItemOperationModel {
   OperationType get type;
   @override
   DateTime get dateOperation;
+  @override
+  String get cardId;
   @override
   @JsonKey(ignore: true)
   _$$_ItemOperationModelCopyWith<_$_ItemOperationModel> get copyWith =>

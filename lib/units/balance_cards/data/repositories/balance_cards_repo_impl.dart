@@ -2,6 +2,7 @@ import 'dart:collection';
 
 import 'package:expensive_tracker_app/data/app_db/app_db.dart';
 import 'package:expensive_tracker_app/units/balance_cards/data/models/item_balance_card_model.dart';
+import 'package:expensive_tracker_app/units/balance_cards/data/models/month_operation_amount_model.dart';
 import 'package:expensive_tracker_app/units/balance_cards/data/services/balance_cards_service.dart';
 import 'package:expensive_tracker_app/units/balance_cards/domain/repositories/balance_cards_repo.dart';
 
@@ -11,16 +12,15 @@ class BalanceCardsRepoImpl implements BalanceCardRepo {
 
   var _listOfCards = <ItemBalanceCardModel>[];
   var _mapOfUsedCurrency = HashMap<int, CurrencyData>();
-
   late ItemBalanceCardModel _currentSelectCard;
+  late MonthOperationAmountModel _operationAmountModel;
 
+  @override
   ItemBalanceCardModel get currentBalanceCard => _currentSelectCard;
 
   @override
   Future<List<ItemBalanceCardModel>> getAllCards() async {
-    print('DEBUG GET ALL CARD');
     _listOfCards = await _balanceCardService.getAllCards();
-    print('DEBUG $_listOfCards');
     _mapOfUsedCurrency = await _getAllUsedCurrencyData();
 
     ///TODO: Сделать функционал последней используемой.
@@ -81,5 +81,16 @@ class BalanceCardsRepoImpl implements BalanceCardRepo {
     } else {
       return _balanceCardService.getItemCurrencyData(id);
     }
+  }
+
+  @override
+  Future<MonthOperationAmountModel> getOperationesMonthSumm() async {
+    _operationAmountModel = await _balanceCardService.getAmountMonthOperationes(
+      DateTime(
+        DateTime.now().year,
+        DateTime.now().month,
+      ),
+    );
+    return _operationAmountModel;
   }
 }
