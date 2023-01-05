@@ -61,23 +61,23 @@ class BalanceCardsRepoImpl implements BalanceCardRepo {
     _currentSelectCard = card;
   }
 
-  @override
-  Future<void> updateBalanceCardInfo({
-    required String id,
-    String? name,
-    double? amount,
-    int? currencyId,
-  }) async {
-    var card = _listOfCards.firstWhere((element) => element.id == id);
-    card = card.copyWith(
-      name: name ?? card.name,
-      amount: amount ?? card.amount,
-      currencyId: currencyId ?? card.currencyId,
-    );
-    _balanceCardService.updateBalanceCardInfo(card);
-    _listOfCards.removeWhere((element) => element.id == id);
-    _listOfCards.add(card);
-  }
+  // @override
+  // Future<void> updateBalanceCardInfo({
+  //   required String id,
+  //   String? name,
+  //   double? amount,
+  //   int? currencyId,
+  // }) async {
+  //   var card = _listOfCards.firstWhere((element) => element.id == id);
+  //   card = card.copyWith(
+  //     name: name ?? card.name,
+  //     amount: amount ?? card.amount,
+  //     currencyId: currencyId ?? card.currencyId,
+  //   );
+  //   _balanceCardService.updateBalanceCardInfo(card);
+  //   _listOfCards.removeWhere((element) => element.id == id);
+  //   _listOfCards.add(card);
+  // }
 
   @override
   Future<CurrencyData> getCurrencyDataById(int id) async {
@@ -116,5 +116,16 @@ class BalanceCardsRepoImpl implements BalanceCardRepo {
     } else {
       return false;
     }
+  }
+
+  @override
+  Future<void> getNewBalanceCardAmount(String id) async {
+    // Получаем карту по id c обновленными данными.
+    final card = await _balanceCardService.getItemBalanceCardModel(id);
+    // Если эта карта активная - обновляем значения активной карты.
+    if (_currentSelectCard.id == id) _currentSelectCard = card;
+    // Обновлеем элемент в списке.
+    _listOfCards.removeWhere((card) => card.id == id);
+    _listOfCards.add(card);
   }
 }

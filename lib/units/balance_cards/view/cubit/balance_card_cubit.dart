@@ -45,8 +45,9 @@ class BalanceCardCubit extends Cubit<BalanceCardState> {
     ));
   }
 
-  void _listenerCreateData(ItemOperationModel model) {
+  Future<void> _listenerCreateData(ItemOperationModel model) async {
     final flag = _balanceRepo.addNewOperation(model);
+    await _balanceRepo.getNewBalanceCardAmount(model.cardId);
     if (flag) {
       emit(BalanceCardLoadedState(
         balanceCardModel: _balanceRepo.currentBalanceCard,

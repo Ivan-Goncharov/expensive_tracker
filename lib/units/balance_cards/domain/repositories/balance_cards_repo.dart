@@ -18,14 +18,16 @@ abstract class BalanceCardRepo {
 
   Future<CurrencyData> getCurrencyDataById(int id);
 
-  Future<void> updateBalanceCardInfo({
-    required String id,
-    String? name,
-    double? amount,
-    int? currencyId,
-  });
+  // Future<void> updateBalanceCardInfo({
+  //   required String id,
+  //   String? name,
+  //   double? amount,
+  //   int? currencyId,
+  // });
 
   Future<void> getOperationesMonthSumm(DateTime dateTime);
 
   bool addNewOperation(ItemOperationModel model);
+
+  Future<void> getNewBalanceCardAmount(String id);
 }
