@@ -30,4 +30,6 @@ abstract class BalanceCardRepo {
   bool addNewOperation(ItemOperationModel model);
 
   Future<void> getNewBalanceCardAmount(String id);
+
+  List<ItemBalanceCardModel> get listOfCards;
 }

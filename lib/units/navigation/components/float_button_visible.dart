@@ -33,7 +33,8 @@ class _FloatButtonVisibleBody extends StatelessWidget {
             opacity: state.isVisible ? 1.0 : 0.0,
             duration: const Duration(milliseconds: 200),
             child: Container(
-              padding: const EdgeInsets.only(top: 700),
+              // padding: const EdgeInsets.only(top: 700),
+
               child: widget,
             ),
           );

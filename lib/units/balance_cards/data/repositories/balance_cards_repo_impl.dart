@@ -22,6 +22,7 @@ class BalanceCardsRepoImpl implements BalanceCardRepo {
   ItemBalanceCardModel get currentBalanceCard => _currentSelectCard;
   @override
   MonthOperationAmountModel get operationAmountModel => _operationAmountModel;
+  List<ItemBalanceCardModel> get listOfCards => _listOfCards;
 
   @override
   Future<List<ItemBalanceCardModel>> getAllCards() async {
