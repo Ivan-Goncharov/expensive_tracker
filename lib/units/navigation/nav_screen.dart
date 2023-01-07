@@ -1,3 +1,4 @@
+import 'package:expensive_tracker_app/units/operationes_stats/operationes_stats_view.dart';
 import 'package:expensive_tracker_app/units/routes/routes.dart';
 import 'package:expensive_tracker_app/get_it.dart';
 import 'package:expensive_tracker_app/units/home/view/home_screen.dart';
@@ -25,7 +26,7 @@ class NavScreen extends StatelessWidget {
 
 final _pages = [
   const HomeScreen(),
-  const SizedBox(),
+  const OperationesStatsView(),
   const SizedBox(),
   const SettingsScreen(),
 ];
@@ -39,7 +40,6 @@ class _NavScreenBody extends StatelessWidget {
     return BlocBuilder<NavigatorCubit, NavigationState>(
       builder: (context, state) {
         if (state is NavigationChangePageState) {
-          print('DEBUG STAET ${state.listOfCards}');
           return Scaffold(
             backgroundColor: colors.background,
             body: _pages[state.currentPage],
@@ -59,7 +59,7 @@ class _NavScreenBody extends StatelessWidget {
                 showSelectedLabels: false,
                 showUnselectedLabels: false,
                 onTap: ((value) {
-                  if (value != 1 && value != 4) {
+                  if (value != 2) {
                     BlocProvider.of<NavigatorCubit>(context).changePage(value);
                   }
                 }),

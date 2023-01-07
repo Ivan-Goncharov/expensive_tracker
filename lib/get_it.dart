@@ -1,7 +1,8 @@
 import 'package:expensive_tracker_app/units/balance_cards/data/repositories/balance_cards_repo_impl.dart';
+import 'package:expensive_tracker_app/units/balance_cards/data/repositories/currencies_repo_impl.dart';
 import 'package:expensive_tracker_app/units/balance_cards/data/services/balance_cards_service.dart';
 import 'package:expensive_tracker_app/units/balance_cards/domain/repositories/balance_cards_repo.dart';
-import 'package:expensive_tracker_app/units/balance_cards/view/balance_cards_carousel.dart';
+import 'package:expensive_tracker_app/units/balance_cards/domain/repositories/currencies_repo.dart';
 import 'package:expensive_tracker_app/units/balance_cards/view/cubits/balance_card_cubit/balance_card_cubit.dart';
 import 'package:expensive_tracker_app/units/balance_cards/view/cubits/scroll_balance_cubit/cubit/scroll_balance_cubit.dart';
 import 'package:expensive_tracker_app/units/create_expense/components/date_title/cubit/date_picker_cubit.dart';
@@ -63,6 +64,7 @@ void setupGetIt() {
   getIt.registerSingleton<BalanceCardRepo>(BalanceCardsRepoImpl(getIt()));
   getIt.registerSingleton<CreateBalanceCardRepo>(
       CreateBalanceCardRepoImpl(getIt()));
+  getIt.registerSingleton<CurrenciesRepo>(CurrenciesRepoImpl(getIt()));
 
   /// Bloc and Cubit
   getIt.registerFactory(() => NavigatorCubit(getIt()));
@@ -79,6 +81,7 @@ void setupGetIt() {
   getIt.registerFactory(() => SelectCurrencyCubit(getIt()));
   getIt.registerFactory(() => SearchCurrencyCubit(getIt()));
   getIt.registerFactory(() => BalanceAmountCubit(getIt()));
-  getIt.registerFactory(() => BalanceCardCubit(getIt(), getIt(), getIt()));
+  getIt.registerFactory(
+      () => BalanceCardCubit(getIt(), getIt(), getIt(), getIt()));
   getIt.registerFactory(() => ScrollBalanceCubit(getIt()));
 }

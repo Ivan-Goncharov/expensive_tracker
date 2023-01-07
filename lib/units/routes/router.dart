@@ -1,3 +1,4 @@
+import 'package:expensive_tracker_app/units/add_balance_card/view/add_balance_card_view.dart';
 import 'package:expensive_tracker_app/units/new_balance_card/view/create_balance_amount_view.dart';
 import 'package:expensive_tracker_app/units/new_balance_card/view/search_currencies_view.dart';
 import 'package:expensive_tracker_app/units/routes/routes.dart';
@@ -45,6 +46,12 @@ Route<dynamic>? getRoutes(RouteSettings settings) {
     case searchCurrensiesRoute:
       return SlideTransitionPageRoute(
         child: const SearchCurrensiesView(),
+        settings: settings,
+      );
+
+    case addNewBalanceCardRoute:
+      return MaterialPageRoute(
+        builder: (_) => const AddBalanceCardView(),
         settings: settings,
       );
   }

@@ -7,7 +7,14 @@ import 'package:flutter/material.dart';
 
 class SelectCurrencyButton extends StatelessWidget {
   final CurrencyData currency;
-  const SelectCurrencyButton(this.currency, {super.key});
+  final double height;
+  final double? width;
+  const SelectCurrencyButton(
+    this.currency, {
+    super.key,
+    this.height = 40,
+    this.width,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,8 +22,8 @@ class SelectCurrencyButton extends StatelessWidget {
       onTap: () => Navigator.of(context).pushNamed(searchCurrensiesRoute),
       child: ContainerNemorophicEmboss(
         widget: _SelectCurrencyTitle(currency),
-        height: 40,
-        width: MediaQuery.of(context).size.width * 0.5,
+        height: height,
+        width: width ?? MediaQuery.of(context).size.width * 0.5,
       ),
     );
   }
