@@ -1,7 +1,7 @@
 // ignore_for_file: file_names
 import 'package:bloc/bloc.dart';
 import 'package:expensive_tracker_app/units/new_balance_card/domian/create_balance_card_repo.dart';
-import 'package:expensive_tracker_app/units/new_balance_card/view/cubits/create_name_cubit/create_card_name_state.dart';
+import 'package:expensive_tracker_app/units/new_balance_card/view/cubits/create_name_cubit/cubit/create_card_name_state.dart';
 import 'package:flutter/material.dart';
 
 class CreateCardNameCubit extends Cubit<CreateCardNameState> {
@@ -12,8 +12,7 @@ class CreateCardNameCubit extends Cubit<CreateCardNameState> {
   var _isShowButton = true;
 
   Future<void> initial() async {
-    emit(CreateCardNameLoadingState());
-    await _repo.getCurrencyList();
+    emit(CreateCardNameLoadingState()); 
     _textEditingController = TextEditingController(text: 'New card');
     _textEditingController.addListener(_controllerListener);
     emit(CreateCardNameSuccesState(_textEditingController, _isShowButton));

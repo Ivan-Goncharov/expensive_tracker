@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SearchCurrencyCubit extends Cubit<SearchCurrencyState> {
   final CreateBalanceCardRepo _repo;
+
   SearchCurrencyCubit(this._repo) : super(SearchCurrencyInitialState());
   late TextEditingController _controller;
   var _listOfCashCurrency = <CurrencyData>[];
@@ -81,7 +82,7 @@ class SearchCurrencyCubit extends Cubit<SearchCurrencyState> {
   }
 
   void selectCurrencyData(CurrencyData data) {
-    _repo.changeCurrencyData(data);
+    _repo.selectCurrencyData(data);
     emit(SearchCurrencySelectState());
   }
 }

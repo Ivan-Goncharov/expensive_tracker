@@ -6,6 +6,15 @@ abstract class CurrenciesRepo {
   Future<CurrencyData> getCurrencyById(int id);
 
   /// Запрос на получение валют.
-  /// [type] - тип валюты, которую необходимо получить.
-  Future<void> getSpecificTypeCurrencies(int type);
+  Future<void> getSpecificTypeCurrencies();
+
+  /// Stream с изменениями по выбранной валюте.
+  Stream<CurrencyData> get handleCurrencyData;
+
+  /// Метод для выбора валюты в поиске.
+  /// Отправляет выбранную валюту в стрим.
+  /// [data] - выбранная валюты.
+  void changeCurrencyData(CurrencyData data);
+
+  void dispose();
 }
