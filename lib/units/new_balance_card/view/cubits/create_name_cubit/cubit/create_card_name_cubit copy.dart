@@ -12,7 +12,7 @@ class CreateCardNameCubit extends Cubit<CreateCardNameState> {
   var _isShowButton = true;
 
   Future<void> initial() async {
-    emit(CreateCardNameLoadingState()); 
+    emit(CreateCardNameLoadingState());
     _textEditingController = TextEditingController(text: 'New card');
     _textEditingController.addListener(_controllerListener);
     emit(CreateCardNameSuccesState(_textEditingController, _isShowButton));
@@ -32,6 +32,7 @@ class CreateCardNameCubit extends Cubit<CreateCardNameState> {
     /// TODO: Реализовать сохранение имени и переход на следующий экран.
     if (_textEditingController.text.trim().isNotEmpty) {
       _repo.changeName(_textEditingController.text);
+      emit(CreateCardNameFinishState());
     } else {
       /// TODO: Реализовать тоаст о том, что не может быть поле пустым
     }

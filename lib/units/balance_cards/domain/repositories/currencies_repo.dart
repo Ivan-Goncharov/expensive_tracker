@@ -16,5 +16,11 @@ abstract class CurrenciesRepo {
   /// [data] - выбранная валюты.
   void changeCurrencyData(CurrencyData data);
 
+  /// Cписок обычных валют.
+  List<CurrencyData> get listUsualCurrencies;
+
+  /// Cписок крипто валюты.
+  List<CurrencyData> get listCryptoCurrencies;
+
   void dispose();
 }

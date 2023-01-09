@@ -1,13 +1,14 @@
 import 'package:expensive_tracker_app/data/app_db/app_db.dart';
-import 'package:expensive_tracker_app/units/new_balance_card/domian/create_balance_card_repo.dart';
+import 'package:expensive_tracker_app/units/balance_cards/domain/repositories/currencies_repo.dart';
 import 'package:expensive_tracker_app/units/new_balance_card/view/cubits/search_currency_cubit/search_currency_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SearchCurrencyCubit extends Cubit<SearchCurrencyState> {
-  final CreateBalanceCardRepo _repo;
+  final CurrenciesRepo _currenciesRepo;
 
-  SearchCurrencyCubit(this._repo) : super(SearchCurrencyInitialState());
+  SearchCurrencyCubit(this._currenciesRepo)
+      : super(SearchCurrencyInitialState());
   late TextEditingController _controller;
   var _listOfCashCurrency = <CurrencyData>[];
   var _listOfCryptoCurrency = <CurrencyData>[];
@@ -26,8 +27,8 @@ class SearchCurrencyCubit extends Cubit<SearchCurrencyState> {
   }
 
   void _addAllCurrency() {
-    _listOfCashCurrency = _repo.listOfUsualCurrency;
-    _listOfCryptoCurrency = _repo.listOfCryptoCurrency;
+    _listOfCashCurrency = _currenciesRepo.listUsualCurrencies;
+    _listOfCryptoCurrency = _currenciesRepo.listCryptoCurrencies;
   }
 
   void changeToogleSwitch(int value) {
@@ -52,12 +53,12 @@ class SearchCurrencyCubit extends Cubit<SearchCurrencyState> {
     } else if (_selectedToogle == 0) {
       _listOfCashCurrency = _searchCurrency(
         _controller.text.toLowerCase(),
-        _repo.listOfUsualCurrency,
+        _currenciesRepo.listUsualCurrencies,
       );
     } else {
       _listOfCryptoCurrency = _searchCurrency(
         _controller.text.toLowerCase(),
-        _repo.listOfCryptoCurrency,
+        _currenciesRepo.listCryptoCurrencies,
       );
     }
     emit(
@@ -82,7 +83,7 @@ class SearchCurrencyCubit extends Cubit<SearchCurrencyState> {
   }
 
   void selectCurrencyData(CurrencyData data) {
-    _repo.selectCurrencyData(data);
+    _currenciesRepo.changeCurrencyData(data);
     emit(SearchCurrencySelectState());
   }
 }

@@ -17,8 +17,11 @@ class SelectCurrencyLoadedState extends SelectCurrencyState {
 }
 
 class SelectCurrencySaveSelectState extends SelectCurrencyState {
-  SelectCurrencySaveSelectState();
-
   @override
   List<Object?> get props => [2];
+}
+
+class SelectCurrencyLoadingState extends SelectCurrencyState {
+  @override
+  List<Object?> get props => [3];
 }

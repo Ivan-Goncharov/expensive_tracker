@@ -151,7 +151,7 @@ class AppDb extends _$AppDb {
   Future<List<CurrencyData>> getSpecificTypeCurrencies(int type) {
     return (select(currency)
           ..where((tbl) => tbl.type.equals(type))
-          ..orderBy([(c) => OrderingTerm.desc(c.name)]))
+          ..orderBy([(c) => OrderingTerm.asc(c.name)]))
         .get();
   }
 }

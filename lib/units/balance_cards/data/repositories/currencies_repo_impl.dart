@@ -20,7 +20,9 @@ class CurrenciesRepoImpl implements CurrenciesRepo {
 
   @override
   Stream<CurrencyData> get handleCurrencyData => _streamController.stream;
+  @override
   List<CurrencyData> get listUsualCurrencies => _listUsualCurrencies;
+  @override
   List<CurrencyData> get listCryptoCurrencies => _listCryptoCurrencies;
 
   @override

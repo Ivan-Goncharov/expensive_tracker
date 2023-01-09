@@ -18,6 +18,8 @@ class StartScreenCubit extends Cubit<StartScreenState> {
     final isNotFirstStart = await startScreenRepo.isFirstStart();
 
     /// TODO: Посмотреть, что можно паралельно исполнять.
+
+    emit(StartScreenFirstStartState());
     if (!isNotFirstStart) {
       await startScreenRepo.saveStartInfo();
       await startScreenRepo.getAllCategories();
