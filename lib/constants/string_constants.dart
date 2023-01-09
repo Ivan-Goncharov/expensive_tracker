@@ -1,5 +1,5 @@
 class SResources {
-  static const balance = 'BALANCE';
+  static const balance = 'Balance';
   static const income = 'Income';
   static const expense = 'Expense';
   static const newOperation = 'New operation';
@@ -13,4 +13,9 @@ class SResources {
   static const currencyTitle = 'Currency';
   static const crytoCurrencyTitle = 'Cryptocurrency';
   static const adjustBalanceTitle = 'Adjust your balance';
+  static const addNewCardBarTitle = 'Add new card';
+  static const nameOfCardTitle = 'Name of card';
+  static const addCardNameHint = 'Enter the name';
+  static const addCardCurrencyHint =  'Enter the balance';
+  static const currency = 'Currency';
 }

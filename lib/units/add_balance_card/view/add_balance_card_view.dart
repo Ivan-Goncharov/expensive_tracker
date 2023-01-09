@@ -1,3 +1,4 @@
+import 'package:expensive_tracker_app/constants/string_constants.dart';
 import 'package:expensive_tracker_app/helpers/default_app_bar.dart';
 import 'package:expensive_tracker_app/units/add_balance_card/view/components/text_field_name.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +11,7 @@ class AddBalanceCardView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const DefaultAppBar(title: 'Add new card'),
+      appBar: const DefaultAppBar(title: SResources.addNewCardBarTitle),
       backgroundColor: Theme.of(context).colorScheme.background,
       body: GestureDetector(
         behavior: HitTestBehavior.opaque,
@@ -19,17 +20,17 @@ class AddBalanceCardView extends StatelessWidget {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              const _FieldTitle('Name of card'),
+              const _FieldTitle(SResources.nameOfCardTitle),
               const SizedBox(height: 8),
               AddCardNameText(
                   textController: TextEditingController(),
-                  hintTitle: 'Enter the name'),
+                  hintTitle: SResources.addCardNameHint),
               const SizedBox(height: 16),
-              const _FieldTitle('Balance'),
+              const _FieldTitle(SResources.balance),
               const SizedBox(height: 8),
               AddCardNameText(
                 textController: TextEditingController(),
-                hintTitle: 'Enter the balance',
+                hintTitle: SResources.addCardCurrencyHint,
                 textInputTupe:
                     const TextInputType.numberWithOptions(decimal: true),
                 inputFormatters: [
@@ -39,7 +40,7 @@ class AddBalanceCardView extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 16),
-              const _FieldTitle('Currency'),
+              const _FieldTitle(SResources.currency),
               // const SelectCurrencyButton(getI)
             ],
           ),
