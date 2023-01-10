@@ -16,6 +16,6 @@ class SResources {
   static const addNewCardBarTitle = 'Add new card';
   static const nameOfCardTitle = 'Name of card';
   static const addCardNameHint = 'Enter the name';
-  static const addCardCurrencyHint =  'Enter the balance';
+  static const addCardCurrencyHint = 'Enter the balance';
   static const currency = 'Currency';
 }

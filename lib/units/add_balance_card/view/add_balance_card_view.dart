@@ -1,6 +1,7 @@
 import 'package:expensive_tracker_app/constants/string_constants.dart';
 import 'package:expensive_tracker_app/helpers/default_app_bar.dart';
 import 'package:expensive_tracker_app/units/add_balance_card/view/components/text_field_name.dart';
+import 'package:expensive_tracker_app/units/new_balance_card/view/components/select_currency_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
@@ -41,7 +42,13 @@ class AddBalanceCardView extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               const _FieldTitle(SResources.currency),
-              // const SelectCurrencyButton(getI)
+              SelectCurrencyButton(
+                null,
+                height: 50,
+                width: MediaQuery.of(context).size.width * 0.8,
+                boxShape: null,
+                isAddBalance: true,
+              ),
             ],
           ),
         ),

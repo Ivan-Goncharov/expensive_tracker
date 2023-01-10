@@ -23,7 +23,14 @@ class AddCardNameText extends StatelessWidget {
         controller: textController,
         textInputAction: TextInputAction.next,
         style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
-        decoration: InputDecoration.collapsed(hintText: hintTitle),
+        decoration: InputDecoration.collapsed(
+          hintText: hintTitle,
+          hintStyle: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+            color: Colors.grey.shade600,
+          ),
+        ),
         keyboardType: textInputTupe,
         inputFormatters: inputFormatters,
       ),
