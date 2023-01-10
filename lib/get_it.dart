@@ -1,3 +1,4 @@
+import 'package:expensive_tracker_app/units/add_balance_card/cubit/add_new_balance_card_cubit.dart';
 import 'package:expensive_tracker_app/units/balance_cards/data/repositories/balance_cards_repo_impl.dart';
 import 'package:expensive_tracker_app/units/balance_cards/data/repositories/currencies_repo_impl.dart';
 import 'package:expensive_tracker_app/units/balance_cards/data/services/balance_cards_service.dart';
@@ -83,4 +84,5 @@ void setupGetIt() {
   getIt.registerFactory(
       () => BalanceCardCubit(getIt(), getIt(), getIt(), getIt()));
   getIt.registerFactory(() => ScrollBalanceCubit(getIt()));
+  getIt.registerFactory(() => AddNewBalanceCardCubit(getIt()));
 }

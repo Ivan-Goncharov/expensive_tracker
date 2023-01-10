@@ -3,15 +3,15 @@ import 'package:flutter/services.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 class AddCardNameText extends StatelessWidget {
-  final TextEditingController textController;
   final String hintTitle;
   final TextInputType? textInputTupe;
   final List<TextInputFormatter>? inputFormatters;
+  final void Function(String) function;
   const AddCardNameText({
-    required this.textController,
     required this.hintTitle,
     this.textInputTupe,
     this.inputFormatters,
+    required this.function,
     super.key,
   });
 
@@ -20,7 +20,6 @@ class AddCardNameText extends StatelessWidget {
     return ContainerNemorophicEmboss(
       boxShape: null,
       widget: TextFormField(
-        controller: textController,
         textInputAction: TextInputAction.next,
         style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
         decoration: InputDecoration.collapsed(
@@ -33,6 +32,7 @@ class AddCardNameText extends StatelessWidget {
         ),
         keyboardType: textInputTupe,
         inputFormatters: inputFormatters,
+        onChanged: function,
       ),
       height: 50,
       width: MediaQuery.of(context).size.width * 0.8,
