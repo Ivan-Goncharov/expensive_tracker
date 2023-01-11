@@ -26,7 +26,7 @@ class SelectCurrencyButton extends StatelessWidget {
     return GestureDetector(
       onTap: () => Navigator.of(context).pushNamed(searchCurrensiesRoute),
       child: ContainerNemorophicEmboss(
-        widget: _SelectCurrencyTitle(currency),
+        widget: _SelectCurrencyTitle(currency, isAddBalance),
         height: height,
         width: width ?? MediaQuery.of(context).size.width * 0.5,
         boxShape: boxShape,
@@ -38,8 +38,9 @@ class SelectCurrencyButton extends StatelessWidget {
 
 class _SelectCurrencyTitle extends StatelessWidget {
   final CurrencyData? currency;
+  final bool isAddBalanceCard;
 
-  const _SelectCurrencyTitle(this.currency);
+  const _SelectCurrencyTitle(this.currency, this.isAddBalanceCard);
 
   @override
   Widget build(BuildContext context) {
@@ -54,12 +55,14 @@ class _SelectCurrencyTitle extends StatelessWidget {
     } else if (currency!.type == 0) {
       return Text(
         '${currency!.symbol} - ${currency!.name}',
-        textAlign: TextAlign.center,
+        textAlign: isAddBalanceCard ? TextAlign.start : TextAlign.center,
         style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
       );
     } else {
       return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: isAddBalanceCard
+            ? MainAxisAlignment.start
+            : MainAxisAlignment.center,
         children: [
           CryptoLogoIage(currency!.symbol),
           const SizedBox(width: 5),
