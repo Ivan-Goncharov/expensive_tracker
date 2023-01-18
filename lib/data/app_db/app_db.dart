@@ -16,8 +16,8 @@ part 'app_db.g.dart';
 
 late AppDb database;
 
-void initDb() {
-  database = AppDb();
+void initDb([QueryExecutor? e]) {
+  database = AppDb(e);
 }
 
 LazyDatabase _openConnection() {
@@ -31,7 +31,7 @@ LazyDatabase _openConnection() {
 @DriftDatabase(
     tables: [NoteOperation, CategoriesOperationTable, BalanceCards, Currency])
 class AppDb extends _$AppDb {
-  AppDb() : super(_openConnection());
+  AppDb([QueryExecutor? e]) : super(e ?? _openConnection());
 
   @override
   int get schemaVersion => 1;

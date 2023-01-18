@@ -10,7 +10,7 @@ class StartScreenRepoImpl implements StartScreenRepo {
 
   @override
   Future<bool> isFirstStart() {
-    return _service.isFirstStart();
+    return _service.isNotFirstStart();
   }
 
   @override
