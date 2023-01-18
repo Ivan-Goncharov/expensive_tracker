@@ -29,7 +29,7 @@ class CreateBalanceCardRepoImpl implements CreateBalanceCardRepo {
   }
 
   @override
-  Future<void> saveInputAmount(double value) {
+  Future<void> saveCardBalance(double value) {
     return getIt<BalanceCardRepo>().saveNewCard(
       name: _name,
       amount: value,

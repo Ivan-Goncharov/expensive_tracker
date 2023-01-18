@@ -29,3 +29,11 @@ class AddNewBalanceCardLoadedState implements AddNewBalanceCardState {
   @override
   bool? get stringify => true;
 }
+
+class AddNewBalanceCardSucceful implements AddNewBalanceCardState {
+  @override
+  List<Object?> get props => [3];
+
+  @override
+  bool? get stringify => true;
+}

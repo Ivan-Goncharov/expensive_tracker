@@ -29,22 +29,33 @@ class _AddBalanceCardBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const DefaultAppBar(title: SResources.addNewCardBarTitle),
-      backgroundColor: Theme.of(context).colorScheme.background,
-      body: BlocConsumer<AddNewBalanceCardCubit, AddNewBalanceCardState>(
-        listener: (context, state) {
-          if (state is AddNewBalanceCardLoadedState) {}
-        },
-        builder: (context, state) {
-          if (state is AddNewBalanceCardLoadingState) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (state is AddNewBalanceCardLoadedState) {
-            return _AddCardLoadedBody(state);
-          } else {
-            return const SizedBox();
-          }
-        },
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Scaffold(
+        appBar: const DefaultAppBar(title: SResources.addNewCardBarTitle),
+        backgroundColor: Theme.of(context).colorScheme.background,
+        body: BlocConsumer<AddNewBalanceCardCubit, AddNewBalanceCardState>(
+          listener: (context, state) {
+            if (state is AddNewBalanceCardSucceful) {
+              /// TODO: Cделать toast об успешном создании карты
+              Navigator.pop(context);
+            }
+          },
+          listenWhen: (previous, current) =>
+              current is AddNewBalanceCardSucceful,
+          buildWhen: (previous, current) =>
+              current is! AddNewBalanceCardSucceful,
+          builder: (context, state) {
+            if (state is AddNewBalanceCardLoadingState) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (state is AddNewBalanceCardLoadedState) {
+              return _AddCardLoadedBody(state);
+            } else {
+              return const SizedBox();
+            }
+          },
+        ),
       ),
     );
   }
@@ -57,47 +68,43 @@ class _AddCardLoadedBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<AddNewBalanceCardCubit>();
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              const AddCardFieldTitle(SResources.nameOfCardTitle),
-              const SizedBox(height: 8),
-              AddCardNameText(
-                hintTitle: SResources.addCardNameHint,
-                function: cubit.changeInputName,
-              ),
-              const SizedBox(height: 16),
-              const AddCardFieldTitle(SResources.balance),
-              const SizedBox(height: 8),
-              AddCardNameText(
-                function: cubit.changeInputBalance,
-                hintTitle: SResources.addCardCurrencyHint,
-                textInputTupe:
-                    const TextInputType.numberWithOptions(decimal: true),
-                inputFormatters: [
-                  FilteringTextInputFormatter.allow(
-                    RegExp(r'(^\d*\.?\d*)'),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 16),
-              const AddCardFieldTitle(SResources.currency),
-              SelectCurrencyButton(
-                loadedState.currencyData,
-                height: 50,
-                width: MediaQuery.of(context).size.width * 0.8,
-                boxShape: null,
-                isAddBalance: true,
-              ),
-              const SizedBox(height: 40),
-              SaveCardButton(loadedState.isVisibleButton),
-            ],
-          ),
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            const AddCardFieldTitle(SResources.nameOfCardTitle),
+            const SizedBox(height: 8),
+            AddCardNameText(
+              hintTitle: SResources.addCardNameHint,
+              function: cubit.changeInputName,
+            ),
+            const SizedBox(height: 16),
+            const AddCardFieldTitle(SResources.balance),
+            const SizedBox(height: 8),
+            AddCardNameText(
+              function: cubit.changeInputBalance,
+              hintTitle: SResources.addCardCurrencyHint,
+              textInputTupe:
+                  const TextInputType.numberWithOptions(decimal: true),
+              inputFormatters: [
+                FilteringTextInputFormatter.allow(
+                  RegExp(r'(^\d*\.?\d*)'),
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            const AddCardFieldTitle(SResources.currency),
+            SelectCurrencyButton(
+              loadedState.currencyData,
+              height: 50,
+              width: MediaQuery.of(context).size.width * 0.8,
+              boxShape: null,
+              isAddBalance: true,
+            ),
+            const SizedBox(height: 40),
+            SaveCardButton(loadedState.isVisibleButton),
+          ],
         ),
       ),
     );

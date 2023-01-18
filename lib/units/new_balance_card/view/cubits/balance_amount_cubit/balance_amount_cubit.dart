@@ -22,7 +22,7 @@ class BalanceAmountCubit extends Cubit<BalanceAmountState> {
         num = double.parse(_controller.text);
       }
       emit(BalanceAmountLoadingState());
-      await _repo.saveInputAmount(num);
+      await _repo.saveCardBalance(num);
       emit(BalanceAmountCreateFinishState());
     } catch (er, st) {
       debugPrint('$er\n$st');

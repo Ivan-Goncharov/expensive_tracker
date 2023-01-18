@@ -3,14 +3,18 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:expensive_tracker_app/data/app_db/app_db.dart';
 import 'package:expensive_tracker_app/units/add_balance_card/cubit/add_new_balance_card_state.dart';
+import 'package:expensive_tracker_app/units/balance_cards/domain/repositories/balance_cards_repo.dart';
 import 'package:expensive_tracker_app/units/balance_cards/domain/repositories/currencies_repo.dart';
 import 'package:flutter/material.dart';
 
 /// Cubit для создания новой карты баланса.
 class AddNewBalanceCardCubit extends Cubit<AddNewBalanceCardState> {
   final CurrenciesRepo _currRepo;
-  AddNewBalanceCardCubit(this._currRepo)
-      : super(AddNewBalanceCardInitialState());
+  final BalanceCardRepo _balanceRepo;
+  AddNewBalanceCardCubit(
+    this._currRepo,
+    this._balanceRepo,
+  ) : super(AddNewBalanceCardInitialState());
 
   // Название карты.
   var _nameOfCard = '';
@@ -64,7 +68,7 @@ class AddNewBalanceCardCubit extends Cubit<AddNewBalanceCardState> {
     if (data == _currencyData) return;
     _currencyData = data;
     emit(AddNewBalanceCardLoadedState(
-      _isVisibleButton,
+      _isShowButton(),
       currencyData: _currencyData,
     ));
   }
@@ -84,7 +88,14 @@ class AddNewBalanceCardCubit extends Cubit<AddNewBalanceCardState> {
   }
 
   /// Cохранение карты.
-  Future<void> saveCard() async {}
+  Future<void> saveCard() async {
+    await _balanceRepo.saveNewCard(
+      name: _nameOfCard.trim(),
+      amount: _balance,
+      currencyId: _currencyData!.id,
+    );
+    emit(AddNewBalanceCardSucceful());
+  }
 
   bool _isShowButton() =>
       _currencyData != null && _balance != 0.0 && _nameOfCard.trim().isNotEmpty;

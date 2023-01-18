@@ -84,5 +84,5 @@ void setupGetIt() {
   getIt.registerFactory(
       () => BalanceCardCubit(getIt(), getIt(), getIt(), getIt()));
   getIt.registerFactory(() => ScrollBalanceCubit(getIt()));
-  getIt.registerFactory(() => AddNewBalanceCardCubit(getIt()));
+  getIt.registerFactory(() => AddNewBalanceCardCubit(getIt(), getIt()));
 }

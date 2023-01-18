@@ -7,7 +7,7 @@ abstract class CreateBalanceCardRepo {
 
   /// Сохранение ввода баланаса.
   /// [value] - баланс.
-  Future<void> saveInputAmount(double value);
+  Future<void> saveCardBalance(double value);
 
   /// Сохранение выбранной валюты.
   /// [data] - валюта, выбранная в поиске.

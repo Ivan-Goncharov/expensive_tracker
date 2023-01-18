@@ -10,7 +10,7 @@ class CurrenciesRepoImpl implements CurrenciesRepo {
   final BalanceCardsService _service;
   CurrenciesRepoImpl(this._service);
 
-  final _streamController = BehaviorSubject<CurrencyData>();
+  final _streamController = PublishSubject<CurrencyData>();
 
   /// Мапа с полученными валютами из бд
   final _mapOfCurrencies = HashMap<int, CurrencyData>();
