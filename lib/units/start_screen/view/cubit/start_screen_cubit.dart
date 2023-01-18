@@ -8,13 +8,18 @@ import 'package:expensive_tracker_app/units/start_screen/view/cubit/start_screen
 class StartScreenCubit extends Cubit<StartScreenState> {
   final StartScreenRepo startScreenRepo;
   final MonthRepositoty monthRepositoty;
-
-  StartScreenCubit(this.startScreenRepo, this.monthRepositoty)
-      : super(StartScreenInitialState());
+  StartScreenCubit(
+    this.startScreenRepo,
+    this.monthRepositoty,
+  ) : super(StartScreenInitialState());
 
   Future<void> startApp() async {
     emit(StartScreenLoadingState());
     final isNotFirstStart = await startScreenRepo.isFirstStart();
+
+    /// TODO: Посмотреть, что можно паралельно исполнять.
+
+    emit(StartScreenFirstStartState());
     if (!isNotFirstStart) {
       await startScreenRepo.saveStartInfo();
       await startScreenRepo.getAllCategories();

@@ -5,13 +5,14 @@ class ContainerNemorophicEmboss extends StatelessWidget {
   final double height;
   final double width;
   final NeumorphicBoxShape? boxShape;
-  const ContainerNemorophicEmboss({
-    super.key,
-    required this.widget,
-    required this.height,
-    required this.width,
-    this.boxShape = const NeumorphicBoxShape.stadium(),
-  });
+  final Alignment alignment;
+  const ContainerNemorophicEmboss(
+      {super.key,
+      required this.widget,
+      required this.height,
+      required this.width,
+      this.boxShape = const NeumorphicBoxShape.stadium(),
+      this.alignment = Alignment.center});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,7 @@ class ContainerNemorophicEmboss extends StatelessWidget {
       ),
       padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 18),
       child: Container(
-        alignment: Alignment.center,
+        alignment: alignment,
         height: height,
         width: width,
         child: widget,

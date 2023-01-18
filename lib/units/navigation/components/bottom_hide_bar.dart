@@ -38,6 +38,7 @@ class _BottomHideBarBody extends StatelessWidget {
                 : kBottomNavigationBarHeight +
                     MediaQuery.of(context).viewInsets.bottom +
                     30,
+            margin: const EdgeInsets.only(bottom: 16.0),
             child: Wrap(
               children: [widget],
             ),

@@ -1,3 +1,4 @@
+import 'package:expensive_tracker_app/units/new_balance_card/view/cubits/create_name_cubit/cubit/create_card_name_cubit%20copy.dart';
 import 'package:expensive_tracker_app/units/routes/routes.dart';
 import 'package:expensive_tracker_app/constants/string_constants.dart';
 import 'package:expensive_tracker_app/get_it.dart';
@@ -5,8 +6,7 @@ import 'package:expensive_tracker_app/units/new_balance_card/view/components/bal
 import 'package:expensive_tracker_app/units/new_balance_card/view/components/create_card_title.dart';
 import 'package:expensive_tracker_app/units/new_balance_card/view/components/next_button.dart';
 import 'package:expensive_tracker_app/units/new_balance_card/view/components/text_field_card.dart';
-import 'package:expensive_tracker_app/units/new_balance_card/view/cubits/create_name_cubit/create_card_name_cubit.dart';
-import 'package:expensive_tracker_app/units/new_balance_card/view/cubits/create_name_cubit/create_card_name_state.dart';
+import 'package:expensive_tracker_app/units/new_balance_card/view/cubits/create_name_cubit/cubit/create_card_name_state.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

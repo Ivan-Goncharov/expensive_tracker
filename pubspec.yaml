@@ -32,6 +32,7 @@ dependencies:
   flutter_neumorphic: ^3.2.0
   cached_network_image: ^3.2.3
   animated_flip_counter: ^0.2.5
+  sqlite3_flutter_libs: ^0.5.12
   
 
 dev_dependencies:

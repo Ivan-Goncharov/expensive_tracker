@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BalanceAmountCubit extends Cubit<BalanceAmountState> {
   final CreateBalanceCardRepo _repo;
+
   BalanceAmountCubit(this._repo) : super(BalanceAmountInitialState());
 
   late TextEditingController _controller;
@@ -21,7 +22,7 @@ class BalanceAmountCubit extends Cubit<BalanceAmountState> {
         num = double.parse(_controller.text);
       }
       emit(BalanceAmountLoadingState());
-      await _repo.saveInputAmount(num);
+      await _repo.saveCardBalance(num);
       emit(BalanceAmountCreateFinishState());
     } catch (er, st) {
       debugPrint('$er\n$st');

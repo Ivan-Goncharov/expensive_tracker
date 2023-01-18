@@ -140,7 +140,18 @@ class AppDb extends _$AppDb {
         .getSingle();
   }
 
+  /// Получение валюты по id;
+  /// [id] - id валюты.
   Future<CurrencyData> getItemCurrencyData(int id) {
     return (select(currency)..where((tbl) => tbl.id.equals(id))).getSingle();
+  }
+
+  /// Получение всех валют.
+  /// [type] - тип валюты
+  Future<List<CurrencyData>> getSpecificTypeCurrencies(int type) {
+    return (select(currency)
+          ..where((tbl) => tbl.type.equals(type))
+          ..orderBy([(c) => OrderingTerm.asc(c.name)]))
+        .get();
   }
 }

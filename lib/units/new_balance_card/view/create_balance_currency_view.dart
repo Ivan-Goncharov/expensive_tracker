@@ -67,6 +67,11 @@ class _SelectBalanceCardBody extends StatelessWidget {
                 ),
               ),
             );
+          } else if (state is SelectCurrencyLoadingState) {
+            /// TODO: Добавить загрузочный экран.
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
           } else {
             return const SizedBox();
           }

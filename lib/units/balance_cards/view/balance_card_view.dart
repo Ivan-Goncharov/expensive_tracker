@@ -1,8 +1,8 @@
 import 'package:expensive_tracker_app/get_it.dart';
 import 'package:expensive_tracker_app/units/balance_cards/view/components/balance_amount.dart';
 import 'package:expensive_tracker_app/units/balance_cards/view/components/spending_month.dart';
-import 'package:expensive_tracker_app/units/balance_cards/view/cubit/balance_card_cubit.dart';
-import 'package:expensive_tracker_app/units/balance_cards/view/cubit/balance_card_state.dart';
+import 'package:expensive_tracker_app/units/balance_cards/view/cubits/balance_card_cubit/balance_card_cubit.dart';
+import 'package:expensive_tracker_app/units/balance_cards/view/cubits/balance_card_cubit/balance_card_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -27,7 +27,7 @@ class _BalanceCardBody extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.all(15.0),
       padding: const EdgeInsets.all(8.0),
-      width: double.infinity,
+      width: MediaQuery.of(context).size.width * 0.4,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
         color: colors.background,

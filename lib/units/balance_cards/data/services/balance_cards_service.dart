@@ -1,5 +1,3 @@
-import 'dart:collection';
-
 import 'package:expensive_tracker_app/data/app_db/app_db.dart';
 import 'package:expensive_tracker_app/units/balance_cards/data/models/item_balance_card_model.dart';
 import 'package:expensive_tracker_app/units/balance_cards/data/models/month_operation_amount_model.dart';
@@ -12,8 +10,12 @@ abstract class BalanceCardsService {
 
   // Future<void> updateBalanceCardInfo(ItemBalanceCardModel balanceCard);
 
-  Future<HashMap<int, CurrencyData>> getAllUsedCurrency(HashSet<int> ids);
+  /// Получение списка опредленного типа валют.
+  /// [type] - тип валюты: 0 - обычная, 1 - крипта.
+  Future<List<CurrencyData>> getSpecificTypeCurrencies(int type);
 
+  /// Получение одной валюты по id
+  /// [id] - id валюты.
   Future<CurrencyData> getItemCurrencyData(int id);
 
   /// Получение одной карты баланса.
@@ -42,21 +44,10 @@ class BalanceCardServiceImpl implements BalanceCardsService {
   //   /// TODO: Реализовать обновление, если потребуется.
   // }
 
-  @override
-  Future<HashMap<int, CurrencyData>> getAllUsedCurrency(
-      HashSet<int> ids) async {
-    final map = HashMap<int, CurrencyData>();
-    for (final id in ids) {
-      final currency = await database.getItemCurrencyData(id);
-      map[currency.id] = currency;
-    }
-    return map;
-  }
-
-  @override
-  Future<CurrencyData> getItemCurrencyData(int id) {
-    return database.getItemCurrencyData(id);
-  }
+  // @override
+  // Future<CurrencyData> getItemCurrencyData(int id) {
+  //   return database.getItemCurrencyData(id);
+  // }
 
   @override
   Future<MonthOperationAmountModel> getAmountMonthOperationes(
@@ -77,5 +68,15 @@ class BalanceCardServiceImpl implements BalanceCardsService {
   @override
   Future<ItemBalanceCardModel> getItemBalanceCardModel(String id) {
     return database.getItemBalanceCard(id);
+  }
+
+  @override
+  Future<List<CurrencyData>> getSpecificTypeCurrencies(int type) async {
+    return database.getSpecificTypeCurrencies(type);
+  }
+
+  @override
+  Future<CurrencyData> getItemCurrencyData(int id) {
+    return database.getItemCurrencyData(id);
   }
 }

@@ -7,5 +7,12 @@ class NavigationInitial extends NavigationState {}
 class NavigationChangePageState extends NavigationState {
   final int currentPage;
   final ScrollController scrollController;
-  NavigationChangePageState(this.currentPage, this.scrollController);
+  final List<ItemBalanceCardModel> listOfCards;
+  final String selectIdCard;
+  NavigationChangePageState({
+    required this.currentPage,
+    required this.scrollController,
+    required this.listOfCards,
+    required this.selectIdCard,
+  });
 }

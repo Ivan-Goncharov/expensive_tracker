@@ -55,6 +55,7 @@ class _SearchCurrensiesBody extends StatelessWidget {
             if (state is SearchCurrencyChangeState) {
               return _SuccesefulSearchView(state);
             } else if (state is SearchCurrencyEmptyState) {
+              /// TODO: Реализовать пустой список.
               return _EmptySearchView(state);
             } else {
               return const SizedBox();
