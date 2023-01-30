@@ -17,6 +17,7 @@ class SelectCurrencyCubit extends Cubit<SelectCurrencyState> {
   StreamSubscription? _streamSubscription;
 
   Future<void> initial() async {
+    print('DEBUG INITIAL');
     await _currenciesRepo.getSpecificTypeCurrencies();
     _streamSubscription =
         _currenciesRepo.handleCurrencyData.listen(_listenCurrencyData);

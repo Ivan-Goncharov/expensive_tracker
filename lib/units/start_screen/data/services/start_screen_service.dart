@@ -38,13 +38,13 @@ class StartScreenServiceImpl implements StartScreenService {
 
   @override
   Future<void> saveFirstStart() async {
-    await _createIncomeCategories(
-        asset: 'assets/categories_json/categories_income.json',
-        type: OperationType.income);
-    await _createIncomeCategories(
-        asset: 'assets/categories_json/categories_expense.json',
-        type: OperationType.expense);
-    await _saveStartCurrency();
+    // await _createIncomeCategories(
+    //     asset: 'assets/categories_json/categories_income.json',
+    //     type: OperationType.income);
+    // await _createIncomeCategories(
+    //     asset: 'assets/categories_json/categories_expense.json',
+    //     type: OperationType.expense);
+    // await _saveStartCurrency();
     final prefs = await SharedPreferences.getInstance();
     prefs.setBool(isFirstStartConst, true);
   }
