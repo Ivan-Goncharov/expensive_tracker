@@ -28,6 +28,7 @@ LazyDatabase _openConnection() {
     final file = File(path.join(dbFolder.path, 'app.db'));
     // return NativeDatabase(file);
     if (!await file.exists()) {
+      print('DEBUG CREATE TABLE');
       // Extract the pre-populated database file from assets
       final blob = await rootBundle.load('assets/my_db.db');
       final buffer = blob.buffer;
@@ -35,7 +36,9 @@ LazyDatabase _openConnection() {
           buffer.asUint8List(blob.offsetInBytes, blob.lengthInBytes));
     }
 
-    return NativeDatabase.memory();
+    print('DEBUG FILE bytes ${file.readAsBytesSync().length}');
+
+    return NativeDatabase(file);
   });
 }
 
@@ -160,8 +163,7 @@ class AppDb extends _$AppDb {
   /// Получение всех валют.
   /// [type] - тип валюты
   Future<List<CurrencyData>> getSpecificTypeCurrencies(int type) async {
-   
-    print('DEBUG  ${ database.}');
+    print('DEBUG  ${database.allSchemaEntities}');
     return (select(currency)
           ..where((tbl) => tbl.type.equals(type))
           ..orderBy([(c) => OrderingTerm.asc(c.name)]))
