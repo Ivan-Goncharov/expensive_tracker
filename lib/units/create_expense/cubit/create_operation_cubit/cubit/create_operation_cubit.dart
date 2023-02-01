@@ -9,7 +9,7 @@ part 'create_operation_state.dart';
 class CreateOperationCubit extends Cubit<CreateOperationState> {
   CreateOperationCubit() : super(CreateOperationInitial());
   double _amount = 0;
-  String _category = '';
+  int _category = -1;
   DateTime _dateTime = DateTime.now();
   OperationType _type = OperationType.expense;
 
@@ -22,8 +22,8 @@ class CreateOperationCubit extends Cubit<CreateOperationState> {
     _changeState();
   }
 
-  void changeCategory(String newCategory) {
-    _category = newCategory;
+  void changeCategory(int newCategoryID) {
+    _category = newCategoryID;
 
     _changeState();
   }
@@ -34,7 +34,7 @@ class CreateOperationCubit extends Cubit<CreateOperationState> {
 
   void changeType(int typeIndex) {
     emit(CreateOperationNotAllowed());
-    _category = '';
+    _category = -1;
     if (typeIndex == 0) {
       _type = OperationType.expense;
     } else {
@@ -58,7 +58,7 @@ class CreateOperationCubit extends Cubit<CreateOperationState> {
   }
 
   void _changeState() {
-    if (_amount != 0 && _category.isNotEmpty) {
+    if (_amount != 0 && _category != -1) {
       emit(CreateOperationAllowed());
     } else {
       emit(CreateOperationNotAllowed());

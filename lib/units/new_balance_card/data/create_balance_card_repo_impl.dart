@@ -13,7 +13,8 @@ class CreateBalanceCardRepoImpl implements CreateBalanceCardRepo {
   @override
   CurrencyData get currentCurrencyData {
     if (_currentCurrencyData == null) {
-      return getIt<CurrenciesRepo>().listUsualCurrencies.first;
+      _currentCurrencyData = getIt<CurrenciesRepo>().listUsualCurrencies.first;
+      return _currentCurrencyData!;
     } else {
       return _currentCurrencyData!;
     }

@@ -14,7 +14,7 @@ class CreateOperationRepoImpl implements CreateOperationRepository {
 
   @override
   Future<void> saveOperation({
-    required String categoty,
+    required int categoty,
     required double amount,
     required OperationType type,
     required DateTime dateTime,

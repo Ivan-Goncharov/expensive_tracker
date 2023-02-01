@@ -10,7 +10,7 @@ abstract class OperationCategoryState extends Equatable {
 class OperationCategoryInitial extends OperationCategoryState {}
 
 class OperationChangeCategoryState extends OperationCategoryState {
-  final List<OperationCategories> categories;
+  final List<CategoriesOperationTableData> categories;
   final int indexOfSelect;
   const OperationChangeCategoryState(this.categories, this.indexOfSelect);
 

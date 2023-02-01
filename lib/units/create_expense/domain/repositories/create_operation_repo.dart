@@ -3,7 +3,7 @@ import 'package:expensive_tracker_app/units/create_expense/data/model/item_opera
 abstract class CreateOperationRepository {
   Stream<ItemOperationModel> getNewOperation();
   Future<void> saveOperation({
-    required String categoty,
+    required int categoty,
     required double amount,
     required OperationType type,
     required DateTime dateTime,
