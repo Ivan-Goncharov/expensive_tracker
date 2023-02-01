@@ -9,13 +9,13 @@ void main() {
 
   final db = AppDb(NativeDatabase.memory());
 
-  tearDownAll(() async { 
+  tearDownAll(() async {
     db.close();
   });
 
   test('Test add new operation in db', () async {
     final model = ItemOperationModel.create(
-      category: '1',
+      category: 1,
       amount: 230,
       type: OperationType.income,
       dateOperation: DateTime.now(),

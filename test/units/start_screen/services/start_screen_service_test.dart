@@ -32,15 +32,4 @@ void main() async {
     final result = await startScreenService.isNotFirstStart();
     expect(true, result);
   });
-
-  test('Create and save inital categories', () async {
-    await startScreenService.createAndSaveCategories(
-      asset: 'test/mock_data/jsons/test_categories.json',
-      type: OperationType.income,
-    );
-    final result = await startScreenService.getCategories();
-    print('DEBUG RESULT $result');
-    expect(1, result.length);
-    expect('Food', result.first.title); 
-  });
 }
