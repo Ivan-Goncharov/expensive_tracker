@@ -1,5 +1,4 @@
 import 'package:drift/drift.dart';
-import 'package:expensive_tracker_app/units/start_screen/data/model/categories.dart';
 
 import '../../units/create_expense/data/model/item_operation_model.dart';
 

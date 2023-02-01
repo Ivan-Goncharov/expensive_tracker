@@ -1,13 +1,13 @@
+import 'package:expensive_tracker_app/data/app_db/app_db.dart';
 import 'package:expensive_tracker_app/get_it.dart';
 import 'package:expensive_tracker_app/units/create_expense/components/item_category/view/item_category.dart';
 import 'package:expensive_tracker_app/units/create_expense/components/operation_category/cubit/operation_category_cubit.dart';
-import 'package:expensive_tracker_app/units/start_screen/data/model/categories.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OperationCategoryWidget extends StatelessWidget {
-  final List<OperationCategories> listCategories;
+  final List<CategoriesOperationTableData> listCategories;
   const OperationCategoryWidget(
     this.listCategories, {
     super.key,

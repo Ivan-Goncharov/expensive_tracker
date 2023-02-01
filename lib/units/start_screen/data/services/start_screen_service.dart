@@ -1,12 +1,7 @@
-import 'dart:convert';
-
 import 'package:drift/drift.dart';
 import 'package:expensive_tracker_app/constants/shared_pref_constants.dart';
 import 'package:expensive_tracker_app/data/app_db/app_db.dart';
-import 'package:expensive_tracker_app/units/create_expense/data/model/item_operation_model.dart';
-import 'package:expensive_tracker_app/units/start_screen/data/model/categories.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class StartScreenService {
@@ -14,7 +9,7 @@ abstract class StartScreenService {
 
   Future<void> saveFirstStart();
 
-  Future<List<OperationCategories>> getCategories();
+  Future<List<CategoriesOperationTableData>> getCategories();
 
   Future<List<DateTime>> getMonthList();
 }
@@ -38,58 +33,12 @@ class StartScreenServiceImpl implements StartScreenService {
 
   @override
   Future<void> saveFirstStart() async {
-    // await _createIncomeCategories(
-    //     asset: 'assets/categories_json/categories_income.json',
-    //     type: OperationType.income);
-    // await _createIncomeCategories(
-    //     asset: 'assets/categories_json/categories_expense.json',
-    //     type: OperationType.expense);
-    // await _saveStartCurrency();
     final prefs = await SharedPreferences.getInstance();
     prefs.setBool(isFirstStartConst, true);
   }
 
-  Future<void> _saveStartCurrency() async {
-    var data = await rootBundle.loadString('assets/currencies/currensies.json');
-    final map = Map<String, dynamic>.from(jsonDecode(data));
-
-    map.forEach((key, value) async {
-      await database.into(database.currency).insert(CurrencyCompanion.insert(
-            name: value['name'],
-            code: value['code'],
-            symbol: value['symbol'],
-            type: 0,
-          ));
-    });
-
-    data =
-        await rootBundle.loadString('assets/currencies/crypto_currensies.json');
-    for (final i in jsonDecode(data)) {
-      await database.into(database.currency).insert(
-            CurrencyCompanion.insert(
-                name: i['name'], code: i['code'], symbol: i['symbol'], type: 1),
-          );
-    }
-  }
-
-  Future<void> _createIncomeCategories({
-    required String asset,
-    required OperationType type,
-  }) async {
-    final data = await rootBundle.loadString(asset);
-    final list = jsonDecode(data)['categories'] as List<dynamic>;
-    for (final i in list) {
-      final caategory = OperationCategories.create(
-        title: i['title']!,
-        code: i['code']!,
-        type: type,
-      );
-      await database.addNewCategory(caategory.toInsertable());
-    }
-  }
-
   @override
-  Future<List<OperationCategories>> getCategories() {
+  Future<List<CategoriesOperationTableData>> getCategories() {
     return database.getAllCategories();
   }
 

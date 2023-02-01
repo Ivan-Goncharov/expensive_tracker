@@ -8,7 +8,6 @@ import 'package:expensive_tracker_app/data/entity/currency.dart';
 import 'package:expensive_tracker_app/data/entity/note_operation.dart';
 import 'package:expensive_tracker_app/units/balance_cards/data/models/item_balance_card_model.dart';
 import 'package:expensive_tracker_app/units/create_expense/data/model/item_operation_model.dart';
-import 'package:expensive_tracker_app/units/start_screen/data/model/categories.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as path;
@@ -28,16 +27,12 @@ LazyDatabase _openConnection() {
     final file = File(path.join(dbFolder.path, 'app.db'));
     // return NativeDatabase(file);
     if (!await file.exists()) {
-      print('DEBUG CREATE TABLE');
       // Extract the pre-populated database file from assets
       final blob = await rootBundle.load('assets/my_db.db');
       final buffer = blob.buffer;
       await file.writeAsBytes(
           buffer.asUint8List(blob.offsetInBytes, blob.lengthInBytes));
     }
-
-    print('DEBUG FILE bytes ${file.readAsBytesSync().length}');
-
     return NativeDatabase(file);
   });
 }
@@ -96,22 +91,23 @@ class AppDb extends _$AppDb {
   }
 
   /// Получение списка всех записей.
-  Future<List<OperationCategories>> getCategories() {
+  Future<List<CategoriesOperationTableData>> getCategories() {
     return select(categoriesOperationTable).get();
   }
 
   /// Сохранение  категории
-  Future<int> addNewCategory(Insertable<OperationCategories> category) {
+  Future<int> addNewCategory(
+      Insertable<CategoriesOperationTableData> category) {
     return into(categoriesOperationTable).insert(category);
   }
 
   /// Получение всех категорий
-  Future<List<OperationCategories>> getAllCategories() {
+  Future<List<CategoriesOperationTableData>> getAllCategories() {
     return select(categoriesOperationTable).get();
   }
 
   /// Удаление категории
-  Future<int> deleteCategories(String id) {
+  Future<int> deleteCategories(int id) {
     return (delete(categoriesOperationTable)..where((tbl) => tbl.id.equals(id)))
         .go();
   }
@@ -163,7 +159,6 @@ class AppDb extends _$AppDb {
   /// Получение всех валют.
   /// [type] - тип валюты
   Future<List<CurrencyData>> getSpecificTypeCurrencies(int type) async {
-    print('DEBUG  ${database.allSchemaEntities}');
     return (select(currency)
           ..where((tbl) => tbl.type.equals(type))
           ..orderBy([(c) => OrderingTerm.asc(c.name)]))
