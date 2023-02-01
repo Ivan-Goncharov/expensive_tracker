@@ -1,6 +1,6 @@
+import 'package:expensive_tracker_app/data/app_db/app_db.dart';
 import 'package:expensive_tracker_app/units/create_expense/components/operation_category/view/operation_category.dart';
 import 'package:expensive_tracker_app/units/create_expense/cubit/change_categories_cubit/change_categories_cubit.dart';
-import 'package:expensive_tracker_app/units/start_screen/data/model/categories.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -28,7 +28,7 @@ class ChangeOperationData extends StatelessWidget {
     );
   }
 
-  List<OperationCategories> getList(ChangeCategoriesState state) {
+  List<CategoriesOperationTableData> getList(ChangeCategoriesState state) {
     if (state is CreateExpenseState) {
       return state.expenseCategory;
     } else if (state is CreateIncomeState) {

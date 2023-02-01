@@ -10,12 +10,17 @@ class OperationesStatsView extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Theme.of(context).colorScheme.background,
         body: Center(
-          child: TextButton(
-            child: const Text(
-              'Create new card',
-            ),
-            onPressed: () =>
-                Navigator.pushNamed(context, addNewBalanceCardRoute),
+          child: Column(
+            children: [
+              TextButton(
+                child: const Text(
+                  'Create new card',
+                ),
+                onPressed: () =>
+                    Navigator.pushNamed(context, addNewBalanceCardRoute),
+              ),
+              const SizedBox(height: 10),
+            ],
           ),
         ),
       ),

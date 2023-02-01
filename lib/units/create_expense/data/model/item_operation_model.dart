@@ -8,7 +8,7 @@ class ItemOperationModel with _$ItemOperationModel {
   const ItemOperationModel._();
   factory ItemOperationModel({
     required String id,
-    required String category,
+    required int category,
     required double amount,
     required OperationType type,
     required DateTime dateOperation,
@@ -17,7 +17,7 @@ class ItemOperationModel with _$ItemOperationModel {
 
   /// Создание операции
   factory ItemOperationModel.create({
-    required String category,
+    required int category,
     required double amount,
     required OperationType type,
     required DateTime dateOperation,
@@ -34,7 +34,7 @@ class ItemOperationModel with _$ItemOperationModel {
 
   /// Изменение операции
   ItemOperationModel edit({
-    String? category,
+    int? category,
     double? amount,
     OperationType? type,
     DateTime? dateOperation,

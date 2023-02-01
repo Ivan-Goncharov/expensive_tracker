@@ -1,11 +1,11 @@
 import 'package:bloc/bloc.dart';
+import 'package:expensive_tracker_app/data/app_db/app_db.dart';
 import 'package:expensive_tracker_app/units/create_expense/data/model/item_operation_model.dart';
 import 'package:expensive_tracker_app/units/create_expense/domain/repositories/create_operation_repo.dart';
 
 import 'package:expensive_tracker_app/units/last_operationes/cubit/last_operationes_state.dart';
 import 'package:expensive_tracker_app/units/last_operationes/domain/repositories/last_operationes_repo.dart';
 import 'package:expensive_tracker_app/units/last_operationes/domain/repositories/month_repository.dart';
-import 'package:expensive_tracker_app/units/start_screen/data/model/categories.dart';
 import 'package:flutter/material.dart';
 
 class LastOperationesCubit extends Cubit<LastOperationState> {
@@ -51,7 +51,7 @@ class LastOperationesCubit extends Cubit<LastOperationState> {
     }
   }
 
-  OperationCategories getCategoriesById(String id) {
+  CategoriesOperationTableData getCategoriesById(int id) {
     return lastOperationRepo.getCategoryById(id);
   }
 }

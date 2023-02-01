@@ -22,5 +22,4 @@ abstract class BalanceCardRepo {
   Future<void> getNewBalanceCardAmount(String id);
 
   List<ItemBalanceCardModel> get listOfCards;
- 
 }

@@ -1,20 +1,20 @@
+import 'package:expensive_tracker_app/data/app_db/app_db.dart';
 import 'package:expensive_tracker_app/get_it.dart';
 import 'package:expensive_tracker_app/units/create_expense/data/model/item_operation_model.dart';
 import 'package:expensive_tracker_app/units/last_operationes/data/services/last_operationes_services.dart';
 import 'package:expensive_tracker_app/units/last_operationes/domain/repositories/last_operationes_repo.dart';
 import 'package:expensive_tracker_app/units/last_operationes/domain/repositories/month_repository.dart';
-import 'package:expensive_tracker_app/units/start_screen/data/model/categories.dart';
 
 class LastOperationesRepoImpl implements LastOperationesRepo {
   final LastOperationesSevices lastOperService;
   LastOperationesRepoImpl(this.lastOperService);
 
-  List<OperationCategories> _categories = [];
+  List<CategoriesOperationTableData> _categories = [];
 
   List<ItemOperationModel> _operationes = [];
 
   @override
-  List<OperationCategories> get categories => _categories;
+  List<CategoriesOperationTableData> get categories => _categories;
 
   @override
   List<ItemOperationModel> get operationes => _operationes;
@@ -26,10 +26,10 @@ class LastOperationesRepoImpl implements LastOperationesRepo {
   }
 
   @override
-  set categories(List<OperationCategories> val) => _categories = val;
+  set categories(List<CategoriesOperationTableData> val) => _categories = val;
 
   @override
-  List<OperationCategories> getTypeCategories(OperationType type) {
+  List<CategoriesOperationTableData> getTypeCategories(OperationType type) {
     return _categories.where((element) => element.type == type).toList();
   }
 
@@ -52,7 +52,7 @@ class LastOperationesRepoImpl implements LastOperationesRepo {
   }
 
   @override
-  OperationCategories getCategoryById(String id) {
+  CategoriesOperationTableData getCategoryById(int id) {
     return _categories.firstWhere((element) => element.id == id);
   }
 }
