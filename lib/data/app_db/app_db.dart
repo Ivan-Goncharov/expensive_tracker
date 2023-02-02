@@ -20,14 +20,21 @@ void initDb([QueryExecutor? e]) {
   database = AppDb(e);
 }
 
+Future<void> deleteBdFromDisk() async {
+  final dbPath = await _getDataBasePath();
+  final file = File(dbPath);
+  if (file.existsSync()) {
+    await database.close();
+    file.deleteSync();
+  }
+}
+
 LazyDatabase _openConnection() {
   return LazyDatabase(() async {
-    final dbFolder = await getApplicationDocumentsDirectory();
-    // final file = File(path.join(dbFolder.path, 'note_operation.sqlite'));
-    final file = File(path.join(dbFolder.path, 'app.db'));
-    // return NativeDatabase(file);
+    final dbPath = await _getDataBasePath();
+    final file = File(dbPath)..createSync(recursive: true);
+
     if (!await file.exists()) {
-      // Extract the pre-populated database file from assets
       final blob = await rootBundle.load('assets/my_db.db');
       final buffer = blob.buffer;
       await file.writeAsBytes(
@@ -35,6 +42,11 @@ LazyDatabase _openConnection() {
     }
     return NativeDatabase(file);
   });
+}
+
+Future<String> _getDataBasePath() async {
+  final documents = await getApplicationDocumentsDirectory();
+  return path.join(documents.path, 'app.db');
 }
 
 @DriftDatabase(
