@@ -48,4 +48,4 @@ lib/**/*.g.dart
 lib/**/*.freezed.dart
 
 # Test coverage
-coverage/
+/coverage/
