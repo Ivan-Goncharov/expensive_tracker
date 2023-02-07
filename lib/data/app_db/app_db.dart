@@ -16,8 +16,9 @@ part 'app_db.g.dart';
 
 late AppDb database;
 
-void initDb([QueryExecutor? e]) {
-  database = AppDb(e);
+void initDb() {
+  print('DEBUG INIT DB');
+  database = AppDb();
 }
 
 Future<void> deleteBdFromDisk() async {
@@ -31,15 +32,16 @@ Future<void> deleteBdFromDisk() async {
 
 LazyDatabase _openConnection() {
   return LazyDatabase(() async {
+    print('DEBUG CREATE BD');
     final dbPath = await _getDataBasePath();
     final file = File(dbPath)..createSync(recursive: true);
 
-    if (!await file.exists()) {
-      final blob = await rootBundle.load('assets/my_db.db');
-      final buffer = blob.buffer;
-      await file.writeAsBytes(
-          buffer.asUint8List(blob.offsetInBytes, blob.lengthInBytes));
-    }
+    final blob = await rootBundle.load('assets/my_db.db');
+    print('DEBUG CREATE BLOB $blob');
+    final buffer = blob.buffer;
+    await file.writeAsBytes(
+        buffer.asUint8List(blob.offsetInBytes, blob.lengthInBytes));
+
     return NativeDatabase(file);
   });
 }
@@ -52,7 +54,7 @@ Future<String> _getDataBasePath() async {
 @DriftDatabase(
     tables: [NoteOperation, CategoriesOperationTable, BalanceCards, Currency])
 class AppDb extends _$AppDb {
-  AppDb([QueryExecutor? e]) : super(e ?? _openConnection());
+  AppDb() : super(_openConnection());
 
   @override
   int get schemaVersion => 1;
@@ -93,35 +95,22 @@ class AppDb extends _$AppDb {
   }
 
   /// Обновление одной записи в бд.
-  Future<bool> updateNoteData(Insertable<ItemOperationModel> operation) {
-    return update(noteOperation).replace(operation);
+  Future<void> updateNoteData(
+      String id, Insertable<ItemOperationModel> operation) async {
+    await (delete(noteOperation)..where((tbl) => tbl.id.equals(id))).go();
+    await into(noteOperation).insert(operation);
   }
 
   /// Сохранение одной записи в БД.
-  Future<int> addNewOperationData(Insertable<ItemOperationModel> operation) {
+  Future<int> addNewOperationData(
+      Insertable<ItemOperationModel> operation) async {
+    print('DEBUG  ${await select(currency).get()}');
     return into(noteOperation).insert(operation);
-  }
-
-  /// Получение списка всех записей.
-  Future<List<CategoriesOperationTableData>> getCategories() {
-    return select(categoriesOperationTable).get();
-  }
-
-  /// Сохранение  категории
-  Future<int> addNewCategory(
-      Insertable<CategoriesOperationTableData> category) {
-    return into(categoriesOperationTable).insert(category);
   }
 
   /// Получение всех категорий
   Future<List<CategoriesOperationTableData>> getAllCategories() {
     return select(categoriesOperationTable).get();
-  }
-
-  /// Удаление категории
-  Future<int> deleteCategories(int id) {
-    return (delete(categoriesOperationTable)..where((tbl) => tbl.id.equals(id)))
-        .go();
   }
 
   /// Запись одного id карты баланса
@@ -177,15 +166,26 @@ class AppDb extends _$AppDb {
         .get();
   }
 
-  Future<void> exportInto(File file) async {
-    // Make sure the directory of the target file exists
-    await file.parent.create(recursive: true);
+  // Future<void> exportInto(File file) async {
+  //   // Make sure the directory of the target file exists
+  //   await file.parent.create(recursive: true);
 
-    // Override an existing backup, sqlite expects the target file to be empty
-    if (file.existsSync()) {
-      file.deleteSync();
-    }
+  //   // Override an existing backup, sqlite expects the target file to be empty
+  //   if (file.existsSync()) {
+  //     file.deleteSync();
+  //   }
 
-    await customStatement('VACUUM INTO ?', [file.path]);
-  }
+  //   await customStatement('VACUUM INTO ?', [file.path]);
+  // }
+
+  /// Удаление категории
+  // Future<int> deleteCategories(int id) {
+  //   return (delete(categoriesOperationTable)..where((tbl) => tbl.id.equals(id)))
+  //       .go();
+  // }
+  /// Сохранение  категории
+  // Future<int> addNewCategory(
+  //     Insertable<CategoriesOperationTableData> category) {
+  //   return into(categoriesOperationTable).insert(category);
+  // }
 }
