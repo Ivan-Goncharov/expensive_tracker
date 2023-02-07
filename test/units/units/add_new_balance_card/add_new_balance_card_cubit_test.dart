@@ -1,0 +1,26 @@
+// ignore_for_file: unused_result
+
+import 'package:bloc_test/bloc_test.dart';
+import 'package:equatable/equatable.dart';
+import 'package:expensive_tracker_app/get_it.dart';
+import 'package:expensive_tracker_app/units/add_balance_card/cubit/add_new_balance_card_cubit.dart';
+import 'package:expensive_tracker_app/units/add_balance_card/cubit/add_new_balance_card_state.dart';
+import 'package:flutter_test/flutter_test.dart';
+
+import '../../../init_global.dart';
+
+void main() {
+  setupTests();
+
+  setUp(() => EquatableConfig.stringify = true);
+
+  blocTest<AddNewBalanceCardCubit, AddNewBalanceCardState>(
+    'Add new balance card cubit initial',
+    build: () => getIt<AddNewBalanceCardCubit>(),
+    act: (cubit) => cubit.initial(),
+    expect: () => [ 
+      AddNewBalanceCardLoadingState(),
+      AddNewBalanceCardLoadedState(false),
+    ],
+  );
+}
