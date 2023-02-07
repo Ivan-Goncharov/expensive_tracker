@@ -1,6 +1,6 @@
 import 'package:expensive_tracker_app/units/create_expense/data/model/item_operation_model.dart';
 
-final dateFirst = DateTime(
+final mockDateFirst = DateTime(
   DateTime.now().year,
   DateTime.now().month,
   DateTime.now().day,
@@ -17,20 +17,27 @@ final dateSecond = DateTime(
   DateTime.now().second,
 );
 
-final mockQuantityCategories = 20;
-
-final operationModelFirst = ItemOperationModel.create(
+final mockOperationModelFirst = ItemOperationModel.create(
   category: 1,
   amount: 230,
   type: OperationType.income,
-  dateOperation: dateFirst,
+  dateOperation: mockDateFirst,
   cardId: '12345678',
 );
 
-final operationModelSecond = ItemOperationModel.create(
+final mockOperationModelSecond = ItemOperationModel.create(
   category: 0,
   amount: 200,
   type: OperationType.expense,
   dateOperation: dateSecond,
   cardId: '12345679',
 );
+
+ItemOperationModel getMockOperationModelThird(String cardId) =>
+    ItemOperationModel.create(
+      category: 4,
+      amount: 250,
+      type: OperationType.expense,
+      dateOperation: dateSecond,
+      cardId: cardId,
+    );
