@@ -16,8 +16,7 @@ part 'app_db.g.dart';
 
 late AppDb database;
 
-void initDb() {
-  print('DEBUG INIT DB');
+void initDb() { 
   database = AppDb();
 }
 

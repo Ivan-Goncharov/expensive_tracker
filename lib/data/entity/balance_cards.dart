@@ -1,6 +1,7 @@
 import 'package:drift/drift.dart';
 import 'package:expensive_tracker_app/units/balance_cards/data/models/item_balance_card_model.dart';
 
+// coverage:ignore-file
 @UseRowClass(ItemBalanceCardModel, generateInsertable: true)
 class BalanceCards extends Table {
   TextColumn get id => text()();

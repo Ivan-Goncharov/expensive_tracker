@@ -31,7 +31,7 @@ class AddNewBalanceCardCubit extends Cubit<AddNewBalanceCardState> {
     emit(AddNewBalanceCardLoadingState());
     await _currRepo.getSpecificTypeCurrencies();
     _streamSubscription =
-        _currRepo.handleCurrencyData.listen(_listenerCurrencies);
+        _currRepo.handleCurrencyData.listen(listenerCurrencies);
     emit(AddNewBalanceCardLoadedState(
       _isVisibleButton,
       currencyData: null,
@@ -64,7 +64,7 @@ class AddNewBalanceCardCubit extends Cubit<AddNewBalanceCardState> {
 
   /// Слушатель валют.
   /// Кидаем event об изменении.
-  void _listenerCurrencies(CurrencyData data) {
+  void listenerCurrencies(CurrencyData data) {
     if (data == _currencyData) return;
     _currencyData = data;
     emit(AddNewBalanceCardLoadedState(
@@ -95,7 +95,7 @@ class AddNewBalanceCardCubit extends Cubit<AddNewBalanceCardState> {
       currencyId: _currencyData!.id,
     );
     emit(AddNewBalanceCardSucceful());
-  }
+  } 
 
   bool _isShowButton() =>
       _currencyData != null && _balance != 0.0 && _nameOfCard.trim().isNotEmpty;
