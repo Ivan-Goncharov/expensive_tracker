@@ -38,12 +38,6 @@ class BalanceCardServiceImpl implements BalanceCardsService {
   Future<void> saveNewCard(ItemBalanceCardModel balanceCard) async {
     await database.addNewBalanceCard(balanceCard.toInsertable());
   }
- 
-
-  // @override
-  // Future<CurrencyData> getItemCurrencyData(int id) {
-  //   return database.getItemCurrencyData(id);
-  // }
 
   @override
   Future<MonthOperationAmountModel> getAmountMonthOperationes(

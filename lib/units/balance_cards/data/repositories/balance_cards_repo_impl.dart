@@ -62,7 +62,7 @@ class BalanceCardsRepoImpl implements BalanceCardRepo {
         currentData.year != operationModel.dateOperation.year) {
       return false;
     }
-    if (currentBalanceCard.id == operationModel.cardId) {
+    if (_currentSelectCard.id == operationModel.cardId) {
       if (operationModel.type == OperationType.expense) {
         _operationAmountModel = _operationAmountModel.copyWith(
             newExpense: _operationAmountModel.expense + operationModel.amount);
@@ -85,5 +85,10 @@ class BalanceCardsRepoImpl implements BalanceCardRepo {
     // Обновлеем элемент в списке.
     _listOfCards.removeWhere((card) => card.id == id);
     _listOfCards.add(card);
+  }
+
+  @override
+  void clearData() {
+    _listOfCards.clear();
   }
 }

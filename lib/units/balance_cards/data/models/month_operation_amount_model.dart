@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-
+// coverage:ignore-file
 class MonthOperationAmountModel implements Equatable {
   final double income;
   final double expense;

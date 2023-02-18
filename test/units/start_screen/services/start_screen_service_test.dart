@@ -1,6 +1,4 @@
-import 'package:drift/native.dart';
 import 'package:expensive_tracker_app/constants/shared_pref_constants.dart';
-import 'package:expensive_tracker_app/data/app_db/app_db.dart';
 import 'package:expensive_tracker_app/get_it.dart';
 import 'package:expensive_tracker_app/units/start_screen/data/services/start_screen_service.dart';
 import 'package:flutter_test/flutter_test.dart';
