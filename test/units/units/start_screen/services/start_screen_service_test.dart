@@ -4,7 +4,7 @@ import 'package:expensive_tracker_app/units/start_screen/data/services/start_scr
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../init_global.dart';
+import '../../../../init_global.dart'; 
 
 void main() async {
   setupTests(); 

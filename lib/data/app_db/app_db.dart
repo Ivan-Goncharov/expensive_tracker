@@ -16,27 +16,28 @@ part 'app_db.g.dart';
 
 late AppDb database;
 
-void initDb() { 
+void initDb() {
   database = AppDb();
 }
 
 Future<void> deleteBdFromDisk() async {
   final dbPath = await _getDataBasePath();
+
   final file = File(dbPath);
   if (file.existsSync()) {
     await database.close();
     file.deleteSync();
-  }
+  } 
 }
 
 LazyDatabase _openConnection() {
-  return LazyDatabase(() async { 
+  return LazyDatabase(() async {
     final dbPath = await _getDataBasePath();
-    final file = File(dbPath)..createSync(recursive: true); 
-    final blob = await rootBundle.load('assets/my_db.db'); 
+    final file = File(dbPath)..createSync(recursive: true);
+    final blob = await rootBundle.load('assets/my_db.db');
     final buffer = blob.buffer;
     await file.writeAsBytes(
-        buffer.asUint8List(blob.offsetInBytes, blob.lengthInBytes)); 
+        buffer.asUint8List(blob.offsetInBytes, blob.lengthInBytes));
     return NativeDatabase(file);
   });
 }
@@ -98,7 +99,7 @@ class AppDb extends _$AppDb {
 
   /// Сохранение одной записи в БД.
   Future<int> addNewOperationData(
-      Insertable<ItemOperationModel> operation) async { 
+      Insertable<ItemOperationModel> operation) async {
     return into(noteOperation).insert(operation);
   }
 
