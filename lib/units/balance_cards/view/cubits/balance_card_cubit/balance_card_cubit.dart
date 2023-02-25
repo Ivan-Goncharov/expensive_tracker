@@ -6,6 +6,7 @@ import 'package:expensive_tracker_app/units/balance_cards/view/cubits/balance_ca
 import 'package:expensive_tracker_app/units/create_expense/data/model/item_operation_model.dart';
 import 'package:expensive_tracker_app/units/create_expense/domain/repositories/create_operation_repo.dart';
 import 'package:expensive_tracker_app/units/last_operationes/domain/repositories/month_repository.dart';
+import 'package:flutter/material.dart';
 
 class BalanceCardCubit extends Cubit<BalanceCardState> {
   final BalanceCardRepo _balanceRepo;
@@ -22,20 +23,25 @@ class BalanceCardCubit extends Cubit<BalanceCardState> {
   late CurrencyData _currencyData;
 
   Future<void> initial() async {
-    final balanceCard = _balanceRepo.currentBalanceCard;
-    _createOpRepo.getNewOperation().listen(_listenerCreateData);
-    _monthRepositoty.getMonth().listen(_listenerMonth);
-    _currencyData =
-        await _currenciesRepo.getCurrencyById(balanceCard.currencyId);
-    await _balanceRepo.getOperationesMonthSumm(
-      DateTime(DateTime.now().year, DateTime.now().month),
-    );
+    try {
+      final balanceCard = _balanceRepo.currentBalanceCard;
+      _createOpRepo.getNewOperation().listen(_listenerCreateData);
+      _monthRepositoty.getMonth().listen(_listenerMonth);
+      _currencyData =
+          await _currenciesRepo.getCurrencyById(balanceCard.currencyId);
+      await _balanceRepo.getOperationesMonthSumm(
+        DateTime(DateTime.now().year, DateTime.now().month),
+      );
 
-    emit(BalanceCardLoadedState(
-      currencyData: _currencyData,
-      balanceCardModel: balanceCard,
-      monthOperationAmount: _balanceRepo.operationAmountModel,
-    ));
+      emit(BalanceCardLoadedState(
+        currencyData: _currencyData,
+        balanceCardModel: balanceCard,
+        monthOperationAmount: _balanceRepo.operationAmountModel,
+      ));
+    } catch (er, st) {
+      debugPrint('$er\n$st');
+      emit(BalanceCardErrorState());
+    }
   }
 
   Future<void> _listenerMonth(int event) async {

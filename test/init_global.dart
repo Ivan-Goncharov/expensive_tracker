@@ -8,7 +8,6 @@ import 'package:path_provider/path_provider.dart';
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart'
     show PathProviderPlatform;
 import 'package:uuid/uuid.dart';
-import 'package:path/path.dart' as path;
 
 const rootPath = 'test';
 
@@ -24,16 +23,9 @@ void setupTests() {
   tearDownAll(() async {
     await deleteBdFromDisk();
     final aplicationPath = await getApplicationDocumentsDirectory();
-    // final dir = Directory(aplicationPath.path);
     final dir = Directory(aplicationPath.path.replaceAll('/documents', ''));
-    print(dir);
-    if (dir.existsSync()) {
-      print('DEBUG exist');
-      await dir.delete(recursive: false);
-
-      print('DEBUG after exist ${dir.existsSync()}');
- 
-    }
+    if (aplicationPath.existsSync()) aplicationPath.deleteSync();
+    if (dir.existsSync()) await dir.delete(recursive: false);
   });
 }
 
