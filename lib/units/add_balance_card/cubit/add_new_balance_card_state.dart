@@ -1,9 +1,10 @@
 import 'package:equatable/equatable.dart';
 import 'package:expensive_tracker_app/data/app_db/app_db.dart';
 
-abstract class AddNewBalanceCardState implements Equatable {}
+abstract class AddNewBalanceCardState extends Equatable {}
 
-class AddNewBalanceCardInitialState implements AddNewBalanceCardState {
+class AddNewBalanceCardInitialState extends Equatable
+    implements AddNewBalanceCardState {
   @override
   List<Object?> get props => [1];
 
@@ -11,7 +12,7 @@ class AddNewBalanceCardInitialState implements AddNewBalanceCardState {
   bool? get stringify => true;
 }
 
-class AddNewBalanceCardLoadingState implements AddNewBalanceCardState {
+class AddNewBalanceCardLoadingState extends AddNewBalanceCardState {
   @override
   List<Object?> get props => [2];
 
@@ -19,7 +20,7 @@ class AddNewBalanceCardLoadingState implements AddNewBalanceCardState {
   bool? get stringify => true;
 }
 
-class AddNewBalanceCardLoadedState implements AddNewBalanceCardState {
+class AddNewBalanceCardLoadedState extends AddNewBalanceCardState {
   final CurrencyData? currencyData;
   final bool isVisibleButton;
   AddNewBalanceCardLoadedState(this.isVisibleButton, {this.currencyData});
@@ -30,7 +31,7 @@ class AddNewBalanceCardLoadedState implements AddNewBalanceCardState {
   bool? get stringify => true;
 }
 
-class AddNewBalanceCardSucceful implements AddNewBalanceCardState {
+class AddNewBalanceCardSucceful extends AddNewBalanceCardState {
   @override
   List<Object?> get props => [3];
 

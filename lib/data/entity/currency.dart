@@ -1,5 +1,6 @@
 import 'package:drift/drift.dart';
 
+// coverage:ignore-file
 class Currency extends Table {
   IntColumn get id => integer().autoIncrement()();
   TextColumn get name => text()();

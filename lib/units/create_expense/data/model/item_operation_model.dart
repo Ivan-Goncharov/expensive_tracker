@@ -22,15 +22,18 @@ class ItemOperationModel with _$ItemOperationModel {
     required OperationType type,
     required DateTime dateOperation,
     required String cardId,
-  }) =>
-      ItemOperationModel(
-        id: const Uuid().v4(),
-        category: category,
-        amount: amount,
-        type: type,
-        dateOperation: dateOperation,
-        cardId: cardId,
-      );
+  }) {
+    print(dateOperation);
+
+    return ItemOperationModel(
+      id: const Uuid().v4(),
+      category: category,
+      amount: amount,
+      type: type,
+      dateOperation: dateOperation,
+      cardId: cardId,
+    );
+  }
 
   /// Изменение операции
   ItemOperationModel edit({

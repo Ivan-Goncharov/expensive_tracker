@@ -2,7 +2,7 @@ import 'package:drift/drift.dart';
 
 import '../../units/create_expense/data/model/item_operation_model.dart';
 
-// @UseRowClass(OperationCategories, generateInsertable: true)
+// coverage:ignore-file
 class CategoriesOperationTable extends Table {
   IntColumn get id => integer().autoIncrement()();
   TextColumn get title => text()();

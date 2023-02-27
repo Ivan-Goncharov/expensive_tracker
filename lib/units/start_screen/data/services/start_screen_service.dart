@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class StartScreenService {
-  Future<bool> isFirstStart();
+  /// Заходим ли мы впервые в приложение или нет.
+  /// [true] - если уже заходили.
+  Future<bool> isNotFirstStart();
 
   Future<void> saveFirstStart();
 
@@ -16,7 +18,7 @@ abstract class StartScreenService {
 
 class StartScreenServiceImpl implements StartScreenService {
   @override
-  Future<bool> isFirstStart() async {
+  Future<bool> isNotFirstStart() async {
     final prefs = await SharedPreferences.getInstance();
     try {
       final isFirstStart = prefs.getBool(isFirstStartConst);

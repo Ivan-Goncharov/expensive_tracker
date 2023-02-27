@@ -42,9 +42,9 @@ class CurrenciesRepoImpl implements CurrenciesRepo {
   }
 
   @override
-  Future<void> getSpecificTypeCurrencies() async {
+  Future<void> getSpecificTypeCurrencies() async { 
     _listUsualCurrencies = await _service.getSpecificTypeCurrencies(0);
-    _listCryptoCurrencies = await _service.getSpecificTypeCurrencies(1);
+    _listCryptoCurrencies = await _service.getSpecificTypeCurrencies(1); 
   }
 
   @override
