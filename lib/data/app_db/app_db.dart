@@ -27,17 +27,19 @@ Future<void> deleteBdFromDisk() async {
   if (file.existsSync()) {
     await database.close();
     file.deleteSync();
-  } 
+  }
 }
 
 LazyDatabase _openConnection() {
   return LazyDatabase(() async {
     final dbPath = await _getDataBasePath();
-    final file = File(dbPath)..createSync(recursive: true);
-    final blob = await rootBundle.load('assets/my_db.db');
-    final buffer = blob.buffer;
-    await file.writeAsBytes(
-        buffer.asUint8List(blob.offsetInBytes, blob.lengthInBytes));
+    final file = File(dbPath);
+    if (!await file.exists()) {
+      final blob = await rootBundle.load('assets/my_db.db');
+      final buffer = blob.buffer;
+      await file.writeAsBytes(
+          buffer.asUint8List(blob.offsetInBytes, blob.lengthInBytes));
+    }
     return NativeDatabase(file);
   });
 }
