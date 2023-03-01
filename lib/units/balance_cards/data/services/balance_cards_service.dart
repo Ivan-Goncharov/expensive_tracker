@@ -1,4 +1,5 @@
 import 'package:expensive_tracker_app/data/app_db/app_db.dart';
+import 'package:expensive_tracker_app/data/storage_provider.dart';
 import 'package:expensive_tracker_app/units/balance_cards/data/models/item_balance_card_model.dart';
 import 'package:expensive_tracker_app/units/balance_cards/data/models/month_operation_amount_model.dart';
 import 'package:expensive_tracker_app/units/create_expense/data/model/item_operation_model.dart';
@@ -27,22 +28,25 @@ abstract class BalanceCardsService {
 }
 
 class BalanceCardServiceImpl implements BalanceCardsService {
-  const BalanceCardServiceImpl();
+  late final AppDb _dbStorage;
+  BalanceCardServiceImpl(StorageProvider provider) {
+    _dbStorage = provider.database;
+  }
 
   @override
   Future<List<ItemBalanceCardModel>> getAllCards() async {
-    return database.getAllBalanceCards();
+    return _dbStorage.getAllBalanceCards();
   }
 
   @override
   Future<void> saveNewCard(ItemBalanceCardModel balanceCard) async {
-    await database.addNewBalanceCard(balanceCard.toInsertable());
+    await _dbStorage.addNewBalanceCard(balanceCard.toInsertable());
   }
 
   @override
   Future<MonthOperationAmountModel> getAmountMonthOperationes(
       DateTime dateTime) async {
-    final data = await database.getNotesOperation(dateTime);
+    final data = await _dbStorage.getNotesOperation(dateTime);
     double income = 0.0;
     double expense = 0.0;
     for (final item in data) {
@@ -57,16 +61,16 @@ class BalanceCardServiceImpl implements BalanceCardsService {
 
   @override
   Future<ItemBalanceCardModel> getItemBalanceCardModel(String id) {
-    return database.getItemBalanceCard(id);
+    return _dbStorage.getItemBalanceCard(id);
   }
 
   @override
   Future<List<CurrencyData>> getSpecificTypeCurrencies(int type) async {
-    return database.getSpecificTypeCurrencies(type);
+    return _dbStorage.getSpecificTypeCurrencies(type);
   }
 
   @override
   Future<CurrencyData> getItemCurrencyData(int id) {
-    return database.getItemCurrencyData(id);
+    return _dbStorage.getItemCurrencyData(id);
   }
 }

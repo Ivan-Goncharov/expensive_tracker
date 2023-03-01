@@ -1,4 +1,4 @@
-import 'package:expensive_tracker_app/constants/shared_pref_constants.dart';
+import 'package:expensive_tracker_app/constants/prefs_constant.dart';
 import 'package:expensive_tracker_app/get_it.dart';
 import 'package:expensive_tracker_app/units/start_screen/data/services/start_screen_service.dart';
 import 'package:flutter_test/flutter_test.dart';

@@ -1,8 +1,8 @@
 import 'package:drift/drift.dart';
-import 'package:expensive_tracker_app/constants/shared_pref_constants.dart';
+import 'package:expensive_tracker_app/constants/prefs_constant.dart';
 import 'package:expensive_tracker_app/data/app_db/app_db.dart';
+import 'package:expensive_tracker_app/data/storage_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class StartScreenService {
   /// Заходим ли мы впервые в приложение или нет.
@@ -17,11 +17,14 @@ abstract class StartScreenService {
 }
 
 class StartScreenServiceImpl implements StartScreenService {
+  late final StorageProvider _storage;
+  StartScreenServiceImpl(StorageProvider provider) {
+    _storage = provider;
+  }
   @override
-  Future<bool> isNotFirstStart() async {
-    final prefs = await SharedPreferences.getInstance();
+   bool isNotFirstStart() async { 
     try {
-      final isFirstStart = prefs.getBool(isFirstStartConst);
+      final isFirstStart = _storage.prefs.get(PrefKeys.isFirstStartConst);
       if (isFirstStart == null) {
         return false;
       } else {
@@ -36,7 +39,7 @@ class StartScreenServiceImpl implements StartScreenService {
   @override
   Future<void> saveFirstStart() async {
     final prefs = await SharedPreferences.getInstance();
-    prefs.setBool(isFirstStartConst, true);
+    prefs.setBool(PrefKeys.isFirstStartConst, true);
   }
 
   @override

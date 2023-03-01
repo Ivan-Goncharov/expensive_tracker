@@ -1,3 +1,4 @@
+import 'package:expensive_tracker_app/data/storage_provider.dart';
 import 'package:expensive_tracker_app/units/add_balance_card/cubit/add_new_balance_card_cubit.dart';
 import 'package:expensive_tracker_app/units/balance_cards/data/repositories/balance_cards_repo_impl.dart';
 import 'package:expensive_tracker_app/units/balance_cards/data/repositories/currencies_repo_impl.dart';
@@ -40,6 +41,9 @@ import 'units/navigation/components/cubits/bottom_hide_cubit/bottom_hide_cubit.d
 final getIt = GetIt.instance;
 
 void setupGetIt() {
+  /// StorageProvider
+  getIt.registerSingleton<StorageProvider>(StorageProvider());
+
   /// Servises.
   getIt.registerSingleton<CreateOpeartionService>(
     CreateOpeartionServiceImpl(),
@@ -50,7 +54,7 @@ void setupGetIt() {
   getIt.registerSingleton<StartScreenService>(
     StartScreenServiceImpl(),
   );
-  getIt.registerSingleton<BalanceCardsService>(const BalanceCardServiceImpl());
+  getIt.registerSingleton<BalanceCardsService>(getIt());
   getIt.registerSingleton<CreateBalanceCardService>(
     CreateBalanceCardServiceImpl(),
   );
