@@ -15,7 +15,7 @@ class StartScreenCubit extends Cubit<StartScreenState> {
 
   Future<void> startApp() async {
     emit(StartScreenLoadingState());
-    final isNotFirstStart = await startScreenRepo.isFirstStart();
+    final isNotFirstStart = startScreenRepo.isFirstStart();
 
     /// TODO: Посмотреть, что можно паралельно исполнять.
 

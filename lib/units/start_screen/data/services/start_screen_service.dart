@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 abstract class StartScreenService {
   /// Заходим ли мы впервые в приложение или нет.
   /// [true] - если уже заходили.
-  Future<bool> isNotFirstStart();
+  bool isNotFirstStart();
 
   Future<void> saveFirstStart();
 
@@ -22,9 +22,10 @@ class StartScreenServiceImpl implements StartScreenService {
     _storage = provider;
   }
   @override
-   bool isNotFirstStart() async { 
+  bool isNotFirstStart() {
     try {
-      final isFirstStart = _storage.prefs.get(PrefKeys.isFirstStartConst);
+      final isFirstStart =
+          _storage.prefs.get(PrefKeys.isFirstStartConst) as bool?;
       if (isFirstStart == null) {
         return false;
       } else {
@@ -37,20 +38,19 @@ class StartScreenServiceImpl implements StartScreenService {
   }
 
   @override
-  Future<void> saveFirstStart() async {
-    final prefs = await SharedPreferences.getInstance();
-    prefs.setBool(PrefKeys.isFirstStartConst, true);
-  }
+  Future<void> saveFirstStart()   =>
+    _storage.prefs.put(PrefKeys.isFirstStartConst, true);
+  
 
   @override
-  Future<List<CategoriesOperationTableData>> getCategories() {
-    return database.getAllCategories();
-  }
+  Future<List<CategoriesOperationTableData>> getCategories() =>
+     _storage.database.getAllCategories();
+  
 
   @override
   Future<List<DateTime>> getMonthList() async {
-    final lastDate = await database.getTimeSingleOperation(OrderingMode.desc);
-    final firstDate = await database.getTimeSingleOperation(OrderingMode.asc);
+    final lastDate = await _storage.database.getTimeSingleOperation(OrderingMode.desc);
+    final firstDate = await _storage.database.getTimeSingleOperation(OrderingMode.asc);
     final list = <DateTime>[];
     var tempDate = DateTime(firstDate.year, firstDate.month);
 

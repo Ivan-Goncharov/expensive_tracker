@@ -1,6 +1,6 @@
 import 'dart:io';
-
-import 'package:expensive_tracker_app/data/app_db/app_db.dart';
+ 
+import 'package:expensive_tracker_app/data/storage_provider.dart';
 import 'package:expensive_tracker_app/get_it.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:path_provider/path_provider.dart';
@@ -15,13 +15,13 @@ void setupTests() {
   TestWidgetsFlutterBinding.ensureInitialized();
   _initPath();
 
-  setUpAll(() {
-    initDb();
+  setUpAll(() async {
+    await StorageProvider.initHiveBoxes();
     setupGetIt();
   });
 
   tearDownAll(() async {
-    await deleteBdFromDisk();
+    await getIt<StorageProvider>().deleteStorage();
     final aplicationPath = await getApplicationDocumentsDirectory();
     final dir = Directory(aplicationPath.path.replaceAll('/documents', ''));
     if (aplicationPath.existsSync()) aplicationPath.deleteSync();

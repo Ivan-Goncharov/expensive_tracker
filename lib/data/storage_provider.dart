@@ -7,12 +7,12 @@ class StorageProvider {
   final database = AppDb();
 
   /// Prefs storage.
-  final prefs = Hive.box<String>(HiveBoxes.prefs);
+  final prefs = Hive.box(HiveBoxes.prefs);
 
   /// Инициализация Hive
  static Future<void> initHiveBoxes() async {
     await Hive.initFlutter();
-    await Hive.openBox<String>(HiveBoxes.prefs);
+    await Hive.openBox(HiveBoxes.prefs);
   }
 
   // Удаление базы данных

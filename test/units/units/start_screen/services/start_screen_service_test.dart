@@ -1,28 +1,22 @@
 import 'package:expensive_tracker_app/constants/prefs_constant.dart';
+import 'package:expensive_tracker_app/data/storage_provider.dart';
 import 'package:expensive_tracker_app/get_it.dart';
 import 'package:expensive_tracker_app/units/start_screen/data/services/start_screen_service.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../../init_global.dart'; 
+import '../../../../init_global.dart';
 
 void main() async {
-  setupTests(); 
-  SharedPreferences.setMockInitialValues({});
-  final prefs = await SharedPreferences.getInstance();  
+  setupTests();
 
-  tearDownAll(() async {
-    await prefs.clear();
-  });
-
-  test('Is first start test', () async {
-    final result = await getIt<StartScreenService>().isNotFirstStart();
+  test('Is first start test', () {
+    final result = getIt<StartScreenService>().isNotFirstStart();
     expect(false, result);
   });
 
   test('Is not first start test', () async {
-    await prefs.setBool(isFirstStartConst, true);
-    final result = await getIt<StartScreenService>().isNotFirstStart();
+    await getIt<StorageProvider>().prefs.put(PrefKeys.isFirstStartConst, true);
+    final result = getIt<StartScreenService>().isNotFirstStart();
     expect(true, result);
   });
 }

@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  setupGetIt();
   await StorageProvider.initHiveBoxes();
+  setupGetIt();
   runApp(const MyApp());
 }
 

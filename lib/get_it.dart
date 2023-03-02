@@ -46,17 +46,19 @@ void setupGetIt() {
 
   /// Servises.
   getIt.registerSingleton<CreateOpeartionService>(
-    CreateOpeartionServiceImpl(),
+    CreateOpeartionServiceImpl(getIt()),
   );
   getIt.registerSingleton<LastOperationesSevices>(
-    LastOperationesServicesImpl(),
+    LastOperationesServicesImpl(getIt()),
   );
   getIt.registerSingleton<StartScreenService>(
-    StartScreenServiceImpl(),
+    StartScreenServiceImpl(getIt()),
   );
-  getIt.registerSingleton<BalanceCardsService>(getIt());
+  getIt.registerSingleton<BalanceCardsService>(
+    BalanceCardServiceImpl(getIt())
+  );
   getIt.registerSingleton<CreateBalanceCardService>(
-    CreateBalanceCardServiceImpl(),
+    CreateBalanceCardServiceImpl(getIt()),
   );
 
   /// Repo
