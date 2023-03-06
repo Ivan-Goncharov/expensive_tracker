@@ -14,64 +14,52 @@ class ItemCategory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
-    // final changeCategoryCubit =
-    //     BlocProvider.of<OperationCategoryCubit>(context);
-    final selectIndex = (BlocProvider.of<OperationCategoryCubit>(context).state
-            as OperationChangeCategoryState)
-        .indexOfSelect;
+    final oprationCategoryBloc = context.watch<OperationCategoryCubit>();
+    final selectIndex =
+        (oprationCategoryBloc.state as OperationChangeCategoryState)
+            .indexOfSelect;
     return GestureDetector(
-      onTap: () => BlocProvider.of<OperationCategoryCubit>(context)
-          .changeCategory(index, context),
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
-        height: 80,
-        margin: const EdgeInsets.all(8.0),
-        padding: const EdgeInsets.all(4.0),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-          color: selectIndex == index ? colors.primary : colors.background,
-          boxShadow: selectIndex == index
-              ? []
-              : [
-                  const BoxShadow(
-                      color: Color(0xFF9E9E9E),
-                      offset: Offset(2.0, 2.0),
-                      blurRadius: 6.0,
-                      spreadRadius: 1.0),
-                  BoxShadow(
-                      color: colors.onPrimary,
-                      offset: const Offset(-2.0, -2.0),
-                      blurRadius: 6.0,
-                      spreadRadius: 1.0),
-                ],
-        ),
-        child: Column(
-          // mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            /// TODO: Сделать иконку
-            Icon(
-              IconDataSolid(),
-              size: 26,
+      onTap: () => oprationCategoryBloc.changeCategory(index, context),
+      child: Padding(
+        padding: const EdgeInsets.all(6.0),
+        child: Material(
+          elevation: 20,
+          borderRadius: BorderRadius.circular(20),
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 300),
+            padding: const EdgeInsets.all(2.0),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
               color:
-                  selectIndex == index ? colors.onPrimary : colors.onBackground,
+                  selectIndex == index ? colors.primary : colors.surfaceVariant,
             ),
-            const SizedBox(
-              height: 6,
-            ),
-            Text(
-              itemCategory.title,
-              textAlign: TextAlign.center,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                  fontSize: 12,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  IconDataSolid(int.parse(itemCategory.code)),
                   color: selectIndex == index
                       ? colors.onPrimary
-                      : colors.onBackground),
+                      : colors.onBackground,
+                ),
+                const SizedBox(
+                  height: 6,
+                ),
+                Text(
+                  itemCategory.title,
+                  textAlign: TextAlign.center,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                      fontSize: 10,
+                      color: selectIndex == index
+                          ? colors.onPrimary
+                          : colors.onSurfaceVariant),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
