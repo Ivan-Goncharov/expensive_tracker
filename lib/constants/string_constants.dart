@@ -18,4 +18,6 @@ class SResources {
   static const addCardNameHint = 'Enter the name';
   static const addCardCurrencyHint = 'Enter the balance';
   static const currency = 'Currency';
+  static const settings = 'Settings';
+  static const darkMode = 'Dark mode';
 }

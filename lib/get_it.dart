@@ -1,4 +1,8 @@
 import 'package:expensive_tracker_app/data/storage_provider.dart';
+import 'package:expensive_tracker_app/theme/cubit/themes_bloc.dart';
+import 'package:expensive_tracker_app/theme/data/themes_repo_impl.dart';
+import 'package:expensive_tracker_app/theme/data/themes_service.dart';
+import 'package:expensive_tracker_app/theme/domain/themes_repo.dart';
 import 'package:expensive_tracker_app/units/add_balance_card/cubit/add_new_balance_card_cubit.dart';
 import 'package:expensive_tracker_app/units/balance_cards/data/repositories/balance_cards_repo_impl.dart';
 import 'package:expensive_tracker_app/units/balance_cards/data/repositories/currencies_repo_impl.dart';
@@ -54,12 +58,11 @@ void setupGetIt() {
   getIt.registerSingleton<StartScreenService>(
     StartScreenServiceImpl(getIt()),
   );
-  getIt.registerSingleton<BalanceCardsService>(
-    BalanceCardServiceImpl(getIt())
-  );
+  getIt.registerSingleton<BalanceCardsService>(BalanceCardServiceImpl(getIt()));
   getIt.registerSingleton<CreateBalanceCardService>(
     CreateBalanceCardServiceImpl(getIt()),
   );
+  getIt.registerSingleton<ThemeService>(ThemeServiceImpl(getIt()));
 
   /// Repo
   getIt.registerSingleton<CreateOperationRepository>(
@@ -71,6 +74,7 @@ void setupGetIt() {
   getIt.registerSingleton<BalanceCardRepo>(BalanceCardsRepoImpl(getIt()));
   getIt.registerSingleton<CreateBalanceCardRepo>(CreateBalanceCardRepoImpl());
   getIt.registerSingleton<CurrenciesRepo>(CurrenciesRepoImpl(getIt()));
+  getIt.registerSingleton<ThemesRepository>(ThemesRepositoryImpl(getIt()));
 
   /// Bloc and Cubit
   getIt.registerFactory(() => NavigatorCubit(getIt()));
@@ -91,4 +95,5 @@ void setupGetIt() {
       () => BalanceCardCubit(getIt(), getIt(), getIt(), getIt()));
   getIt.registerFactory(() => ScrollBalanceCubit(getIt()));
   getIt.registerFactory(() => AddNewBalanceCardCubit(getIt(), getIt()));
+  getIt.registerFactory(() => ThemesBloc(getIt()));
 }

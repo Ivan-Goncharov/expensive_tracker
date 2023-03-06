@@ -10,8 +10,9 @@ class StorageProvider {
   final prefs = Hive.box(HiveBoxes.prefs);
 
   /// Инициализация Hive
- static Future<void> initHiveBoxes() async {
+  static Future<void> initHiveBoxes() async {
     await Hive.initFlutter();
+    print('DEBUG OPEN BOX');
     await Hive.openBox(HiveBoxes.prefs);
   }
 
