@@ -24,8 +24,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ThemesBloc, ThemesState>(
-      builder: (context, state) {
-        print('DEBUG THEME $state');
+      builder: (context, state) { 
         return MaterialApp(
           themeMode: state.getThemeMode(),
           darkTheme: MyThemeApp.darkTheme,

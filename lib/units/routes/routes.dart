@@ -5,3 +5,4 @@ const selectCurrencyRoute = '/select_currency_route';
 const searchCurrensiesRoute = '/search_currensies_route';
 const createBalanceAmountRoute = '/create_balance_amount_route';
 const addNewBalanceCardRoute = '/add_new_balance_card';
+const settingsAppRoute = '/settings_app_screen';

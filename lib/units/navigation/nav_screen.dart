@@ -5,7 +5,6 @@ import 'package:expensive_tracker_app/units/home/view/home_screen.dart';
 import 'package:expensive_tracker_app/units/navigation/components/bottom_hide_bar.dart';
 
 import 'package:expensive_tracker_app/units/navigation/cubit/navigation_cubit.dart';
-import 'package:expensive_tracker_app/units/settings/view/settings_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -27,8 +26,6 @@ class NavScreen extends StatelessWidget {
 final _pages = [
   const HomeScreen(),
   const OperationesStatsView(),
-  const SizedBox(),
-  const SettingsScreen(),
 ];
 
 class _NavScreenBody extends StatelessWidget {
@@ -43,63 +40,41 @@ class _NavScreenBody extends StatelessWidget {
           return Scaffold(
             backgroundColor: colors.background,
             body: _pages[state.currentPage],
-            // floatingActionButton: const FabButton(),
+            floatingActionButton: FloatingActionButton(
+              onPressed: () => Navigator.pushNamed(context, createExpenseRoute),
+              child: FaIcon(
+                FontAwesomeIcons.plus,
+                color: colors.onPrimaryContainer,
+                size: 30,
+              ),
+            ),
             floatingActionButtonLocation:
-                FloatingActionButtonLocation.endDocked,
+                FloatingActionButtonLocation.centerDocked,
             bottomNavigationBar: BottomHideBar(
               widget: BottomNavigationBar(
                 type: BottomNavigationBarType.fixed,
+                enableFeedback: false,
                 elevation: 0,
-                iconSize: 30,
                 selectedIconTheme:
-                    IconThemeData(color: colors.onSurfaceVariant, size: 40),
-                unselectedItemColor: const Color(0xFF6F6F6F),
+                    IconThemeData(color: colors.primary, size: 30),
+                unselectedItemColor: colors.onSurface,
                 backgroundColor: colors.background,
                 currentIndex: state.currentPage,
                 showSelectedLabels: false,
                 showUnselectedLabels: false,
-                onTap: ((value) {
-                  if (value != 2) {
-                    BlocProvider.of<NavigatorCubit>(context).changePage(value);
-                  }
-                }),
-                items: [
-                  const BottomNavigationBarItem(
+                onTap: context.watch<NavigatorCubit>().changePage,
+                items: const [
+                  BottomNavigationBarItem(
                     icon: FaIcon(
                       FontAwesomeIcons.house,
                     ),
                     label: 'Main',
                   ),
-                  const BottomNavigationBarItem(
+                  BottomNavigationBarItem(
                     icon: FaIcon(
                       FontAwesomeIcons.chartSimple,
                     ),
                     label: 'Statistic',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: InkWell(
-                      onTap: () =>
-                          Navigator.pushNamed(context, createExpenseRoute),
-                      child: Container(
-                        alignment: Alignment.center,
-                        margin: const EdgeInsets.only(bottom: 8.0),
-                        width: 40,
-                        height: 40,
-                        decoration: BoxDecoration(
-                            color: colors.primary, shape: BoxShape.circle),
-                        child: FaIcon(
-                          FontAwesomeIcons.plus,
-                          color: colors.background,
-                        ),
-                      ),
-                    ),
-                    label: 'Настройки',
-                  ),
-                  const BottomNavigationBarItem(
-                    icon: FaIcon(
-                      FontAwesomeIcons.gear,
-                    ),
-                    label: 'Settings',
                   ),
                 ],
               ),

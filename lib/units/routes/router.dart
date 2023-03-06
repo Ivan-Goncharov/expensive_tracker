@@ -7,6 +7,7 @@ import 'package:expensive_tracker_app/units/navigation/nav_screen.dart';
 import 'package:expensive_tracker_app/units/new_balance_card/view/create_balance_currency_view.dart';
 import 'package:expensive_tracker_app/units/new_balance_card/view/create_balance_name_view.dart';
 import 'package:expensive_tracker_app/units/routes/slide_transition.dart';
+import 'package:expensive_tracker_app/units/settings/view/settings_screen.dart';
 import 'package:expensive_tracker_app/units/start_screen/view/start_screen_view.dart';
 import 'package:flutter/material.dart';
 
@@ -52,6 +53,12 @@ Route<dynamic>? getRoutes(RouteSettings settings) {
     case addNewBalanceCardRoute:
       return MaterialPageRoute(
         builder: (_) => const AddBalanceCardView(),
+        settings: settings,
+      );
+
+    case settingsAppRoute:
+      return MaterialPageRoute(
+        builder: (_) => const SettingsScreen(),
         settings: settings,
       );
   }

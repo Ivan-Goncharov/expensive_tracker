@@ -2,6 +2,7 @@ import 'package:expensive_tracker_app/data/app_db/app_db.dart';
 import 'package:expensive_tracker_app/units/create_expense/components/operation_category/cubit/operation_category_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ItemCategory extends StatelessWidget {
   final CategoriesOperationTableData itemCategory;
@@ -50,12 +51,12 @@ class ItemCategory extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             /// TODO: Сделать иконку
-            // Icon(
-            //   IconDataSolid(itemCategory.getIconCode),
-            //   size: 26,
-            //   color:
-            //       selectIndex == index ? colors.onPrimary : colors.onBackground,
-            // ),
+            Icon(
+              IconDataSolid(),
+              size: 26,
+              color:
+                  selectIndex == index ? colors.onPrimary : colors.onBackground,
+            ),
             const SizedBox(
               height: 6,
             ),
