@@ -1,4 +1,5 @@
 import 'package:expensive_tracker_app/get_it.dart';
+import 'package:expensive_tracker_app/units/balance_cards/data/models/item_balance_card_model.dart';
 import 'package:expensive_tracker_app/units/balance_cards/view/components/balance_amount.dart';
 import 'package:expensive_tracker_app/units/balance_cards/view/components/spending_month.dart';
 import 'package:expensive_tracker_app/units/balance_cards/view/cubits/balance_card_cubit/balance_card_cubit.dart';
@@ -7,12 +8,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BalanceCardView extends StatelessWidget {
-  const BalanceCardView({super.key});
+  final ItemBalanceCardModel balanceCard;
+  const BalanceCardView({
+    super.key,
+    required this.balanceCard,
+  });
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => getIt<BalanceCardCubit>()..initial(),
+      create: (_) => getIt<BalanceCardCubit>()..initial(balanceCard),
       child: const _BalanceCardBody(),
     );
   }

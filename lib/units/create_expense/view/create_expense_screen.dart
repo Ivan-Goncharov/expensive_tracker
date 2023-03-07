@@ -40,7 +40,6 @@ class _CreateExpenseScreenBody extends StatelessWidget {
         Navigator.pop(context);
       }
     }, builder: (context, state) {
-      print('DEBUG STATE $state');
       return Scaffold(
         appBar: const DefaultAppBar(title: SResources.newOperation),
         backgroundColor: colors.background,
@@ -63,6 +62,9 @@ class _CreateExpenseScreenBody extends StatelessWidget {
                 width: double.infinity,
                 margin: const EdgeInsets.symmetric(horizontal: 30),
                 child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: colors.primary,
+                        foregroundColor: colors.onPrimary),
                     onPressed:
                         context.read<CreateOperationCubit>().saveOperation,
                     child: const Text(SResources.saveButton)),

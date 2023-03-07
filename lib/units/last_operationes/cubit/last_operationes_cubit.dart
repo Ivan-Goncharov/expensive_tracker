@@ -15,16 +15,18 @@ class LastOperationesCubit extends Cubit<LastOperationState> {
   LastOperationesCubit(
       this.lastOperationRepo, this.monthRepositoty, this.createOperRepo)
       : super(LastOperationInitial());
+  late DateTime _currentDate;
 
   Future<void> initial() async {
     monthRepositoty.getMonth().listen(_listenerMonth);
     createOperRepo.getNewOperation().listen(_listenerNewOperation);
-    await _getMonthOperationes(DateTime.now());
+    _currentDate = DateTime.now();
+    await _getMonthOperationes();
   }
 
   Future<void> _listenerMonth(int event) async {
-    final date = monthRepositoty.listOfMonth[event];
-    await _getMonthOperationes(date);
+    _currentDate = monthRepositoty.listOfMonth[event];
+    await _getMonthOperationes();
   }
 
   void _listenerNewOperation(ItemOperationModel model) {
@@ -36,10 +38,10 @@ class LastOperationesCubit extends Cubit<LastOperationState> {
     }
   }
 
-  Future<void> _getMonthOperationes(DateTime dateTime) async {
+  Future<void> _getMonthOperationes() async {
     emit(LastOperationLoadingState());
     try {
-      final list = await lastOperationRepo.getLastOperationes(dateTime);
+      final list = await lastOperationRepo.getLastOperationes(_currentDate);
       if (list.isEmpty) {
         emit(LastOperationErrorState());
       } else {

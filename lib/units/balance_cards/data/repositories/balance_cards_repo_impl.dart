@@ -5,6 +5,7 @@ import 'package:expensive_tracker_app/units/balance_cards/data/services/balance_
 import 'package:expensive_tracker_app/units/balance_cards/domain/repositories/balance_cards_repo.dart';
 import 'package:expensive_tracker_app/units/create_expense/data/model/item_operation_model.dart';
 import 'package:expensive_tracker_app/units/last_operationes/domain/repositories/month_repository.dart';
+import 'package:rxdart/rxdart.dart';
 
 class BalanceCardsRepoImpl implements BalanceCardRepo {
   final BalanceCardsService _balanceCardService;
@@ -13,6 +14,7 @@ class BalanceCardsRepoImpl implements BalanceCardRepo {
   var _listOfCards = <ItemBalanceCardModel>[];
   late ItemBalanceCardModel _currentSelectCard;
   late MonthOperationAmountModel _operationAmountModel;
+  final _monthStreamController = BehaviorSubject<String>();
 
   @override
   ItemBalanceCardModel get currentBalanceCard => _currentSelectCard;
@@ -47,9 +49,9 @@ class BalanceCardsRepoImpl implements BalanceCardRepo {
   }
 
   @override
-  Future<void> getOperationesMonthSumm(DateTime dateTime) async {
-    _operationAmountModel =
-        await _balanceCardService.getAmountMonthOperationes(dateTime);
+  Future<void> getOperationesMonthSumm(DateTime dateTime, String cardId) async {
+    _operationAmountModel = await _balanceCardService.getAmountMonthOperationes(
+        DateTime(dateTime.year, dateTime.month), cardId);
   }
 
   @override
@@ -85,6 +87,11 @@ class BalanceCardsRepoImpl implements BalanceCardRepo {
     // Обновлеем элемент в списке.
     _listOfCards.removeWhere((card) => card.id == id);
     _listOfCards.add(card);
+  }
+
+  void addCardInStream(ItemBalanceCardModel card) {
+    _monthStreamController.add(card.id);
+    _currentSelectCard = card;
   }
 
   @override

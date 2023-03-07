@@ -46,7 +46,7 @@ void main() {
   test('BalanceCardsService get amoun month operation test', () async {
     final service = getIt<BalanceCardsService>();
     final monthOperationModel =
-        await service.getAmountMonthOperationes(DateTime.now());
+        await service.getAmountMonthOperationes(DateTime.now(), mockBalanceModel.id);
     expect(monthOperationModel.income, 0.0);
     expect(monthOperationModel.expense, 0.0);
   });

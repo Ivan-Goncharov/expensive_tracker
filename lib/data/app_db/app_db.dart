@@ -23,9 +23,11 @@ class AppDb extends _$AppDb {
   int get schemaVersion => 1;
 
   /// Получение списка всех записей.
-  Future<List<ItemOperationModel>> getNotesOperation(DateTime date) {
+  Future<List<ItemOperationModel>> getNotesOperation(
+      DateTime date, String cardId) {
     return (select(noteOperation)
           ..where((tbl) =>
+              tbl.cardId.equals(cardId) &
               tbl.dateOperation.year.equals(date.year) &
               tbl.dateOperation.month.equals(date.month))
           ..orderBy([

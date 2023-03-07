@@ -24,7 +24,9 @@ abstract class BalanceCardsService {
   Future<ItemBalanceCardModel> getItemBalanceCardModel(String id);
 
   Future<MonthOperationAmountModel> getAmountMonthOperationes(
-      DateTime dateTime);
+    DateTime dateTime,
+    String cardId,
+  );
 }
 
 class BalanceCardServiceImpl implements BalanceCardsService {
@@ -45,8 +47,8 @@ class BalanceCardServiceImpl implements BalanceCardsService {
 
   @override
   Future<MonthOperationAmountModel> getAmountMonthOperationes(
-      DateTime dateTime) async {
-    final data = await _dbStorage.getNotesOperation(dateTime);
+      DateTime dateTime, String cardId) async {
+    final data = await _dbStorage.getNotesOperation(dateTime, cardId);
     double income = 0.0;
     double expense = 0.0;
     for (final item in data) {
