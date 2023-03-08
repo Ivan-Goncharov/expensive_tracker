@@ -30,7 +30,7 @@ void main() {
   test('Test getOperationesMonthSumm BalanceCardsRepo ', () async {
     final repo = getIt<BalanceCardRepo>();
     await repo.getOperationesMonthSumm(
-        DateTime(DateTime.now().year, DateTime.now().month));
+        DateTime(DateTime.now().year, DateTime.now().month), '');
     final amountModel = repo.operationAmountModel;
     expect([amountModel.expense, amountModel.income], [0, 0]);
   });

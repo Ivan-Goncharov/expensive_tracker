@@ -14,7 +14,7 @@ class BalanceCardsRepoImpl implements BalanceCardRepo {
   var _listOfCards = <ItemBalanceCardModel>[];
   late ItemBalanceCardModel _currentSelectCard;
   late MonthOperationAmountModel _operationAmountModel;
-  final _monthStreamController = BehaviorSubject<String>();
+  final _balanceCardsController = BehaviorSubject<String>();
 
   @override
   ItemBalanceCardModel get currentBalanceCard => _currentSelectCard;
@@ -89,10 +89,13 @@ class BalanceCardsRepoImpl implements BalanceCardRepo {
     _listOfCards.add(card);
   }
 
+  @override
   void addCardInStream(ItemBalanceCardModel card) {
-    _monthStreamController.add(card.id);
+    _balanceCardsController.add(card.id);
     _currentSelectCard = card;
   }
+
+  Stream<String> cardIdStream() => _balanceCardsController.asBroadcastStream();
 
   @override
   void clearData() {

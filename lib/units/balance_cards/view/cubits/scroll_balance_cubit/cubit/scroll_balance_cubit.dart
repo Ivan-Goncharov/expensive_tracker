@@ -11,7 +11,10 @@ class ScrollBalanceCubit extends Cubit<ScrollBalanceState> {
   void initial() {
     emit(ScrollBalanceLoadedState(_repo.listOfCards, _pageController));
     _pageController.addListener(() {
-      _repo.addCardInStream(_repo.listOfCards[_pageController.page!.toInt()]);
+      final page = _pageController.page!;
+      if (page == page.roundToDouble()) {
+        _repo.addCardInStream(_repo.listOfCards[_pageController.page!.toInt()]);
+      }
     });
   }
 }

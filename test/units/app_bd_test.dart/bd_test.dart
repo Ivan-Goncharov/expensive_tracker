@@ -22,7 +22,7 @@ void main() {
 
   /// Тестирование [addNewOperationData] и [getNotesOperation]
   test('Test add new operation in db', () async {
-    final data =   await getIt<StorageProvider>().database.getNotesOperation(DateTime.now());
+    final data = await getIt<StorageProvider>().database.getNotesOperation(DateTime.now(), '');
     expect(
       2,
       data.length,
@@ -52,7 +52,7 @@ void main() {
   /// Тестирование [deleteNoteData] - удаление записи из бд
   test('Test delete note operation', () async {
     await getIt<StorageProvider>().database.deleteNoteData(mockOperationModelFirst.id);
-    final data = await getIt<StorageProvider>().database.getNotesOperation(DateTime.now());
+    final data = await getIt<StorageProvider>().database.getNotesOperation(DateTime.now(), '');
     expect(data, [mockOperationModelSecond]);
   });
 
