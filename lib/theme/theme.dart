@@ -1,3 +1,4 @@
+import 'package:expensive_tracker_app/theme/extension/color_extension.dart';
 import 'package:flutter/material.dart';
 
 /// Тема приложения
@@ -37,6 +38,9 @@ class MyThemeApp {
       outlineVariant: Color(0xFFC6C5D0),
       scrim: Color(0xFF000000),
     ),
+    extensions: [
+      ColorExtnesion.light,
+    ]
   );
 
   static final darkTheme = ThemeData(
@@ -74,5 +78,8 @@ class MyThemeApp {
       outlineVariant: Color(0xFF45464F),
       scrim: Color(0xFF000000),
     ),
+    extensions: [
+      ColorExtnesion.dark,
+    ]
   );
 }
