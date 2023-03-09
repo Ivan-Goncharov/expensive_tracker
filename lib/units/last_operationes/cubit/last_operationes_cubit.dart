@@ -41,7 +41,9 @@ class LastOperationesCubit extends Cubit<LastOperationState> {
     await _getItemMonthOperationes();
   }
 
-  Future<void> _getCurrencyById(int id) => _currenciesRepo.getCurrencyById(id);
+  Future<void> _getCurrencyById(int id) async {
+    _currencyData = await _currenciesRepo.getCurrencyById(id);
+  }
 
   Future<void> _listenerMonth(int event) async {
     _currentDate = _monthRepositoty.listOfMonth[event];

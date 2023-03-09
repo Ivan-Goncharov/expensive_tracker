@@ -1,3 +1,4 @@
+import 'package:expensive_tracker_app/units/components/currency_symbol_view.dart';
 import 'package:expensive_tracker_app/units/create_expense/data/model/item_operation_model.dart';
 import 'package:expensive_tracker_app/units/last_operationes/cubit/last_operationes_cubit.dart';
 import 'package:expensive_tracker_app/units/last_operationes/cubit/last_operationes_state.dart';
@@ -13,23 +14,23 @@ class OperationAmount extends StatelessWidget {
     final currency =
         (context.read<LastOperationesCubit>().state as LastOperationLoadedState)
             .currencyData;
+    final isIncome = operation.type == OperationType.income;
+    final color = isIncome ? Colors.green : Colors.red;
 
-    if (operation.type == OperationType.income) {
-      return Text(
-        '+${currency.symbol}${operation.amount}',
-        style: const TextStyle(
-          color: Colors.green,
-          fontWeight: FontWeight.bold,
+    return Row(
+      children: [
+        Text(
+          isIncome ? '+' : '-',
+          style: TextStyle(color: color, fontWeight: FontWeight.bold),
         ),
-      );
-    } else {
-      return Text(
-        '+\$${operation.amount}',
-        style: const TextStyle(
-          color: Colors.red,
-          fontWeight: FontWeight.bold,
+        const SizedBox(width: 2),
+        CurrencySymbolView(currency, 14, titleColor: color),
+        const SizedBox(width: 2),
+        Text(
+          operation.amount.toString(),
+          style: TextStyle(color: color, fontWeight: FontWeight.bold),
         ),
-      );
-    }
+      ],
+    );
   }
 }
