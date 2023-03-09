@@ -11,4 +11,6 @@ abstract class LastOperationesRepo {
 
   List<CategoriesOperationTableData> getTypeCategories(OperationType type);
   CategoriesOperationTableData getCategoryById(int id);
+  
+
 }

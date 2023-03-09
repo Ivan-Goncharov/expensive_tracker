@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:expensive_tracker_app/theme/extension/color_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -16,5 +14,11 @@ extension FormatCurrency on double {
         decimalDigits: decimialDigits, locale: 'en_US');
 
     return formatter.format(this).substring(1);
+  }
+}
+
+extension DateFormatExtension on DateTime {
+  String formatToDateDivider() {
+    return DateFormat('d MMMM').format(this);
   }
 }

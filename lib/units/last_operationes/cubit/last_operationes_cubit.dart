@@ -1,6 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:expensive_tracker_app/data/app_db/app_db.dart';
+import 'package:expensive_tracker_app/units/balance_cards/data/models/item_balance_card_model.dart';
 import 'package:expensive_tracker_app/units/balance_cards/domain/repositories/balance_cards_repo.dart';
+import 'package:expensive_tracker_app/units/balance_cards/domain/repositories/currencies_repo.dart';
 import 'package:expensive_tracker_app/units/create_expense/data/model/item_operation_model.dart';
 import 'package:expensive_tracker_app/units/create_expense/domain/repositories/create_operation_repo.dart';
 
@@ -14,24 +16,32 @@ class LastOperationesCubit extends Cubit<LastOperationState> {
   final MonthRepositoty _monthRepositoty;
   final CreateOperationRepository _createOperRepo;
   final BalanceCardRepo _balanceCardRepo;
+  final CurrenciesRepo _currenciesRepo;
+
   LastOperationesCubit(
     this._lastOperationRepo,
     this._monthRepositoty,
     this._createOperRepo,
     this._balanceCardRepo,
+    this._currenciesRepo,
   ) : super(LastOperationInitial());
+
   late DateTime _currentDate;
-  String? _currentCardID;
+  ItemBalanceCardModel? _currentCard;
+  CurrencyData? _currencyData;
 
   Future<void> initial() async {
     _monthRepositoty.getMonth().listen(_listenerMonth);
     _createOperRepo.getNewOperation().listen(_listenerNewOperation);
     _balanceCardRepo.cardIdStream().listen(_listenCardsScroll);
-    _currentCardID = _balanceCardRepo.currentBalanceCard.id;
+    _currentCard = _balanceCardRepo.currentBalanceCard;
+    await _getCurrencyById(_currentCard!.currencyId);
 
     _currentDate = DateTime.now();
     await _getItemMonthOperationes();
   }
+
+  Future<void> _getCurrencyById(int id) => _currenciesRepo.getCurrencyById(id);
 
   Future<void> _listenerMonth(int event) async {
     _currentDate = _monthRepositoty.listOfMonth[event];
@@ -43,27 +53,27 @@ class LastOperationesCubit extends Cubit<LastOperationState> {
     if (isAdded) {
       emit(LastOperationLoadingState());
       final list = _lastOperationRepo.operationes;
-      emit(LastOperationLoadedState(list));
+      emit(LastOperationLoadedState(list, _currencyData!));
     }
   }
 
-  void _listenCardsScroll(String id) {
-    print('DEBUG EMIT SCROLL');
+  void _listenCardsScroll(ItemBalanceCardModel? currentCard) async {
     emit(LastOperationLoadingState());
-    _currentCardID = id;
+    _currentCard = currentCard;
     _currentDate = DateTime.now();
-    _getItemMonthOperationes();
+    await _getCurrencyById(_currentCard!.currencyId);
+    await _getItemMonthOperationes();
   }
 
   Future<void> _getItemMonthOperationes() async {
     emit(LastOperationLoadingState());
     try {
       final list = await _lastOperationRepo.getLastOperationes(
-          _currentDate, _currentCardID!);
+          _currentDate, _currentCard!.id);
       if (list.isEmpty) {
         emit(LastOperationErrorState());
       } else {
-        emit(LastOperationLoadedState(list));
+        emit(LastOperationLoadedState(list, _currencyData!));
       }
     } catch (er, st) {
       debugPrint('$er\n$st');
@@ -71,7 +81,6 @@ class LastOperationesCubit extends Cubit<LastOperationState> {
     }
   }
 
-  CategoriesOperationTableData getCategoriesById(int id) {
-    return _lastOperationRepo.getCategoryById(id);
-  }
+  CategoriesOperationTableData getCategoriesById(int id) =>
+      _lastOperationRepo.getCategoryById(id);
 }

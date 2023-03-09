@@ -10,15 +10,20 @@ class OperationIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
     return Container(
       height: 45,
       width: 45,
-      // alignment: Alignment.center,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
-        border: Border.all(color: const Color(0xFF9E9E9E)),
+        color: colors.onBackground,
+        shape: BoxShape.circle,
+        // border: Border.all(color: const Color(0xFF9E9E9E)),
       ),
-      child: Icon(IconDataSolid(iconCode)),
+      child: Icon(
+        IconDataSolid(iconCode),
+        color: Theme.of(context).colorScheme.background,
+        size: 20,
+      ),
     );
   }
 }

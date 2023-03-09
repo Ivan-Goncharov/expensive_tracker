@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:expensive_tracker_app/data/app_db/app_db.dart';
 import 'package:expensive_tracker_app/units/create_expense/data/model/item_operation_model.dart';
 
 abstract class LastOperationState extends Equatable {}
@@ -15,9 +16,10 @@ class LastOperationLoadingState extends LastOperationState {
 
 class LastOperationLoadedState extends LastOperationState {
   final List<ItemOperationModel> operations;
-  LastOperationLoadedState(this.operations);
+  final CurrencyData currencyData;
+  LastOperationLoadedState(this.operations, this.currencyData);
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [operations, currencyData];
 }
 
 class LastOperationEmptyState extends LastOperationState {

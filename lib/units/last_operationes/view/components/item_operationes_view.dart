@@ -1,6 +1,7 @@
 import 'package:expensive_tracker_app/units/create_expense/data/model/item_operation_model.dart';
 import 'package:expensive_tracker_app/units/last_operationes/cubit/last_operationes_cubit.dart';
 import 'package:expensive_tracker_app/units/last_operationes/view/components/opeation_amount.dart';
+import 'package:expensive_tracker_app/units/last_operationes/view/components/operation_icon.dart';
 import 'package:expensive_tracker_app/units/last_operationes/view/components/operation_title.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -23,8 +24,7 @@ class ItemOperationView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           /// Иконка
-          /// TODO: Сделать иконку
-          // OperationIcon(category.getIconCode),
+          OperationIcon(int.parse(category.code)),
           const SizedBox(width: 20),
 
           /// Название категории и дата

@@ -25,7 +25,7 @@ abstract class BalanceCardRepo {
 
   void addCardInStream(ItemBalanceCardModel card);
 
-  Stream<String> cardIdStream();
+  Stream<ItemBalanceCardModel> cardIdStream();
 
   void clearData();
 }
