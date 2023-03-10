@@ -27,7 +27,6 @@ class BalanceCardsRepoImpl implements BalanceCardRepo {
   Future<List<ItemBalanceCardModel>> getAllCards() async {
     _listOfCards = await _balanceCardService.getAllCards();
 
-    ///TODO: Сделать функционал последней используемой.
     _currentSelectCard = _listOfCards.first;
     return _listOfCards;
   }
@@ -96,7 +95,8 @@ class BalanceCardsRepoImpl implements BalanceCardRepo {
   }
 
   @override
-  Stream<ItemBalanceCardModel> cardIdStream() => _balanceCardsController.asBroadcastStream();
+  Stream<ItemBalanceCardModel> cardIdStream() =>
+      _balanceCardsController.asBroadcastStream();
 
   @override
   void clearData() {

@@ -1,3 +1,4 @@
+import 'package:expensive_tracker_app/constants/prefs_constant.dart';
 import 'package:expensive_tracker_app/data/app_db/app_db.dart';
 import 'package:expensive_tracker_app/data/storage_provider.dart';
 import 'package:expensive_tracker_app/units/balance_cards/data/models/item_balance_card_model.dart';
@@ -8,8 +9,6 @@ abstract class BalanceCardsService {
   Future<void> saveNewCard(ItemBalanceCardModel balanceCard);
 
   Future<List<ItemBalanceCardModel>> getAllCards();
-
-  // Future<void> updateBalanceCardInfo(ItemBalanceCardModel balanceCard);
 
   /// Получение списка опредленного типа валют.
   /// [type] - тип валюты: 0 - обычная, 1 - крипта.
@@ -27,10 +26,15 @@ abstract class BalanceCardsService {
     DateTime dateTime,
     String cardId,
   );
+
+  String? currentBalanceCardId();
+
+  void saveCurrentBalanceCardId(String id);
 }
 
 class BalanceCardServiceImpl implements BalanceCardsService {
   late final AppDb _dbStorage;
+  late final StorageProvider _storage;
   BalanceCardServiceImpl(StorageProvider provider) {
     _dbStorage = provider.database;
   }
@@ -75,4 +79,12 @@ class BalanceCardServiceImpl implements BalanceCardsService {
   Future<CurrencyData> getItemCurrencyData(int id) {
     return _dbStorage.getItemCurrencyData(id);
   }
+
+  @override
+  String? currentBalanceCardId() =>
+      _storage.prefs.get(PrefKeys.lastBalanceCardId) as String?;
+
+  @override
+  void saveCurrentBalanceCardId(String id) =>
+      _storage.prefs.put(PrefKeys.lastBalanceCardId, id);
 }

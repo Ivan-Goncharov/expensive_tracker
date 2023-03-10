@@ -32,10 +32,9 @@ class BalanceCardLoadedState implements BalanceCardState {
 }
 
 class BalanceCardErrorState implements BalanceCardState {
-  @override 
+  @override
   List<Object?> get props => [];
 
-  @override 
+  @override
   bool? get stringify => true;
-
 }

@@ -5,4 +5,5 @@ abstract class HiveBoxes {
 abstract class PrefKeys {
   static const isFirstStartConst = 'isFirstStart';
   static const appTheme = 'appTheme';
+  static const lastBalanceCardId = 'lastBalanceCardId';
 }

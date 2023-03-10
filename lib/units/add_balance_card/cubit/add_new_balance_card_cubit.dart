@@ -95,7 +95,7 @@ class AddNewBalanceCardCubit extends Cubit<AddNewBalanceCardState> {
       currencyId: _currencyData!.id,
     );
     emit(AddNewBalanceCardSucceful());
-  } 
+  }
 
   bool _isShowButton() =>
       _currencyData != null && _balance != 0.0 && _nameOfCard.trim().isNotEmpty;

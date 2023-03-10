@@ -20,7 +20,8 @@ class LastOperationesRepoImpl implements LastOperationesRepo {
   List<ItemOperationModel> get operationes => _operationes;
 
   @override
-  Future<List<ItemOperationModel>> getLastOperationes(DateTime date, String cardId) async {
+  Future<List<ItemOperationModel>> getLastOperationes(
+      DateTime date, String cardId) async {
     _operationes = await lastOperService.getLastOperationes(date, cardId);
     return _operationes;
   }

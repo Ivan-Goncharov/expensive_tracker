@@ -9,13 +9,10 @@ class StartScreenRepoImpl implements StartScreenRepo {
   const StartScreenRepoImpl(this._service);
 
   @override
-  bool isFirstStart() =>
-      _service.isNotFirstStart();
-  
+  bool isFirstStart() => _service.isNotFirstStart();
 
   @override
   Future<void> saveStartInfo() => _service.saveFirstStart();
-  
 
   @override
   Future<void> getAllCategories() async {

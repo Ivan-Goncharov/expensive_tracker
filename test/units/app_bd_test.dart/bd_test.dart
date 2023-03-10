@@ -14,7 +14,9 @@ void main() {
   setUpAll(() async {
     final listOperationes = [mockOperationModelFirst, mockOperationModelSecond];
     for (final itemOper in listOperationes) {
-      await getIt<StorageProvider>().database.addNewOperationData(itemOper.toInsertable());
+      await getIt<StorageProvider>()
+          .database
+          .addNewOperationData(itemOper.toInsertable());
     }
   });
 
@@ -22,7 +24,9 @@ void main() {
 
   /// Тестирование [addNewOperationData] и [getNotesOperation]
   test('Test add new operation in db', () async {
-    final data = await getIt<StorageProvider>().database.getNotesOperation(DateTime.now(), '');
+    final data = await getIt<StorageProvider>()
+        .database
+        .getNotesOperation(DateTime.now(), '');
     expect(
       2,
       data.length,
@@ -32,37 +36,48 @@ void main() {
 
   /// Тестирование [getTimeSingleOperation] и поиск самой старшей записи
   test('Test get last date operation', () async {
-    final data =   await getIt<StorageProvider>().database.getTimeSingleOperation(OrderingMode.desc);
+    final data = await getIt<StorageProvider>()
+        .database
+        .getTimeSingleOperation(OrderingMode.desc);
     expect(data, mockDateFirst);
   });
 
   /// Тестирование [getTimeSingleOperation] и поиск самой младшей записи
   test('Test get first date operation', () async {
-    final data = await getIt<StorageProvider>().database.getTimeSingleOperation(OrderingMode.asc);
+    final data = await getIt<StorageProvider>()
+        .database
+        .getTimeSingleOperation(OrderingMode.asc);
     expect(data, dateSecond);
   });
 
   /// Тестирование [getItemNoteOperation] - получение одной операции.
   test('Test get item notesOperation', () async {
-    final data =
-        await getIt<StorageProvider>().database.getItemNoteOperation(mockOperationModelFirst.id);
+    final data = await getIt<StorageProvider>()
+        .database
+        .getItemNoteOperation(mockOperationModelFirst.id);
     expect(data, mockOperationModelFirst);
   });
 
   /// Тестирование [deleteNoteData] - удаление записи из бд
   test('Test delete note operation', () async {
-    await getIt<StorageProvider>().database.deleteNoteData(mockOperationModelFirst.id);
-    final data = await getIt<StorageProvider>().database.getNotesOperation(DateTime.now(), '');
+    await getIt<StorageProvider>()
+        .database
+        .deleteNoteData(mockOperationModelFirst.id);
+    final data = await getIt<StorageProvider>()
+        .database
+        .getNotesOperation(DateTime.now(), '');
     expect(data, [mockOperationModelSecond]);
   });
 
   /// Тестирование [updateNoteData] - обновление одной записи в бд.
   test('Test update noteOperation', () async {
     final newValue = mockOperationModelSecond.copyWith(category: 3);
-    await getIt<StorageProvider>().database.updateNoteData(
-        mockOperationModelSecond.id, newValue.toInsertable());
-    final data =
-        await getIt<StorageProvider>().database.getItemNoteOperation(mockOperationModelSecond.id);
+    await getIt<StorageProvider>()
+        .database
+        .updateNoteData(mockOperationModelSecond.id, newValue.toInsertable());
+    final data = await getIt<StorageProvider>()
+        .database
+        .getItemNoteOperation(mockOperationModelSecond.id);
     expect(data, newValue);
   });
 
@@ -78,13 +93,19 @@ void main() {
   /// --- Balance cards ---
 
   test('Test add balance card model in bd', () async {
-    await getIt<StorageProvider>().database.addNewBalanceCard(mockBalanceModel.toInsertable());
-    final data = await getIt<StorageProvider>().database.getItemBalanceCard(mockBalanceModel.id);
+    await getIt<StorageProvider>()
+        .database
+        .addNewBalanceCard(mockBalanceModel.toInsertable());
+    final data = await getIt<StorageProvider>()
+        .database
+        .getItemBalanceCard(mockBalanceModel.id);
     expect(data, mockBalanceModel);
   });
 
   test('Test get all balance cards from bd', () async {
-    await getIt<StorageProvider>().database.addNewBalanceCard(mockBalanceModelSecond.toInsertable());
+    await getIt<StorageProvider>()
+        .database
+        .addNewBalanceCard(mockBalanceModelSecond.toInsertable());
     final data = await getIt<StorageProvider>().database.getAllBalanceCards();
     expect(data.length, 2);
     expect(data[1].id, mockBalanceModelSecond.id);
@@ -93,7 +114,9 @@ void main() {
   test('Test update balance card in bd', () async {
     final operation = getMockOperationModelThird(mockBalanceModelSecond.id);
     await getIt<StorageProvider>().database.updateBalanceCardAmount(operation);
-    final data = await getIt<StorageProvider>().database.getItemBalanceCard(mockBalanceModelSecond.id);
+    final data = await getIt<StorageProvider>()
+        .database
+        .getItemBalanceCard(mockBalanceModelSecond.id);
     expect(data.amount, mockInitialBalanceSecond - operation.amount);
   });
 
@@ -104,7 +127,8 @@ void main() {
   });
 
   test('Test get all currencies', () async {
-    final data = await getIt<StorageProvider>().database.getSpecificTypeCurrencies(0);
-    expect(data.length, 119); 
+    final data =
+        await getIt<StorageProvider>().database.getSpecificTypeCurrencies(0);
+    expect(data.length, 119);
   });
 }

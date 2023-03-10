@@ -11,7 +11,7 @@ class StorageProvider {
 
   /// Инициализация Hive
   static Future<void> initHiveBoxes() async {
-    await Hive.initFlutter(); 
+    await Hive.initFlutter();
     await Hive.openBox(HiveBoxes.prefs);
   }
 

@@ -1,9 +1,12 @@
+import 'package:expensive_tracker_app/constants/string_constants.dart';
 import 'package:expensive_tracker_app/get_it.dart';
 import 'package:expensive_tracker_app/units/last_operationes/cubit/last_operationes_cubit.dart';
 import 'package:expensive_tracker_app/units/last_operationes/cubit/last_operationes_state.dart';
+import 'package:expensive_tracker_app/units/last_operationes/view/components/error_or_loading.dart';
 import 'package:expensive_tracker_app/units/last_operationes/view/components/operationes_scroll.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class LastOperationesView extends StatelessWidget {
   const LastOperationesView({super.key});
@@ -28,17 +31,21 @@ class _LastOperationesViewBody extends StatelessWidget {
       },
       builder: (context, state) {
         if (state is LastOperationLoadingState) {
-          /// TODO: Реализовать нормальный загрузочный экран.
           return const Center(
             child: CircularProgressIndicator(),
           );
         } else if (state is LastOperationErrorState) {
-          /// TODO: Реализовать красивую ошибку.
-          return const Center(
-            child: Text('Text Произошла ошибка'),
+          return const ErrorOrEmptyLastTransactions(
+            title: SResources.error,
+            iconData: FontAwesomeIcons.triangleExclamation,
           );
         } else if (state is LastOperationLoadedState) {
           return OperationesScroll(state.operations);
+        } else if (state is LastOperationEmptyState) {
+          return const ErrorOrEmptyLastTransactions(
+            title: SResources.emptyList,
+            iconData: FontAwesomeIcons.magnifyingGlassMinus,
+          );
         } else {
           return const SizedBox();
         }

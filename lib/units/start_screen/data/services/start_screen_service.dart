@@ -38,19 +38,19 @@ class StartScreenServiceImpl implements StartScreenService {
   }
 
   @override
-  Future<void> saveFirstStart()   =>
-    _storage.prefs.put(PrefKeys.isFirstStartConst, true);
-  
+  Future<void> saveFirstStart() =>
+      _storage.prefs.put(PrefKeys.isFirstStartConst, true);
 
   @override
   Future<List<CategoriesOperationTableData>> getCategories() =>
-     _storage.database.getAllCategories();
-  
+      _storage.database.getAllCategories();
 
   @override
   Future<List<DateTime>> getMonthList() async {
-    final lastDate = await _storage.database.getTimeSingleOperation(OrderingMode.desc);
-    final firstDate = await _storage.database.getTimeSingleOperation(OrderingMode.asc);
+    final lastDate =
+        await _storage.database.getTimeSingleOperation(OrderingMode.desc);
+    final firstDate =
+        await _storage.database.getTimeSingleOperation(OrderingMode.asc);
     final list = <DateTime>[];
     var tempDate = DateTime(firstDate.year, firstDate.month);
 

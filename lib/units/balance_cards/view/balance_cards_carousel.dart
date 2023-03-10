@@ -30,7 +30,6 @@ class _BalanceCardCarousel extends StatelessWidget {
             width: double.infinity,
             child: PageView.builder(
               controller: state.pageController,
-              
               itemBuilder: (_, index) {
                 return BalanceCardView(
                   balanceCard: state.listOfCards[index],

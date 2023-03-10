@@ -9,9 +9,9 @@ import '../../../../init_global.dart';
 void main() {
   setupTests();
 
-  setUp(() { 
+  setUp(() {
     EquatableConfig.stringify = true;
-  }); 
+  });
 
   // blocTest<BalanceCardCubit, BalanceCardState>(
   //     'Balance card cubit test initial',

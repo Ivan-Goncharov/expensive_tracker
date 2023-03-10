@@ -73,7 +73,7 @@ class LastOperationesCubit extends Cubit<LastOperationState> {
       final list = await _lastOperationRepo.getLastOperationes(
           _currentDate, _currentCard!.id);
       if (list.isEmpty) {
-        emit(LastOperationErrorState());
+        emit(LastOperationEmptyState());
       } else {
         emit(LastOperationLoadedState(list, _currencyData!));
       }

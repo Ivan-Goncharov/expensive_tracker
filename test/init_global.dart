@@ -1,5 +1,5 @@
 import 'dart:io';
- 
+
 import 'package:expensive_tracker_app/data/storage_provider.dart';
 import 'package:expensive_tracker_app/get_it.dart';
 import 'package:flutter_test/flutter_test.dart';
