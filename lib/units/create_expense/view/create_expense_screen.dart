@@ -46,7 +46,7 @@ class _CreateExpenseScreenBody extends StatelessWidget {
         resizeToAvoidBottomInset: false,
         body: GestureDetector(
           behavior: HitTestBehavior.opaque,
-          onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+          onTap: FocusManager.instance.primaryFocus?.unfocus,
           child: ListView(
             padding: const EdgeInsets.all(16.0),
             children: const [

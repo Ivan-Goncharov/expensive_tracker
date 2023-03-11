@@ -50,6 +50,7 @@ class BalanceCardServiceImpl implements BalanceCardsService {
   @override
   Future<void> saveNewCard(ItemBalanceCardModel balanceCard) async {
     await _dbStorage.addNewBalanceCard(balanceCard.toInsertable());
+    _storage.prefs.put(PrefKeys.lastBalanceCardId, balanceCard.id);
   }
 
   @override

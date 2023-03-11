@@ -42,8 +42,10 @@ class StartScreenServiceImpl implements StartScreenService {
       _storage.prefs.put(PrefKeys.isFirstStartConst, true);
 
   @override
-  Future<List<CategoriesOperationTableData>> getCategories() =>
-      _storage.database.getAllCategories();
+  Future<List<CategoriesOperationTableData>> getCategories() async {
+    final list = await _storage.database.getAllCategories();
+    return list;
+  }
 
   @override
   Future<List<DateTime>> getMonthList() async {

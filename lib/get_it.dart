@@ -83,7 +83,7 @@ void setupGetIt() {
   getIt.registerFactory(() => DatePickerCubit());
   getIt.registerFactory(() => ChangeCategoriesCubit(getIt()));
   getIt.registerFactory(() => OperationCategoryCubit());
-  getIt.registerFactory(() => CreateOperationCubit());
+  getIt.registerFactory(() => CreateOperationCubit(getIt(), getIt()));
   getIt.registerFactory(
       () => LastOperationesCubit(getIt(), getIt(), getIt(), getIt(), getIt()));
   getIt.registerFactory(() => StartScreenCubit(getIt(), getIt()));

@@ -49,6 +49,6 @@ class ItemOperationModel with _$ItemOperationModel {
 }
 
 enum OperationType {
-  income,
   expense,
+  income,
 }

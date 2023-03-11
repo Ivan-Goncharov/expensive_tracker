@@ -17,7 +17,6 @@ class SwitchOperation extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
-        // padding: const EdgeInsets.all(8.0),
         children: [
           ToggleSwitch(
             cornerRadius: 16,

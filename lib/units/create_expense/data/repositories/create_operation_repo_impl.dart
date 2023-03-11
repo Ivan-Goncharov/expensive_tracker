@@ -1,5 +1,3 @@
-import 'package:expensive_tracker_app/get_it.dart';
-import 'package:expensive_tracker_app/units/balance_cards/domain/repositories/balance_cards_repo.dart';
 import 'package:expensive_tracker_app/units/create_expense/data/model/item_operation_model.dart';
 import 'package:expensive_tracker_app/units/create_expense/data/services/create_operation_service.dart';
 import 'package:expensive_tracker_app/units/create_expense/domain/repositories/create_operation_repo.dart';
@@ -18,13 +16,14 @@ class CreateOperationRepoImpl implements CreateOperationRepository {
     required double amount,
     required OperationType type,
     required DateTime dateTime,
+    required String cardId,
   }) async {
     final operation = ItemOperationModel.create(
       category: categoty,
       amount: amount,
       type: type,
       dateOperation: dateTime,
-      cardId: getIt<BalanceCardRepo>().currentBalanceCard!.id,
+      cardId: cardId,
     );
     try {
       await _createOpeartionService.createOperation(operation);

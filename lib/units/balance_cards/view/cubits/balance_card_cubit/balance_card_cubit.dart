@@ -57,6 +57,7 @@ class BalanceCardCubit extends Cubit<BalanceCardState> {
   }
 
   Future<void> _listenerCreateData(ItemOperationModel model) async {
+    if (isClosed) return;
     final flag = _balanceRepo.addNewOperation(model);
     await _balanceRepo.getNewBalanceCardAmount(model.cardId);
     await Future.delayed(const Duration(milliseconds: 250));

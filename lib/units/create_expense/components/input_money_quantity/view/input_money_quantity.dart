@@ -1,3 +1,4 @@
+import 'package:expensive_tracker_app/units/components/currency_symbol_view.dart';
 import 'package:expensive_tracker_app/units/create_expense/cubit/create_operation_cubit/cubit/create_operation_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,7 +12,6 @@ class InputMoneyQuantity extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
       child: Row(
-        // crossAxisAlignment: CrossAxisAlignment.end,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(
@@ -28,13 +28,7 @@ class InputMoneyQuantity extends StatelessWidget {
               onChanged: (value) => _changeAmount(context, value),
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.only(left: 8),
-            child: Text(
-              'USD',
-              style: TextStyle(fontSize: 20),
-            ),
-          ),
+          const _CurrencySymbolBuilder(),
           const Padding(
             padding: EdgeInsets.only(left: 8),
             child: Icon(FontAwesomeIcons.calculator),
@@ -49,6 +43,29 @@ class InputMoneyQuantity extends StatelessWidget {
     if (value.isNotEmpty) {
       amount = double.parse(value);
     }
-    BlocProvider.of<CreateOperationCubit>(context).changeAmount(amount);
+    context.read<CreateOperationCubit>().changeAmount(amount);
+  }
+}
+
+class _CurrencySymbolBuilder extends StatelessWidget {
+  const _CurrencySymbolBuilder();
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<CreateOperationCubit, CreateOperationState>(
+      builder: (context, state) {
+        if (state is CreateOperationLoading) {
+          return const CircularProgressIndicator();
+        } else {
+          return Padding(
+            padding: const EdgeInsets.only(left: 8),
+            child: CurrencySymbolView(
+              context.read<CreateOperationCubit>().currencyData,
+              20,
+            ),
+          );
+        }
+      },
+    );
   }
 }
