@@ -66,7 +66,8 @@ class BalanceCardServiceImpl implements BalanceCardsService {
         expense += item.amount;
       }
     }
-    return MonthOperationAmountModel(expense: expense, income: income);
+    return MonthOperationAmountModel(
+        expense: expense, income: income, monthAndYear: dateTime);
   }
 
   @override
