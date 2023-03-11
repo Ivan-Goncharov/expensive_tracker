@@ -46,11 +46,12 @@ class BalanceCardCubit extends Cubit<BalanceCardState> {
   }
 
   Future<void> _listenerMonth(int event) async {
+    if (isClosed) return;
     final date = _monthRepositoty.listOfMonth[event];
     await _balanceRepo.getOperationesMonthSumm(date, _balanceCardModel.id);
     emit(BalanceCardLoadedState(
       currencyData: _currencyData,
-      balanceCardModel: _balanceRepo.currentBalanceCard,
+      balanceCardModel: _balanceRepo.currentBalanceCard!,
       monthOperationAmount: _balanceRepo.operationAmountModel,
     ));
   }
@@ -61,7 +62,7 @@ class BalanceCardCubit extends Cubit<BalanceCardState> {
     await Future.delayed(const Duration(milliseconds: 250));
     if (flag) {
       emit(BalanceCardLoadedState(
-        balanceCardModel: _balanceRepo.currentBalanceCard,
+        balanceCardModel: _balanceRepo.currentBalanceCard!,
         currencyData: _currencyData,
         monthOperationAmount: _balanceRepo.operationAmountModel,
       ));

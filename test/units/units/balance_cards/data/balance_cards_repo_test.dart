@@ -22,7 +22,7 @@ void main() {
       amount: amount,
       currencyId: currencyId,
     );
-    expect([repo.currentBalanceCard.amount, repo.currentBalanceCard.name],
+    expect([repo.currentBalanceCard!.amount, repo.currentBalanceCard!.name],
         [amount, name]);
     expect(repo.listOfCards.length, 1);
   });
@@ -37,7 +37,7 @@ void main() {
 
   test('Test add new operation BalanceCardsRepo', () {
     final repo = getIt<BalanceCardRepo>();
-    final cardId = repo.currentBalanceCard.id;
+    final cardId = repo.currentBalanceCard!.id;
     final operationModel = getMockOperationModelThird(cardId);
     final flag = repo.addNewOperation(operationModel);
     expect(flag, true);
@@ -48,13 +48,13 @@ void main() {
     final listCards = await repo.getAllCards();
     final currentCard = repo.currentBalanceCard;
     expect(listCards.length, 1);
-    expect([currentCard.amount, currentCard.name], [amount, name]);
+    expect([currentCard!.amount, currentCard.name], [amount, name]);
   });
 
   test('Test getNewBalanceCardAmount BalanceCardsRepo', () async {
     final repo = getIt<BalanceCardRepo>();
     final currentCard = repo.currentBalanceCard;
-    await repo.getNewBalanceCardAmount(currentCard.id);
+    await repo.getNewBalanceCardAmount(currentCard!.id);
     expect(repo.listOfCards.length, 1);
   });
 }

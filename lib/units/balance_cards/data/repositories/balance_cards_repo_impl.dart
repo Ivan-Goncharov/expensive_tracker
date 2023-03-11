@@ -12,12 +12,12 @@ class BalanceCardsRepoImpl implements BalanceCardRepo {
   BalanceCardsRepoImpl(this._balanceCardService);
 
   var _listOfCards = <ItemBalanceCardModel>[];
-  late ItemBalanceCardModel _currentSelectCard;
+  ItemBalanceCardModel? _currentSelectCard;
   late MonthOperationAmountModel _operationAmountModel;
   final _balanceCardsController = BehaviorSubject<ItemBalanceCardModel>();
 
   @override
-  ItemBalanceCardModel get currentBalanceCard => _currentSelectCard;
+  ItemBalanceCardModel? get currentBalanceCard => _currentSelectCard;
   @override
   MonthOperationAmountModel get operationAmountModel => _operationAmountModel;
   @override
@@ -25,9 +25,19 @@ class BalanceCardsRepoImpl implements BalanceCardRepo {
 
   @override
   Future<List<ItemBalanceCardModel>> getAllCards() async {
+    /// Получаем список всех карт и текущую выбранную карту
     _listOfCards = await _balanceCardService.getAllCards();
+    final currentCardID = _balanceCardService.currentBalanceCardId();
 
-    _currentSelectCard = _listOfCards.first;
+    if (currentCardID != null) {
+      /// Если id текущей карты сохранен - работаем с ней
+      _currentSelectCard =
+          _listOfCards.firstWhere((element) => element.id == currentCardID);
+    } else if (_listOfCards.isNotEmpty) {
+      /// Иначе выбираем первую карту из списка и работаем с ней
+      _currentSelectCard = _listOfCards.first;
+      _balanceCardService.saveCurrentBalanceCardId(_currentSelectCard!.id);
+    }
     return _listOfCards;
   }
 
@@ -63,7 +73,7 @@ class BalanceCardsRepoImpl implements BalanceCardRepo {
         currentData.year != operationModel.dateOperation.year) {
       return false;
     }
-    if (_currentSelectCard.id == operationModel.cardId) {
+    if (_currentSelectCard!.id == operationModel.cardId) {
       if (operationModel.type == OperationType.expense) {
         _operationAmountModel = _operationAmountModel.copyWith(
             newExpense: _operationAmountModel.expense + operationModel.amount);
@@ -82,7 +92,7 @@ class BalanceCardsRepoImpl implements BalanceCardRepo {
     // Получаем карту по id c обновленными данными.
     final card = await _balanceCardService.getItemBalanceCardModel(id);
     // Если эта карта активная - обновляем значения активной карты.
-    if (_currentSelectCard.id == id) _currentSelectCard = card;
+    if (_currentSelectCard!.id == id) _currentSelectCard = card;
     // Обновлеем элемент в списке.
     _listOfCards.removeWhere((card) => card.id == id);
     _listOfCards.add(card);
@@ -92,6 +102,7 @@ class BalanceCardsRepoImpl implements BalanceCardRepo {
   void addCardInStream(ItemBalanceCardModel card) {
     _balanceCardsController.add(card);
     _currentSelectCard = card;
+    _balanceCardService.saveCurrentBalanceCardId(card.id);
   }
 
   @override

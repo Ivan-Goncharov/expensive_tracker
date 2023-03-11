@@ -62,6 +62,7 @@ class StartScreenServiceImpl implements StartScreenService {
         tempDate = DateTime(tempDate.year, tempDate.month + 1);
       }
     }
+
     return list;
   }
 }

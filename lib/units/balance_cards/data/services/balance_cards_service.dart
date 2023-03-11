@@ -27,8 +27,10 @@ abstract class BalanceCardsService {
     String cardId,
   );
 
+  /// Получние id текущей карты.
   String? currentBalanceCardId();
 
+  /// Сохранение id текущей карты.
   void saveCurrentBalanceCardId(String id);
 }
 
@@ -37,6 +39,7 @@ class BalanceCardServiceImpl implements BalanceCardsService {
   late final StorageProvider _storage;
   BalanceCardServiceImpl(StorageProvider provider) {
     _dbStorage = provider.database;
+    _storage = provider;
   }
 
   @override

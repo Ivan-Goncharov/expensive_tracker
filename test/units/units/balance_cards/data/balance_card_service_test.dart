@@ -60,4 +60,19 @@ void main() {
         await service.getItemBalanceCardModel(balanceModel.id);
     expect(dbBalanceModel, balanceModel);
   });
+
+  /// Test get currentBalanceCard
+  test('BalanceCardsService get currentBalanceCardId test', () {
+    final service = getIt<BalanceCardsService>();
+    final result = service.currentBalanceCardId();
+    expect(result, null);
+  });
+
+  test('BalanceCardsService saveCurrentBalanceCardId test', () {
+    const cardId = '123455';
+    final service = getIt<BalanceCardsService>();
+    service.saveCurrentBalanceCardId(cardId);
+    final result = service.currentBalanceCardId();
+    expect(result, cardId);
+  });
 }

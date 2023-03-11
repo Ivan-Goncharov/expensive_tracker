@@ -24,7 +24,7 @@ class CreateOperationRepoImpl implements CreateOperationRepository {
       amount: amount,
       type: type,
       dateOperation: dateTime,
-      cardId: getIt<BalanceCardRepo>().currentBalanceCard.id,
+      cardId: getIt<BalanceCardRepo>().currentBalanceCard!.id,
     );
     try {
       await _createOpeartionService.createOperation(operation);

@@ -11,7 +11,7 @@ abstract class BalanceCardRepo {
 
   Future<List<ItemBalanceCardModel>> getAllCards();
 
-  ItemBalanceCardModel get currentBalanceCard;
+  ItemBalanceCardModel? get currentBalanceCard;
 
   MonthOperationAmountModel get operationAmountModel;
 

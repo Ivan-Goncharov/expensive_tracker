@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:expensive_tracker_app/data/app_db/app_db.dart';
 import 'package:expensive_tracker_app/units/balance_cards/data/models/item_balance_card_model.dart';
@@ -17,6 +19,12 @@ class LastOperationesCubit extends Cubit<LastOperationState> {
   final CreateOperationRepository _createOperRepo;
   final BalanceCardRepo _balanceCardRepo;
   final CurrenciesRepo _currenciesRepo;
+  late DateTime _currentDate;
+  ItemBalanceCardModel? _currentCard;
+  CurrencyData? _currencyData;
+  StreamSubscription<int>? _monthSub;
+  StreamSubscription<ItemOperationModel>? _operationSub;
+  StreamSubscription<ItemBalanceCardModel>? _cardSub;
 
   LastOperationesCubit(
     this._lastOperationRepo,
@@ -26,14 +34,11 @@ class LastOperationesCubit extends Cubit<LastOperationState> {
     this._currenciesRepo,
   ) : super(LastOperationInitial());
 
-  late DateTime _currentDate;
-  ItemBalanceCardModel? _currentCard;
-  CurrencyData? _currencyData;
-
   Future<void> initial() async {
-    _monthRepositoty.getMonth().listen(_listenerMonth);
-    _createOperRepo.getNewOperation().listen(_listenerNewOperation);
-    _balanceCardRepo.cardIdStream().listen(_listenCardsScroll);
+    _monthSub = _monthRepositoty.getMonth().listen(_listenerMonth);
+    _operationSub =
+        _createOperRepo.getNewOperation().listen(_listenerNewOperation);
+    _cardSub = _balanceCardRepo.cardIdStream().listen(_listenCardsScroll);
     _currentCard = _balanceCardRepo.currentBalanceCard;
     await _getCurrencyById(_currentCard!.currencyId);
 
@@ -46,11 +51,13 @@ class LastOperationesCubit extends Cubit<LastOperationState> {
   }
 
   Future<void> _listenerMonth(int event) async {
+    if (isClosed) return;
     _currentDate = _monthRepositoty.listOfMonth[event];
     await _getItemMonthOperationes();
   }
 
   void _listenerNewOperation(ItemOperationModel model) {
+    if (isClosed) return;
     final isAdded = _lastOperationRepo.addNewOperationes(model);
     if (isAdded) {
       emit(LastOperationLoadingState());
@@ -60,6 +67,7 @@ class LastOperationesCubit extends Cubit<LastOperationState> {
   }
 
   void _listenCardsScroll(ItemBalanceCardModel? currentCard) async {
+    if (isClosed) return;
     emit(LastOperationLoadingState());
     _currentCard = currentCard;
     _currentDate = DateTime.now();
@@ -85,4 +93,12 @@ class LastOperationesCubit extends Cubit<LastOperationState> {
 
   CategoriesOperationTableData getCategoriesById(int id) =>
       _lastOperationRepo.getCategoryById(id);
+
+  @override
+  Future<void> close() {
+    _cardSub?.cancel();
+    _monthSub?.cancel();
+    _operationSub?.cancel();
+    return super.close();
+  }
 }
