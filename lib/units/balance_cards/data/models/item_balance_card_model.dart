@@ -3,6 +3,7 @@ import 'package:uuid/uuid.dart';
 
 part 'item_balance_card_model.freezed.dart';
 part 'item_balance_card_model.g.dart';
+
 // coverage:ignore-file
 @freezed
 class ItemBalanceCardModel with _$ItemBalanceCardModel {

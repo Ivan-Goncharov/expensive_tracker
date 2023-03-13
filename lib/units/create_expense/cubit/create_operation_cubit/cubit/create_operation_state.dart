@@ -46,3 +46,11 @@ class CreateOperationSucces implements CreateOperationState {
   @override
   bool? get stringify => true;
 }
+
+class CreateOperationLoading implements CreateOperationState {
+  @override
+  List<Object> get props => [6];
+
+  @override
+  bool? get stringify => true;
+}

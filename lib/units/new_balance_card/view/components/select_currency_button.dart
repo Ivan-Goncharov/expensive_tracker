@@ -1,7 +1,7 @@
 import 'package:expensive_tracker_app/data/app_db/app_db.dart';
 
-import 'package:expensive_tracker_app/helpers/container_neomorphic_emboss.dart';
 import 'package:expensive_tracker_app/helpers/crypto_logo_image.dart';
+import 'package:expensive_tracker_app/units/add_balance_card/view/components/input_container_material.dart';
 import 'package:expensive_tracker_app/units/routes/routes.dart';
 
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
@@ -24,15 +24,19 @@ class SelectCurrencyButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.of(context).pushNamed(searchCurrensiesRoute),
-      child: ContainerNemorophicEmboss(
-        widget: _SelectCurrencyTitle(currency, isAddBalance),
-        height: height,
-        width: width ?? MediaQuery.of(context).size.width * 0.5,
-        boxShape: boxShape,
-        alignment: isAddBalance ? Alignment.centerLeft : Alignment.center,
-      ),
-    );
+        onTap: () => Navigator.of(context).pushNamed(searchCurrensiesRoute),
+        child: InputContainerMaterial(
+          child: _SelectCurrencyTitle(currency, isAddBalance),
+        )
+
+        // ContainerNemorophicEmboss(
+        //   widget: ,
+        //   height: height,
+        //   width: width ?? MediaQuery.of(context).size.width * 0.5,
+        //   boxShape: boxShape,
+        //   alignment: isAddBalance ? Alignment.centerLeft : Alignment.center,
+        // ),
+        );
   }
 }
 

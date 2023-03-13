@@ -31,21 +31,18 @@ class _OperationCategoryBody extends StatelessWidget {
       buildWhen: (previous, current) => true,
       builder: (context, state) {
         if (state is OperationChangeCategoryState) {
-          return Flexible(
-            fit: FlexFit.loose,
-            child: GridView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 4,
-                crossAxisSpacing: 8.0,
-              ),
-              itemBuilder: (_, index) {
-                return ItemCategory(
-                    itemCategory: state.categories[index], index: index);
-              },
-              itemCount: state.categories.length,
+          return GridView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 4,
+              crossAxisSpacing: 8.0,
             ),
+            itemBuilder: (_, index) {
+              return ItemCategory(
+                  itemCategory: state.categories[index], index: index);
+            },
+            itemCount: state.categories.length,
           );
         } else {
           return const SizedBox();

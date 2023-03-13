@@ -1,5 +1,5 @@
 abstract class StartScreenRepo {
-  Future<bool> isFirstStart();
+  bool isFirstStart();
 
   Future<void> saveStartInfo();
 

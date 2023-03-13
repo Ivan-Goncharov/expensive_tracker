@@ -1,13 +1,13 @@
 import 'package:drift/drift.dart';
-import 'package:expensive_tracker_app/constants/shared_pref_constants.dart';
+import 'package:expensive_tracker_app/constants/prefs_constant.dart';
 import 'package:expensive_tracker_app/data/app_db/app_db.dart';
+import 'package:expensive_tracker_app/data/storage_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class StartScreenService {
   /// Заходим ли мы впервые в приложение или нет.
   /// [true] - если уже заходили.
-  Future<bool> isNotFirstStart();
+  bool isNotFirstStart();
 
   Future<void> saveFirstStart();
 
@@ -17,11 +17,15 @@ abstract class StartScreenService {
 }
 
 class StartScreenServiceImpl implements StartScreenService {
+  late final StorageProvider _storage;
+  StartScreenServiceImpl(StorageProvider provider) {
+    _storage = provider;
+  }
   @override
-  Future<bool> isNotFirstStart() async {
-    final prefs = await SharedPreferences.getInstance();
+  bool isNotFirstStart() {
     try {
-      final isFirstStart = prefs.getBool(isFirstStartConst);
+      final isFirstStart =
+          _storage.prefs.get(PrefKeys.isFirstStartConst) as bool?;
       if (isFirstStart == null) {
         return false;
       } else {
@@ -34,20 +38,21 @@ class StartScreenServiceImpl implements StartScreenService {
   }
 
   @override
-  Future<void> saveFirstStart() async {
-    final prefs = await SharedPreferences.getInstance();
-    prefs.setBool(isFirstStartConst, true);
-  }
+  Future<void> saveFirstStart() =>
+      _storage.prefs.put(PrefKeys.isFirstStartConst, true);
 
   @override
-  Future<List<CategoriesOperationTableData>> getCategories() {
-    return database.getAllCategories();
+  Future<List<CategoriesOperationTableData>> getCategories() async {
+    final list = await _storage.database.getAllCategories();
+    return list;
   }
 
   @override
   Future<List<DateTime>> getMonthList() async {
-    final lastDate = await database.getTimeSingleOperation(OrderingMode.desc);
-    final firstDate = await database.getTimeSingleOperation(OrderingMode.asc);
+    final lastDate =
+        await _storage.database.getTimeSingleOperation(OrderingMode.desc);
+    final firstDate =
+        await _storage.database.getTimeSingleOperation(OrderingMode.asc);
     final list = <DateTime>[];
     var tempDate = DateTime(firstDate.year, firstDate.month);
 
@@ -59,6 +64,7 @@ class StartScreenServiceImpl implements StartScreenService {
         tempDate = DateTime(tempDate.year, tempDate.month + 1);
       }
     }
+
     return list;
   }
 }

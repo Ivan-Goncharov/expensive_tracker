@@ -1,4 +1,6 @@
+import 'package:expensive_tracker_app/constants/prefs_constant.dart';
 import 'package:expensive_tracker_app/data/app_db/app_db.dart';
+import 'package:expensive_tracker_app/data/storage_provider.dart';
 import 'package:expensive_tracker_app/units/balance_cards/data/models/item_balance_card_model.dart';
 import 'package:expensive_tracker_app/units/balance_cards/data/models/month_operation_amount_model.dart';
 import 'package:expensive_tracker_app/units/create_expense/data/model/item_operation_model.dart';
@@ -7,8 +9,6 @@ abstract class BalanceCardsService {
   Future<void> saveNewCard(ItemBalanceCardModel balanceCard);
 
   Future<List<ItemBalanceCardModel>> getAllCards();
-
-  // Future<void> updateBalanceCardInfo(ItemBalanceCardModel balanceCard);
 
   /// Получение списка опредленного типа валют.
   /// [type] - тип валюты: 0 - обычная, 1 - крипта.
@@ -23,26 +23,40 @@ abstract class BalanceCardsService {
   Future<ItemBalanceCardModel> getItemBalanceCardModel(String id);
 
   Future<MonthOperationAmountModel> getAmountMonthOperationes(
-      DateTime dateTime);
+    DateTime dateTime,
+    String cardId,
+  );
+
+  /// Получние id текущей карты.
+  String? currentBalanceCardId();
+
+  /// Сохранение id текущей карты.
+  void saveCurrentBalanceCardId(String id);
 }
 
 class BalanceCardServiceImpl implements BalanceCardsService {
-  const BalanceCardServiceImpl();
+  late final AppDb _dbStorage;
+  late final StorageProvider _storage;
+  BalanceCardServiceImpl(StorageProvider provider) {
+    _dbStorage = provider.database;
+    _storage = provider;
+  }
 
   @override
   Future<List<ItemBalanceCardModel>> getAllCards() async {
-    return database.getAllBalanceCards();
+    return _dbStorage.getAllBalanceCards();
   }
 
   @override
   Future<void> saveNewCard(ItemBalanceCardModel balanceCard) async {
-    await database.addNewBalanceCard(balanceCard.toInsertable());
+    await _dbStorage.addNewBalanceCard(balanceCard.toInsertable());
+    _storage.prefs.put(PrefKeys.lastBalanceCardId, balanceCard.id);
   }
 
   @override
   Future<MonthOperationAmountModel> getAmountMonthOperationes(
-      DateTime dateTime) async {
-    final data = await database.getNotesOperation(dateTime);
+      DateTime dateTime, String cardId) async {
+    final data = await _dbStorage.getNotesOperation(dateTime, cardId);
     double income = 0.0;
     double expense = 0.0;
     for (final item in data) {
@@ -52,21 +66,30 @@ class BalanceCardServiceImpl implements BalanceCardsService {
         expense += item.amount;
       }
     }
-    return MonthOperationAmountModel(expense: expense, income: income);
+    return MonthOperationAmountModel(
+        expense: expense, income: income, monthAndYear: dateTime);
   }
 
   @override
   Future<ItemBalanceCardModel> getItemBalanceCardModel(String id) {
-    return database.getItemBalanceCard(id);
+    return _dbStorage.getItemBalanceCard(id);
   }
 
   @override
   Future<List<CurrencyData>> getSpecificTypeCurrencies(int type) async {
-    return database.getSpecificTypeCurrencies(type);
+    return _dbStorage.getSpecificTypeCurrencies(type);
   }
 
   @override
   Future<CurrencyData> getItemCurrencyData(int id) {
-    return database.getItemCurrencyData(id);
+    return _dbStorage.getItemCurrencyData(id);
   }
+
+  @override
+  String? currentBalanceCardId() =>
+      _storage.prefs.get(PrefKeys.lastBalanceCardId) as String?;
+
+  @override
+  void saveCurrentBalanceCardId(String id) =>
+      _storage.prefs.put(PrefKeys.lastBalanceCardId, id);
 }

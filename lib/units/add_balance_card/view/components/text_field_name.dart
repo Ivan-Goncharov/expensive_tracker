@@ -1,4 +1,4 @@
-import 'package:expensive_tracker_app/helpers/container_neomorphic_emboss.dart';
+import 'package:expensive_tracker_app/units/add_balance_card/view/components/input_container_material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
@@ -17,9 +17,8 @@ class AddCardNameText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ContainerNemorophicEmboss(
-      boxShape: null,
-      widget: TextFormField(
+    return InputContainerMaterial(
+      child: TextFormField(
         textInputAction: TextInputAction.next,
         style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
         decoration: InputDecoration.collapsed(
@@ -34,8 +33,6 @@ class AddCardNameText extends StatelessWidget {
         inputFormatters: inputFormatters,
         onChanged: function,
       ),
-      height: 50,
-      width: MediaQuery.of(context).size.width * 0.8,
     );
   }
 }

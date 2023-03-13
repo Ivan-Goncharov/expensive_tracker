@@ -14,41 +14,6 @@ import 'package:path/path.dart' as path;
 
 part 'app_db.g.dart';
 
-late AppDb database;
-
-void initDb() {
-  database = AppDb();
-}
-
-Future<void> deleteBdFromDisk() async {
-  final dbPath = await _getDataBasePath();
-
-  final file = File(dbPath);
-  if (file.existsSync()) {
-    await database.close();
-    file.deleteSync();
-  }
-}
-
-LazyDatabase _openConnection() {
-  return LazyDatabase(() async {
-    final dbPath = await _getDataBasePath();
-    final file = File(dbPath);
-    if (!await file.exists()) {
-      final blob = await rootBundle.load('assets/my_db.db');
-      final buffer = blob.buffer;
-      await file.writeAsBytes(
-          buffer.asUint8List(blob.offsetInBytes, blob.lengthInBytes));
-    }
-    return NativeDatabase(file);
-  });
-}
-
-Future<String> _getDataBasePath() async {
-  final documents = await getApplicationDocumentsDirectory();
-  return path.join(documents.path, 'app.db');
-}
-
 @DriftDatabase(
     tables: [NoteOperation, CategoriesOperationTable, BalanceCards, Currency])
 class AppDb extends _$AppDb {
@@ -58,9 +23,11 @@ class AppDb extends _$AppDb {
   int get schemaVersion => 1;
 
   /// Получение списка всех записей.
-  Future<List<ItemOperationModel>> getNotesOperation(DateTime date) {
+  Future<List<ItemOperationModel>> getNotesOperation(
+      DateTime date, String cardId) {
     return (select(noteOperation)
           ..where((tbl) =>
+              tbl.cardId.equals(cardId) &
               tbl.dateOperation.year.equals(date.year) &
               tbl.dateOperation.month.equals(date.month))
           ..orderBy([
@@ -163,6 +130,17 @@ class AppDb extends _$AppDb {
         .get();
   }
 
+  /// Удаление базы
+  Future<void> deleteBdFromDisk() async {
+    final dbPath = await _getDataBasePath();
+
+    final file = File(dbPath);
+    if (file.existsSync()) {
+      await close();
+      file.deleteSync();
+    }
+  }
+
   // Future<void> exportInto(File file) async {
   //   // Make sure the directory of the target file exists
   //   await file.parent.create(recursive: true);
@@ -185,4 +163,23 @@ class AppDb extends _$AppDb {
   //     Insertable<CategoriesOperationTableData> category) {
   //   return into(categoriesOperationTable).insert(category);
   // }
+}
+
+LazyDatabase _openConnection() {
+  return LazyDatabase(() async {
+    final dbPath = await _getDataBasePath();
+    final file = File(dbPath);
+    if (!await file.exists()) {
+      final blob = await rootBundle.load('assets/my_db.db');
+      final buffer = blob.buffer;
+      await file.writeAsBytes(
+          buffer.asUint8List(blob.offsetInBytes, blob.lengthInBytes));
+    }
+    return NativeDatabase(file);
+  });
+}
+
+Future<String> _getDataBasePath() async {
+  final documents = await getApplicationDocumentsDirectory();
+  return path.join(documents.path, 'app.db');
 }

@@ -6,7 +6,8 @@ abstract class LastOperationesRepo {
   set categories(List<CategoriesOperationTableData> val);
 
   List<ItemOperationModel> get operationes;
-  Future<List<ItemOperationModel>> getLastOperationes(DateTime date);
+  Future<List<ItemOperationModel>> getLastOperationes(
+      DateTime date, String cardId);
   bool addNewOperationes(ItemOperationModel operationModel);
 
   List<CategoriesOperationTableData> getTypeCategories(OperationType type);

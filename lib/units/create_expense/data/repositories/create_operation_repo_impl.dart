@@ -18,16 +18,18 @@ class CreateOperationRepoImpl implements CreateOperationRepository {
     required double amount,
     required OperationType type,
     required DateTime dateTime,
+    required String cardId,
   }) async {
     final operation = ItemOperationModel.create(
       category: categoty,
       amount: amount,
       type: type,
       dateOperation: dateTime,
-      cardId: getIt<BalanceCardRepo>().currentBalanceCard.id,
+      cardId: cardId,
     );
     try {
       await _createOpeartionService.createOperation(operation);
+      getIt<BalanceCardRepo>().changeAmountBalanceCard(operation);
       _newOperationController.add(operation);
     } catch (er, st) {
       debugPrint('$er\n$st');

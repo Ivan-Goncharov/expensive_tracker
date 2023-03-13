@@ -17,7 +17,7 @@ void main() {
 
   setUp(() => EquatableConfig.stringify = true);
 
-  tearDownAll(() { 
+  tearDownAll(() {
     getIt<CurrenciesRepo>().dispose();
   });
 
@@ -50,7 +50,7 @@ void main() {
     build: () => getIt<AddNewBalanceCardCubit>(),
     act: (cubit) async {
       final repo = getIt<CurrenciesRepo>();
-      currencyData = await repo.getCurrencyById(1); 
+      currencyData = await repo.getCurrencyById(1);
       cubit.listenerCurrencies(currencyData);
     },
     expect: () => [
@@ -74,7 +74,7 @@ void main() {
       cubit.saveCard();
     },
     expect: () => [
-      AddNewBalanceCardLoadedState(true, currencyData:currencyData ),
+      AddNewBalanceCardLoadedState(true, currencyData: currencyData),
       AddNewBalanceCardSucceful(),
     ],
   );

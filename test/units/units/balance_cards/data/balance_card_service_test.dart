@@ -45,8 +45,8 @@ void main() {
   /// Test get amount month operationes
   test('BalanceCardsService get amoun month operation test', () async {
     final service = getIt<BalanceCardsService>();
-    final monthOperationModel =
-        await service.getAmountMonthOperationes(DateTime.now());
+    final monthOperationModel = await service.getAmountMonthOperationes(
+        DateTime.now(), mockBalanceModel.id);
     expect(monthOperationModel.income, 0.0);
     expect(monthOperationModel.expense, 0.0);
   });
@@ -59,5 +59,20 @@ void main() {
     final dbBalanceModel =
         await service.getItemBalanceCardModel(balanceModel.id);
     expect(dbBalanceModel, balanceModel);
+  });
+
+  /// Test get currentBalanceCard
+  test('BalanceCardsService get currentBalanceCardId test', () {
+    final service = getIt<BalanceCardsService>();
+    final result = service.currentBalanceCardId();
+    expect(result, null);
+  });
+
+  test('BalanceCardsService saveCurrentBalanceCardId test', () {
+    const cardId = '123455';
+    final service = getIt<BalanceCardsService>();
+    service.saveCurrentBalanceCardId(cardId);
+    final result = service.currentBalanceCardId();
+    expect(result, cardId);
   });
 }

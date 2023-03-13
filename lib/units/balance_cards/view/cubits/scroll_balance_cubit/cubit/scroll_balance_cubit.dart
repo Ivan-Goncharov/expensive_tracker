@@ -6,8 +6,20 @@ import 'package:flutter/material.dart';
 class ScrollBalanceCubit extends Cubit<ScrollBalanceState> {
   final BalanceCardRepo _repo;
   ScrollBalanceCubit(this._repo) : super(ScrollBalanceInitialState());
-  final _pageController = PageController(viewportFraction: 0.8);
+  PageController? _pageController;
+
   void initial() {
-    emit(ScrollBalanceLoadedState(_repo.listOfCards, _pageController));
+    final initialPage = _repo.listOfCards.indexOf(_repo.currentBalanceCard!);
+    _pageController =
+        PageController(viewportFraction: 0.8, initialPage: initialPage);
+
+    emit(ScrollBalanceLoadedState(_repo.listOfCards, _pageController!));
+    _pageController!.addListener(() {
+      final page = _pageController!.page!;
+      if (page == page.roundToDouble()) {
+        _repo
+            .addCardInStream(_repo.listOfCards[_pageController!.page!.toInt()]);
+      }
+    });
   }
 }

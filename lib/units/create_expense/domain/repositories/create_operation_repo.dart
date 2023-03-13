@@ -7,5 +7,6 @@ abstract class CreateOperationRepository {
     required double amount,
     required OperationType type,
     required DateTime dateTime,
+    required String cardId,
   });
 }

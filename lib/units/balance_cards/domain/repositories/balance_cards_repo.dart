@@ -11,17 +11,18 @@ abstract class BalanceCardRepo {
 
   Future<List<ItemBalanceCardModel>> getAllCards();
 
-  ItemBalanceCardModel get currentBalanceCard;
+  ItemBalanceCardModel? get currentBalanceCard;
 
-  MonthOperationAmountModel get operationAmountModel;
-
-  Future<void> getOperationesMonthSumm(DateTime dateTime);
-
-  bool addNewOperation(ItemOperationModel model);
-
-  Future<void> getNewBalanceCardAmount(String id);
+  Future<MonthOperationAmountModel> getOperationesMonthSumm(
+      DateTime dateTime, String cardID);
 
   List<ItemBalanceCardModel> get listOfCards;
+
+  void addCardInStream(ItemBalanceCardModel card);
+
+  void changeAmountBalanceCard(ItemOperationModel operation);
+
+  Stream<ItemBalanceCardModel> cardIdStream();
 
   void clearData();
 }

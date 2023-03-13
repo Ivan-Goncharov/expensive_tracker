@@ -95,6 +95,7 @@ class _AddCardLoadedBody extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             const AddCardFieldTitle(SResources.currency),
+            const SizedBox(height: 8),
             SelectCurrencyButton(
               loadedState.currencyData,
               height: 50,

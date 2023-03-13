@@ -22,8 +22,7 @@ class ItemOperationModel with _$ItemOperationModel {
     required OperationType type,
     required DateTime dateOperation,
     required String cardId,
-  }) { 
-
+  }) {
     return ItemOperationModel(
       id: const Uuid().v4(),
       category: category,
@@ -50,6 +49,6 @@ class ItemOperationModel with _$ItemOperationModel {
 }
 
 enum OperationType {
-  income,
   expense,
+  income,
 }

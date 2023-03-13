@@ -45,36 +45,33 @@ class _SpendingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
     return Row(
       children: [
         Container(
           padding: const EdgeInsets.all(8.0),
           decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.onPrimary,
-            shape: BoxShape.circle,
-          ),
+              color: colors.background,
+              shape: BoxShape.circle,
+              border: Border.all(color: colors.primary)),
           child: Icon(
             icon,
             size: 16,
             color: color,
           ),
         ),
-        const SizedBox(
-          width: 5,
-        ),
+        const SizedBox(width: 5),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               title,
-              style: const TextStyle(color: Colors.grey),
+              style: TextStyle(color: colors.outline),
             ),
             AnimatedFlipCounter(
               value: quantity,
               duration: const Duration(milliseconds: 500),
-              textStyle: const TextStyle(
-                color: Colors.black,
-              ),
+              textStyle: TextStyle(color: colors.onSurfaceVariant),
             )
           ],
         )

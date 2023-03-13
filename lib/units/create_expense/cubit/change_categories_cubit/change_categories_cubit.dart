@@ -13,7 +13,10 @@ class ChangeCategoriesCubit extends Cubit<ChangeCategoriesState> {
 
   void initial() {
     listExpense = lastOperRepo.getTypeCategories(OperationType.expense);
+    // print('DEBUG EXPENSE ${listExpense}');
     listIncome = lastOperRepo.getTypeCategories(OperationType.income);
+    // print('DEBUG income ${listIncome}');
+
     emit(CreateExpenseState(listExpense));
   }
 

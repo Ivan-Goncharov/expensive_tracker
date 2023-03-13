@@ -21,7 +21,7 @@ class NavigatorCubit extends Cubit<NavigationState> {
       currentPage: _currentPage,
       scrollController: _scrollController,
       listOfCards: _repo.listOfCards,
-      selectIdCard: _repo.currentBalanceCard.id,
+      selectIdCard: _repo.currentBalanceCard!.id,
     ));
   }
 
@@ -30,7 +30,7 @@ class NavigatorCubit extends Cubit<NavigationState> {
       currentPage: _currentPage,
       scrollController: _scrollController,
       listOfCards: _repo.listOfCards,
-      selectIdCard: _repo.currentBalanceCard.id,
+      selectIdCard: _repo.currentBalanceCard!.id,
     ));
   }
 }

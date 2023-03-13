@@ -20,6 +20,10 @@ class OperationesStatsView extends StatelessWidget {
                     Navigator.pushNamed(context, addNewBalanceCardRoute),
               ),
               const SizedBox(height: 10),
+              TextButton(
+                  onPressed: () =>
+                      Navigator.pushNamed(context, settingsAppRoute),
+                  child: const Text('Open settings screen'))
             ],
           ),
         ),
