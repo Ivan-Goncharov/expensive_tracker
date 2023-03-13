@@ -1,7 +1,7 @@
 import 'package:expensive_tracker_app/constants/string_constants.dart';
 import 'package:expensive_tracker_app/get_it.dart';
 import 'package:expensive_tracker_app/helpers/default_app_bar.dart';
-import 'package:expensive_tracker_app/units/create_expense/components/change_operation_data/view/change_operation_data.dart';
+import 'package:expensive_tracker_app/units/create_expense/components/change_operation_data/change_operation_data.dart';
 import 'package:expensive_tracker_app/units/create_expense/components/date_title/view/date_titile.dart';
 import 'package:expensive_tracker_app/units/create_expense/components/input_money_quantity/view/input_money_quantity.dart';
 import 'package:expensive_tracker_app/units/create_expense/components/switch_operation/switch_operation.dart';

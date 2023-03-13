@@ -13,7 +13,7 @@ extension FormatCurrency on double {
     final formatter = NumberFormat.simpleCurrency(
         decimalDigits: decimialDigits, locale: 'en_US');
 
-    return formatter.format(this).substring(1);
+    return formatter.format(this).replaceFirst('\$', '');
   }
 }
 

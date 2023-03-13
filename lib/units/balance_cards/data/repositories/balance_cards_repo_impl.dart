@@ -62,17 +62,6 @@ class BalanceCardsRepoImpl implements BalanceCardRepo {
         cardId,
       );
 
-  // @override
-  // Future<void> getNewBalanceCardAmount(String id) async {
-  //   // Получаем карту по id c обновленными данными.
-  //   final card = await _balanceCardService.getItemBalanceCardModel(id);
-  //   // Если эта карта активная - обновляем значения активной карты.
-  //   if (_currentSelectCard!.id == id) _currentSelectCard = card;
-  //   // Обновлеем элемент в списке.
-  //   _listOfCards.removeWhere((card) => card.id == id);
-  //   _listOfCards.add(card);
-  // }
-
   @override
   void addCardInStream(ItemBalanceCardModel card) {
     _balanceCardsController.add(card);
@@ -89,7 +78,7 @@ class BalanceCardsRepoImpl implements BalanceCardRepo {
     final index =
         _listOfCards.indexWhere((card) => card.id == operation.cardId);
     var card = _listOfCards[index];
-    var newAmount = operation.category == 0
+    var newAmount = operation.type == OperationType.expense
         ? card.amount - operation.amount
         : card.amount + operation.amount;
 
