@@ -2,12 +2,17 @@ import 'package:flutter/material.dart';
 
 class InputContainerMaterial extends StatelessWidget {
   final Widget child;
-  const InputContainerMaterial({super.key, required this.child});
+  final double elevation;
+  const InputContainerMaterial({
+    super.key,
+    required this.child,
+    this.elevation = 10,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Material(
-      elevation: 20,
+      elevation: elevation,
       borderRadius: BorderRadius.circular(8),
       child: Container(
           decoration: BoxDecoration(

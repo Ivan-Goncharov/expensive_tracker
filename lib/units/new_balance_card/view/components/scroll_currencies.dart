@@ -11,39 +11,36 @@ class ScrollCurrencies extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Neumorphic(
-        style: NeumorphicStyle(color: Theme.of(context).colorScheme.background),
-        child: ListView.separated(
-          itemBuilder: (context, index) {
-            final itemCurr = listOfCurrencies[index];
-            return InkWell(
-              onTap: () => context
-                  .read<SearchCurrencyCubit>()
-                  .selectCurrencyData(itemCurr),
-              child: Container(
-                padding: const EdgeInsets.all(16.0),
-                width: double.infinity,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      itemCurr.name,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontSize: 16,
-                      ),
+      child: ListView.separated(
+        itemBuilder: (context, index) {
+          final itemCurr = listOfCurrencies[index];
+          return InkWell(
+            onTap: () => context
+                .read<SearchCurrencyCubit>()
+                .selectCurrencyData(itemCurr),
+            child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 16.0),
+              width: double.infinity,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    itemCurr.name,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontSize: 16,
                     ),
-                    _LeadingCurrency(itemCurr),
-                  ],
-                ),
+                  ),
+                  _LeadingCurrency(itemCurr),
+                ],
               ),
-            );
-          },
-          itemCount: listOfCurrencies.length,
-          separatorBuilder: (_, index) {
-            return const Divider(height: 2, color: Color(0xFF9E9E9E));
-          },
-        ),
+            ),
+          );
+        },
+        itemCount: listOfCurrencies.length,
+        separatorBuilder: (_, index) {
+          return const Divider(height: 2, color: Color(0xFF9E9E9E));
+        },
       ),
     );
   }
@@ -59,7 +56,7 @@ class _LeadingCurrency extends StatelessWidget {
       return Text(
         currency.code,
         style: const TextStyle(
-          fontWeight: FontWeight.w400,
+          fontWeight: FontWeight.w500,
           fontSize: 16,
         ),
       );

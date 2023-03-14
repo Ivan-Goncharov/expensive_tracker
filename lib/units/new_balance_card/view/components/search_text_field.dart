@@ -1,5 +1,5 @@
 import 'package:expensive_tracker_app/constants/string_constants.dart';
-import 'package:expensive_tracker_app/helpers/container_neomorphic_emboss.dart';
+import 'package:expensive_tracker_app/units/add_balance_card/view/components/input_container_material.dart';
 import 'package:flutter/material.dart';
 
 class SearchCurrencyTextField extends StatelessWidget {
@@ -8,17 +8,14 @@ class SearchCurrencyTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ContainerNemorophicEmboss(
-      boxShape: null,
-      widget: TextField(
+    return InputContainerMaterial(
+      elevation: 6,
+      child: TextField(
         controller: textEditingController,
-        textAlign: TextAlign.center,
         style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 16),
         decoration:
             const InputDecoration.collapsed(hintText: SResources.searchHint),
       ),
-      height: 40,
-      width: double.infinity,
     );
   }
 }
