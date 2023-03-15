@@ -35,6 +35,8 @@ dependencies:
   document_file_save_plus: ^1.0.9
   bloc_test: ^9.1.1
   hive_flutter: ^1.1.0 
+  slang: ^3.14.0
+  slang_flutter: ^3.14.0
 
   
 
@@ -48,6 +50,7 @@ dev_dependencies:
   json_serializable: ^6.5.4
   theme_tailor: ^1.0.8 
   theme_tailor_annotation: ^1.0.3
+  slang_build_runner: ^3.14.0
   
 
 # For information on the generic Dart part of this file, see the
