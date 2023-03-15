@@ -31,15 +31,22 @@ class MyApp extends StatelessWidget {
     return BlocBuilder<ThemesBloc, ThemesState>(
       builder: (context, state) {
         return MaterialApp(
-          themeMode: state.getThemeMode(),
-          darkTheme: MyThemeApp.darkTheme,
-          theme: MyThemeApp.lightTheme,
-          initialRoute: '/',
-          onGenerateRoute: getRoutes,
-          locale: TranslationProvider.of(context).flutterLocale, // use provider
-          supportedLocales: AppLocaleUtils.supportedLocales,
-          localizationsDelegates: GlobalMaterialLocalizations.delegates,
-        );
+            themeMode: state.getThemeMode(),
+            darkTheme: MyThemeApp.darkTheme,
+            theme: MyThemeApp.lightTheme,
+            initialRoute: '/',
+            onGenerateRoute: getRoutes,
+            locale:
+                TranslationProvider.of(context).flutterLocale, // use provider
+            supportedLocales: const [
+              Locale('en'),
+              Locale('ru'),
+            ],
+            localizationsDelegates: const [
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ]);
       },
     );
   }
