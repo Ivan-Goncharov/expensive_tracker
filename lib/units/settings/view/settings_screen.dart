@@ -1,4 +1,4 @@
-import 'package:expensive_tracker_app/constants/string_constants.dart';
+import 'package:expensive_tracker_app/i18n/translations.g.dart';
 import 'package:expensive_tracker_app/theme/cubit/themes_bloc.dart';
 import 'package:expensive_tracker_app/theme/cubit/themes_state.dart';
 import 'package:flutter/cupertino.dart';
@@ -20,7 +20,7 @@ class SettingsScreen extends StatelessWidget {
           children: [
             /// Заголовок
             Text(
-              SResources.settings,
+              t.strings.settings,
               style: TextStyle(
                 fontSize: 30,
                 fontWeight: FontWeight.bold,
@@ -30,12 +30,12 @@ class SettingsScreen extends StatelessWidget {
             const SizedBox(height: 20),
 
             /// Смена темы
-            const _SettingsElement(
-              title: SResources.darkMode,
-              backgroundColor: Color(0xffE5D1FA),
-              iconColor: Color(0xff655DBB),
+            _SettingsElement(
+              title: t.strings.darkMode,
+              backgroundColor: const Color(0xffE5D1FA),
+              iconColor: const Color(0xff655DBB),
               iconData: FontAwesomeIcons.solidMoon,
-              trailing: _ThemeSwitcher(),
+              trailing: const _ThemeSwitcher(),
             ),
           ],
         ),

@@ -1,4 +1,5 @@
 import 'package:expensive_tracker_app/get_it.dart';
+import 'package:expensive_tracker_app/i18n/translations.g.dart';
 import 'package:expensive_tracker_app/units/balance_cards/view/balance_card_view.dart';
 import 'package:expensive_tracker_app/units/balance_cards/view/cubits/scroll_balance_cubit/cubit/scroll_balance_cubit.dart';
 import 'package:flutter/material.dart';

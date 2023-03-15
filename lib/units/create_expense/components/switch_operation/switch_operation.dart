@@ -1,4 +1,4 @@
-import 'package:expensive_tracker_app/constants/string_constants.dart';
+import 'package:expensive_tracker_app/i18n/translations.g.dart';
 import 'package:expensive_tracker_app/units/create_expense/cubit/change_categories_cubit/change_categories_cubit.dart';
 import 'package:expensive_tracker_app/units/create_expense/cubit/create_operation_cubit/cubit/create_operation_cubit.dart';
 import 'package:flutter/material.dart';
@@ -30,9 +30,9 @@ class SwitchOperation extends StatelessWidget {
             borderWidth: 1,
             activeBgColor: [colors.primary],
             activeFgColor: colors.onPrimary,
-            labels: const [
-              SResources.expense,
-              SResources.income,
+            labels: [
+              t.strings.expense,
+              t.strings.income,
             ],
             onToggle: (index) {
               context.read<ChangeCategoriesCubit>().changeState(index!);

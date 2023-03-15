@@ -1,4 +1,4 @@
-import 'package:expensive_tracker_app/constants/string_constants.dart';
+import 'package:expensive_tracker_app/i18n/translations.g.dart';
 import 'package:expensive_tracker_app/units/new_balance_card/view/cubits/search_currency_cubit/search_currency_cubit.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
@@ -32,12 +32,11 @@ class SearchCurrencyToggle extends StatelessWidget {
               borderWidth: 1,
               activeBgColor: [colors.primary],
               activeFgColor: colors.onPrimary,
-              labels: const [
-                SResources.currencyTitle,
-                SResources.crytoCurrencyTitle,
+              labels: [
+                t.strings.currencyTitle,
+                t.strings.crytoCurrencyTitle,
               ],
               onToggle: (value) {
-                print('DEBUG VAUE $value');
                 context.read<SearchCurrencyCubit>().changeToogleSwitch(value!);
               }),
           // ),

@@ -1,5 +1,5 @@
-import 'package:expensive_tracker_app/constants/string_constants.dart';
 import 'package:expensive_tracker_app/get_it.dart';
+import 'package:expensive_tracker_app/i18n/translations.g.dart';
 import 'package:expensive_tracker_app/units/last_operationes/cubit/last_operationes_cubit.dart';
 import 'package:expensive_tracker_app/units/last_operationes/cubit/last_operationes_state.dart';
 import 'package:expensive_tracker_app/units/last_operationes/view/components/error_or_loading.dart';
@@ -35,15 +35,15 @@ class _LastOperationesViewBody extends StatelessWidget {
             child: CircularProgressIndicator(),
           );
         } else if (state is LastOperationErrorState) {
-          return const ErrorOrEmptyLastTransactions(
-            title: SResources.error,
+          return ErrorOrEmptyLastTransactions(
+            title: t.strings.error,
             iconData: FontAwesomeIcons.triangleExclamation,
           );
         } else if (state is LastOperationLoadedState) {
           return OperationesScroll(state.operations);
         } else if (state is LastOperationEmptyState) {
-          return const ErrorOrEmptyLastTransactions(
-            title: SResources.emptyList,
+          return ErrorOrEmptyLastTransactions(
+            title: t.strings.emptyList,
             iconData: FontAwesomeIcons.magnifyingGlassMinus,
           );
         } else {

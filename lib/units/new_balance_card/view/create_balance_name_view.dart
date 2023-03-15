@@ -1,6 +1,6 @@
+import 'package:expensive_tracker_app/i18n/translations.g.dart';
 import 'package:expensive_tracker_app/units/new_balance_card/view/cubits/create_name_cubit/cubit/create_card_name_cubit%20copy.dart';
 import 'package:expensive_tracker_app/units/routes/routes.dart';
-import 'package:expensive_tracker_app/constants/string_constants.dart';
 import 'package:expensive_tracker_app/get_it.dart';
 import 'package:expensive_tracker_app/units/new_balance_card/view/components/balance_icon.dart';
 import 'package:expensive_tracker_app/units/new_balance_card/view/components/create_card_title.dart';
@@ -66,7 +66,7 @@ class _CreateBalanceNameBody extends StatelessWidget {
                   children: [
                     const BalanceIcon(FontAwesomeIcons.filePen),
                     const SizedBox(height: 20),
-                    const CreateCardTitle(SResources.selectCurrencyOfCard),
+                    CreateCardTitle(t.strings.selectCurrencyOfCard),
                     const SizedBox(height: 20),
                     TextFieldCard(state.textController),
                     const SizedBox(height: 20),

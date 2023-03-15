@@ -1,4 +1,4 @@
-import 'package:expensive_tracker_app/constants/string_constants.dart';
+import 'package:expensive_tracker_app/i18n/translations.g.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 class NextButtonView extends StatelessWidget {
@@ -24,9 +24,9 @@ class NextButtonView extends StatelessWidget {
             alignment: Alignment.center,
             width: MediaQuery.of(context).size.width * 0.5,
             height: 40,
-            child: const Text(
-              SResources.nextButtonCreate,
-              style: TextStyle(
+            child: Text(
+              t.strings.nextButtonCreate,
+              style: const TextStyle(
                 fontWeight: FontWeight.w600,
                 fontSize: 16,
               ),

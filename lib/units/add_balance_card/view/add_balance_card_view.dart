@@ -1,6 +1,6 @@
-import 'package:expensive_tracker_app/constants/string_constants.dart';
 import 'package:expensive_tracker_app/get_it.dart';
 import 'package:expensive_tracker_app/helpers/default_app_bar.dart';
+import 'package:expensive_tracker_app/i18n/translations.g.dart';
 import 'package:expensive_tracker_app/units/add_balance_card/cubit/add_new_balance_card_cubit.dart';
 import 'package:expensive_tracker_app/units/add_balance_card/cubit/add_new_balance_card_state.dart';
 import 'package:expensive_tracker_app/units/add_balance_card/view/components/add_card_field_title.dart';
@@ -33,7 +33,7 @@ class _AddBalanceCardBody extends StatelessWidget {
       behavior: HitTestBehavior.opaque,
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
-        appBar: const DefaultAppBar(title: SResources.addNewCardBarTitle),
+        appBar: DefaultAppBar(title: t.strings.addNewCardBarTitle),
         backgroundColor: Theme.of(context).colorScheme.background,
         body: BlocConsumer<AddNewBalanceCardCubit, AddNewBalanceCardState>(
           listener: (context, state) {
@@ -73,18 +73,18 @@ class _AddCardLoadedBody extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            const AddCardFieldTitle(SResources.nameOfCardTitle),
+            AddCardFieldTitle(t.strings.nameOfCardTitle),
             const SizedBox(height: 8),
             AddCardNameText(
-              hintTitle: SResources.addCardNameHint,
+              hintTitle: t.strings.addCardNameHint,
               function: cubit.changeInputName,
             ),
             const SizedBox(height: 16),
-            const AddCardFieldTitle(SResources.balance),
+            AddCardFieldTitle(t.strings.balance),
             const SizedBox(height: 8),
             AddCardNameText(
               function: cubit.changeInputBalance,
-              hintTitle: SResources.addCardCurrencyHint,
+              hintTitle: t.strings.addCardCurrencyHint,
               textInputTupe:
                   const TextInputType.numberWithOptions(decimal: true),
               inputFormatters: [
@@ -94,7 +94,7 @@ class _AddCardLoadedBody extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 16),
-            const AddCardFieldTitle(SResources.currency),
+            AddCardFieldTitle(t.strings.currency),
             const SizedBox(height: 8),
             SelectCurrencyButton(
               loadedState.currencyData,

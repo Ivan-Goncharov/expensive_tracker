@@ -1,6 +1,6 @@
-import 'package:expensive_tracker_app/constants/string_constants.dart';
 import 'package:expensive_tracker_app/get_it.dart';
 import 'package:expensive_tracker_app/helpers/default_app_bar.dart';
+import 'package:expensive_tracker_app/i18n/translations.g.dart';
 import 'package:expensive_tracker_app/units/new_balance_card/view/components/scroll_currencies.dart';
 import 'package:expensive_tracker_app/units/new_balance_card/view/components/search_currency_toggle.dart';
 import 'package:expensive_tracker_app/units/new_balance_card/view/components/search_text_field.dart';
@@ -27,7 +27,7 @@ class _SearchCurrensiesBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
     return Scaffold(
-      appBar: const DefaultAppBar(title: SResources.selectCurrencyTitle),
+      appBar: DefaultAppBar(title: t.strings.selectCurrencyTitle),
       backgroundColor: colors.background,
       body: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
