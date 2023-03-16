@@ -24,3 +24,4 @@ emptyList: "You dont have any transactions yet"
 language: "Language"
 english: "English"
 russian: "Русский"
+system: 'System'

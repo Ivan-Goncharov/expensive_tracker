@@ -40,6 +40,7 @@ dependencies:
   slang: ^3.14.0
   slang_flutter: ^3.14.0
   flutter_smart_dialog: ^4.9.0+3
+  flutter_svg: ^2.0.4
 
   
 
@@ -70,6 +71,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets: 
     - assets/my_db.db
+    - assets/flags/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

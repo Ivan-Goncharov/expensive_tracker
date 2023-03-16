@@ -2,6 +2,7 @@ import 'package:expensive_tracker_app/i18n/translations.g.dart';
 import 'package:expensive_tracker_app/theme/cubit/themes_bloc.dart';
 import 'package:expensive_tracker_app/theme/cubit/themes_state.dart';
 import 'package:expensive_tracker_app/units/settings/components/change_language.dart';
+import 'package:expensive_tracker_app/units/settings/components/settings_element_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,7 +32,7 @@ class SettingsScreen extends StatelessWidget {
             const SizedBox(height: 20),
 
             /// Смена темы
-            _SettingsElement(
+            SettingsElement(
               title: t.strings.darkMode,
               backgroundColor: const Color(0xffE5D1FA),
               iconColor: const Color(0xff655DBB),
@@ -40,15 +41,7 @@ class SettingsScreen extends StatelessWidget {
             ),
 
             /// Смена языка
-            InkWell(
-              onTap: () => changeLanguageDialogShow(context),
-              child: _SettingsElement(
-                title: t.strings.language,
-                backgroundColor: const Color(0xffE5D1FA),
-                iconColor: const Color(0xff655DBB),
-                iconData: FontAwesomeIcons.globe,
-              ),
-            ),
+            const ChangeLanguageSettings(),
           ],
         ),
       ),
@@ -56,55 +49,7 @@ class SettingsScreen extends StatelessWidget {
   }
 }
 
-class _SettingsElement extends StatelessWidget {
-  final String title;
-  final Color backgroundColor;
-  final Color iconColor;
-  final IconData iconData;
-  final Widget? trailing;
-  const _SettingsElement({
-    required this.title,
-    required this.backgroundColor,
-    required this.iconColor,
-    required this.iconData,
-    this.trailing,
-  });
 
-  @override
-  Widget build(BuildContext context) {
-    final colors = Theme.of(context).colorScheme;
-
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-      child: Row(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              color: backgroundColor,
-              shape: BoxShape.circle,
-            ),
-            padding: const EdgeInsets.all(6),
-            child: Icon(
-              iconData,
-              color: iconColor,
-            ),
-          ),
-          const SizedBox(width: 16),
-          Text(
-            title,
-            style: TextStyle(
-              color: colors.onBackground,
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-          const Spacer(),
-          trailing ?? const SizedBox()
-        ],
-      ),
-    );
-  }
-}
 
 class _ThemeSwitcher extends StatelessWidget {
   const _ThemeSwitcher();
