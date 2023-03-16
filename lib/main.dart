@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:expensive_tracker_app/theme/theme.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -46,7 +47,9 @@ class MyApp extends StatelessWidget {
               GlobalMaterialLocalizations.delegate,
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
-            ]);
+            ],
+            navigatorObservers: [FlutterSmartDialog.observer],
+            builder: FlutterSmartDialog.init());
       },
     );
   }

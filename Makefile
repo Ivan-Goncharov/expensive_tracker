@@ -3,11 +3,10 @@ gen:
 format:
 	dart format .
 
-fmt: 
-   format
+fmt: format
 
 run: 
-   flutter run
+	flutter run
 
-locale:
-    flutter pub run slang	
+locale: 
+	flutter pub run slang	

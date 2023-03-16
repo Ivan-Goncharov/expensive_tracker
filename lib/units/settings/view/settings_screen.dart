@@ -1,6 +1,7 @@
 import 'package:expensive_tracker_app/i18n/translations.g.dart';
 import 'package:expensive_tracker_app/theme/cubit/themes_bloc.dart';
 import 'package:expensive_tracker_app/theme/cubit/themes_state.dart';
+import 'package:expensive_tracker_app/units/settings/components/change_language.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,6 +37,17 @@ class SettingsScreen extends StatelessWidget {
               iconColor: const Color(0xff655DBB),
               iconData: FontAwesomeIcons.solidMoon,
               trailing: const _ThemeSwitcher(),
+            ),
+
+            /// Смена языка
+            InkWell(
+              onTap: () => changeLanguageDialogShow(context),
+              child: _SettingsElement(
+                title: t.strings.language,
+                backgroundColor: const Color(0xffE5D1FA),
+                iconColor: const Color(0xff655DBB),
+                iconData: FontAwesomeIcons.globe,
+              ),
             ),
           ],
         ),

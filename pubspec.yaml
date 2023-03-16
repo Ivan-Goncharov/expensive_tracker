@@ -39,6 +39,7 @@ dependencies:
   hive_flutter: ^1.1.0 
   slang: ^3.14.0
   slang_flutter: ^3.14.0
+  flutter_smart_dialog: ^4.9.0+3
 
   
 
