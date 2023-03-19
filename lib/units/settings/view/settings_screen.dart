@@ -1,6 +1,13 @@
-import 'package:expensive_tracker_app/constants/string_constants.dart';
+import 'package:expensive_tracker_app/get_it.dart';
+import 'package:expensive_tracker_app/i18n/translations.g.dart';
 import 'package:expensive_tracker_app/theme/cubit/themes_bloc.dart';
 import 'package:expensive_tracker_app/theme/cubit/themes_state.dart';
+import 'package:expensive_tracker_app/units/last_operationes/view/components/error_or_loading.dart';
+import 'package:expensive_tracker_app/units/settings/components/change_language.dart';
+import 'package:expensive_tracker_app/units/settings/components/change_theme.dart';
+import 'package:expensive_tracker_app/units/settings/components/settings_element_item.dart';
+import 'package:expensive_tracker_app/units/settings/view/cubit/settings_cubit.dart';
+import 'package:expensive_tracker_app/units/settings/view/cubit/settings_state.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,85 +18,71 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return BlocProvider<SettingsCubit>(
+      create: (_) => getIt<SettingsCubit>()..init(),
+      child: const _SettingsScreenBody(),
+    );
+  }
+}
+
+class _SettingsScreenBody extends StatelessWidget {
+  const _SettingsScreenBody();
+
+  @override
+  Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
     return SafeArea(
       child: Scaffold(
         backgroundColor: colors.background,
-        body: ListView(
-          padding: const EdgeInsets.all(16),
-          children: [
-            /// Заголовок
-            Text(
-              SResources.settings,
-              style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-                color: colors.onBackground,
-              ),
-            ),
-            const SizedBox(height: 20),
-
-            /// Смена темы
-            const _SettingsElement(
-              title: SResources.darkMode,
-              backgroundColor: Color(0xffE5D1FA),
-              iconColor: Color(0xff655DBB),
-              iconData: FontAwesomeIcons.solidMoon,
-              trailing: _ThemeSwitcher(),
-            ),
-          ],
+        body: BlocBuilder<SettingsCubit, SettingsState>(
+          builder: (context, state) {
+            if (state is SettingsStateLoading) {
+              /// Состояние загрузки
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (state is SettingsStateError) {
+              /// Состояние ошибки
+              return ErrorIconWithDescription(
+                title: t.strings.error,
+                iconData: FontAwesomeIcons.triangleExclamation,
+              );
+            } else {
+              /// Успешное состояние
+              return const _SuccefulSettingsView();
+            }
+          },
         ),
       ),
     );
   }
 }
 
-class _SettingsElement extends StatelessWidget {
-  final String title;
-  final Color backgroundColor;
-  final Color iconColor;
-  final IconData iconData;
-  final Widget? trailing;
-  const _SettingsElement({
-    required this.title,
-    required this.backgroundColor,
-    required this.iconColor,
-    required this.iconData,
-    this.trailing,
-  });
+class _SuccefulSettingsView extends StatelessWidget {
+  const _SuccefulSettingsView();
 
   @override
   Widget build(BuildContext context) {
-    final colors = Theme.of(context).colorScheme;
+    return ListView(
+      padding: const EdgeInsets.all(16),
+      children: [
+        /// Заголовок
+        Text(
+          t.strings.settings,
+          style: TextStyle(
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+            color: Theme.of(context).colorScheme.onBackground,
+          ),
+        ),
+        const SizedBox(height: 20),
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-      child: Row(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              color: backgroundColor,
-              shape: BoxShape.circle,
-            ),
-            padding: const EdgeInsets.all(6),
-            child: Icon(
-              iconData,
-              color: iconColor,
-            ),
-          ),
-          const SizedBox(width: 16),
-          Text(
-            title,
-            style: TextStyle(
-              color: colors.onBackground,
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-          const Spacer(),
-          trailing ?? const SizedBox()
-        ],
-      ),
+        /// Смена темы
+        const ChangeThemeView(),
+
+        /// Смена языка
+        const ChangeLanguageSettings(),
+      ],
     );
   }
 }

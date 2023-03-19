@@ -1,5 +1,6 @@
 import 'package:animated_flip_counter/animated_flip_counter.dart';
-import 'package:expensive_tracker_app/constants/string_constants.dart';
+import 'package:expensive_tracker_app/i18n/translations.g.dart';
+
 import 'package:expensive_tracker_app/units/balance_cards/data/models/month_operation_amount_model.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -17,12 +18,12 @@ class SpendingMonth extends StatelessWidget {
         children: [
           _SpendingWidget(
               color: Colors.green,
-              title: SResources.income,
+              title: t.strings.income,
               quantity: monthAmountModel.income,
               icon: FontAwesomeIcons.arrowUp),
           _SpendingWidget(
               color: Colors.red,
-              title: SResources.expense,
+              title: t.strings.expense,
               quantity: monthAmountModel.expense,
               icon: FontAwesomeIcons.arrowDown),
         ],

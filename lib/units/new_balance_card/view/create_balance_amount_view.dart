@@ -1,5 +1,5 @@
-import 'package:expensive_tracker_app/constants/string_constants.dart';
 import 'package:expensive_tracker_app/get_it.dart';
+import 'package:expensive_tracker_app/i18n/translations.g.dart';
 import 'package:expensive_tracker_app/units/new_balance_card/view/components/balance_icon.dart';
 import 'package:expensive_tracker_app/units/new_balance_card/view/components/create_card_title.dart';
 import 'package:expensive_tracker_app/units/new_balance_card/view/components/input_balance.dart';
@@ -63,7 +63,7 @@ class _CreateBalanceAmountBody extends StatelessWidget {
                   children: [
                     const BalanceIcon(FontAwesomeIcons.coins),
                     const SizedBox(height: 20),
-                    const CreateCardTitle(SResources.adjustBalanceTitle),
+                    CreateCardTitle(t.strings.adjustBalanceTitle),
                     const SizedBox(height: 20),
                     InputBalance(state.textController, state.currencyData),
                     const SizedBox(height: 20),

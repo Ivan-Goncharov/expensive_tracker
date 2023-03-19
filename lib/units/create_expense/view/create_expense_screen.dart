@@ -1,6 +1,6 @@
-import 'package:expensive_tracker_app/constants/string_constants.dart';
 import 'package:expensive_tracker_app/get_it.dart';
 import 'package:expensive_tracker_app/helpers/default_app_bar.dart';
+import 'package:expensive_tracker_app/i18n/translations.g.dart';
 import 'package:expensive_tracker_app/units/create_expense/components/change_operation_data/change_operation_data.dart';
 import 'package:expensive_tracker_app/units/create_expense/components/date_title/view/date_titile.dart';
 import 'package:expensive_tracker_app/units/create_expense/components/input_money_quantity/view/input_money_quantity.dart';
@@ -41,7 +41,7 @@ class _CreateExpenseScreenBody extends StatelessWidget {
       }
     }, builder: (context, state) {
       return Scaffold(
-        appBar: const DefaultAppBar(title: SResources.newOperation),
+        appBar: DefaultAppBar(title: t.strings.newOperation),
         backgroundColor: colors.background,
         resizeToAvoidBottomInset: false,
         body: GestureDetector(
@@ -67,7 +67,7 @@ class _CreateExpenseScreenBody extends StatelessWidget {
                         foregroundColor: colors.onPrimary),
                     onPressed:
                         context.read<CreateOperationCubit>().saveOperation,
-                    child: const Text(SResources.saveButton)),
+                    child: Text(t.strings.saveButton)),
               )
             : null,
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

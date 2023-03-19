@@ -33,6 +33,10 @@ import 'package:expensive_tracker_app/units/new_balance_card/view/cubits/balance
 import 'package:expensive_tracker_app/units/new_balance_card/view/cubits/create_name_cubit/cubit/create_card_name_cubit%20copy.dart';
 import 'package:expensive_tracker_app/units/new_balance_card/view/cubits/search_currency_cubit/search_currency_cubit.dart';
 import 'package:expensive_tracker_app/units/new_balance_card/view/cubits/select_currency_cubit/select_currency_cubit.dart';
+import 'package:expensive_tracker_app/units/settings/data/services/settings_repository_impl.dart';
+import 'package:expensive_tracker_app/units/settings/data/services/settings_service.dart';
+import 'package:expensive_tracker_app/units/settings/domain/settings_repository.dart';
+import 'package:expensive_tracker_app/units/settings/view/cubit/settings_cubit.dart';
 import 'package:expensive_tracker_app/units/start_screen/data/repositories/start_screen_repo_impl.dart';
 import 'package:expensive_tracker_app/units/start_screen/data/services/start_screen_service.dart';
 import 'package:expensive_tracker_app/units/start_screen/domain/repositories/start_screen_repo.dart';
@@ -63,6 +67,7 @@ void setupGetIt() {
     CreateBalanceCardServiceImpl(getIt()),
   );
   getIt.registerSingleton<ThemeService>(ThemeServiceImpl(getIt()));
+  getIt.registerSingleton<SettingsService>(SettingsServiceImpl(getIt()));
 
   /// Repo
   getIt.registerSingleton<CreateOperationRepository>(
@@ -75,6 +80,7 @@ void setupGetIt() {
   getIt.registerSingleton<CreateBalanceCardRepo>(CreateBalanceCardRepoImpl());
   getIt.registerSingleton<CurrenciesRepo>(CurrenciesRepoImpl(getIt()));
   getIt.registerSingleton<ThemesRepository>(ThemesRepositoryImpl(getIt()));
+  getIt.registerSingleton<SettingsRepository>(SettingsRepositoryImpl(getIt()));
 
   /// Bloc and Cubit
   getIt.registerFactory(() => NavigatorCubit(getIt()));
@@ -97,4 +103,5 @@ void setupGetIt() {
   getIt.registerFactory(() => ScrollBalanceCubit(getIt()));
   getIt.registerFactory(() => AddNewBalanceCardCubit(getIt(), getIt()));
   getIt.registerFactory(() => ThemesBloc(getIt()));
+  getIt.registerFactory(() => SettingsCubit(getIt()));
 }

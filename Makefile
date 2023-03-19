@@ -5,5 +5,8 @@ format:
 
 fmt: format
 
-run:
+run: 
 	flutter run
+
+locale: 
+	flutter pub run slang	

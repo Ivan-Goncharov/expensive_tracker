@@ -1,5 +1,5 @@
-import 'package:expensive_tracker_app/constants/string_constants.dart';
 import 'package:expensive_tracker_app/get_it.dart';
+import 'package:expensive_tracker_app/i18n/translations.g.dart';
 import 'package:expensive_tracker_app/units/new_balance_card/view/components/balance_icon.dart';
 import 'package:expensive_tracker_app/units/new_balance_card/view/components/create_card_title.dart';
 import 'package:expensive_tracker_app/units/new_balance_card/view/components/next_button.dart';
@@ -55,7 +55,7 @@ class _SelectBalanceCardBody extends StatelessWidget {
                   children: [
                     const BalanceIcon(FontAwesomeIcons.moneyBill1Wave),
                     const SizedBox(height: 20),
-                    const CreateCardTitle(SResources.selectCurrencyOfCard),
+                    CreateCardTitle(t.strings.selectCurrencyOfCard),
                     const SizedBox(height: 20),
                     SelectCurrencyButton(state.currencyData),
                     const SizedBox(height: 20),
