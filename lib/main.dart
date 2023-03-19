@@ -12,9 +12,9 @@ import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  LocaleSettings.useDeviceLocale();
   await StorageProvider.initHiveBoxes();
   setupGetIt();
+  LocaleSettings.useDeviceLocale();
   runApp(
     TranslationProvider(
       child: BlocProvider(

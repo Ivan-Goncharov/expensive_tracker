@@ -55,7 +55,7 @@ Future<void> changeLanguageDialogShow({
       alignment: Alignment.bottomCenter,
       builder: (_) {
         return Container(
-          margin: const EdgeInsets.symmetric(horizontal: 32, vertical: 4),
+          margin: const EdgeInsets.symmetric(horizontal: 32),
           width: MediaQuery.of(context).size.width,
           // ),
           child: Material(
@@ -71,10 +71,14 @@ Future<void> changeLanguageDialogShow({
                     child: Column(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 4),
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 8,
+                            horizontal: 6,
+                          ),
                           child: Row(
                             children: [
                               _IconElement(items[index]),
+                              const SizedBox(width: 8),
                               Text(
                                 items[index].title,
                                 style: const TextStyle(
@@ -85,7 +89,7 @@ Future<void> changeLanguageDialogShow({
                             ],
                           ),
                         ),
-                        if (index != items.length - 1) const Divider(),
+                        if (index != items.length - 1) const Divider(height: 1),
                       ],
                     ),
                   );
