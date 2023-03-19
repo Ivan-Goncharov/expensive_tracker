@@ -4,6 +4,7 @@ import 'package:expensive_tracker_app/theme/cubit/themes_bloc.dart';
 import 'package:expensive_tracker_app/theme/cubit/themes_state.dart';
 import 'package:expensive_tracker_app/units/last_operationes/view/components/error_or_loading.dart';
 import 'package:expensive_tracker_app/units/settings/components/change_language.dart';
+import 'package:expensive_tracker_app/units/settings/components/change_theme.dart';
 import 'package:expensive_tracker_app/units/settings/components/settings_element_item.dart';
 import 'package:expensive_tracker_app/units/settings/view/cubit/settings_cubit.dart';
 import 'package:expensive_tracker_app/units/settings/view/cubit/settings_state.dart';
@@ -77,13 +78,7 @@ class _SuccefulSettingsView extends StatelessWidget {
         const SizedBox(height: 20),
 
         /// Смена темы
-        SettingsElement(
-          title: t.strings.darkMode,
-          backgroundColor: const Color(0xffE5D1FA),
-          iconColor: const Color(0xff655DBB),
-          iconData: FontAwesomeIcons.solidMoon,
-          trailing: const _ThemeSwitcher(),
-        ),
+        const ChangeThemeView(),
 
         /// Смена языка
         const ChangeLanguageSettings(),
