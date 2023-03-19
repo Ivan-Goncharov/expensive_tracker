@@ -22,9 +22,19 @@ enum InterfaceLanguage {
       case InterfaceLanguage.system:
         return t.strings.system;
       case InterfaceLanguage.russian:
-        return t.strings.russian; 
+        return t.strings.russian;
       case InterfaceLanguage.english:
         return t.strings.english;
+    }
+  }
+
+  AppLocale toAppLocale() {
+    switch (this) {
+      case InterfaceLanguage.russian:
+        return AppLocale.ru;
+      case InterfaceLanguage.system:
+      case InterfaceLanguage.english:
+        return AppLocale.en;
     }
   }
 }

@@ -1,5 +1,6 @@
 import 'package:expensive_tracker_app/data/storage_provider.dart';
 import 'package:expensive_tracker_app/get_it.dart';
+import 'package:expensive_tracker_app/helpers/set_app_locale.dart';
 import 'package:expensive_tracker_app/i18n/translations.g.dart';
 import 'package:expensive_tracker_app/theme/cubit/themes_bloc.dart';
 import 'package:expensive_tracker_app/theme/cubit/themes_state.dart';
@@ -14,7 +15,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await StorageProvider.initHiveBoxes();
   setupGetIt();
-  LocaleSettings.useDeviceLocale();
+  setAppLocale();
   runApp(
     TranslationProvider(
       child: BlocProvider(

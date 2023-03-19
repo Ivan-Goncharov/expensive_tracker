@@ -14,20 +14,18 @@ void main() {
   setUp(() => EquatableConfig.stringify = true);
 
   blocTest<SettingsCubit, SettingsState>(
-    'Get system language SettingsCubit test',
-    build: () => getIt<SettingsCubit>(),
-    act: (cubit) => cubit.init(),
-    expect: () => [
-      SettingsStateSucceful(InterfaceLanguage.system),
-    ]
-  );
+      'Get system language SettingsCubit test',
+      build: () => getIt<SettingsCubit>(),
+      act: (cubit) => cubit.init(),
+      expect: () => [
+            SettingsStateSucceful(InterfaceLanguage.system),
+          ]);
 
   blocTest<SettingsCubit, SettingsState>(
-    'Save english language SettingsCubit test',
-    build: () => getIt<SettingsCubit>(),
-    act: (cubit) => cubit.changeLanguage(InterfaceLanguage.english),
-    expect: () => [
-      SettingsStateSucceful(InterfaceLanguage.english),
-    ]
-  );
+      'Save english language SettingsCubit test',
+      build: () => getIt<SettingsCubit>(),
+      act: (cubit) => cubit.changeLanguage(InterfaceLanguage.english),
+      expect: () => [
+            SettingsStateSucceful(InterfaceLanguage.english),
+          ]);
 }

@@ -1,6 +1,8 @@
 import 'package:expensive_tracker_app/i18n/translations.g.dart';
 import 'package:expensive_tracker_app/units/settings/components/settings_element_item.dart';
 import 'package:expensive_tracker_app/units/settings/data/entity/settings_dropdown_model.dart';
+import 'package:expensive_tracker_app/units/settings/view/cubit/settings_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:flutter_svg/svg.dart';
@@ -26,10 +28,12 @@ class ChangeLanguageSettings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = context.watch<SettingsCubit>();
     return InkWell(
       onTap: () => changeLanguageDialogShow(
         context: context,
-        selectItem: () {
+        selectItem: (index) {
+          cubit.changeLanguage(InterfaceLanguage.values[index]);
           SmartDialog.dismiss();
         },
         items: _items,
@@ -39,6 +43,10 @@ class ChangeLanguageSettings extends StatelessWidget {
         backgroundColor: const Color(0xffE5D1FA),
         iconColor: const Color(0xff655DBB),
         iconData: FontAwesomeIcons.globe,
+        trailing: Padding(
+          padding: const EdgeInsets.only(right: 8.0),
+          child: Text(cubit.language.typeToLocale()),
+        ),
       ),
     );
   }
@@ -47,7 +55,7 @@ class ChangeLanguageSettings extends StatelessWidget {
 Future<void> changeLanguageDialogShow({
   required BuildContext context,
   required List<SettingsDropdownModel> items,
-  required void Function() selectItem,
+  required void Function(int index) selectItem,
 }) async {
   final colors = Theme.of(context).colorScheme;
   await SmartDialog.showAttach(
@@ -67,7 +75,7 @@ Future<void> changeLanguageDialogShow({
                 items.length,
                 (index) {
                   return InkWell(
-                    onTap: SmartDialog.dismiss,
+                    onTap: () => selectItem(index),
                     child: Column(
                       children: [
                         Padding(

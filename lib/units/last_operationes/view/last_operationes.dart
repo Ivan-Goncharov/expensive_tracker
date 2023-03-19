@@ -35,14 +35,14 @@ class _LastOperationesViewBody extends StatelessWidget {
             child: CircularProgressIndicator(),
           );
         } else if (state is LastOperationErrorState) {
-          return ErrorOrEmptyLastTransactions(
+          return ErrorIconWithDescription(
             title: t.strings.error,
             iconData: FontAwesomeIcons.triangleExclamation,
           );
         } else if (state is LastOperationLoadedState) {
           return OperationesScroll(state.operations);
         } else if (state is LastOperationEmptyState) {
-          return ErrorOrEmptyLastTransactions(
+          return ErrorIconWithDescription(
             title: t.strings.emptyList,
             iconData: FontAwesomeIcons.magnifyingGlassMinus,
           );

@@ -1,6 +1,4 @@
-
 import 'package:flutter/material.dart';
-
 
 class SettingsElement extends StatelessWidget {
   final String title;
@@ -8,7 +6,8 @@ class SettingsElement extends StatelessWidget {
   final Color iconColor;
   final IconData iconData;
   final Widget? trailing;
-  const SettingsElement({super.key, 
+  const SettingsElement({
+    super.key,
     required this.title,
     required this.backgroundColor,
     required this.iconColor,

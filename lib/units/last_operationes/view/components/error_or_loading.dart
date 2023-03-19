@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class ErrorOrEmptyLastTransactions extends StatelessWidget {
+class ErrorIconWithDescription extends StatelessWidget {
   final String title;
   final IconData iconData;
-  const ErrorOrEmptyLastTransactions(
+  const ErrorIconWithDescription(
       {super.key, required this.title, required this.iconData});
 
   @override
