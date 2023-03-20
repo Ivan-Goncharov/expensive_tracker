@@ -41,6 +41,7 @@ dependencies:
   slang_flutter: ^3.14.0
   flutter_smart_dialog: ^4.9.0+3
   flutter_svg: ^2.0.4
+  fl_chart: ^0.61.0
 
   
 
