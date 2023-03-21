@@ -28,3 +28,9 @@ system: 'System'
 systemTheme: 'System'
 lightMode: "Light" 
 appTheme: "App theme" 
+today: 'Today'
+yesterday: 'Yesterday'
+year: "Year"
+month: "Month"
+thisWeek: "This week"
+allTime: "All time"

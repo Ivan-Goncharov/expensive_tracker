@@ -22,7 +22,7 @@ class AppDb extends _$AppDb {
   @override
   int get schemaVersion => 1;
 
-  /// Получение списка всех записей.
+  /// Получение списка всех записей по дате.
   Future<List<ItemOperationModel>> getNotesOperation(
       DateTime date, String cardId) {
     return (select(noteOperation)
@@ -30,6 +30,17 @@ class AppDb extends _$AppDb {
               tbl.cardId.equals(cardId) &
               tbl.dateOperation.year.equals(date.year) &
               tbl.dateOperation.month.equals(date.month))
+          ..orderBy([
+            (u) => OrderingTerm(
+                expression: u.dateOperation, mode: OrderingMode.desc)
+          ]))
+        .get();
+  }
+
+  /// Получение списка всех записей.
+  Future<List<ItemOperationModel>> getAllNotesOperation(String cardId) {
+    return (select(noteOperation)
+          ..where((tbl) => tbl.cardId.equals(cardId))
           ..orderBy([
             (u) => OrderingTerm(
                 expression: u.dateOperation, mode: OrderingMode.desc)

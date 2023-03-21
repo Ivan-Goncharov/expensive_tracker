@@ -1,6 +1,9 @@
 import 'package:expensive_tracker_app/get_it.dart';
 import 'package:expensive_tracker_app/i18n/translations.g.dart';
+import 'package:expensive_tracker_app/units/create_expense/data/model/item_operation_model.dart';
 import 'package:expensive_tracker_app/units/last_operationes/view/components/error_or_loading.dart';
+import 'package:expensive_tracker_app/units/operationes_stats/components/succeful_stats_view.dart';
+import 'package:expensive_tracker_app/units/operationes_stats/cubit/change_stats_cubit.dart';
 import 'package:expensive_tracker_app/units/operationes_stats/cubit/operations_stats_cubit.dart';
 import 'package:expensive_tracker_app/units/operationes_stats/cubit/operations_stats_state.dart';
 import 'package:flutter/material.dart';
@@ -35,39 +38,31 @@ class _OperationesStatsBody extends StatelessWidget {
             title: t.strings.error,
             iconData: FontAwesomeIcons.triangleExclamation,
           );
+        } else if (state is OperationsStatsLoaded) {
+          final cubit = context.watch<OperationsStatsCubit>();
+          return Scaffold(
+            appBar: AppBar(
+              title: Text(cubit.balanceCard.name),
+            ),
+            body: _OperationsStatsProvider(operations: state.listOperations),
+          );
         } else {
-          return const _SuccefulStateStats();
+          return const SizedBox();
         }
       },
     );
   }
 }
 
-class _SuccefulStateStats extends StatelessWidget {
-  const _SuccefulStateStats();
+class _OperationsStatsProvider extends StatelessWidget {
+  final List<ItemOperationModel> operations;
+  const _OperationsStatsProvider({required this.operations});
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.watch<OperationsStatsCubit>();
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(cubit.balanceCard.name),
-      ),
+    return BlocProvider(
+      create: (_) => getIt<ChangeStatsCubit>()..init(operations),
+      child: const SuccefulStatsView(),
     );
   }
 }
-
-
-//  TextButton(
-//                 child: const Text(
-//                   'Create new card',
-//                 ),
-//                 onPressed: () =>
-//                     Navigator.pushNamed(context, addNewBalanceCardRoute),
-//               ),
-//               const SizedBox(height: 10),
-//               TextButton(
-//                   onPressed: () =>
-//                       Navigator.pushNamed(context, settingsAppRoute),
-//                   child: const Text('Open settings screen'))
-//             ],

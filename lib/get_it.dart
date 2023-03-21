@@ -33,7 +33,11 @@ import 'package:expensive_tracker_app/units/new_balance_card/view/cubits/balance
 import 'package:expensive_tracker_app/units/new_balance_card/view/cubits/create_name_cubit/cubit/create_card_name_cubit%20copy.dart';
 import 'package:expensive_tracker_app/units/new_balance_card/view/cubits/search_currency_cubit/search_currency_cubit.dart';
 import 'package:expensive_tracker_app/units/new_balance_card/view/cubits/select_currency_cubit/select_currency_cubit.dart';
+import 'package:expensive_tracker_app/units/operationes_stats/cubit/change_stats_cubit.dart';
 import 'package:expensive_tracker_app/units/operationes_stats/cubit/operations_stats_cubit.dart';
+import 'package:expensive_tracker_app/units/operationes_stats/data/stats_repo_impl.dart';
+import 'package:expensive_tracker_app/units/operationes_stats/data/stats_service.dart';
+import 'package:expensive_tracker_app/units/operationes_stats/domain/stats_repo.dart';
 import 'package:expensive_tracker_app/units/settings/data/services/settings_repository_impl.dart';
 import 'package:expensive_tracker_app/units/settings/data/services/settings_service.dart';
 import 'package:expensive_tracker_app/units/settings/domain/settings_repository.dart';
@@ -69,6 +73,7 @@ void setupGetIt() {
   );
   getIt.registerSingleton<ThemeService>(ThemeServiceImpl(getIt()));
   getIt.registerSingleton<SettingsService>(SettingsServiceImpl(getIt()));
+  getIt.registerSingleton<StatsService>(StatsServiceImpl(getIt()));
 
   /// Repo
   getIt.registerSingleton<CreateOperationRepository>(
@@ -82,6 +87,7 @@ void setupGetIt() {
   getIt.registerSingleton<CurrenciesRepo>(CurrenciesRepoImpl(getIt()));
   getIt.registerSingleton<ThemesRepository>(ThemesRepositoryImpl(getIt()));
   getIt.registerSingleton<SettingsRepository>(SettingsRepositoryImpl(getIt()));
+  getIt.registerSingleton<StatsRepository>(StatsRepositoryImpl(getIt()));
 
   /// Bloc and Cubit
   getIt.registerFactory(() => NavigatorCubit(getIt()));
@@ -105,5 +111,6 @@ void setupGetIt() {
   getIt.registerFactory(() => AddNewBalanceCardCubit(getIt(), getIt()));
   getIt.registerFactory(() => ThemesBloc(getIt()));
   getIt.registerFactory(() => SettingsCubit(getIt()));
-  getIt.registerFactory(() => OperationsStatsCubit(getIt()));
+  getIt.registerFactory(() => OperationsStatsCubit(getIt(), getIt()));
+  getIt.registerFactory(() => ChangeStatsCubit(getIt()));
 }

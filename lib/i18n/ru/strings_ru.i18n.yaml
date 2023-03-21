@@ -27,4 +27,10 @@ russian: "Русский"
 system: "Cистемный"
 systemTheme: "Cистемная"
 lightMode: "Светлая" 
-appTheme: "Тема приложения" 
+appTheme: "Тема приложения"
+today: 'Cегодня'
+yesterday: 'Вчера'
+year: "За год"
+month: "За месяц"
+thisWeek: "Эта неделя"
+allTime: "За все время"
