@@ -1,5 +1,6 @@
 import 'package:expensive_tracker_app/i18n/translations.g.dart';
 import 'package:expensive_tracker_app/units/last_operationes/view/components/error_or_loading.dart';
+import 'package:expensive_tracker_app/units/operationes_stats/components/diagram_stats.dart';
 import 'package:expensive_tracker_app/units/operationes_stats/components/select_date_stats.dart';
 import 'package:expensive_tracker_app/units/operationes_stats/cubit/change_stats_cubit.dart';
 import 'package:expensive_tracker_app/units/operationes_stats/cubit/change_stats_state.dart';
@@ -14,10 +15,15 @@ class SuccefulStatsView extends StatelessWidget {
     return BlocBuilder<ChangeStatsCubit, ChangeStatsState>(
       builder: (context, state) {
         if (state is ChangeStatsLoaded) {
+          print('DEBUG STATE');
           return ListView(
             padding: const EdgeInsets.all(16.0),
             children: [
               const SelectDateStats(),
+              DiagramStats(
+                summOfElement: state.summOfElement,
+                operationes: state.operationes,
+              ),
             ],
           );
         } else if (state is ChangeStatsLoading) {

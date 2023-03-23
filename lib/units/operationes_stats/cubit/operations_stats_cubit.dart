@@ -17,6 +17,7 @@ class OperationsStatsCubit extends Cubit<OperationsStatsState> {
     _balanceCard = _balanceCardRepo.currentBalanceCard;
     final listOfOperations =
         await _statsRepo.getAllOperations(_balanceCard!.id);
+    await _statsRepo.getCategories();
     emit(OperationsStatsLoaded(listOfOperations));
   }
 }
