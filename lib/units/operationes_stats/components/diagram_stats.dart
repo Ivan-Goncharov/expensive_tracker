@@ -2,13 +2,12 @@ import 'package:expensive_tracker_app/helpers/create_chart_helper.dart';
 import 'package:expensive_tracker_app/units/create_expense/data/model/item_operation_model.dart';
 import 'package:expensive_tracker_app/units/operationes_stats/cubit/change_stats_cubit.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart'; 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DiagramStats extends StatefulWidget {
   final Map<int, List<ItemOperationModel>> operationes;
-  final int summOfElement;
+  final double summOfElement;
   const DiagramStats({
     super.key,
     required this.operationes,
@@ -40,7 +39,7 @@ class _DiagramStatsState extends State<DiagramStats> {
           centerSpaceRadius: 30,
           sectionsSpace: 1,
         ),
-        swapAnimationDuration: const Duration(milliseconds: 500),
+        swapAnimationDuration: const Duration(milliseconds: 200),
       ),
     );
   }
@@ -52,21 +51,22 @@ class _DiagramStatsState extends State<DiagramStats> {
       final key = keys[index];
       final values = widget.operationes[key]!;
       return _pieChartSectionData(
-        count: calculatePrecent(widget.summOfElement, values.length),
+        count: calculatePrecent(widget.summOfElement, values),
         color: generateByIdColor(cubit.getCategoriesById(key).id),
         isTouched: index == selectedItemId,
       );
     });
   }
 
+  /// Перестраиваем экран только, если нажали на другой элемент
   void touchCallback(FlTouchEvent event, PieTouchResponse? pieTouchResponse) {
+    if (pieTouchResponse == null) {
+      setState(() => selectedItemId = -1);
+      return;
+    }
+    final touchedIndex = pieTouchResponse.touchedSection!.touchedSectionIndex;
+    if (touchedIndex == selectedItemId) return;
     setState(() {
-      if (!event.isInterestedForInteractions ||
-          pieTouchResponse == null ||
-          pieTouchResponse.touchedSection == null) {
-        selectedItemId = -1;
-        return;
-      }
       selectedItemId = pieTouchResponse.touchedSection!.touchedSectionIndex;
     });
   }

@@ -176,11 +176,14 @@ class ChangeStatsCubit extends Cubit<ChangeStatsState> {
       _statsRepo.getCategoriesById(id);
 
   /// Получение общей суммы элементов в списках
-  int _getSummElements(Map<int, List<ItemOperationModel>> map) {
-    var summ = 0; 
+  double _getSummElements(Map<int, List<ItemOperationModel>> map) {
+    var summ = 0.0;
     map.forEach((key, value) {
-      summ += value.length;
-    }); 
+      summ += value
+          .map((e) => e.amount)
+          .toList()
+          .reduce((value, element) => value + element);
+    });
     return summ;
   }
 }

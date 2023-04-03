@@ -18,7 +18,7 @@ class ChangeStatsError extends ChangeStatsState {
 class ChangeStatsLoaded extends ChangeStatsState {
   final StatsDateType dateType;
   final Map<int, List<ItemOperationModel>> operationes;
-  final int summOfElement;
+  final double summOfElement;
 
   ChangeStatsLoaded(
     this.dateType,

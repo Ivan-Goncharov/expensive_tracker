@@ -14,8 +14,7 @@ class SuccefulStatsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ChangeStatsCubit, ChangeStatsState>(
       builder: (context, state) {
-        if (state is ChangeStatsLoaded) {
-          print('DEBUG STATE');
+        if (state is ChangeStatsLoaded) { 
           return ListView(
             padding: const EdgeInsets.all(16.0),
             children: [
