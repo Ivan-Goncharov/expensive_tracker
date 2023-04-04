@@ -4,12 +4,12 @@ import 'package:expensive_tracker_app/units/create_expense/data/model/item_opera
 import 'package:flutter/material.dart';
 
 /// Подсчет процента от элемента
-int calculatePrecent(double overallCount, List<ItemOperationModel> values) {
-  final currentValue = values
-      .map((e) => e.amount)
-      .toList()
-      .reduce((value, element) => value + element);
-      
+int calculatePrecent(double overallCount,double currentValue) {
+  // final currentValue = values
+  //     .map((e) => e.amount)
+  //     .toList()
+  //     .reduce((value, element) => value + element);
+
   return ((currentValue * 100) / overallCount).round();
 }
 

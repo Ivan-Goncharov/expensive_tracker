@@ -1,7 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:expensive_tracker_app/i18n/translations.g.dart';
-import 'package:expensive_tracker_app/units/create_expense/data/model/item_operation_model.dart';
-import 'package:intl/intl.dart';
+import 'package:expensive_tracker_app/units/operationes_stats/data/entity/stats_model_cubit.dart';
 
 abstract class ChangeStatsState extends Equatable {}
 
@@ -17,17 +16,15 @@ class ChangeStatsError extends ChangeStatsState {
 
 class ChangeStatsLoaded extends ChangeStatsState {
   final StatsDateType dateType;
-  final Map<int, List<ItemOperationModel>> operationes;
-  final double summOfElement;
+  final StatsModel statsModel;
 
   ChangeStatsLoaded(
     this.dateType,
-    this.operationes,
-    this.summOfElement,
+    this.statsModel,
   );
   
   @override
-  List<Object?> get props => [dateType, operationes];
+  List<Object?> get props => [dateType, statsModel];
 }
 
 enum StatsDateType {

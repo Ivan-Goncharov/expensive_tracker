@@ -1,17 +1,15 @@
 import 'package:expensive_tracker_app/helpers/create_chart_helper.dart';
-import 'package:expensive_tracker_app/units/create_expense/data/model/item_operation_model.dart';
 import 'package:expensive_tracker_app/units/operationes_stats/cubit/change_stats_cubit.dart';
+import 'package:expensive_tracker_app/units/operationes_stats/data/entity/stats_model_cubit.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DiagramStats extends StatefulWidget {
-  final Map<int, List<ItemOperationModel>> operationes;
-  final double summOfElement;
+  final StatsModel statsModel;
   const DiagramStats({
     super.key,
-    required this.operationes,
-    required this.summOfElement,
+    required this.statsModel,
   });
 
   @override
@@ -24,7 +22,7 @@ class _DiagramStatsState extends State<DiagramStats> {
 
   @override
   Widget build(BuildContext context) {
-    keys = widget.operationes.keys.toList();
+    keys = widget.statsModel.mapOfOperationes.keys.toList();
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 10),
       height: 200,
@@ -49,9 +47,12 @@ class _DiagramStatsState extends State<DiagramStats> {
   ) {
     return List.generate(keys.length, (index) {
       final key = keys[index];
-      final values = widget.operationes[key]!;
+      // final values = widget.statsModel.mapOfOperationes[key];
       return _pieChartSectionData(
-        count: calculatePrecent(widget.summOfElement, values),
+        count: calculatePrecent(
+          widget.statsModel.totalSpend,
+          widget.statsModel.categorySpendMap[key] ?? 0.0,
+        ),
         color: generateByIdColor(cubit.getCategoriesById(key).id),
         isTouched: index == selectedItemId,
       );

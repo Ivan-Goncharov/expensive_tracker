@@ -14,15 +14,12 @@ class SuccefulStatsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ChangeStatsCubit, ChangeStatsState>(
       builder: (context, state) {
-        if (state is ChangeStatsLoaded) { 
+        if (state is ChangeStatsLoaded) {
           return ListView(
             padding: const EdgeInsets.all(16.0),
             children: [
               const SelectDateStats(),
-              DiagramStats(
-                summOfElement: state.summOfElement,
-                operationes: state.operationes,
-              ),
+              DiagramStats(statsModel: state.statsModel),
             ],
           );
         } else if (state is ChangeStatsLoading) {
