@@ -48,37 +48,37 @@ class _NavScreenBody extends StatelessWidget {
                 size: 30,
               ),
             ),
-            floatingActionButtonLocation:
-                FloatingActionButtonLocation.centerDocked,
-            bottomNavigationBar: BottomHideBar(
-              widget: BottomNavigationBar(
-                type: BottomNavigationBarType.fixed,
-                enableFeedback: false,
-                elevation: 0,
-                selectedIconTheme:
-                    IconThemeData(color: colors.primary, size: 30),
-                unselectedItemColor: colors.onSurface,
-                backgroundColor: colors.background,
-                currentIndex: state.currentPage,
-                showSelectedLabels: false,
-                showUnselectedLabels: false,
-                onTap: context.watch<NavigatorCubit>().changePage,
-                items: const [
-                  BottomNavigationBarItem(
-                    icon: FaIcon(
-                      FontAwesomeIcons.house,
-                    ),
-                    label: 'Main',
-                  ),
-                  BottomNavigationBarItem(
-                    icon: FaIcon(
-                      FontAwesomeIcons.chartSimple,
-                    ),
-                    label: 'Statistic',
-                  ),
-                ],
-              ),
-            ),
+            // floatingActionButtonLocation:
+            //     FloatingActionButtonLocation.centerDocked,
+            // bottomNavigationBar: BottomHideBar(
+            //   widget: BottomNavigationBar(
+            //     type: BottomNavigationBarType.fixed,
+            //     enableFeedback: false,
+            //     elevation: 0,
+            //     selectedIconTheme:
+            //         IconThemeData(color: colors.primary, size: 30),
+            //     unselectedItemColor: colors.onSurface,
+            //     backgroundColor: colors.background,
+            //     currentIndex: state.currentPage,
+            //     showSelectedLabels: false,
+            //     showUnselectedLabels: false,
+            //     onTap: context.watch<NavigatorCubit>().changePage,
+            //     items: const [
+            //       BottomNavigationBarItem(
+            //         icon: FaIcon(
+            //           FontAwesomeIcons.house,
+            //         ),
+            //         label: 'Main',
+            //       ),
+            //       BottomNavigationBarItem(
+            //         icon: FaIcon(
+            //           FontAwesomeIcons.chartSimple,
+            //         ),
+            //         label: 'Statistic',
+            //       ),
+            //     ],
+            //   ),
+            // ),
           );
         } else {
           return const SizedBox();

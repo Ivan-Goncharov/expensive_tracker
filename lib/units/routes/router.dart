@@ -1,6 +1,7 @@
 import 'package:expensive_tracker_app/units/add_balance_card/view/add_balance_card_view.dart';
 import 'package:expensive_tracker_app/units/new_balance_card/view/create_balance_amount_view.dart';
 import 'package:expensive_tracker_app/units/new_balance_card/view/search_currencies_view.dart';
+import 'package:expensive_tracker_app/units/operationes_stats/operationes_stats_view.dart';
 import 'package:expensive_tracker_app/units/routes/routes.dart';
 import 'package:expensive_tracker_app/units/create_expense/view/create_expense_screen.dart';
 import 'package:expensive_tracker_app/units/navigation/nav_screen.dart';
@@ -59,6 +60,11 @@ Route<dynamic>? getRoutes(RouteSettings settings) {
     case settingsAppRoute:
       return MaterialPageRoute(
         builder: (_) => const SettingsScreen(),
+        settings: settings,
+      );
+    case chartStatsRoute:
+      return MaterialPageRoute(
+        builder: (_) => const OperationesStatsView(),
         settings: settings,
       );
   }

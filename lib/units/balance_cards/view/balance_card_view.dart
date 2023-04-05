@@ -31,7 +31,7 @@ class _BalanceCardBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = Theme.of(context).colorScheme;
     return Container(
-      margin: const EdgeInsets.all(16.0),
+      margin: const EdgeInsets.fromLTRB(16.0, 8, 16, 16),
       padding: const EdgeInsets.all(8.0),
       width: MediaQuery.of(context).size.width * 0.4,
       decoration: BoxDecoration(
