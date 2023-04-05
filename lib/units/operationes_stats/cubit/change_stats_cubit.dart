@@ -189,7 +189,7 @@ class ChangeStatsCubit extends Cubit<ChangeStatsState> {
         } else {
           mapOfModels[oper.category] = [oper];
         }
-         maoOfSummOperations[oper.category] =
+        maoOfSummOperations[oper.category] =
             (maoOfSummOperations[oper.category] ?? 0.0) + oper.amount;
       }
     }
@@ -218,7 +218,7 @@ class ChangeStatsCubit extends Cubit<ChangeStatsState> {
         } else {
           mapOfModels[oper.category] = [oper];
         }
-         maoOfSummOperations[oper.category] =
+        maoOfSummOperations[oper.category] =
             (maoOfSummOperations[oper.category] ?? 0.0) + oper.amount;
       }
     }

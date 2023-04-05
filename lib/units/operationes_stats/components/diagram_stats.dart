@@ -1,4 +1,5 @@
 import 'package:expensive_tracker_app/helpers/create_chart_helper.dart';
+import 'package:expensive_tracker_app/units/operationes_stats/components/operationes_list_stats.dart';
 import 'package:expensive_tracker_app/units/operationes_stats/cubit/change_stats_cubit.dart';
 import 'package:expensive_tracker_app/units/operationes_stats/data/entity/stats_model_cubit.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -21,24 +22,42 @@ class _DiagramStatsState extends State<DiagramStats> {
   List<int> keys = [];
 
   @override
+  void didUpdateWidget(covariant DiagramStats oldWidget) {
+    selectedItemId = -1;
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
   Widget build(BuildContext context) {
     keys = widget.statsModel.mapOfOperationes.keys.toList();
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 10),
-      height: 200,
-      child: PieChart(
-        PieChartData(
-          pieTouchData: PieTouchData(
-            touchCallback: touchCallback,
-            enabled: false,
+    final currentId = selectedItemId == -1 ? null : keys[selectedItemId];
+    return Column(
+      children: [
+        Container(
+          padding: const EdgeInsets.symmetric(vertical: 10),
+          height: 200,
+          child: PieChart(
+            PieChartData(
+              pieTouchData: PieTouchData(
+                touchCallback: touchCallback,
+                enabled: false,
+              ),
+              sections: showingSections(context.watch<ChangeStatsCubit>()),
+              borderData: FlBorderData(show: false),
+              centerSpaceRadius: 30,
+              sectionsSpace: 1,
+            ),
+            swapAnimationDuration: const Duration(milliseconds: 200),
           ),
-          sections: showingSections(context.watch<ChangeStatsCubit>()),
-          borderData: FlBorderData(show: false),
-          centerSpaceRadius: 30,
-          sectionsSpace: 1,
         ),
-        swapAnimationDuration: const Duration(milliseconds: 200),
-      ),
+        OperationesListStats(
+          currentCategory: currentId,
+          amountSpend: currentId == null
+              ? widget.statsModel.totalSpend
+              : widget.statsModel.categorySpendMap[currentId]!,
+          categorySpendMap: widget.statsModel.categorySpendMap,
+        )
+      ],
     );
   }
 
@@ -47,7 +66,6 @@ class _DiagramStatsState extends State<DiagramStats> {
   ) {
     return List.generate(keys.length, (index) {
       final key = keys[index];
-      // final values = widget.statsModel.mapOfOperationes[key];
       return _pieChartSectionData(
         count: calculatePrecent(
           widget.statsModel.totalSpend,

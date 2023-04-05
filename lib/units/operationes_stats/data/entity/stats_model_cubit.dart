@@ -21,7 +21,12 @@ class StatsModel extends Equatable {
       required Map<int, double> categorySpendMap}) {
     return StatsModel(
       mapOfOperationes,
-      categorySpendMap,
+      Map.fromEntries(
+        categorySpendMap.entries.toList()
+          ..sort(
+            (e1, e2) => e2.value.compareTo(e1.value),
+          ),
+      ),
       _getSummElements(mapOfOperationes),
     );
   }

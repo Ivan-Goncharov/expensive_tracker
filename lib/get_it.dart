@@ -111,6 +111,6 @@ void setupGetIt() {
   getIt.registerFactory(() => AddNewBalanceCardCubit(getIt(), getIt()));
   getIt.registerFactory(() => ThemesBloc(getIt()));
   getIt.registerFactory(() => SettingsCubit(getIt()));
-  getIt.registerFactory(() => OperationsStatsCubit(getIt(), getIt()));
+  getIt.registerFactory(() => OperationsStatsCubit(getIt(), getIt(), getIt()));
   getIt.registerFactory(() => ChangeStatsCubit(getIt()));
 }
