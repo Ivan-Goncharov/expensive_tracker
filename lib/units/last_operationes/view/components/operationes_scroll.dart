@@ -22,10 +22,10 @@ class OperationesScroll extends StatelessWidget {
           ItemOperationView(operation: operationes[index]),
       itemCount: operationes.length,
       separatorBuilder: (_, index) {
-        final currentOperation = operationes[index];   
+        final currentOperation = operationes[index];
         if (index + 1 < operationes.length &&
             currentOperation.dateOperation.day !=
-                operationes[index + 1].dateOperation.day) { 
+                operationes[index + 1].dateOperation.day) {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 2),
             child: Text(

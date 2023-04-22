@@ -19,7 +19,21 @@ class SuccefulStatsView extends StatelessWidget {
             padding: const EdgeInsets.all(16.0),
             children: [
               const SelectDateStats(),
-              DiagramStats(statsModel: state.statsModel),
+              state.statsModel.mapOfOperationes.isEmpty
+
+                  /// TODO: Добавить нормальную заглушку
+                  ? const Padding(
+                      padding: EdgeInsets.only(top: 16.0),
+                      child: Text(
+                        'Операций за данный период не было',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    )
+                  : DiagramStats(statsModel: state.statsModel),
             ],
           );
         } else if (state is ChangeStatsLoading) {
@@ -36,5 +50,3 @@ class SuccefulStatsView extends StatelessWidget {
     );
   }
 }
-
-

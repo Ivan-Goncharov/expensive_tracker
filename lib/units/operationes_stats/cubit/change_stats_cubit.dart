@@ -10,6 +10,8 @@ class ChangeStatsCubit extends Cubit<ChangeStatsState> {
   ChangeStatsCubit(this._statsRepo) : super(ChangeStatsLoading());
 
   List<ItemOperationModel> _operations = [];
+
+  /// Мапа с типами даты и списком дат
   var _mapOfDateType = <StatsDateType, List<DateTime>>{};
 
   /// Мапа с датами и моделями статистики для каждой даты
@@ -19,46 +21,34 @@ class ChangeStatsCubit extends Cubit<ChangeStatsState> {
   var _currentStatsDateType = StatsDateType.today;
 
   /// Текущий тип траназакций
-  var _currentOperationType = OperationType.expense;
+  final _currentOperationType = OperationType.expense;
   DateTime? _currentStatsMonth;
   DateTime? _currentStatsYear;
-
-  /// Мапа с типами даты и списком дат
-  Map<StatsDateType, List<DateTime>> get mapOfDateType => _mapOfDateType;
-
-  /// Текущий выбранный месяц
-  DateTime get currentStatsMonth => _currentStatsMonth ?? DateTime.now();
-
-  /// Текущий выбранный год
-  DateTime get currentStatsYear => _currentStatsYear ?? DateTime.now();
 
   void init(List<ItemOperationModel> operationsValue) {
     _operations = operationsValue;
     _mapOfDateType = _statsRepo.createMapOfDateType(_operations);
     _currentStatsMonth = _mapOfDateType[StatsDateType.month]?.first;
     _currentStatsYear = _mapOfDateType[StatsDateType.year]?.first;
-    final statsModel =
-        _createDayListOper(_mapOfDateType[StatsDateType.today]!.first);
-
-    emit(
-      ChangeStatsLoaded(
-        _currentStatsDateType,
-        statsModel,
-      ),
-    );
+    _emitChangeStatsEvent(
+        _createDayListOper(_mapOfDateType[StatsDateType.today]!.first));
   }
 
   /// Cмена выбранного типа
   void changeType(StatsDateType type, {DateTime? dateTime}) {
     _currentStatsDateType = type;
-    final statsModel = _createOperationsSpecificList(type, dateTime: dateTime);
-    emit(
-      ChangeStatsLoaded(
-        _currentStatsDateType,
-        statsModel,
-      ),
-    );
+    _emitChangeStatsEvent(
+        _createOperationsSpecificList(type, dateTime: dateTime));
   }
+
+  /// Прокидывание event ChangeStatsLoaded
+  void _emitChangeStatsEvent(StatsModel statsModel) => emit(ChangeStatsLoaded(
+        dateType: _currentStatsDateType,
+        statsModel: statsModel,
+        mapOfDateType: _mapOfDateType,
+        currentStatsMonth: _currentStatsMonth ?? DateTime.now(),
+        currentStatsYear: _currentStatsYear ?? DateTime.now(),
+      ));
 
   StatsModel _createOperationsSpecificList(StatsDateType type,
       {DateTime? dateTime}) {

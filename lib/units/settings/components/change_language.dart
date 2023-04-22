@@ -52,5 +52,3 @@ class ChangeLanguageSettings extends StatelessWidget {
     );
   }
 }
-
-

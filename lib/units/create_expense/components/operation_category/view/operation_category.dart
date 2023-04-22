@@ -1,7 +1,7 @@
 import 'package:expensive_tracker_app/data/app_db/app_db.dart';
 import 'package:expensive_tracker_app/get_it.dart';
-import 'package:expensive_tracker_app/units/create_expense/components/item_category/view/item_category.dart'; 
-import 'package:expensive_tracker_app/units/create_expense/components/operation_category/cubit/operation_category_cubit.dart'; 
+import 'package:expensive_tracker_app/units/create_expense/components/item_category/view/item_category.dart';
+import 'package:expensive_tracker_app/units/create_expense/components/operation_category/cubit/operation_category_cubit.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';

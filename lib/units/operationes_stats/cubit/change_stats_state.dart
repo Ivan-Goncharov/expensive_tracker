@@ -17,12 +17,29 @@ class ChangeStatsError extends ChangeStatsState {
 class ChangeStatsLoaded extends ChangeStatsState {
   final StatsDateType dateType;
   final StatsModel statsModel;
+  final Map<StatsDateType, List<DateTime>> mapOfDateType;
 
-  ChangeStatsLoaded(
-    this.dateType,
-    this.statsModel,
-  );
-  
+  /// Текущий выбранный месяц
+  final DateTime currentStatsMonth;
+
+  /// Текущий выбранный год
+  final DateTime currentStatsYear;
+
+  /// Cписок месяцев, которые есть в статистике
+  List<DateTime> get listOfMonthStats =>
+      mapOfDateType[StatsDateType.month] ?? [];
+
+  /// Cписок годов, которые есть в статистике
+  List<DateTime> get listOfYearStats => mapOfDateType[StatsDateType.year] ?? [];
+
+  ChangeStatsLoaded({
+    required this.dateType,
+    required this.statsModel,
+    required this.mapOfDateType,
+    required this.currentStatsMonth,
+    required this.currentStatsYear,
+  });
+
   @override
   List<Object?> get props => [dateType, statsModel];
 }

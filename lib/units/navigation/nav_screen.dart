@@ -2,7 +2,6 @@ import 'package:expensive_tracker_app/units/operationes_stats/operationes_stats_
 import 'package:expensive_tracker_app/units/routes/routes.dart';
 import 'package:expensive_tracker_app/get_it.dart';
 import 'package:expensive_tracker_app/units/home/view/home_screen.dart';
-import 'package:expensive_tracker_app/units/navigation/components/bottom_hide_bar.dart';
 
 import 'package:expensive_tracker_app/units/navigation/cubit/navigation_cubit.dart';
 import 'package:flutter/material.dart';
